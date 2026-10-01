@@ -163,8 +163,8 @@ export const portfolio = {
   aiRecommendations: {
     updated: '2026-10-01',
     introduction: {
-      en: 'With Opus 5.5, avoid Low and Max. For GPT-6.1 Sol, skip Max for ordinary work and use Extra High (xhigh) only when High falls short; try Low only for small, well-defined tasks.',
-      de: 'Bei Opus 5.5 Low und Max vermeiden. Bei GPT-6.1 Sol Max für normale Aufgaben auslassen und Extra High (xhigh) nur nutzen, wenn High nicht ausreicht; Low nur für kleine, klar definierte Aufgaben ausprobieren.',
+      en: 'With Opus 5.5, avoid Low and Max. For GPT-6.1 Sol, skip Max and use Extra High (xhigh) only when High falls short; try Low only for small, well-defined tasks.',
+      de: 'Bei Opus 5.5 Low und Max vermeiden. Bei GPT-6.1 Sol Max auslassen und Extra High (xhigh) nur nutzen, wenn High nicht ausreicht; Low nur für kleine, klar definierte Aufgaben ausprobieren.',
     },
     items: [
       {
