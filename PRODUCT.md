@@ -52,6 +52,10 @@ Use `@fontsource-variable` for self-hosted variable fonts. The draft uses Roboto
   a green keyboard focus indicator without altering the mouse presentation.
 - Explain the portfolio's actual technology choices for technical readers and
   mention mise as part of the owner's terminal-based development setup.
+- Explain projects in plain language for readers who do not play computer
+  games. Omit test details and testing-only badges from project summaries.
+- Keep the contact address out of the rendered HTML and decode the owner's
+  portfolio email alias only when the email button is activated.
 - The owner requested animation recommendations based exclusively on the latest Chrome/Chromium features.
 - New GitHub repository remains private initially.
 

@@ -60,3 +60,16 @@ or availability claim is added. Private repository content is not published.
 English is primary. Every public content item must have an English and German
 version. Code, comments, README files, issues and documentation use English.
 Avoid em dashes outside deliberate typography in the website design.
+
+## Project copy and contact
+
+The owner requested project descriptions that require no gaming knowledge and
+omit test details. Testing remains part of the skills and teaching inventory;
+project summaries and badges focus on the application itself. Game and team
+attribution remains factual.
+
+The contact button uses the owner's Gmail portfolio alias. The browser decodes
+the encoded address only when the button is activated and opens the mail
+application. The prerendered HTML has no email address, mailto link or address
+tooltip. This deters plain-text address harvesters, not bots that execute or
+analyze JavaScript. The build validator checks the decoded address.

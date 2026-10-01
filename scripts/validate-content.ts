@@ -22,7 +22,7 @@ const project = z.object({
 const portfolioSchema = z.object({
   name: text,
   location: text,
-  email: z.email(),
+  emailEncoded: z.base64(),
   github: z.url(),
   linkedin: z.url(),
   portrait: z.object({
@@ -76,7 +76,11 @@ const portfolioSchema = z.object({
 });
 
 const validation = Effect.try({
-  try: () => portfolioSchema.parse(portfolio),
+  try: () => {
+    const content = portfolioSchema.parse(portfolio);
+    z.email().parse(globalThis.atob(content.emailEncoded));
+    return content;
+  },
   catch: (error) => new Error(`Portfolio content is invalid: ${String(error)}`),
 });
 

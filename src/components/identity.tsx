@@ -60,11 +60,13 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
 
       <ul aria-label={t.contactLabel} className='flex flex-wrap gap-2'>
         <li>
-          <Button asChild>
-            <a href={`mailto:${portfolio.email}`} title={portfolio.email}>
-              <Mail aria-hidden />
-              {t.email}
-            </a>
+          <Button
+            onClick={() => {
+              globalThis.location.href = `mailto:${globalThis.atob(portfolio.emailEncoded)}`;
+            }}
+          >
+            <Mail aria-hidden />
+            {t.email}
           </Button>
         </li>
         <li>
