@@ -184,7 +184,7 @@
         "typescript/no-deprecated": "warn",
         "typescript/no-duplicate-enum-values": "error",
         "typescript/no-duplicate-type-constituents": "error",
-        "typescript/no-empty-interface": "warn",
+        "typescript/no-empty-interface": ["warn", { "allowSingleExtends": true }],
         "typescript/no-extra-non-null-assertion": "error",
         "typescript/no-extraneous-class": "warn",
         "typescript/no-floating-promises": "error",
@@ -259,7 +259,30 @@
       "rules": {
         "shadcn/no-restyle": "off",
         "shadcn/no-arbitrary-values": "off",
-        "shadcn/require-static-classes": "off"
+        "shadcn/require-static-classes": "off",
+        // Wrappers forward the remaining props to the Radix primitive.
+        "react/jsx-props-no-spreading": "off"
+      }
+    },
+    {
+      // Build scripts and their tests run in Node.
+      "files": ["scripts/**"],
+      "rules": {
+        "import/no-nodejs-modules": "off"
+      }
+    },
+    {
+      // Zod schemas nest by design; extracting each level would hide the shape.
+      "files": ["scripts/validate-content.ts"],
+      "rules": {
+        "unicorn/max-nested-calls": "off"
+      }
+    },
+    {
+      // Bilingual content data grows with the portfolio, not with logic.
+      "files": ["src/content/portfolio.ts"],
+      "rules": {
+        "max-lines": "off"
       }
     },
     {

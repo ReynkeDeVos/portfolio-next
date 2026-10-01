@@ -3,10 +3,13 @@ import type { CSSProperties, ReactNode } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+import { CareerPanel } from './career-panel';
 import { copy, isSection, sections } from './copy';
 import type { Locale, Section } from './copy';
 import { Identity } from './identity';
-import { CareerPanel, SkillsPanel, WorkflowPanel, WorkPanel } from './sections';
+import { SkillsPanel } from './skills-panel';
+import { WorkPanel } from './work-panel';
+import { WorkflowPanel } from './workflow-panel';
 
 const panels = {
   work: WorkPanel,
@@ -25,18 +28,18 @@ function PortfolioPage({ locale }: { locale: Locale }) {
   // switch or shared link shows the right panel without a visible swap.
   useLayoutEffect(() => {
     const sync = () => {
-      const hash = window.location.hash.slice(1);
+      const hash = globalThis.location.hash.slice(1);
       setAnimateSelection(false);
       setSection(isSection(hash) ? hash : 'work');
     };
 
     sync();
-    window.addEventListener('hashchange', sync);
+    globalThis.addEventListener('hashchange', sync);
 
     return () => {
-      window.removeEventListener('hashchange', sync);
+      globalThis.removeEventListener('hashchange', sync);
     };
-  }, [locale]);
+  }, []);
 
   function changeSection(value: string) {
     if (!isSection(value) || value === section) {
@@ -47,9 +50,9 @@ function PortfolioPage({ locale }: { locale: Locale }) {
     setAnimateSelection(true);
     setSection(value);
     setTicks((count) => count + (sections.indexOf(value) > sections.indexOf(section) ? 1 : -1));
-    const { pathname, search } = window.location;
-    window.history.replaceState(
-      window.history.state,
+    const { pathname, search } = globalThis.location;
+    globalThis.history.replaceState(
+      globalThis.history.state,
       '',
       value === 'work' ? `${pathname}${search}` : `#${value}`,
     );
@@ -62,10 +65,10 @@ function PortfolioPage({ locale }: { locale: Locale }) {
 
   return (
     <div className='min-h-dvh'>
-      <main className='mx-auto grid w-full max-w-[1200px] gap-4 px-4 pt-4 pb-16 sm:px-6 sm:pt-6 lg:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[minmax(0,25rem)_minmax(0,1fr)]'>
+      <main className='mx-auto grid w-full max-w-300 gap-4 px-4 pt-4 pb-16 sm:px-6 sm:pt-6 lg:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[minmax(0,25rem)_minmax(0,1fr)]'>
         <Identity locale={locale} section={section} ticks={ticks} />
 
-        <Tabs value={section} onValueChange={changeSection} className='rounded-xl-inc min-w-0'>
+        <Tabs value={section} onValueChange={changeSection} className='min-w-0'>
           <TabsList aria-label={t.sectionsLabel} style={indicator} data-animate={animateSelection}>
             {sections.map((value) => (
               <TabsTrigger key={value} value={value}>

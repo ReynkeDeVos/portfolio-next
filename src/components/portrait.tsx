@@ -50,12 +50,12 @@ function hintArc(radius: number) {
 }
 
 // One dash, centred on the arc, as long as the line's text.
-function hintBand(radius: number, em: number): CSSProperties {
+function hintBand(radius: number, em: number) {
   const arcLength = Math.PI * radius;
 
   return {
-    strokeDasharray: `${em}em ${arcLength.toFixed(2)}`,
-    strokeDashoffset: `calc(${em / 2}em - ${(arcLength / 2).toFixed(2)}px)`,
+    dash: `${em}em ${arcLength.toFixed(2)}`,
+    offset: `calc(${em / 2}em - ${(arcLength / 2).toFixed(2)}px)`,
   };
 }
 
@@ -102,7 +102,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
             <clipPath id={clipId} clipPathUnits='objectBoundingBox'>
               <path
                 d={clipPath}
-                className='ease-spatial [translate:0.5px_0.5px] [rotate:var(--portrait-angle)] transition-[rotate,scale] duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]'
+                className='ease-spatial [translate:0.5px_0.5px] [rotate:var(--portrait-angle)] transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]'
               />
             </clipPath>
           </svg>
@@ -119,25 +119,29 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
               className='size-full scale-[1.09] object-cover'
             />
             {/* The hint peeks up from the rim on the zoom's curve and drops
-                  back quickly. It grows with the frame, so font sizes land
-                  near 11px, then 13px, and it reads as a label inside it. */}
+                back quickly. It grows with the frame, so it reads as a
+                label inside it. */}
             <svg
               aria-hidden
               viewBox='0 0 100 100'
-              className='ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial absolute inset-0 size-full translate-y-[15%] text-[10.6px] font-medium opacity-0 transition-[opacity,translate,scale] duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-500 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-500 sm:text-[9.4px] lg:text-[8.6px]'
+              className='ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial type-portrait-hint transition-portrait-hint absolute inset-0 size-full translate-y-[15%] font-medium opacity-0 duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-500 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-500'
             >
-              {hintLines.map((line) => (
-                <path
-                  key={line.id}
-                  id={line.id}
-                  d={hintArc(line.radius)}
-                  fill='none'
-                  strokeWidth='1.6em'
-                  strokeLinecap='round'
-                  className='stroke-primary-container'
-                  style={hintBand(line.radius, hintEm[locale][line.key])}
-                />
-              ))}
+              {hintLines.map((line) => {
+                const band = hintBand(line.radius, hintEm[locale][line.key]);
+
+                return (
+                  <path
+                    key={line.id}
+                    id={line.id}
+                    d={hintArc(line.radius)}
+                    fill='none'
+                    strokeWidth='1.6em'
+                    strokeLinecap='round'
+                    className='stroke-primary-container portrait-hint-band'
+                    style={{ '--hint-dash': band.dash, '--hint-offset': band.offset }}
+                  />
+                );
+              })}
               {hintLines.map((line) => (
                 <text
                   key={line.id}
