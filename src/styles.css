@@ -298,7 +298,41 @@
 }
 
 /* Feedback motion is decorative; content never depends on it. */
+.not-found-ghost {
+  fill: light-dark(var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface));
+  animation: ghost-float 2.4s ease-in-out 2;
+}
+
+.not-found-ghost-eyes {
+  fill: light-dark(var(--md-sys-color-primary), var(--md-sys-color-on-primary));
+}
+
+.not-found-ghost-shadow {
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.16;
+  animation: ghost-shadow 2.4s ease-in-out 2;
+}
+
+@keyframes ghost-float {
+  50% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+@keyframes ghost-shadow {
+  50% {
+    transform: scaleX(0.7);
+    opacity: 0.08;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .not-found-ghost,
+  .not-found-ghost-shadow {
+    animation: none;
+  }
+
   *,
   ::before,
   ::after {

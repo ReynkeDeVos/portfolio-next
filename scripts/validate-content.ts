@@ -34,7 +34,7 @@ const workSelection = z.object({ featured: z.array(text), supporting: z.array(te
 
 const portfolioSchema = z.object({
   name: text,
-  location: text,
+  location: translatedText,
   emailEncoded: z.base64(),
   github: z.url(),
   linkedin: z.url(),
