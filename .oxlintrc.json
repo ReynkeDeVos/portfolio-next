@@ -3,6 +3,10 @@
     {
       "name": "shadcn",
       "specifier": "./tools/shadcn-lint.mjs"
+    },
+    {
+      "name": "anti-slop",
+      "specifier": "./tools/oxlint/anti-slop/index.ts"
     }
   ],
   "plugins": [
@@ -16,10 +20,22 @@
     "jsdoc",
     "jsx-a11y",
     // "node",
-    "promise",
-    "vitest"
+    "promise"
+    // "vitest"
   ],
   "ignorePatterns": [
+    ".agent/**",
+    ".agents/**",
+    ".claude/**",
+    ".codex/**",
+    ".continue/**",
+    ".cursor/**",
+    ".gemini/**",
+    ".opencode/**",
+    ".pi/**",
+    ".roo/**",
+    ".windsurf/**",
+    "tools/oxlint/anti-slop/**",
     "**/.impeccable/questions/**",
     "**/node_modules/**",
     "**/dist/**",
@@ -52,6 +68,25 @@
     "shadcn/no-inline-styles": "warn",
     "shadcn/no-unknown-classes": "warn",
     "shadcn/require-static-classes": "warn",
+    "oxc/no-accumulating-spread": "error",
+    "anti-slop/no-array-filter-map": "error",
+    "anti-slop/no-reduce-accumulator-copy": "error",
+    "anti-slop/no-chained-type-assertions": "error",
+    "anti-slop/no-conditional-empty-object-spread": "error",
+    "anti-slop/no-known-value-widening": "error",
+    "anti-slop/no-module-mocking": "error",
+    "anti-slop/no-object-parameters": "error",
+    "anti-slop/no-reflect-apply": "error",
+    "anti-slop/no-reflect-get": "error",
+    "anti-slop/no-runtime-typeof": "error",
+    "anti-slop/no-shape-in-symbol-names": "error",
+    "anti-slop/no-unknown-parameters": "error",
+    "anti-slop/no-unknown-returns": "error",
+    "anti-slop/no-unknown-type-aliases": "error",
+    "anti-slop/no-unsafe-dictionary-type": "error",
+    "anti-slop/no-widen-then-assert": "error",
+    "anti-slop/require-readable-spacing": "error",
+    "anti-slop/require-safety-comment-for-type-assertion": "error",
     "vitest/no-hooks": "off",
     "vitest/prefer-strict-boolean-matchers": "off",
     "vitest/prefer-to-be-truthy": "off",

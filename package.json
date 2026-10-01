@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.62.3",
+    "@oxlint/plugins": "1.86.0",
     "@shadcn/lint": "^0.2.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "24",
