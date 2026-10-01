@@ -115,6 +115,12 @@ The copy distinguishes Tailscale's connectivity from persistent agent sessions:
 the agents run on the reachable machine, while a session host such as herdr
 keeps them running when the client disconnects.
 
+At the owner's request, Workflow tool links prefer official product homepages
+over guides, announcements and other documentation pages. Where a tool has no
+separate homepage, its project repository or individual skill page remains the
+destination. Font links use their Google Fonts specimen pages. These public
+links are distinct from the deeper evidence links retained in this document.
+
 ## Portrait
 
 The owner selected DSC02990.jpg for the close-up and DSC05590.png for the
