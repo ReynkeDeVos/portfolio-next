@@ -11,11 +11,13 @@ const listeners = new Set<() => void>();
 
 function readTheme(): ThemePreference {
   const value = document.documentElement.dataset.theme;
+
   return value === 'light' || value === 'dark' ? value : 'system';
 }
 
 function subscribe(listener: () => void) {
   listeners.add(listener);
+
   return () => {
     listeners.delete(listener);
   };
@@ -25,6 +27,7 @@ function subscribe(listener: () => void) {
 // system scheme while no explicit preference is set.
 function setTheme(preference: ThemePreference) {
   const root = document.documentElement;
+
   if (preference === 'system') {
     delete root.dataset.theme;
   } else {
@@ -51,4 +54,5 @@ function useThemePreference() {
 }
 
 export { setTheme, themeScript, useThemePreference };
+
 export type { ThemePreference };

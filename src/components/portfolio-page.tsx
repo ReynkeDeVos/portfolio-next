@@ -29,8 +29,10 @@ function PortfolioPage({ locale }: { locale: Locale }) {
       setAnimateSelection(false);
       setSection(isSection(hash) ? hash : 'work');
     };
+
     sync();
     window.addEventListener('hashchange', sync);
+
     return () => {
       window.removeEventListener('hashchange', sync);
     };
@@ -40,6 +42,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
     if (!isSection(value) || value === section) {
       return;
     }
+
     // Content commits first; the indicator and portrait frame follow.
     setAnimateSelection(true);
     setSection(value);
@@ -52,10 +55,10 @@ function PortfolioPage({ locale }: { locale: Locale }) {
     );
   }
 
-  const indicator = {
+  const indicator: CSSProperties = {
     '--tab-index': sections.indexOf(section),
     '--tab-count': sections.length,
-  } as CSSProperties;
+  };
 
   return (
     <div className='min-h-dvh'>
@@ -72,6 +75,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
           </TabsList>
           {sections.map((value) => {
             const Panel = panels[value];
+
             return (
               // Every panel is prerendered; inactive ones are only hidden.
               <TabsContent key={value} value={value} forceMount>

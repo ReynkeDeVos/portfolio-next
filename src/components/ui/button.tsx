@@ -2,7 +2,6 @@ import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
 import { cn } from 'cn';
 import { Slot } from 'radix-ui';
-import * as React from 'react';
 
 // Material buttons: full shape, label-large type and an opacity state layer.
 // Only transform and opacity transition, so theme changes never animate color.

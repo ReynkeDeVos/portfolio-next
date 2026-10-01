@@ -3,15 +3,20 @@ import { z } from 'zod';
 import { portfolio } from '../src/content/portfolio.ts';
 
 const text = z.string().min(1);
+
 const technologies = z.array(text).min(1);
+
 const translatedText = z.object({ en: text, de: text });
+
 const teachingTopic = translatedText.extend({ technologies });
+
 const experience = z.object({
   organization: translatedText,
   url: z.url(),
   period: text,
   role: translatedText,
 });
+
 const project = z.object({
   id: text,
   name: text,
@@ -80,5 +85,7 @@ const portfolioSchema = z.object({
 });
 
 const validated = portfolioSchema.parse(portfolio);
+
 z.email().parse(globalThis.atob(validated.emailEncoded));
+
 process.stdout.write(`Validated bilingual content for ${validated.name}.\n`);

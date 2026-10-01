@@ -11,6 +11,7 @@ import { SiteControls } from './site-controls';
 function Identity({ locale, section, ticks }: { locale: Locale; section: Section; ticks: number }) {
   const t = copy[locale];
   const [current] = portfolio.experience;
+
   const [role, rest] = current
     ? t.currentRole(
         current.role[locale],

@@ -10,6 +10,7 @@ import type { Locale } from './copy';
 type Project = (typeof portfolio.projects)[number];
 
 const featuredProjects = portfolio.projects.filter((project) => project.featured);
+
 const moreProjects = ['elder-gym-bro', 'omarchy-stats'].flatMap((id) =>
   portfolio.projects.filter((project) => project.id === id),
 );
@@ -69,6 +70,7 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
 
 function WorkPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
+
   return (
     <div className='flex flex-col gap-6'>
       <h2 className='sr-only'>{t.sectionHeadings.work}</h2>
@@ -139,6 +141,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
 
 function SkillsPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
+
   return (
     <div>
       <h2 className='sr-only'>{t.sectionHeadings.skills}</h2>
@@ -165,6 +168,7 @@ function SkillsPanel({ locale }: { locale: Locale }) {
 function WorkflowPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const { aiRecommendations } = portfolio;
+
   return (
     <div className='flex flex-col gap-4'>
       <h2 className='sr-only'>{t.sectionHeadings.workflow}</h2>
@@ -261,6 +265,7 @@ function WorkflowPanel({ locale }: { locale: Locale }) {
 function BuildSection({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const { portfolioBuild } = portfolio;
+
   return (
     <section
       aria-labelledby='build-heading'
@@ -283,6 +288,7 @@ function BuildSection({ locale }: { locale: Locale }) {
               <p className='type-body-lg text-on-surface font-medium'>
                 {item.technologies.map((name, index) => {
                   const url = portfolioBuild.links.find((link) => link.name === name)?.url;
+
                   return (
                     <Fragment key={name}>
                       {index > 0 ? ', ' : null}
@@ -304,6 +310,7 @@ function BuildSection({ locale }: { locale: Locale }) {
 
 function CareerPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
+
   return (
     <div className='flex flex-col gap-4'>
       <h2 className='sr-only'>{t.sectionHeadings.career}</h2>

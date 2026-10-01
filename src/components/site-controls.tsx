@@ -9,6 +9,7 @@ import { copy } from './copy';
 import type { Locale, Section } from './copy';
 
 const themeIcons = { system: Monitor, light: Sun, dark: Moon } as const;
+
 const themeOrder: ThemePreference[] = ['system', 'light', 'dark'];
 
 // Language and theme in one compact row at the foot of the profile panel.
@@ -48,6 +49,7 @@ function SiteControls({ locale, section }: { locale: Locale; section: Section })
       >
         {themeOrder.map((option) => {
           const Icon = themeIcons[option];
+
           return (
             <Button
               key={option}
