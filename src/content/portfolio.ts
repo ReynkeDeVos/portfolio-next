@@ -324,7 +324,7 @@ export const portfolio = {
     links: [
       { name: 'React 19', url: 'https://react.dev/' },
       { name: 'TanStack Start', url: 'https://tanstack.com/start/latest' },
-      { name: 'Vite 8', url: 'https://vite.dev/guide/' },
+      { name: 'Vite 8', url: 'https://vite.dev/' },
       { name: 'shadcn/ui', url: 'https://ui.shadcn.com/docs' },
       { name: 'Tailwind CSS 4', url: 'https://tailwindcss.com/docs' },
       { name: 'cn', url: 'https://github.com/shadcn-ui/cn' },
