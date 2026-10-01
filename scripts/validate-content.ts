@@ -73,6 +73,16 @@ const portfolioSchema = z.object({
       )
       .min(1)
       .max(5),
+    tips: z
+      .array(
+        z.object({
+          id: text,
+          title: translatedText,
+          description: translatedText,
+          links: z.array(z.object({ name: text, url: z.url() })).min(1),
+        }),
+      )
+      .min(1),
   }),
   portfolioBuild: z.object({
     items: z

@@ -192,6 +192,68 @@ export const portfolio = {
         note: { en: 'Layout and visual refinements', de: 'Layout und visuelle Verfeinerung' },
       },
     ],
+    tips: [
+      {
+        id: 'harness',
+        title: { en: 'Harness & remote work', de: 'Harness & Remote-Arbeit' },
+        description: {
+          en: 'T3 Code for a clear overview of agent sessions; pi for project-specific workflows. herdr + Tailscale for persistent agent sessions you can reach remotely.',
+          de: 'T3 Code für einen klaren Überblick über Agentensitzungen, pi für projektspezifische Abläufe. herdr + Tailscale für dauerhafte Agentensitzungen mit Remote-Zugriff.',
+        },
+        links: [
+          { name: 'T3 Code', url: 'https://github.com/pingdotgg/t3code' },
+          { name: 'herdr', url: 'https://herdr.dev/' },
+          { name: 'pi', url: 'https://pi.dev/' },
+          { name: 'Tailscale', url: 'https://tailscale.com/docs/remote-code' },
+        ],
+      },
+      {
+        id: 'design',
+        title: { en: 'Design', de: 'Design' },
+        description: {
+          en: 'Interface design, critique and polish.',
+          de: 'Oberflächendesign, Designkritik und Feinschliff.',
+        },
+        links: [{ name: 'Impeccable', url: 'https://github.com/pbakaus/impeccable' }],
+      },
+      {
+        id: 'planning',
+        title: { en: 'Planning', de: 'Planung' },
+        description: {
+          en: 'Wayfinder for open decisions; OpenSpec as an alternative for specs and tasks.',
+          de: 'Wayfinder für offene Entscheidungen, alternativ OpenSpec für Specs und Aufgaben.',
+        },
+        links: [
+          {
+            name: 'Wayfinder',
+            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md',
+          },
+          { name: 'OpenSpec', url: 'https://github.com/Fission-AI/OpenSpec' },
+        ],
+      },
+      {
+        id: 'engineering-skills',
+        title: { en: 'Development', de: 'Entwicklung' },
+        description: {
+          en: 'Matt Pocock’s skills for requirements, test-first development and code review.',
+          de: 'Matt Pococks Skills für Anforderungen, testgetriebene Entwicklung und Code-Reviews.',
+        },
+        links: [
+          {
+            name: 'grill-with-docs',
+            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md',
+          },
+          {
+            name: 'tdd',
+            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md',
+          },
+          {
+            name: 'code-review',
+            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md',
+          },
+        ],
+      },
+    ],
   },
   portfolioBuild: {
     items: [

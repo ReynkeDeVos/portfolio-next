@@ -94,6 +94,29 @@ function WorkflowPanel({ locale }: { locale: Locale }) {
             ))}
           </tbody>
         </table>
+        <dl className='divide-outline-variant mt-4 divide-y'>
+          {aiRecommendations.tips.map((tip) => (
+            <div
+              key={tip.id}
+              className='grid gap-x-6 gap-y-0.5 py-3 sm:grid-cols-[7.5rem_minmax(0,1fr)]'
+            >
+              <dt className='type-body-md text-on-surface-variant'>{tip.title[locale]}</dt>
+              <dd>
+                <p className='type-body-md text-on-surface font-medium'>
+                  {tip.links.map((link, index) => (
+                    <Fragment key={link.url}>
+                      {index > 0 ? ', ' : null}
+                      <ExternalLink href={link.url}>{link.name}</ExternalLink>
+                    </Fragment>
+                  ))}
+                </p>
+                <p className='type-body-md text-on-surface-variant mt-0.5 max-w-[68ch]'>
+                  {tip.description[locale]}
+                </p>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <BuildSection locale={locale} />

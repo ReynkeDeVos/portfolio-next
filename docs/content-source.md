@@ -79,6 +79,29 @@ Opus 5.5 for design. Thinking levels are practical starting
 settings rather than rankings or guarantees. The portfolio does not publish
 the local guide or duplicate its source transcript archive.
 
+The bilingual “My AI workflow” section also includes linked tools,
+checked against their official repositories on 2026-10-01:
+[Impeccable](https://github.com/pbakaus/impeccable) for interface design and review;
+[Wayfinder](https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md)
+for resolving a large plan's decisions across sessions; Matt Pocock's
+[grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md),
+[tdd](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md)
+and [code-review](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+for requirements, test-first development and review; and
+[OpenSpec](https://github.com/Fission-AI/OpenSpec) for proposals, requirements,
+scenarios and implementation tasks kept with the code. At the owner's request,
+OpenSpec appears alongside Wayfinder as an alternative planning approach.
+The tool list describes the owner's workflow choices without adding claims
+about their use in a particular project.
+
+The owner also requested [T3 Code](https://github.com/pingdotgg/t3code) and
+[herdr](https://herdr.dev/) as agent workspaces, [pi](https://pi.dev/) for
+project-specific harness customization, and [Tailscale](https://tailscale.com/docs/remote-code)
+for remote access. Their official documentation was checked on 2026-10-01.
+The copy distinguishes Tailscale's connectivity from persistent agent sessions:
+the agents run on the reachable machine, while a session host such as herdr
+keeps them running when the client disconnects.
+
 ## Portrait
 
 The owner selected DSC02990.jpg for the close-up and DSC05590.png for the
