@@ -226,7 +226,7 @@ export const portfolio = {
         links: [
           {
             name: 'Wayfinder',
-            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md',
+            url: 'https://www.aihero.dev/skills-wayfinder',
           },
           { name: 'OpenSpec', url: 'https://openspec.dev/' },
         ],
@@ -235,21 +235,17 @@ export const portfolio = {
         id: 'engineering-skills',
         title: { en: 'Development', de: 'Entwicklung' },
         description: {
-          en: 'Matt Pocock’s skills for requirements, test-first development and code review.',
-          de: 'Matt Pococks Skills für Anforderungen, testgetriebene Entwicklung und Code-Reviews.',
+          en: 'Matt Pocock’s skills for requirements and code review.',
+          de: 'Matt Pococks Skills für Anforderungen und Code-Reviews.',
         },
         links: [
           {
             name: 'grill-with-docs',
-            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md',
-          },
-          {
-            name: 'tdd',
-            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md',
+            url: 'https://www.aihero.dev/skills-grill-with-docs',
           },
           {
             name: 'code-review',
-            url: 'https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md',
+            url: 'https://www.aihero.dev/skills-code-review',
           },
         ],
       },
