@@ -14,6 +14,16 @@ design and components are not reused. The owner supplied the current focus on
 software development, experimentation, terminal workflows, Arch Linux, more than 20 years with Linux as the main
 operating system, and practical daily evaluation of AI tools.
 
+The owner connects this Linux workflow to AI agents editing configuration and
+working in parallel Git worktrees. The [Linux filesystem manual](https://man7.org/linux/man-pages/man7/hier.7.html)
+documents configuration files in `/etc`, and [Git's worktree documentation](https://git-scm.com/docs/git-worktree)
+describes checking out multiple branches in separate working directories.
+[Microsoft's WSL filesystem guidance](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
+recommends keeping tools and files on the same operating system's filesystem
+for performance. These sources were checked on 2026-10-01. The benefit to the
+owner's AI workflow is an inference from these capabilities; the copy does not
+claim a universal Linux speed advantage or a 10–20× comparison with other OSes.
+
 ## Verified project evidence
 
 Public GitHub source, manifests and attribution were inspected for selected
@@ -78,6 +88,29 @@ model guide, checked on 2026-10-01, with the owner’s current preference for
 Opus 5.5 for design. Thinking levels are practical starting
 settings rather than rankings or guarantees. The portfolio does not publish
 the local guide or duplicate its source transcript archive.
+
+The bilingual “My AI workflow” section also includes linked tools,
+checked against their official repositories on 2026-10-01:
+[Impeccable](https://github.com/pbakaus/impeccable) for interface design and review;
+[Wayfinder](https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md)
+for resolving a large plan's decisions across sessions; Matt Pocock's
+[grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md),
+[tdd](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md)
+and [code-review](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+for requirements, test-first development and review; and
+[OpenSpec](https://github.com/Fission-AI/OpenSpec) for proposals, requirements,
+scenarios and implementation tasks kept with the code. At the owner's request,
+OpenSpec appears alongside Wayfinder as an alternative planning approach.
+The tool list describes the owner's workflow choices without adding claims
+about their use in a particular project.
+
+The owner also requested [T3 Code](https://github.com/pingdotgg/t3code) and
+[herdr](https://herdr.dev/) as agent workspaces, [pi](https://pi.dev/) for
+project-specific harness customization, and [Tailscale](https://tailscale.com/docs/remote-code)
+for remote access. Their official documentation was checked on 2026-10-01.
+The copy distinguishes Tailscale's connectivity from persistent agent sessions:
+the agents run on the reachable machine, while a session host such as herdr
+keeps them running when the client disconnects.
 
 ## Portrait
 
