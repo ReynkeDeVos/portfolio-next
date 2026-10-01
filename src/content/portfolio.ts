@@ -27,7 +27,7 @@ export const portfolio = {
     de: 'Ich entwickle Software und unterrichte Programmieren.',
   },
   introduction: {
-    en: 'I build web applications, game mods and tools for the terminal and Linux desktop.',
+    en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
     de: 'Ich entwickle Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop.',
   },
   interests: [
