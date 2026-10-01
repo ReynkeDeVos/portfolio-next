@@ -59,19 +59,26 @@ function hintBand(radius: number, em: number) {
   };
 }
 
-// Fetch the full photo once when the trigger is hovered or focused, so the
-// dialog usually opens with a cached image. Opening never waits for it.
-let fullPortraitWarmed = false;
+// Keep the preloaded Image alive across route remounts when switching languages,
+// so the browser can reuse its image data when the dialog opens again.
+let fullPortraitImage: HTMLImageElement | null = null;
 
 function warmFullPortrait() {
-  if (fullPortraitWarmed) {
+  if (fullPortraitImage) {
     return;
   }
 
-  fullPortraitWarmed = true;
-  const image = new Image();
-  image.decoding = 'async';
-  image.src = portfolio.fullPortrait.src;
+  fullPortraitImage = new Image();
+  fullPortraitImage.decoding = 'async';
+  fullPortraitImage.addEventListener(
+    'error',
+    () => {
+      fullPortraitImage = null;
+    },
+    { once: true },
+  );
+
+  fullPortraitImage.src = portfolio.fullPortrait.src;
 }
 
 // `ticks` advances the frame one lobe per section change. Only the clip shape
