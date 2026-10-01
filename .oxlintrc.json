@@ -26,8 +26,8 @@
     "jsdoc",
     "jsx-a11y",
     // "node",
-    "promise",
-    "vitest"
+    "promise"
+    // "vitest"
   ],
   "ignorePatterns": [
     ".agent/**",

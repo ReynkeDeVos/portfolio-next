@@ -219,8 +219,8 @@ export const portfolio = {
         topic: { en: 'Content', de: 'Inhalte' },
         technologies: ['Zod'],
         description: {
-          en: 'All text is typed data in the repo, in English and German. Zod checks it at build time.',
-          de: 'Alle Texte sind typisierte Daten im Repository, auf Englisch und Deutsch. Zod prüft sie beim Build.',
+          en: 'I use Zod before each build to catch missing translations, empty text and malformed URLs in the English and German content. These content checks go beyond TypeScript’s types. Validation runs in a local script, so Zod adds no JavaScript to the browser bundle.',
+          de: 'Vor jedem Build prüfe ich die englischen und deutschen Inhalte mit Zod auf fehlende Übersetzungen, leere Texte und ungültige URLs. Diese Inhaltsregeln gehen über die Typprüfung von TypeScript hinaus. Die Prüfung läuft in einem lokalen Skript; Zod fügt dem Browser-Bundle kein JavaScript hinzu.',
         },
       },
       {

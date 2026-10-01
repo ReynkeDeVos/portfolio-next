@@ -188,7 +188,7 @@ components:
 
 ## Overview
 
-**Creative North Star: "Material 3 Expressive portfolio"**
+### Creative North Star: "Material 3 Expressive portfolio"
 
 This is a factual documentation label for the owner's chosen Material 3 Expressive direction, not a new approved metaphor. The implemented draft combines warm sand and charcoal surfaces, sage interaction color, caramel selections and copper project categories. Compact identity and project evidence share the first desktop view. Software development is the primary identity; teaching appears in current-employment and career context.
 
@@ -314,7 +314,7 @@ All feedback is decorative. Reduced-motion preferences set transition and animat
 
 ## Do's and Don'ts
 
-### Do:
+### Do
 
 - **Do** use the root Material color roles and their matching on-colors in both themes.
 - **Do** preserve the compact identity, original portrait crops and software developer emphasis.
@@ -324,7 +324,7 @@ All feedback is decorative. Reduced-motion preferences set transition and animat
 - **Do** respect reduced motion and restore the selected section without animation after language navigation or reload.
 - **Do** keep implementation explanations grounded in the real stack and describe Cloudflare as the prepared hosting target.
 
-### Don't:
+### Don't
 
 - **Don't** replace owner-approved visual decisions through documentation; further visual refinements belong to actual Claude Opus 5.5.
 - **Don't** scale the visible photograph, add circular hover outlines, or restore detached portrait icon badges.

@@ -81,12 +81,15 @@ the local guide or duplicate its source transcript archive.
 
 ## Portrait
 
-The owner selected DSC02990.jpg for the close-up and DSC03095.jpg for the
-larger viewer. Conventional cropping retains the brick background. The close-up
-is 480x480 and horizontally mirrored at the owner's request, so Renke faces
-right. The larger portrait is 720x1080. Both use AVIF quality 65, with original
-metadata removed. No AI image editing or retouching was used. Provenance
-sidecars record the source filenames, crop coordinates and conversion settings.
+The owner selected DSC02990.jpg for the close-up and DSC05590.png for the
+larger viewer, replacing DSC03095.jpg on 2026-10-01. Conventional resizing and
+cropping retain the brick background. The close-up
+uses a 1600x1600 crop at x1150 y330, resized to 480x480 and horizontally mirrored
+at the owner's request, so Renke faces right. The larger portrait uses the
+2823x4226 source, resized to fill 720x1080 and center-cropped to those dimensions.
+Both use AVIF quality 65 and YUV420, with original metadata removed. No AI image
+editing or retouching was used. This document keeps the conversion details;
+the public image JSON sidecars were removed at the owner's request.
 
 The owner confirmed participation in the Claude Code for Business course as
 preparation for the company's business partner program. This does not claim
