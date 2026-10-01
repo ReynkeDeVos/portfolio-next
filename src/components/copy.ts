@@ -1,55 +1,61 @@
 type Locale = 'en' | 'de';
 
 const sections = ['work', 'career', 'skills', 'workflow'] as const;
+
 type Section = (typeof sections)[number];
 
 function isSection(value: string): value is Section {
-  return (sections as readonly string[]).includes(value);
+  return sections.some((section) => section === value);
 }
 
 const localePaths = { en: '/', de: '/de' } as const;
 
-const copy = {
-  en: {
-    languageLabel: 'Language',
-    languageNames: { en: 'English', de: 'Deutsch' },
-    themeLabel: 'Color theme',
-    themes: { system: 'System theme', light: 'Light theme', dark: 'Dark theme' },
-    contactLabel: 'Contact',
-    photoOpen: 'View larger portrait',
-    photoHint: { question: 'bigger?', action: 'click me 😊' },
-    photoTitle: 'Portrait of Renke Brixel',
-    photoClose: 'Close photo',
-    email: 'Email',
-    strengthsLabel: 'Profile highlights',
-    currentRole: (role: string, organization: string, since: string) =>
-      [role, ` at ${organization}, since ${since}`] as const,
-    sectionsLabel: 'Portfolio sections',
-    sectionNames: { work: 'Work', skills: 'Skills', workflow: 'Workflow', career: 'Career' },
-    sectionHeadings: {
-      work: 'Selected work',
-      skills: 'Skills',
-      workflow: 'Workflow and interests',
-      career: 'Career',
-    },
-    sourceOnGitHub: 'source on GitHub',
-    moreWork: 'More projects',
-    moreOnGitHub: 'See more on my GitHub profile',
-    aiHeading: 'AI starting points',
-    aiColumns: { task: 'Task', model: 'Model', effort: 'Thinking level' },
-    updated: 'Updated',
-    buildHeading: 'How this portfolio is built',
-    experienceHeading: 'Experience',
-    teachingHeading: 'Current teaching',
-    teachingNote: 'Topics I teach',
-    present: 'present',
-    meta: {
-      title: 'Renke Brixel | Software Developer in Hamburg',
-      description:
-        'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
-      ogLocale: 'en_US',
-    },
+const en = {
+  languageLabel: 'Language',
+  languageNames: { en: 'English', de: 'Deutsch' },
+  themeLabel: 'Color theme',
+  themes: { system: 'System theme', light: 'Light theme', dark: 'Dark theme' },
+  contactLabel: 'Contact',
+  photoOpen: 'View larger portrait',
+  photoHint: { action: 'click me 😊' },
+  photoTitle: 'Portrait of Renke Brixel',
+  photoClose: 'Close photo',
+  email: 'Email',
+  strengthsLabel: 'Profile highlights',
+  currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
+    role,
+    ` at ${organization}, since ${since}`,
+  ],
+  sectionsLabel: 'Portfolio sections',
+  sectionNames: { work: 'Work', skills: 'Skills', workflow: 'Workflow', career: 'Career' },
+  sectionHeadings: {
+    work: 'Selected work',
+    skills: 'Skills',
+    workflow: 'Workflow and interests',
+    career: 'Career',
   },
+  sourceOnGitHub: 'source on GitHub',
+  moreWork: 'More projects',
+  moreOnGitHub: 'See more on my GitHub profile',
+  aiHeading: 'AI starting points',
+  aiColumns: { task: 'Task', model: 'Model', effort: 'Thinking level' },
+  updated: 'Updated',
+  buildHeading: 'How this portfolio is built',
+  experienceHeading: 'Experience',
+  teachingHeading: 'Current teaching',
+  teachingNote: 'Topics I teach',
+  present: 'present',
+  meta: {
+    title: 'Renke Brixel | Software Developer in Hamburg',
+    description:
+      'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
+    ogLocale: 'en_US',
+  },
+};
+
+// Every locale repeats the English keys, with the same value types.
+const copy = {
+  en,
   de: {
     languageLabel: 'Sprache',
     languageNames: { en: 'English', de: 'Deutsch' },
@@ -57,13 +63,15 @@ const copy = {
     themes: { system: 'Systemeinstellung', light: 'Helles Farbschema', dark: 'Dunkles Farbschema' },
     contactLabel: 'Kontakt',
     photoOpen: 'Porträt vergrößern',
-    photoHint: { question: 'größer?', action: 'klick mich 😊' },
+    photoHint: { action: 'klick mich 😊' },
     photoTitle: 'Porträt von Renke Brixel',
     photoClose: 'Foto schließen',
     email: 'E-Mail',
     strengthsLabel: 'Kurzprofil',
-    currentRole: (role: string, organization: string, since: string) =>
-      [role, ` bei ${organization}, seit ${since}`] as const,
+    currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
+      role,
+      ` bei ${organization}, seit ${since}`,
+    ],
     sectionsLabel: 'Bereiche des Portfolios',
     sectionNames: {
       work: 'Projekte',
@@ -95,7 +103,7 @@ const copy = {
       ogLocale: 'de_DE',
     },
   },
-} satisfies Record<Locale, unknown>;
+} satisfies Record<Locale, typeof en>;
 
 // "2025-present" -> "2025–present", localized.
 function formatPeriod(period: string, locale: Locale) {
@@ -111,6 +119,7 @@ function formatDate(isoDate: string, locale: Locale) {
 
 function pageHead(locale: Locale) {
   const { meta } = copy[locale];
+
   return {
     meta: [
       { title: meta.title },
@@ -142,4 +151,5 @@ export {
   pageHead,
   sections,
 };
+
 export type { Locale, Section };
