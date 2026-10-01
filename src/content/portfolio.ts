@@ -231,10 +231,10 @@ export const portfolio = {
       {
         id: 'tooling',
         topic: { en: 'Toolchain', de: 'Toolchain' },
-        technologies: ['mise', 'Nub', 'aube', 'Oxlint', 'Oxfmt'],
+        technologies: ['mise', 'Node.js', 'aube', 'Oxlint', 'Oxfmt'],
         description: {
-          en: 'mise pins Node 24 and Nub; Nub launches the tooling on stock Node. aube manages dependencies and the lockfile. Oxlint runs type-aware lint rules and Oxfmt formats the code.',
-          de: 'mise legt Node 24 und Nub fest; Nub startet die Werkzeuge auf Standard-Node. aube verwaltet Abhängigkeiten und Lockfile. Oxlint prüft mit typbasierten Regeln, Oxfmt formatiert den Code.',
+          en: 'I use mise to select Node LTS for development and builds, and aube to manage dependencies and the lockfile. I run project scripts with aubr, check the code with type-aware Oxlint rules and format it with Oxfmt.',
+          de: 'Für Entwicklung und Builds wähle ich mit mise Node LTS aus. Mit aube verwalte ich Abhängigkeiten und Lockfile und mit aubr starte ich die Projektskripte. Ich prüfe den Code mit typbasierten Oxlint-Regeln und formatiere ihn mit Oxfmt.',
         },
       },
       {
@@ -260,7 +260,7 @@ export const portfolio = {
       { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
       { name: 'Zod', url: 'https://zod.dev/' },
       { name: 'mise', url: 'https://mise.jdx.dev/' },
-      { name: 'Nub', url: 'https://nubjs.com/docs/runtime' },
+      { name: 'Node.js', url: 'https://nodejs.org/' },
       { name: 'aube', url: 'https://aube.sh/guide.html' },
       { name: 'Oxlint', url: 'https://oxc.rs/docs/guide/usage/linter' },
       { name: 'Oxfmt', url: 'https://oxc.rs/docs/guide/usage/formatter' },

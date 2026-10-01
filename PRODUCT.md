@@ -80,5 +80,5 @@ retains its visual scale. Clickable controls use a pointer cursor.
 Navigation order is Work, Career, Skills, Workflow, with Work initially open.
 Restore the selected tab without motion on language navigation or reload.
 Design delegation conveys user requirements without prescribing a visual
-solution; Opus chooses the treatment. Nub launches local tooling on pinned
+solution; Opus chooses the treatment. Local tooling runs directly on pinned
 Node, while aube remains the package manager and workerd the deployed runtime.

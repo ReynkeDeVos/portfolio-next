@@ -59,16 +59,14 @@ animations of layout dimensions need explicit profiling even on current Chrome.
 
 ## Dependencies
 
-Nub 0.9.5 runs local TypeScript and tool binaries on pinned Node 24.21.0.
+Node runs local TypeScript and tool binaries; mise selects the LTS release.
 Node type definitions deliberately use major 24 so the compiler does not
-assume newer runtime APIs. `nub exec --no-check` avoids Nub dependency
-freshness/install behavior because aube owns the installed dependencies.
-Cloudflare Workers uses workerd at development preview and deployment, so the
-local launcher is not a website runtime-speed improvement. See
+assume newer runtime APIs. aube owns dependency installation and the lockfile.
+Cloudflare Workers uses workerd at development preview and deployment. See
 [runtime evidence](research-runtime.md).
 
-TanStack Query is installed at the owner's request. Static portfolio copy needs
-no QueryClient or network requests. Introduce it when there is real server state.
+Static portfolio copy needs no QueryClient or network requests, so TanStack
+Query is not installed. Introduce it when there is real server state.
 Zod validates bilingual content in the build workflow and does not
 enter the browser bundle. shadcn is configured; add only components the design
 actually uses.

@@ -13,26 +13,23 @@ The visual draft awaits owner review; production deployment is still open.
 
 ## Development
 
-Requires Nub 0.9.5 and aube 2.6.1. The project pins Node.js 24.21.0
-under Nub in `.tool-versions`, a version file supported by mise. Nub launches local tooling; aube owns dependency
-installation and the lockfile.
+Requires Node.js 24 and aube 2.6.1. The project selects Node.js LTS
+in `.tool-versions`, which mise reads with `mise install`. aube owns dependency
+installation and the lockfile; package scripts run the installed tools directly.
 
-With mise installed, `mise install` reads the project runtime pins. There is no
-second `mise.toml` with duplicate version declarations. The `engines.node` entry
-in `package.json` describes Nub's underlying Node requirement; project scripts
-choose Nub as the launcher.
+Vite uses its default local host and port and prints the URL when it starts.
 
 ```sh
 aube install --frozen-lockfile
-aube run dev
+aubr dev
 ```
 
 ## Verification
 
 ```sh
-aube run check
-aube run build
-aube run preview
+aubr check
+aubr build
+aubr preview
 ```
 
 `content:check` validates bilingual content with Zod outside the browser. Public routes are prerendered. The previous portfolio is an interim career-content source only. The portrait comes from the owner's separately authorized photoshoot.
@@ -42,16 +39,15 @@ aube run preview
 Cloudflare Workers is the prepared hosting target. The official Cloudflare Vite plugin runs local preview in the Workers runtime. Production deployment requires a Cloudflare account and the owner’s chosen domain.
 
 ```sh
-nub exec --no-check wrangler login
-aube run deploy
+aube exec wrangler login
+aubr deploy
 ```
 
 See [performance decisions](docs/performance.md), [content provenance](docs/content-source.md), [design research](docs/research-material-expressive.md) and [product brief](PRODUCT.md).
 
 The draft uses editable shadcn Button, Tabs and Dialog components with Material roles,
 Tailwind utilities, native CSS motion, and a self-hosted Roboto Flex font from
-`@fontsource-variable`. TanStack Query is reserved for actual server state;
-static portfolio content needs no network requests or query provider.
+`@fontsource-variable`. Static portfolio content needs no network requests or query provider.
 
 Class merging uses the `cn` package from
 [shadcn-ui/cn](https://github.com/shadcn-ui/cn). Workflow includes a bilingual
