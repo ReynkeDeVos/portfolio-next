@@ -3,17 +3,11 @@ import { ArrowUpRight } from 'lucide-react';
 import { Fragment } from 'react';
 
 import { portfolio } from '@/content/portfolio';
+import { selectedWork } from '@/content/selected-work';
+import type { SelectedProject } from '@/content/selected-work';
 
 import { copy, formatDate, formatPeriod } from './copy';
 import type { Locale } from './copy';
-
-type Project = (typeof portfolio.projects)[number];
-
-const featuredProjects = portfolio.projects.filter((project) => project.featured);
-
-const moreProjects = ['elder-gym-bro', 'omarchy-stats'].flatMap((id) =>
-  portfolio.projects.filter((project) => project.id === id),
-);
 
 function TechList({ items, className }: { items: readonly string[]; className?: string }) {
   return (
@@ -32,7 +26,7 @@ function TechList({ items, className }: { items: readonly string[]; className?: 
 
 // The project name is the link; its ::after stretches over the whole item.
 // The item draws the focus ring and rises above its closely spaced neighbours.
-function ProjectLink({ project, locale }: { project: Project; locale: Locale }) {
+function ProjectLink({ project, locale }: { project: SelectedProject; locale: Locale }) {
   return (
     <a
       href={project.url}
@@ -70,6 +64,7 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
 
 function WorkPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
+  const { featured, supporting } = selectedWork.forLocale(locale);
 
   return (
     <div className='flex flex-col gap-6'>
@@ -77,7 +72,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
 
       {/* Connected Expressive list: large outer corners, small inner ones. */}
       <ol className='flex flex-col gap-1'>
-        {featuredProjects.map((project) => (
+        {featured.map((project) => (
           <li
             key={project.id}
             className='group bg-surface-container-low before:bg-on-surface before:ease-effects-fast first:rounded-t-xl-inc last:rounded-b-xl-inc has-[a:focus-visible]:focus-ring relative rounded-xs px-5 py-5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10 sm:px-6'
@@ -87,17 +82,13 @@ function WorkPanel({ locale }: { locale: Locale }) {
                 <h3 className='type-title-lg text-on-surface font-semibold'>
                   <ProjectLink project={project} locale={locale} />
                 </h3>
-                <p className='type-label-lg text-tertiary mt-0.5 font-medium'>
-                  {project.category[locale]}
-                </p>
+                <p className='type-label-lg text-tertiary mt-0.5 font-medium'>{project.category}</p>
               </div>
               <LinkArrow />
             </div>
-            <p className='type-body-lg text-on-surface mt-3 max-w-[64ch]'>
-              {project.description[locale]}
-            </p>
+            <p className='type-body-lg text-on-surface mt-3 max-w-[64ch]'>{project.description}</p>
             <p className='type-body-md text-on-surface-variant mt-2 max-w-[72ch]'>
-              {project.details[locale]}
+              {project.details}
             </p>
             <TechList items={project.technologies} className='mt-4' />
           </li>
@@ -109,7 +100,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
           {t.moreWork}
         </h3>
         <ul className='grid gap-3 md:grid-cols-2'>
-          {moreProjects.map((project) => (
+          {supporting.map((project) => (
             <li
               key={project.id}
               className='group rounded-lg-inc bg-surface-container before:bg-on-surface before:ease-effects-fast has-[a:focus-visible]:focus-ring relative flex flex-col p-5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10'
@@ -120,13 +111,13 @@ function WorkPanel({ locale }: { locale: Locale }) {
                     <ProjectLink project={project} locale={locale} />
                   </h4>
                   <p className='type-label-md text-on-surface-variant font-medium'>
-                    {project.category[locale]}
+                    {project.category}
                   </p>
                 </div>
                 <LinkArrow />
               </div>
-              <p className='type-body-md text-on-surface mt-2'>{project.description[locale]}</p>
-              <p className='type-body-sm text-on-surface-variant mt-2'>{project.details[locale]}</p>
+              <p className='type-body-md text-on-surface mt-2'>{project.description}</p>
+              <p className='type-body-sm text-on-surface-variant mt-2'>{project.details}</p>
               <TechList items={project.technologies} className='mt-auto pt-3' />
             </li>
           ))}

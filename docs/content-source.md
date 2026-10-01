@@ -27,6 +27,11 @@ Elder Gym Bro its team credits; the portfolio does not claim independent
 ownership of either codebase. See [repository evidence](research-selected-work.md)
 for pinned source revisions and limits. No usage or impact metrics are invented.
 
+`portfolio.selectedWork` in `src/content/portfolio.ts` owns this selection.
+Its ordered `featured` and `supporting` ID lists decide what appears and in
+which order; catalog order and catalog records that no list names have no
+effect on the page. Change the selection there, not in components.
+
 ## Technical breadth
 
 The curriculum and lecture repositories supplied the technology inventory.

@@ -4,15 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "aubr content:check && vite",
     "build": "aubr content:check && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/selected-work.test.ts",
     "lint": "oxlint --type-aware",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "deploy": "aubr build && wrangler deploy",
-    "check": "aubr content:check && aubr typecheck && aubr lint && aubr format:check",
+    "check": "aubr content:check && aubr test && aubr typecheck && aubr lint && aubr format:check",
     "content:check": "node scripts/validate-content.ts"
   },
   "dependencies": {

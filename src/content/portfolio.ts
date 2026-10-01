@@ -355,6 +355,12 @@ export const portfolio = {
       role: { en: 'Research intern', de: 'Forschungspraktikant' },
     },
   ],
+  // Display order is set here, not by catalog order. Catalog records that are
+  // not listed stay in the catalog without being shown.
+  selectedWork: {
+    featured: ['reputation-assistant', 'scoundrel-tui', 'pokemon-battle'],
+    supporting: ['elder-gym-bro', 'omarchy-stats'],
+  },
   projects: [
     {
       id: 'reputation-assistant',
@@ -370,7 +376,6 @@ export const portfolio = {
         en: 'Players can choose which groups matter most to them. The default settings follow the reputation guide on qudzoo.',
         de: 'Man kann festlegen, welche Gruppen einem am wichtigsten sind. Die Standardeinstellungen folgen dem Ruf-Leitfaden von qudzoo.',
       },
-      featured: true,
     },
     {
       id: 'scoundrel-tui',
@@ -386,7 +391,6 @@ export const portfolio = {
         en: 'Based on the card game Scoundrel by Zach Gage and Kurt Bieg. Credits for the game and the artwork are in the repository.',
         de: 'Nach dem Kartenspiel Scoundrel von Zach Gage und Kurt Bieg. Die Nachweise für Spiel und Bilder stehen im Repository.',
       },
-      featured: true,
     },
     {
       id: 'omarchy-stats',
@@ -402,7 +406,6 @@ export const portfolio = {
         en: 'If a computer does not provide one of these values, the display says so.',
         de: 'Liefert ein Rechner einen dieser Werte nicht, zeigt die Anzeige das an.',
       },
-      featured: false,
     },
     {
       id: 'name-shuffler',
@@ -418,7 +421,6 @@ export const portfolio = {
         en: 'An experiment in AI-assisted development with Claude.',
         de: 'Ein Experiment mit KI-gestützter Entwicklung und Claude.',
       },
-      featured: false,
     },
     {
       id: 'elder-gym-bro',
@@ -434,7 +436,6 @@ export const portfolio = {
         en: 'A final project by a team of four: Michal, Sebastian, Alex and Renke.',
         de: 'Ein Abschlussprojekt im Viererteam mit Michal, Sebastian, Alex und Renke.',
       },
-      featured: false,
     },
     {
       id: 'pokemon-battle',
@@ -450,7 +451,6 @@ export const portfolio = {
         en: 'A fork of EinKinddesWindes/PokemonBattle.',
         de: 'Ein Fork von EinKinddesWindes/PokemonBattle.',
       },
-      featured: true,
     },
   ],
 };

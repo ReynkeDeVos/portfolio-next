@@ -71,6 +71,22 @@ Zod validates bilingual content in the build workflow and does not
 enter the browser bundle. shadcn is configured; add only components the design
 actually uses.
 
+## Content validation
+
+`aube run content:check` validates the bilingual content shape with Zod and
+then checks the selected work against the project catalog: duplicate project
+IDs, IDs repeated within a group, IDs in both groups, unknown IDs and empty
+groups. It reports every problem at once. The check runs before `dev` starts
+and before `build`; there is no watcher, so restart the dev server after
+editing the selection. Both scripts live under `scripts/`, which keeps Zod
+and the validator out of the browser bundle.
+
+The page reads the selection through `src/content/selected-work.ts`. If a
+listed ID has no project, rendering throws an error naming the group and ID
+instead of silently leaving the project out. `aube run test` runs the native
+Node tests for both the read and validation interfaces; `aube run check`
+includes it.
+
 ## Verification
 
 Measure a production build, not dev-server timings. Check direct requests to

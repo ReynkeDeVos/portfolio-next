@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { portfolio } from '../src/content/portfolio.ts';
+import { validateSelectedWork } from './validate-selected-work.ts';
 
 const text = z.string().min(1);
 
@@ -25,8 +26,10 @@ const project = z.object({
   technologies,
   url: z.url(),
   details: translatedText,
-  featured: z.boolean(),
 });
+
+// Relationships between the groups and the catalog are checked separately.
+const workSelection = z.object({ featured: z.array(text), supporting: z.array(text) });
 
 const portfolioSchema = z.object({
   name: text,
@@ -81,11 +84,14 @@ const portfolioSchema = z.object({
   }),
   teaching: z.array(teachingTopic).min(1),
   experience: z.array(experience),
+  selectedWork: workSelection,
   projects: z.array(project),
 });
 
 const validated = portfolioSchema.parse(portfolio);
 
 z.email().parse(globalThis.atob(validated.emailEncoded));
+
+validateSelectedWork(validated.projects, validated.selectedWork);
 
 process.stdout.write(`Validated bilingual content for ${validated.name}.\n`);
