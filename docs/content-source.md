@@ -95,14 +95,14 @@ the local guide or duplicate its source transcript archive.
 The bilingual “My AI workflow” section also includes linked tools,
 checked against their official repositories on 2026-10-01:
 [Impeccable](https://github.com/pbakaus/impeccable) for interface design and review;
-[Wayfinder](https://www.aihero.dev/skills-wayfinder)
+[wayfinder](https://www.aihero.dev/skills-wayfinder)
 for resolving a large plan's decisions across sessions; Matt Pocock's
 [grill-with-docs](https://www.aihero.dev/skills-grill-with-docs)
 and [code-review](https://www.aihero.dev/skills-code-review)
 for requirements and review; and
 [OpenSpec](https://github.com/Fission-AI/OpenSpec) for proposals, requirements,
 scenarios and implementation tasks kept with the code. At the owner's request,
-OpenSpec appears alongside Wayfinder as an alternative planning approach.
+OpenSpec appears alongside wayfinder as an alternative planning approach.
 The owner requested the AI Hero links for Matt Pocock’s skills and omitted
 `tdd` because the agent reaches for it automatically when a task fits.
 The tool list describes the owner's workflow choices without adding claims

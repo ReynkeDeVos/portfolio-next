@@ -220,12 +220,12 @@ export const portfolio = {
         id: 'planning',
         title: { en: 'Planning', de: 'Planung' },
         description: {
-          en: 'Wayfinder for open decisions; OpenSpec as an alternative for specs and tasks.',
-          de: 'Wayfinder für offene Entscheidungen, alternativ OpenSpec für Specs und Aufgaben.',
+          en: 'wayfinder for open decisions; OpenSpec as an alternative for specs and tasks.',
+          de: 'wayfinder für offene Entscheidungen, alternativ OpenSpec für Specs und Aufgaben.',
         },
         links: [
           {
-            name: 'Wayfinder',
+            name: 'wayfinder',
             url: 'https://www.aihero.dev/skills-wayfinder',
           },
           { name: 'OpenSpec', url: 'https://openspec.dev/' },
