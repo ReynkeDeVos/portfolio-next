@@ -32,7 +32,7 @@ function TabsList({
       <span
         aria-hidden
         data-slot='tabs-indicator'
-        className='bg-secondary-container ease-spatial-fast absolute inset-y-1 start-1 -z-10 w-[calc((100%_-_0.5rem)/var(--tab-count,1))] translate-x-[calc(var(--tab-index,0)*100%)] rounded-full transition-transform duration-350 group-data-[animate=false]/tabs-list:transition-none'
+        className='bg-secondary-container ease-spatial-fast absolute inset-y-1 inset-s-1 -z-10 w-[calc((100%-0.5rem)/var(--tab-count,1))] translate-x-[calc(var(--tab-index,0)*100%)] rounded-full transition-transform duration-350 group-data-[animate=false]/tabs-list:transition-none'
       />
       {children}
     </TabsPrimitive.List>

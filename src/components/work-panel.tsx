@@ -40,7 +40,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
         {featured.map((project) => (
           <li
             key={project.id}
-            className='group bg-surface-container-low before:bg-on-surface before:ease-effects-fast first:rounded-t-xl-inc last:rounded-b-xl-inc has-[a:focus-visible]:focus-ring before:rounded-inherit relative rounded-xs px-5 py-5 before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10 sm:px-6'
+            className='group bg-surface-container-low before:bg-on-surface before:ease-effects-fast first:rounded-t-xl-inc last:rounded-b-xl-inc has-[a:focus-visible]:focus-ring before:rounded-inherit relative rounded-xs p-5 before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10 sm:px-6'
           >
             <div className='flex items-start justify-between gap-4'>
               <div className='min-w-0'>

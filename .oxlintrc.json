@@ -7,8 +7,14 @@
     {
       "name": "anti-slop",
       "specifier": "./tools/oxlint/anti-slop/index.ts"
-    }
+    },
+    "oxlint-tailwindcss"
   ],
+  "settings": {
+    "tailwindcss": {
+      "entryPoint": "src/styles.css"
+    }
+  },
   "plugins": [
     "eslint",
     "unicorn",
@@ -20,8 +26,8 @@
     "jsdoc",
     "jsx-a11y",
     // "node",
-    "promise"
-    // "vitest"
+    "promise",
+    "vitest"
   ],
   "ignorePatterns": [
     ".agent/**",
@@ -68,6 +74,8 @@
     "shadcn/no-inline-styles": "warn",
     "shadcn/no-unknown-classes": "warn",
     "shadcn/require-static-classes": "warn",
+    "tailwindcss/enforce-canonical": "warn",
+    "tailwindcss/enforce-shorthand": "warn",
     "oxc/no-accumulating-spread": "error",
     "anti-slop/no-array-filter-map": "error",
     "anti-slop/no-reduce-accumulator-copy": "error",

@@ -102,7 +102,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
             <clipPath id={clipId} clipPathUnits='objectBoundingBox'>
               <path
                 d={clipPath}
-                className='ease-spatial [translate:0.5px_0.5px] [rotate:var(--portrait-angle)] transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]'
+                className='ease-spatial [translate:0.5px_0.5px] rotate-(--portrait-angle) transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]'
               />
             </clipPath>
           </svg>
