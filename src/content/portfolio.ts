@@ -43,7 +43,7 @@ export const portfolio = {
       id: 'terminal',
       title: { en: 'Terminal first', de: 'Terminal zuerst' },
       description: {
-        en: 'Linux has been my main operating system for over 20 years. I love Arch Linux and a terminal-first workflow. Linux’s text-based configuration lets AI agents customize the operating system itself, from desktop settings to system services. Fast file access also helps with parallel Git worktrees.',
+        en: 'Linux has been my main operating system for 20+ years. I love Arch Linux and a terminal-first workflow. Linux’s text-based configuration lets AI agents customize the operating system itself, from desktop settings to system services. Faster file access also helps with parallel Git worktrees.',
         de: 'Linux ist seit über 20 Jahren mein Hauptbetriebssystem. Ich liebe Arch Linux und einen terminalbasierten Workflow. Dank der textbasierten Konfiguration können KI-Agenten das Betriebssystem selbst anpassen, von Desktop-Einstellungen bis zu Systemdiensten. Schneller Dateizugriff hilft auch bei parallelen Git-Worktrees.',
       },
     },
