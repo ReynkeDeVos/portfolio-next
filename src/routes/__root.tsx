@@ -9,9 +9,14 @@ import {
 } from '@tanstack/react-router';
 
 import { localeFromPathname } from '@/components/copy';
+import { NotFound } from '@/components/not-found';
 import { themeScript } from '@/lib/theme';
 
 import appCss from '../styles.css?url';
+
+const favicon = `data:image/svg+xml,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="50" font-size="88" text-anchor="middle" dominant-baseline="central">🧑‍💻</text></svg>',
+)}`;
 
 const Route = createRootRoute({
   head: () => ({
@@ -34,11 +39,12 @@ const Route = createRootRoute({
         type: 'font/woff2',
         crossOrigin: 'anonymous',
       },
-      { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+      { rel: 'icon', href: favicon, type: 'image/svg+xml' },
       { rel: 'stylesheet', href: appCss },
     ],
   }),
   component: Root,
+  notFoundComponent: NotFound,
 });
 
 function Root() {

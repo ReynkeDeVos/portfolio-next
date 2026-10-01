@@ -37,6 +37,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
           <p className='type-title-md text-primary mt-1 font-medium'>
             {portfolio.identity[locale]}
           </p>
+          <p className='type-body-md text-on-surface-variant mt-1'>{portfolio.location[locale]}</p>
         </div>
       </div>
 

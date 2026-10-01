@@ -1,6 +1,9 @@
 export const portfolio = {
   name: 'Renke Brixel',
-  location: 'Hamburg, Germany',
+  location: {
+    en: 'Based in Hamburg, Germany.',
+    de: 'Wohnhaft in Hamburg, Deutschland.',
+  },
   emailEncoded: 'cmVua2UuYnJpeGVsK3BvcnRmb2xpb0BnbWFpbC5jb20=',
   github: 'https://github.com/ReynkeDeVos',
   linkedin: 'https://www.linkedin.com/in/rbrixel/',
@@ -20,8 +23,8 @@ export const portfolio = {
     height: 1080,
   },
   identity: {
-    en: 'Software developer in Hamburg, Germany',
-    de: 'Softwareentwickler in Hamburg, Deutschland',
+    en: 'I build software and teach people to code.',
+    de: 'Ich entwickle Software und unterrichte Programmieren.',
   },
   introduction: {
     en: 'I build web applications, game mods and tools for the terminal and Linux desktop.',
@@ -160,8 +163,8 @@ export const portfolio = {
   aiRecommendations: {
     updated: '2026-10-01',
     introduction: {
-      en: 'Thinking levels are settings to try, not a promise of better results.',
-      de: 'Denkstufen sind Einstellungen zum Ausprobieren, kein Versprechen für bessere Ergebnisse.',
+      en: 'With Opus 5.5, avoid Low and Max. For GPT-6.1 Sol, skip Max and use Extra High (xhigh) only when High falls short; try Low only for small, well-defined tasks.',
+      de: 'Bei Opus 5.5 Low und Max vermeiden. Bei GPT-6.1 Sol Max auslassen und Extra High (xhigh) nur nutzen, wenn High nicht ausreicht; Low nur für kleine, klar definierte Aufgaben ausprobieren.',
     },
     items: [
       {
