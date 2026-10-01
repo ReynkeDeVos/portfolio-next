@@ -16,7 +16,10 @@ operating system, and practical daily evaluation of AI tools.
 
 The owner connects this Linux workflow to AI agents editing configuration and
 working in parallel Git worktrees. The [Linux filesystem manual](https://man7.org/linux/man-pages/man7/hier.7.html)
-documents configuration files in `/etc`, and [Git's worktree documentation](https://git-scm.com/docs/git-worktree)
+documents configuration files in `/etc`; the [kernel's sysfs documentation](https://docs.kernel.org/filesystems/sysfs.html)
+describes exposing kernel attributes through files, generally as ASCII text.
+The copy emphasizes agents customizing the operating system itself without
+claiming every Linux file is text. [Git's worktree documentation](https://git-scm.com/docs/git-worktree)
 describes checking out multiple branches in separate working directories.
 [Microsoft's WSL filesystem guidance](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
 recommends keeping tools and files on the same operating system's filesystem
