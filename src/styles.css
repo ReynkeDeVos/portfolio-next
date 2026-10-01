@@ -258,8 +258,15 @@
     color: var(--md-sys-color-on-surface);
     accent-color: var(--md-sys-color-primary);
     caret-color: var(--md-sys-color-primary);
+    scrollbar-gutter: stable;
     scrollbar-color: var(--md-sys-color-outline) var(--md-sys-color-surface);
     -webkit-text-size-adjust: 100%;
+  }
+
+  @media (pointer: fine) {
+    html {
+      overscroll-behavior: none;
+    }
   }
 
   body {
