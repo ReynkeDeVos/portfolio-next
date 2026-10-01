@@ -37,7 +37,8 @@ document language and alternate-language metadata.
 
 Animate one characteristic visual interaction with short, interruptible
 transitions. Content starts visible. Reduced motion removes nonessential
-movement. Navigation never waits for an animation to finish.
+movement. Navigation never waits for an animation to finish. The portrait hint
+appears with the existing zoom; no continuous hover animation runs.
 
 The animation target is the latest stable Chrome/Chromium. Prefer native CSS
 transitions/keyframes for simple motion and the Web Animations API when playback
@@ -68,7 +69,7 @@ local launcher is not a website runtime-speed improvement. See
 
 TanStack Query is installed at the owner's request. Static portfolio copy needs
 no QueryClient or network requests. Introduce it when there is real server state.
-Effect and Zod validate bilingual content in the build workflow and do not
+Zod validates bilingual content in the build workflow and does not
 enter the browser bundle. shadcn is configured; add only components the design
 actually uses.
 

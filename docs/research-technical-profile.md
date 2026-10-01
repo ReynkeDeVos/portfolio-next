@@ -61,3 +61,8 @@ The owner wants copy about trying new technologies, a terminal-first Linux workf
 - Historical manifests include Axios, dotenv, ts-node, Prettier and ESLint, plus numerous incidental UI/markdown packages. Their presence does not make them requirements of this portfolio. Apply the separately researched e18e replacement policy to actual portfolio dependencies without rewriting teaching history or claiming that a recommended alternative was taught.
 - SQLite/Sequelize, Joi, Leaflet, Cloudinary, daisyUI and similar dependencies can be mentioned in an individual relevant project when useful; they should not fill the homepage merely because they appear in a template.
 - Do not add authentication, a database, an AI backend, an automation runtime or cloud SDKs to this primarily static portfolio solely to match taught technologies.
+
+Owner update: Effect was removed from the portfolio implementation because
+the single synchronous content validator did not justify it. It remains a
+self-reported item in the general skills inventory. Better Auth is now listed
+alongside the custom authentication solution at the owner’s request.

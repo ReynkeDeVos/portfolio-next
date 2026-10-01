@@ -35,7 +35,7 @@ aube run build
 aube run preview
 ```
 
-`content:check` validates bilingual content with Zod and Effect outside the browser. Public routes are prerendered. The previous portfolio is an interim career-content source only. The portrait comes from the owner's separately authorized photoshoot.
+`content:check` validates bilingual content with Zod outside the browser. Public routes are prerendered. The previous portfolio is an interim career-content source only. The portrait comes from the owner's separately authorized photoshoot.
 
 ## Hosting
 

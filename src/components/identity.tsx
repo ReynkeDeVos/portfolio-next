@@ -12,7 +12,11 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
   const t = copy[locale];
   const [current] = portfolio.experience;
   const [role, rest] = current
-    ? t.currentRole(current.role[locale], current.organization, current.period.split('-')[0] ?? '')
+    ? t.currentRole(
+        current.role[locale],
+        current.organization[locale],
+        current.period.split('-')[0] ?? '',
+      )
     : ['', ''];
 
   return (

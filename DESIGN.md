@@ -210,7 +210,7 @@ The role palette uses sage for action and keyboard focus, caramel for selected c
 
 ### Primary
 
-- **Sage action:** `primary` and `on-primary` form the Email button and keyboard rings. Primary also colors the developer identity, build-section links, caret and native accents.
+- **Sage action:** `primary` and `on-primary` form the Email button and keyboard rings. Primary also colors the developer identity, caret and native accents. Text links use on-surface, with stationary diagonal arrows.
 - **Sage tonal:** `primary-container` and `on-primary-container` support the portrait fallback and thinking-level chips.
 
 ### Secondary
@@ -262,7 +262,7 @@ Work, Career, Skills and Workflow are the section order, with Work initially ope
 
 ## Elevation & Depth
 
-The system is flat and uses tonal layering, borders and a translucent scrim. No component applies box shadows. Surface-container-low separates primary content from the document ground; higher containers distinguish small controls, technology tags and the portrait dialog. Thin outline-variant dividers group career, skills, build rows and table content. A focused stretched project link raises its item above adjacent items so the green outline remains visible; this is stacking, not shadow elevation.
+The system is flat and uses tonal layering, borders and a translucent scrim. No component applies box shadows. Surface-container-low separates primary content from the document ground; higher containers distinguish small controls, technology tags and the portrait dialog. Supporting project cards, AI starting points and current teaching use opaque surface-container fills, distinct from the page ground and main low-surface panels. Thin outline-variant dividers group career, skills, build rows and table content. A focused stretched project link raises its item above adjacent items so the green outline remains visible; this is stacking, not shadow elevation.
 
 **The Tonal Depth Rule.** Use surface roles and outline-variant divisions for depth. The current portfolio has no box shadows.
 
@@ -288,7 +288,7 @@ Strength chips are noninteractive, caramel-toned, medium-weight label-large with
 
 Primary containers use the low surface with enlarged corners and padding (20px or 24px). Featured work is a connected list: individual items have small corners, while the first and last items complete the large outer silhouette. Supporting projects use an outline-variant border and `lg-inc` corners.
 
-Project names are semantic links whose hit area stretches across the item. Hover adds an on-surface state layer (6%) and moves the outgoing arrow (2px right, 2px up) over (350ms). Keyboard focus draws the shared ring around the whole item and produces the same arrow feedback. Descriptive text and technologies remain readable during every state.
+Project names are semantic links whose hit area stretches across the item. Hover adds an on-surface state layer (6%). The outgoing arrow stays stationary. Keyboard focus draws the shared ring around the whole item. Descriptive text and technologies remain readable during every state.
 
 ### Navigation
 
@@ -302,13 +302,13 @@ Every interactive element uses the primary green outline (3px). The default offs
 
 The owner-selected AVIF thumbnail is an ordinary crop from DSC02990.jpg, mirrored to face right. The larger portrait is an ordinary crop from DSC03095.jpg; both retain their original brick backgrounds and have no AI editing. The thumbnail size steps from (96px) to (128px) to (144px).
 
-Hover and keyboard focus expand the scalloped frame to (1.08), while coordinated image scaling keeps the visible photograph fixed: overscan starts at (1.09) and changes to (1.0093) as the frame expands. Rotation and expansion use the spatial curve over (500ms). Hover or focus warms the larger image cache without delaying opening.
+Hover and keyboard focus expand the scalloped frame to (1.08), while coordinated image scaling keeps the visible photograph fixed: overscan starts at (1.09) and changes to (1.0093) as the frame expands. Rotation and expansion use the spatial curve over (500ms). Hover or focus warms the larger image cache without delaying opening. A two-line sage hint appears inside the lower rim: “bigger? / click me 😊” or “größer? / klick mich 😊”. The photo and hint remain upright. Hover does not rotate the frame; section changes retain the existing one-lobe rotation.
 
 The viewer uses a scrim and a high-surface dialog with extra-large corners. A tonal close button sits on its own top row, receives initial focus and remains distinct from the image. The visible title is omitted; a screen-reader title remains. Radix supplies the focus trap, Escape/outside dismissal and focus return. The image fits both viewport axes with a maximum width (960px), retains its full crop and uses rounded-lg corners. Opening fades over (150ms); closing unmounts immediately.
 
 ### Build explanation
 
-The bilingual "How this portfolio is built" section is a low-surface container with a title-large heading, body-medium introduction and divided topic/technology/reason rows. Only named tools with a stored link become links; currently mise is linked in primary color with an underline and a `xs` focus shape. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides mise-compatible Node/Nub pins; Nub launches tooling on Node, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
+The bilingual "How this portfolio is built" section is a low-surface container with a title-large heading, body-medium introduction and divided topic/technology/reason rows. Every named technology links to its documentation in on-surface color, with a stationary diagonal ArrowUpRight and an `xs` focus shape. Employer names and the GitHub-profile footer use the same inline treatment. Project links use on-surface text and arrows while retaining their whole-item hit area. These text links have no underline or arrow movement on hover or keyboard focus. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides mise-compatible Node/Nub pins; Nub launches tooling on Node, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
 
 All feedback is decorative. Reduced-motion preferences set transition and animation duration to zero throughout the document; content never depends on finishing an effect. Exact easing and state snippets live in the v2 sidecar because the frontmatter schema has no motion or focus fields. Sidecar tonal ramps are synthesized dark-to-light preview metadata, except the tab-track strip, which uses existing surface ladder values; these strips do not add shipped palette tokens. Component previews embed the actual AVIF media and expand utility styles into local CSS. Navigation and dialog previews show the implemented surfaces and states; runtime selection, image opening and focus trapping remain app behavior.
 

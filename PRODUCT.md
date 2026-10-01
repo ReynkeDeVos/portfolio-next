@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-TanStack Start, React, TypeScript 7, Vite, Zod, shadcn/ui, Tailwind CSS, TanStack Query and Effect. aube manages packages. Oxlint and Oxfmt use the owner's global configuration as their baseline. Cloudflare Workers is the prepared hosting target. Production credentials and a domain are not configured yet.
+TanStack Start, React, TypeScript 7, Vite, Zod, shadcn/ui, Tailwind CSS, TanStack Query. Effect was removed from this project at the owner’s request; it remains in the general skills inventory. aube manages packages. Oxlint and Oxfmt use the owner's global configuration as their baseline. Cloudflare Workers is the prepared hosting target. Production credentials and a domain are not configured yet.
 
 ## Users
 

@@ -10,9 +10,8 @@ import type { Locale } from './copy';
 type Project = (typeof portfolio.projects)[number];
 
 const featuredProjects = portfolio.projects.filter((project) => project.featured);
-// Team and fork work stays optional; only projects with clear attribution appear.
-const moreProjects = portfolio.projects.filter((project) =>
-  ['blitzlesen', 'elder-gym-bro'].includes(project.id),
+const moreProjects = ['elder-gym-bro', 'omarchy-stats'].flatMap((id) =>
+  portfolio.projects.filter((project) => project.id === id),
 );
 
 function TechList({ items, className }: { items: readonly string[]; className?: string }) {
@@ -36,7 +35,7 @@ function ProjectLink({ project, locale }: { project: Project; locale: Locale }) 
   return (
     <a
       href={project.url}
-      className='cursor-pointer outline-none after:absolute after:inset-0 after:cursor-pointer'
+      className='text-on-surface cursor-pointer outline-none after:absolute after:inset-0 after:cursor-pointer'
     >
       {project.name}
       <span className='sr-only'>, {copy[locale].sourceOnGitHub}</span>
@@ -44,13 +43,27 @@ function ProjectLink({ project, locale }: { project: Project; locale: Locale }) 
   );
 }
 
-// Hover and focus nudge the arrow toward the link target.
+// A stationary arrow, like the contact buttons, marks the link target.
 function LinkArrow() {
+  return <ArrowUpRight aria-hidden className='text-on-surface size-5 shrink-0' />;
+}
+
+// Inline external link. The word joiner keeps the arrow on the line of the
+// name's last character while long names still wrap anywhere.
+function ExternalLink({ href, children }: { href: string; children: string }) {
   return (
-    <ArrowUpRight
-      aria-hidden
-      className='text-on-surface-variant ease-spatial-fast size-5 shrink-0 transition-transform duration-350 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-has-[a:focus-visible]:translate-x-0.5 group-has-[a:focus-visible]:-translate-y-0.5'
-    />
+    <a
+      href={href}
+      target='_blank'
+      rel='noopener noreferrer'
+      className='text-on-surface cursor-pointer rounded-xs wrap-anywhere'
+    >
+      {children}
+      <span className='whitespace-nowrap'>
+        {'\u2060'}
+        <ArrowUpRight aria-hidden className='ms-0.5 inline size-[1em] align-[-0.125em]' />
+      </span>
+    </a>
   );
 }
 
@@ -97,7 +110,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
           {moreProjects.map((project) => (
             <li
               key={project.id}
-              className='group rounded-lg-inc border-outline-variant before:bg-on-surface before:ease-effects-fast has-[a:focus-visible]:focus-ring relative flex flex-col border p-5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10'
+              className='group rounded-lg-inc bg-surface-container before:bg-on-surface before:ease-effects-fast has-[a:focus-visible]:focus-ring relative flex flex-col p-5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10'
             >
               <div className='flex items-start justify-between gap-3'>
                 <div className='min-w-0'>
@@ -116,6 +129,9 @@ function WorkPanel({ locale }: { locale: Locale }) {
             </li>
           ))}
         </ul>
+        <p className='type-body-md px-1'>
+          <ExternalLink href={portfolio.github}>{t.moreOnGitHub}</ExternalLink>
+        </p>
       </section>
     </div>
   );
@@ -171,7 +187,7 @@ function WorkflowPanel({ locale }: { locale: Locale }) {
 
       <section
         aria-labelledby='ai-heading'
-        className='rounded-xl-inc border-outline-variant border p-5 sm:p-6'
+        className='rounded-xl-inc bg-surface-container p-5 sm:p-6'
       >
         <div className='flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1'>
           <h3 id='ai-heading' className='type-title-lg text-on-surface font-semibold'>
@@ -270,16 +286,7 @@ function BuildSection({ locale }: { locale: Locale }) {
                   return (
                     <Fragment key={name}>
                       {index > 0 ? ', ' : null}
-                      {url ? (
-                        <a
-                          href={url}
-                          className='text-primary cursor-pointer rounded-xs underline hover:decoration-2'
-                        >
-                          {name}
-                        </a>
-                      ) : (
-                        name
-                      )}
+                      {url ? <ExternalLink href={url}>{name}</ExternalLink> : name}
                     </Fragment>
                   );
                 })}
@@ -311,7 +318,7 @@ function CareerPanel({ locale }: { locale: Locale }) {
         <ol className='divide-outline-variant mt-3 divide-y'>
           {portfolio.experience.map((entry) => (
             <li
-              key={`${entry.organization}-${entry.period}`}
+              key={`${entry.organization.en}-${entry.period}`}
               className='grid gap-x-6 gap-y-0.5 py-3 sm:grid-cols-[7.5rem_minmax(0,1fr)]'
             >
               <p className='type-body-md text-on-surface-variant tabular-nums'>
@@ -319,7 +326,9 @@ function CareerPanel({ locale }: { locale: Locale }) {
               </p>
               <div>
                 <p className='type-body-lg text-on-surface font-medium'>{entry.role[locale]}</p>
-                <p className='type-body-md text-on-surface-variant'>{entry.organization}</p>
+                <p className='type-body-md text-on-surface-variant'>
+                  <ExternalLink href={entry.url}>{entry.organization[locale]}</ExternalLink>
+                </p>
               </div>
             </li>
           ))}
@@ -328,7 +337,7 @@ function CareerPanel({ locale }: { locale: Locale }) {
 
       <section
         aria-labelledby='teaching-heading'
-        className='rounded-xl-inc border-outline-variant border p-5 sm:p-6'
+        className='rounded-xl-inc bg-surface-container p-5 sm:p-6'
       >
         <h3 id='teaching-heading' className='type-title-lg text-on-surface font-semibold'>
           {t.teachingHeading}

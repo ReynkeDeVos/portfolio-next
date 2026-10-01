@@ -19,10 +19,12 @@ than 20 years using Linux, and practical daily evaluation of AI tools.
 ## Verified project evidence
 
 Public GitHub source, manifests and attribution were inspected for selected
-work. Reputation Assistant, Scoundrel TUI and Omarchy System Stats are the main
-examples. Blitzlesen supplies an additional web example. Team projects and
-forks retain their attribution; uncertain individual contributions are not
-presented as personal case studies. See [repository evidence](research-selected-work.md)
+work. The owner selected Reputation Assistant, Scoundrel TUI and PokémonBattle
+as the main examples, in that order. Elder Gym Bro App and Omarchy System Stats
+appear below, left to right on wider screens. Name Shuffler CLI and the unfinished
+Blitzlesen are not displayed. PokémonBattle retains its fork attribution and
+Elder Gym Bro its team credits; the portfolio does not claim independent
+ownership of either codebase. See [repository evidence](research-selected-work.md)
 for pinned source revisions and limits. No usage or impact metrics are invented.
 
 ## Technical breadth
@@ -30,8 +32,25 @@ for pinned source revisions and limits. No usage or impact metrics are invented.
 The curriculum and lecture repositories supplied the technology inventory.
 See [technical profile evidence](research-technical-profile.md). Teaching a
 technology does not establish commercial production experience with it.
-Better Auth is being prepared alongside custom authentication. It is not
-presented as an established teaching or production credential.
+At the owner’s request, Better Auth is included alongside custom authentication
+in the skills and teaching inventory. The owner says the teaching addition
+will take effect within days. The owner also requested Claude Agent SDK
+under AI integration and automation, without a separate coming-soon entry.
+The Anthropic client SDK is listed separately from the Agent SDK.
+
+The owner reports regular deployments to Cloudflare, Render, Vercel and Railway
+and use of Docker and Podman. Fallow appears in the general code-quality
+toolkit, supported by the lecture inventory; this portfolio does not claim to
+run Fallow in its build.
+
+Employer links come from the old portfolio’s `src/data/index.ts`, including
+the specific LIV research-unit and UKE institute pages.
+
+Institution names follow the selected language: [Leibniz-Institut für Virologie](https://www.leibniz-liv.de/)
+and [Universitätsklinikum Hamburg-Eppendorf](https://www.uke.de/allgemein/ueber-uns/das-uke/index.html)
+use their official German names. WBS Coding School, Closelink and University
+of Utah School of Medicine retain their names in both languages. The official
+agent library name is [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview).
 
 The small dated model recommendation list follows the owner's maintained
 model guide, checked on 2026-10-01, with the owner’s current preference for
@@ -73,3 +92,15 @@ the encoded address only when the button is activated and opens the mail
 application. The prerendered HTML has no email address, mailto link or address
 tooltip. This deters plain-text address harvesters, not bots that execute or
 analyze JavaScript. The build validator checks the decoded address.
+
+The portfolio-build section links each named technology to its official
+documentation, the Fontsource font page or the AVIF specification. It reuses
+the existing inline link treatment and green keyboard focus indicator.
+
+The owner added ultrarunning as a personal profile highlight. It is not a
+software skill, and the chip group’s accessible label reflects the mixed
+profile highlights. The portfolio-build explanation addresses a technical
+lead and describes the implemented tradeoffs rather than generic asset
+provenance. At the owner’s request, Effect was removed from the dependency
+list and build validator. The owner still lists it in the general skills
+inventory; the portfolio does not describe it as part of its implementation.

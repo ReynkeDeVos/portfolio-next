@@ -46,3 +46,32 @@ controls use an inset ring, stretched project links outline their whole item,
 and the portrait ring clears the expanded frame. Mouse presentation is
 unchanged. The owner explicitly requested removing the skip-to-content link
 after trying the keyboard navigation; it is absent from the final draft.
+
+After the owner rejected underlines, Opus 5.5 at Medium effort aligned all
+text links. The owner then requested normal on-surface text color and
+stationary ArrowUpRight icons, matching the contact buttons. The final
+treatment has no underlines or moving arrows and retains green keyboard focus. Employer and documentation
+links share the inline treatment; project links retain their whole-item hit
+area. Long institution names wrap on small screens. The owner supplied the
+employer destinations from the old portfolio. Contact buttons and language
+controls retain their component-specific presentation.
+
+Opus rewrote the portfolio-build explanations in both languages for a
+technical lead, using the actual renderer, client-import graph, theme store
+and caching configuration. The owner added ultrarunning to the existing
+profile chips without requesting a new visual treatment.
+
+Opus added the owner-requested bilingual portrait hint, using two curved lines
+on a sage band inside the lower rim and a smiling emoji. The owner cancelled
+hover rotation; only the approved zoom and section-change rotation remain.
+Opus replaced the transparent outlined AI, teaching and supporting-project
+containers with opaque surface-container fills in both themes.
+
+The final production Chromium pass covered all four sections at 1280px and
+390px, in English and German and both themes: 32 view combinations, with no
+horizontal overflow or JavaScript exceptions. Project order matched the owner’s
+selection throughout. The new supporting surfaces are opaque and sampled
+body text reached at least 7.92:1 contrast. Eight portrait states showed the
+hint, preserved the green focus ring, opened the photo and returned focus
+after Escape. Reduced-motion transitions were zero-duration and no hover
+rotation was present. These are local checks, not deployed performance metrics.

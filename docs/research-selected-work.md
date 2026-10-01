@@ -100,3 +100,13 @@ Inventory source: [GitHub repository API](https://api.github.com/users/ReynkeDeV
 - These summaries establish what the public source implements, not whether every external demo or deployment currently works.
 - Prefer three visible project cards with compact technology labels. Put the implementation story and additional projects behind an immediate detail view or dedicated work page.
 - Keep project attribution in those details. The homepage can remain concise without implying ownership of third-party engines, games, art or team contributions.
+
+## Owner selection update
+
+The owner removed Blitzlesen from the portfolio because it is unfinished.
+The owner subsequently selected Reputation Assistant, Scoundrel TUI and
+PokémonBattle as the three main projects. Elder Gym Bro App is the left supporting
+card and Omarchy System Stats the right. Name Shuffler CLI is no longer displayed.
+PokémonBattle retains its upstream fork attribution; individual contribution
+scope remains unresolved in the research, with no sole-authorship claim.
+The original research above is historical evidence, not the current ordering.
