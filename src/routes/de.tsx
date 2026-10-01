@@ -3,13 +3,13 @@ import { createFileRoute } from '@tanstack/react-router';
 import { pageHead } from '@/components/copy';
 import { PortfolioPage } from '@/components/portfolio-page';
 
-const Route = createFileRoute('/')({
-  head: () => pageHead('en'),
-  component: English,
+const Route = createFileRoute('/de')({
+  head: () => pageHead('de'),
+  component: German,
 });
 
-function English() {
-  return <PortfolioPage locale='en' />;
+function German() {
+  return <PortfolioPage locale='de' />;
 }
 
 export { Route };

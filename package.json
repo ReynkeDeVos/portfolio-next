@@ -4,22 +4,27 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 3000",
-    "build": "aube run content:check && vite build",
-    "preview": "vite preview --host 0.0.0.0 --port 3000",
-    "typecheck": "tsc --noEmit",
-    "lint": "oxlint --type-aware",
-    "format": "oxfmt --write .",
-    "format:check": "oxfmt --check .",
-    "deploy": "aube run build && wrangler deploy",
+    "dev": "nub exec --no-check vite --host 0.0.0.0 --port 3000",
+    "build": "aube run content:check && nub exec --no-check vite build",
+    "preview": "nub exec --no-check vite preview --host 0.0.0.0 --port 3000",
+    "typecheck": "nub exec --no-check tsc --noEmit",
+    "lint": "nub exec --no-check oxlint --type-aware",
+    "format": "nub exec --no-check oxfmt --write .",
+    "format:check": "nub exec --no-check oxfmt --check .",
+    "deploy": "aube run build && nub exec --no-check wrangler deploy",
     "check": "aube run content:check && aube run typecheck && aube run lint && aube run format:check",
-    "content:check": "node scripts/validate-content.ts"
+    "content:check": "nub scripts/validate-content.ts"
   },
   "dependencies": {
+    "@fontsource-variable/roboto-flex": "^5.3.0",
     "@tanstack/react-query": "^5.104.0",
     "@tanstack/react-router": "^1.170.41",
     "@tanstack/react-start": "^1.168.60",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.4.0",
     "effect": "^4.0.0",
+    "lucide-react": "^1.49.0",
+    "radix-ui": "^1.6.7",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "zod": "^4.6.5"
@@ -37,7 +42,7 @@
     "oxlint-tsgolint": "^7.0.2003",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
+    "vite": "^8.3.2",
     "wrangler": "^4.145.0"
   },
   "engines": {
