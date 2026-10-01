@@ -1,12 +1,10 @@
 # Content sources
 
 The owner's use of mise is a self-reported workflow fact. This project's
-`.tool-versions` file is read by mise and pins the Node version under Nub and
-Nub itself. Portfolio implementation details come from the actual source and
-manifest, not a general list of familiar technologies. Cloudflare remains the
-prepared deployment target until the site is publicly deployed. TanStack Query
-is installed for future server state and is not described as powering current
-static content.
+`.tool-versions` file is read by mise and selects Node LTS. Portfolio
+implementation details come from the actual source and manifest, not a general
+list of familiar technologies. The owner reports that the site is deployed on
+Cloudflare Workers (2026-10-01).
 
 Source: the previous portfolio at `/home/kawa/Projects/Portfolio/src/data/index.ts`
 and its contact components, inspected on 2026-10-01.
@@ -24,7 +22,9 @@ as the main examples, in that order. Elder Gym Bro App and Omarchy System Stats
 appear below, left to right on wider screens. Name Shuffler CLI and the unfinished
 Blitzlesen are not displayed. PokémonBattle retains its fork attribution and
 Elder Gym Bro its team credits; the portfolio does not claim independent
-ownership of either codebase. See [repository evidence](research-selected-work.md)
+ownership of either codebase. The owner confirmed on 2026-10-01 that they built
+PokémonBattle with Sebastian and Clara during the bootcamp, and that Elder Gym
+Bro was the bootcamp final project with a different team. See [repository evidence](research-selected-work.md)
 for pinned source revisions and limits. No usage or impact metrics are invented.
 
 `portfolio.selectedWork` in `src/content/portfolio.ts` owns this selection.
@@ -99,13 +99,34 @@ tooltip. This deters plain-text address harvesters, not bots that execute or
 analyze JavaScript. The build validator checks the decoded address.
 
 The portfolio-build section links each named technology to its official
-documentation, the Fontsource font page or the AVIF specification. It reuses
-the existing inline link treatment and green keyboard focus indicator.
+documentation or repository. It reuses the existing inline link treatment and
+green keyboard focus indicator.
 
-The owner added ultrarunning as a personal profile highlight. It is not a
+At the owner's request, the profile chips stay short and list C#/.NET and
+Python separately. The Skills section's language description says where each
+is used: React and TypeScript for frontends, both TypeScript on Node.js and C#
+on .NET for backends, and Python for algorithms and data structures. The owner
+added ultrarunning as a
+personal profile highlight. It is not a
 software skill, and the chip group’s accessible label reflects the mixed
-profile highlights. The portfolio-build explanation addresses a technical
-lead and describes the implemented tradeoffs rather than generic asset
-provenance. At the owner’s request, Effect was removed from the dependency
+profile highlights. The portfolio-build section addresses a
+technical lead, such as the head of a software team. It names and links the technologies used,
+with one short reason per group for the less obvious ones. React, TypeScript,
+Tailwind and the fonts are not explained. Radix and class-variance-authority
+are not listed because they come with shadcn/ui. The aube description follows its
+[guide](https://aube.sh/guide.html), checked on 2026-10-01: made by jdx, the
+developer of mise; it reads and writes pnpm, npm, Yarn and Bun lockfiles in
+place; it checks publishing evidence, release age and known malicious packages
+when selecting versions ([aube.sh](https://aube.sh/)). No benchmark figure is
+quoted.
+
+Other build-section facts were checked on 2026-10-01:
+TypeScript 7 is the [10x faster Go port](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/)
+of the compiler. Oxlint and Oxfmt belong to [Oxc](https://oxc.rs/docs/guide/introduction),
+developed by VoidZero, which maintains Vite. Cloudflare is an
+[official TanStack Start hosting partner](https://tanstack.com/blog/cloudflare-partnership)
+and [acquired VoidZero](https://voidzero.dev/posts/whats-new-jun-2026) in 2026.
+The AVIF comparison with WebP is a general format property, not a measurement
+of these portraits. At the owner’s request, Effect was removed from the dependency
 list and build validator. The owner still lists it in the general skills
 inventory; the portfolio does not describe it as part of its implementation.

@@ -41,19 +41,25 @@ await test('German view keeps the order and uses German project text', () => {
 
   assert.deepEqual(names(featured), ['Reputation Assistant', 'Scoundrel TUI', 'PokémonBattle']);
   assert.deepEqual(names(supporting), ['Elder Gym Bro App', 'Omarchy System Stats']);
-  assert.equal(featured[2]?.category, 'Gemeinschaftlicher Fork');
-  assert.equal(supporting[0]?.category, 'Teamprojekt');
+  assert.equal(featured[2]?.category, 'Bootcamp-Teamprojekt');
+  assert.equal(supporting[0]?.category, 'Bootcamp-Abschlussprojekt im Team');
 });
 
 await test('credits and attribution reach the page unchanged', () => {
   const english = selectedWork.forLocale('en');
   const german = selectedWork.forLocale('de');
 
-  assert.equal(english.featured[2]?.details, 'A fork of EinKinddesWindes/PokemonBattle.');
-  assert.equal(german.featured[2]?.details, 'Ein Fork von EinKinddesWindes/PokemonBattle.');
+  assert.equal(
+    english.featured[2]?.details,
+    'Built with Sebastian and Clara during the bootcamp. This is my fork of the team repository.',
+  );
+  assert.equal(
+    german.featured[2]?.details,
+    'Mit Sebastian und Clara im Bootcamp entwickelt. Das ist mein Fork des Team-Repositorys.',
+  );
   assert.equal(
     english.supporting[0]?.details,
-    'A final project by a team of four: Michal, Sebastian, Alex and Renke.',
+    'Built by a team of four: Michal, Sebastian, Alex and Renke.',
   );
   assert.equal(
     english.featured[1]?.details,

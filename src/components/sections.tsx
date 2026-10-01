@@ -340,7 +340,6 @@ function CareerPanel({ locale }: { locale: Locale }) {
         <h3 id='teaching-heading' className='type-title-lg text-on-surface font-semibold'>
           {t.teachingHeading}
         </h3>
-        <p className='type-body-md text-on-surface-variant mt-1'>{t.teachingNote}</p>
         <ul className='mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2'>
           {portfolio.teaching.map((topic) => (
             <li key={topic.en}>
@@ -352,6 +351,10 @@ function CareerPanel({ locale }: { locale: Locale }) {
           ))}
         </ul>
       </section>
+
+      <p className='type-body-md px-1'>
+        <ExternalLink href={portfolio.linkedin}>{t.moreOnLinkedIn}</ExternalLink>
+      </p>
     </div>
   );
 }

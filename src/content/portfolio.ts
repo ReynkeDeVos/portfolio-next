@@ -32,8 +32,8 @@ export const portfolio = {
       id: 'exploration',
       title: { en: 'Curious by default', de: 'Neugierig auf Neues' },
       description: {
-        en: 'I enjoy trying new technologies and finding out where they help in real projects. This portfolio is one of them.',
-        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Dieses Portfolio ist eines davon.',
+        en: 'I enjoy trying new technologies and finding out where they help in real projects. For this portfolio, I mainly wanted to try TanStack Start and Cloudflare Workers.',
+        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Mit diesem Portfolio wollte ich vor allem TanStack Start und Cloudflare Workers ausprobieren.',
       },
     },
     {
@@ -55,7 +55,8 @@ export const portfolio = {
   ],
   coreStrengths: [
     { en: 'React & TypeScript', de: 'React & TypeScript' },
-    { en: 'C#/.NET & Python', de: 'C#/.NET & Python' },
+    { en: 'C#/.NET', de: 'C#/.NET' },
+    { en: 'Python', de: 'Python' },
     { en: 'Linux & terminal tools', de: 'Linux & Terminal-Werkzeuge' },
     { en: 'Ultrarunning', de: 'Ultralaufen' },
   ],
@@ -65,8 +66,8 @@ export const portfolio = {
       title: { en: 'Languages & foundations', de: 'Sprachen & Grundlagen' },
       technologies: ['TypeScript', 'JavaScript', 'Python', 'C#', 'SQL', 'HTML', 'CSS', 'zsh'],
       description: {
-        en: 'Algorithms, data structures, object-oriented design and asynchronous programming are part of my teaching and development work.',
-        de: 'Algorithmen, Datenstrukturen, objektorientiertes Design und asynchrone Programmierung gehören zu meiner Lehr- und Entwicklungsarbeit.',
+        en: 'I build frontends with React and TypeScript, and backends with TypeScript on Node.js as well as C# on .NET. For algorithms and data structures I use Python. Object-oriented design and asynchronous programming are part of my teaching and development work.',
+        de: 'Frontends entwickle ich mit React und TypeScript, Backends sowohl mit TypeScript auf Node.js als auch mit C# auf .NET. Für Algorithmen und Datenstrukturen nutze ich Python. Objektorientiertes Design und asynchrone Programmierung gehören zu meiner Lehr- und Entwicklungsarbeit.',
       },
     },
     {
@@ -188,35 +189,26 @@ export const portfolio = {
   },
   portfolioBuild: {
     introduction: {
-      en: 'A React app with two prerendered locales.',
-      de: 'Eine React-App mit zwei vorgerenderten Sprachfassungen.',
+      en: 'React and TypeScript on Cloudflare Workers. The less obvious choices:',
+      de: 'React und TypeScript auf Cloudflare Workers. Die weniger offensichtlichen Entscheidungen:',
     },
     items: [
       {
         id: 'rendering',
-        topic: { en: 'Rendering', de: 'Rendering' },
-        technologies: ['TanStack Start', 'React 19', 'TypeScript 7', 'Vite 8'],
+        topic: { en: 'Framework', de: 'Framework' },
+        technologies: ['React 19', 'TanStack Start', 'Vite 8'],
         description: {
-          en: 'TanStack Start prerenders / and /de to static HTML, then React hydrates the controls. All four panels render upfront and router code splitting is off, so tab changes need no route change or fetch. The tradeoff: initial HTML and client bundle include every panel.',
-          de: 'TanStack Start rendert / und /de vorab als statisches HTML, danach hydratisiert React die Bedienelemente. Alle vier Bereiche werden vorab gerendert und Router-Code-Splitting ist deaktiviert, daher brauchen Tabwechsel weder Routenwechsel noch Datenabruf. Dafür enthalten initiales HTML und Client-Bundle jeden Bereich.',
+          en: 'Prerenders both language versions to static HTML. Switching tabs sends no request.',
+          de: 'Rendert beide Sprachfassungen vorab als statisches HTML. Tabwechsel senden keine Anfrage.',
         },
       },
       {
         id: 'interface',
-        topic: { en: 'Interaction', de: 'Interaktion' },
-        technologies: ['Tailwind CSS 4', 'shadcn/ui', 'Radix'],
+        topic: { en: 'Components', de: 'Komponenten' },
+        technologies: ['shadcn/ui', 'Tailwind CSS 4', 'cn', '@shadcn/lint', 'Lucide'],
         description: {
-          en: 'Tabs and the portrait dialog are shadcn components kept in the repo and built on Radix, which handles keyboard navigation and focus. Links are native anchors. Tailwind covers layout and states; Material 3 tokens live in custom CSS.',
-          de: 'Tabs und Porträt-Dialog sind shadcn-Komponenten im Repository auf Radix-Basis, das Tastaturbedienung und Fokus übernimmt. Links sind native Anker. Tailwind deckt Layout und Zustände ab; Material-3-Tokens sind in eigenem CSS umgesetzt.',
-        },
-      },
-      {
-        id: 'design',
-        topic: { en: 'Theme & assets', de: 'Theme & Assets' },
-        technologies: ['Roboto Flex', 'CSS', 'AVIF'],
-        description: {
-          en: 'A head script restores the saved theme before first paint; one data-theme attribute on html swaps all color tokens. Transitions use transform and opacity and drop to zero duration under prefers-reduced-motion. The variable WOFF2 font is self-hosted and preloaded; AVIF portraits carry intrinsic dimensions.',
-          de: 'Ein Head-Skript stellt das gespeicherte Farbschema vor der ersten Darstellung wieder her; ein data-theme-Attribut am html-Element tauscht alle Farb-Tokens. Übergänge nutzen transform und opacity und laufen bei prefers-reduced-motion ohne Dauer. Die variable WOFF2-Schrift ist selbst gehostet und vorgeladen; AVIF-Porträts haben intrinsische Abmessungen.',
+          en: 'shadcn/ui copies the component source into the repo, so I fully own the code. cn replaces clsx and tailwind-merge; the shadcn linter flags raw colors and off-token values.',
+          de: 'shadcn/ui kopiert den Quellcode der Komponenten ins Repository, so gehört der Code vollständig mir. cn ersetzt clsx und tailwind-merge; der shadcn-Linter meldet feste Farben und Werte außerhalb der Tokens.',
         },
       },
       {
@@ -224,47 +216,71 @@ export const portfolio = {
         topic: { en: 'Content', de: 'Inhalte' },
         technologies: ['Zod'],
         description: {
-          en: 'Copy lives in English and German TypeScript dictionaries, with no CMS or runtime API. A build script checks required fields, URLs and dates with Zod. The validator stays outside the client import graph.',
-          de: 'Die Texte liegen in englischen und deutschen TypeScript-Dictionaries, ohne CMS oder Laufzeit-API. Ein Build-Skript prüft Pflichtfelder, URLs und Datumsangaben mit Zod. Die Validierung bleibt außerhalb des Client-Importgraphen.',
+          en: 'All text is typed data in the repo, in English and German. Zod checks it at build time.',
+          de: 'Alle Texte sind typisierte Daten im Repository, auf Englisch und Deutsch. Zod prüft sie beim Build.',
+        },
+      },
+      {
+        id: 'packages',
+        topic: { en: 'Runtime & packages', de: 'Laufzeit & Pakete' },
+        technologies: ['mise', 'Node.js', 'aube'],
+        description: {
+          en: 'mise pins Node LTS, which runs the TypeScript scripts and tests. aube, from the developer of mise, is fast and works with existing pnpm, npm, Yarn and Bun lockfiles. Before choosing a version, it checks publishing evidence, release age and known malicious packages.',
+          de: 'mise legt Node LTS fest, das die TypeScript-Skripte und Tests ausführt. aube vom Entwickler von mise ist schnell und arbeitet mit bestehenden Lockfiles von pnpm, npm, Yarn und Bun. Vor der Wahl einer Version prüft es Veröffentlichungsnachweise, Alter des Releases und bekannte Schadpakete.',
         },
       },
       {
         id: 'tooling',
-        topic: { en: 'Toolchain', de: 'Toolchain' },
-        technologies: ['mise', 'Node.js', 'aube', 'Oxlint', 'Oxfmt'],
+        topic: { en: 'Code quality', de: 'Codequalität' },
+        technologies: ['TypeScript 7', 'Oxlint', 'Oxfmt'],
         description: {
-          en: 'I use mise to select Node LTS for development and builds, and aube to manage dependencies and the lockfile. I run project scripts with aubr, check the code with type-aware Oxlint rules and format it with Oxfmt.',
-          de: 'Für Entwicklung und Builds wähle ich mit mise Node LTS aus. Mit aube verwalte ich Abhängigkeiten und Lockfile und mit aubr starte ich die Projektskripte. Ich prüfe den Code mit typbasierten Oxlint-Regeln und formatiere ihn mit Oxfmt.',
+          en: 'TypeScript 7’s compiler is ported to Go and about 10x faster; Oxlint uses it for type-aware rules. Oxlint and Oxfmt come from VoidZero and replace ESLint and Prettier with Rust-based tools; Oxlint also runs anti-slop rules.',
+          de: 'Der Compiler von TypeScript 7 ist nach Go portiert und etwa zehnmal schneller; Oxlint nutzt ihn für typbasierte Regeln. Oxlint und Oxfmt stammen von VoidZero und ersetzen ESLint und Prettier durch Rust-basierte Werkzeuge; Oxlint prüft zusätzlich Anti-Slop-Regeln.',
+        },
+      },
+      {
+        id: 'images',
+        topic: { en: 'Images & fonts', de: 'Bilder & Schriften' },
+        technologies: ['AVIF', 'Google Sans Flex', 'Roboto Flex'],
+        description: {
+          en: 'The portraits are AVIF files, smaller than WebP at similar quality.',
+          de: 'Die Porträts sind AVIF-Dateien, kleiner als WebP bei ähnlicher Qualität.',
         },
       },
       {
         id: 'hosting',
         topic: { en: 'Deployment', de: 'Deployment' },
-        technologies: ['Cloudflare Workers'],
+        technologies: ['Cloudflare Workers', 'Wrangler'],
         description: {
-          en: 'Configured for Cloudflare Workers through the Cloudflare Vite plugin, with workerd running the server build; not publicly deployed. _headers caches hashed /assets files as immutable for one year and /images for one day.',
-          de: 'Über das Cloudflare-Vite-Plugin für Cloudflare Workers eingerichtet, workerd führt den Server-Build aus; nicht öffentlich bereitgestellt. _headers cacht gehashte Dateien unter /assets ein Jahr lang als immutable und /images einen Tag.',
+          en: 'Serves this site. Cloudflare is an official TanStack Start hosting partner and acquired VoidZero in 2026.',
+          de: 'Liefert diese Seite aus. Cloudflare ist offizieller Hosting-Partner von TanStack Start und hat 2026 VoidZero übernommen.',
         },
       },
     ],
     links: [
-      { name: 'TanStack Start', url: 'https://tanstack.com/start/latest' },
       { name: 'React 19', url: 'https://react.dev/' },
-      { name: 'TypeScript 7', url: 'https://www.typescriptlang.org/docs/' },
+      { name: 'TanStack Start', url: 'https://tanstack.com/start/latest' },
       { name: 'Vite 8', url: 'https://vite.dev/guide/' },
-      { name: 'Tailwind CSS 4', url: 'https://tailwindcss.com/docs' },
       { name: 'shadcn/ui', url: 'https://ui.shadcn.com/docs' },
-      { name: 'Radix', url: 'https://www.radix-ui.com/primitives/docs/overview/introduction' },
-      { name: 'Roboto Flex', url: 'https://fontsource.org/fonts/roboto-flex' },
-      { name: 'CSS', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
-      { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
+      { name: 'Tailwind CSS 4', url: 'https://tailwindcss.com/docs' },
+      { name: 'cn', url: 'https://github.com/shadcn-ui/cn' },
+      { name: '@shadcn/lint', url: 'https://github.com/shadcn-ui/lint' },
+      { name: 'Lucide', url: 'https://lucide.dev/' },
       { name: 'Zod', url: 'https://zod.dev/' },
       { name: 'mise', url: 'https://mise.jdx.dev/' },
       { name: 'Node.js', url: 'https://nodejs.org/' },
       { name: 'aube', url: 'https://aube.sh/guide.html' },
+      {
+        name: 'TypeScript 7',
+        url: 'https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/',
+      },
       { name: 'Oxlint', url: 'https://oxc.rs/docs/guide/usage/linter' },
       { name: 'Oxfmt', url: 'https://oxc.rs/docs/guide/usage/formatter' },
+      { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
+      { name: 'Google Sans Flex', url: 'https://fontsource.org/fonts/google-sans-flex' },
+      { name: 'Roboto Flex', url: 'https://fontsource.org/fonts/roboto-flex' },
       { name: 'Cloudflare Workers', url: 'https://developers.cloudflare.com/workers/' },
+      { name: 'Wrangler', url: 'https://developers.cloudflare.com/workers/wrangler/' },
     ],
   },
   teaching: [
@@ -425,7 +441,7 @@ export const portfolio = {
     {
       id: 'elder-gym-bro',
       name: 'Elder Gym Bro App',
-      category: { en: 'Team project', de: 'Teamprojekt' },
+      category: { en: 'Bootcamp final team project', de: 'Bootcamp-Abschlussprojekt im Team' },
       description: {
         en: 'A fitness app for planning workouts and following your progress.',
         de: 'Eine Fitness-App, mit der man Trainings plant und die eigenen Fortschritte verfolgt.',
@@ -433,14 +449,14 @@ export const portfolio = {
       technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express'],
       url: 'https://github.com/ReynkeDeVos/ElderGymBroApp',
       details: {
-        en: 'A final project by a team of four: Michal, Sebastian, Alex and Renke.',
-        de: 'Ein Abschlussprojekt im Viererteam mit Michal, Sebastian, Alex und Renke.',
+        en: 'Built by a team of four: Michal, Sebastian, Alex and Renke.',
+        de: 'Im Viererteam mit Michal, Sebastian, Alex und Renke entwickelt.',
       },
     },
     {
       id: 'pokemon-battle',
       name: 'PokémonBattle',
-      category: { en: 'Collaborative fork', de: 'Gemeinschaftlicher Fork' },
+      category: { en: 'Bootcamp team project', de: 'Bootcamp-Teamprojekt' },
       description: {
         en: 'A browser game in which Pokémon creatures fight each other.',
         de: 'Ein Browserspiel, in dem Pokémon-Figuren gegeneinander kämpfen.',
@@ -448,8 +464,8 @@ export const portfolio = {
       technologies: ['React', 'Context API', 'CSS'],
       url: 'https://github.com/ReynkeDeVos/PokemonBattle',
       details: {
-        en: 'A fork of EinKinddesWindes/PokemonBattle.',
-        de: 'Ein Fork von EinKinddesWindes/PokemonBattle.',
+        en: 'Built with Sebastian and Clara during the bootcamp. This is my fork of the team repository.',
+        de: 'Mit Sebastian und Clara im Bootcamp entwickelt. Das ist mein Fork des Team-Repositorys.',
       },
     },
   ],
