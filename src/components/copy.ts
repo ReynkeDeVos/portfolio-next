@@ -10,6 +10,8 @@ function isSection(value: string): value is Section {
 
 const localePaths = { en: '/', de: '/de' } as const;
 
+const siteOrigin = 'https://portfolio.renkebrixel.workers.dev';
+
 const en = {
   languageLabel: 'Language',
   languageNames: { en: 'English', de: 'Deutsch' },
@@ -149,9 +151,9 @@ function pageHead(locale: Locale) {
       { property: 'og:locale', content: meta.ogLocale },
     ],
     links: [
-      { rel: 'alternate', hrefLang: 'en', href: localePaths.en },
-      { rel: 'alternate', hrefLang: 'de', href: localePaths.de },
-      { rel: 'alternate', hrefLang: 'x-default', href: localePaths.en },
+      { rel: 'alternate', hrefLang: 'en', href: new URL(localePaths.en, siteOrigin).href },
+      { rel: 'alternate', hrefLang: 'de', href: new URL(localePaths.de, siteOrigin).href },
+      { rel: 'alternate', hrefLang: 'x-default', href: new URL(localePaths.en, siteOrigin).href },
     ],
   };
 }
