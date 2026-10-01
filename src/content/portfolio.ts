@@ -43,8 +43,8 @@ export const portfolio = {
       id: 'terminal',
       title: { en: 'Terminal first', de: 'Terminal zuerst' },
       description: {
-        en: 'I love a terminal-first workflow and Arch Linux. Linux has been my main operating system for more than 20 years, and I can rarely resist trying a new tool that runs in the terminal.',
-        de: 'Ich liebe einen terminalbasierten Workflow und Arch Linux. Linux ist seit mehr als 20 Jahren mein Hauptbetriebssystem, und neuen Werkzeugen fürs Terminal kann ich selten widerstehen.',
+        en: 'Linux has been my main operating system for over 20 years. I love Arch Linux and a terminal-first workflow, especially with AI agents: text-based configuration lets them adjust my setup directly, and local file access keeps file-heavy workflows with parallel Git worktrees efficient.',
+        de: 'Linux ist seit über 20 Jahren mein Hauptbetriebssystem. Ich liebe Arch Linux und einen terminalbasierten Workflow, besonders mit KI-Agenten: Textbasierte Konfiguration lässt sie mein Setup direkt anpassen, und lokaler Dateizugriff hält dateiintensive Abläufe mit parallelen Git-Worktrees effizient.',
       },
     },
     {
@@ -280,8 +280,8 @@ export const portfolio = {
         topic: { en: 'Content', de: 'Inhalte' },
         technologies: ['Zod'],
         description: {
-          en: 'I use Zod before each build to catch missing translations, empty text and malformed URLs in the English and German content. These content checks go beyond TypeScript’s types. Validation runs in a local script, so Zod adds no JavaScript to the browser bundle.',
-          de: 'Vor jedem Build prüfe ich die englischen und deutschen Inhalte mit Zod auf fehlende Übersetzungen, leere Texte und ungültige URLs. Diese Inhaltsregeln gehen über die Typprüfung von TypeScript hinaus. Die Prüfung läuft in einem lokalen Skript; Zod fügt dem Browser-Bundle kein JavaScript hinzu.',
+          en: 'I use Zod before each build to catch missing translations, empty text and malformed URLs in the English and German content.',
+          de: 'Vor jedem Build prüfe ich die englischen und deutschen Inhalte mit Zod auf fehlende Übersetzungen, leere Texte und ungültige URLs.',
         },
       },
       {

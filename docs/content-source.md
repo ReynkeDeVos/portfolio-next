@@ -14,6 +14,16 @@ design and components are not reused. The owner supplied the current focus on
 software development, experimentation, terminal workflows, Arch Linux, more than 20 years with Linux as the main
 operating system, and practical daily evaluation of AI tools.
 
+The owner connects this Linux workflow to AI agents editing configuration and
+working in parallel Git worktrees. The [Linux filesystem manual](https://man7.org/linux/man-pages/man7/hier.7.html)
+documents configuration files in `/etc`, and [Git's worktree documentation](https://git-scm.com/docs/git-worktree)
+describes checking out multiple branches in separate working directories.
+[Microsoft's WSL filesystem guidance](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
+recommends keeping tools and files on the same operating system's filesystem
+for performance. These sources were checked on 2026-10-01. The benefit to the
+owner's AI workflow is an inference from these capabilities; the copy does not
+claim a universal Linux speed advantage or a 10–20× comparison with other OSes.
+
 ## Verified project evidence
 
 Public GitHub source, manifests and attribution were inspected for selected
