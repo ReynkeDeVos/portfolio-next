@@ -67,6 +67,8 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
         <li>
           <Button
             onClick={() => {
+              // Reviewed: the target is a mailto: link to the build-validated address.
+              // fallow-ignore-next-line security-sink
               globalThis.location.href = `mailto:${globalThis.atob(portfolio.emailEncoded)}`;
             }}
           >

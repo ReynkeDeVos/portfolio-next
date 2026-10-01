@@ -48,6 +48,8 @@ function Root() {
     // The head script may set data-theme before hydration.
     <html lang={localeFromPathname(pathname)} suppressHydrationWarning>
       <head>
+        {/* Reviewed: themeScript is a constant string with no external input. */}
+        {/* fallow-ignore-next-line security-sink */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <HeadContent />
       </head>

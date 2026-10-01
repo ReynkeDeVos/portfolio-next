@@ -16,10 +16,6 @@ function DialogPortal({ ...props }: React.ComponentProps<typeof DialogPrimitive.
   return <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />;
 }
 
-function DialogClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot='dialog-close' {...props} />;
-}
-
 // Material scrim. Clicking it dismisses, so it carries the pointer cursor.
 // Opening fades in; closing unmounts immediately without an exit animation.
 function DialogOverlay({
@@ -83,41 +79,6 @@ function DialogContent({
   );
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot='dialog-header'
-      className={cn('flex flex-col gap-2 text-start', className)}
-      {...props}
-    />
-  );
-}
-
-function DialogFooter({
-  className,
-  closeLabel,
-  children,
-  ...props
-}: React.ComponentProps<'div'> & {
-  /** Adds a text close action with this label. */
-  closeLabel?: string;
-}) {
-  return (
-    <div
-      data-slot='dialog-footer'
-      className={cn('flex flex-wrap justify-end gap-2', className)}
-      {...props}
-    >
-      {children}
-      {closeLabel ? (
-        <DialogPrimitive.Close asChild>
-          <Button variant='text'>{closeLabel}</Button>
-        </DialogPrimitive.Close>
-      ) : null}
-    </div>
-  );
-}
-
 function DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
@@ -128,28 +89,4 @@ function DialogTitle({ className, ...props }: React.ComponentProps<typeof Dialog
   );
 }
 
-function DialogDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Description>) {
-  return (
-    <DialogPrimitive.Description
-      data-slot='dialog-description'
-      className={cn('type-body-md text-on-surface-variant', className)}
-      {...props}
-    />
-  );
-}
-
-export {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
-};
+export { Dialog, DialogContent, DialogTitle, DialogTrigger };

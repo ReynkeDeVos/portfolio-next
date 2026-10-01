@@ -1,0 +1,7 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  // Vendored upstream code; changes go through the install-anti-slop update procedure.
+  "ignorePatterns": ["tools/oxlint/anti-slop/**"],
+  // Loaded through .oxlintrc.json jsPlugins, which Fallow does not read.
+  "ignoreDependencies": ["@oxlint/plugins", "@shadcn/lint", "oxlint-tailwindcss"]
+}

@@ -68,4 +68,4 @@ const selectedWork = createSelectedWork(portfolio.projects, portfolio.selectedWo
 
 export { createSelectedWork, selectedWork };
 
-export type { Project, SelectedProject, SelectedWork, WorkSelection };
+export type { Project, SelectedProject, WorkSelection };

@@ -141,15 +141,6 @@ function localeFromPathname(pathname: string): Locale {
   return pathname === '/de' || pathname.startsWith('/de/') ? 'de' : 'en';
 }
 
-export {
-  copy,
-  formatDate,
-  formatPeriod,
-  isSection,
-  localeFromPathname,
-  localePaths,
-  pageHead,
-  sections,
-};
+export { copy, formatDate, formatPeriod, isSection, localeFromPathname, pageHead, sections };
 
 export type { Locale, Section };
