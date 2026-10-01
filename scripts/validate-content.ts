@@ -75,7 +75,6 @@ const portfolioSchema = z.object({
       .max(5),
   }),
   portfolioBuild: z.object({
-    introduction: translatedText,
     items: z
       .array(
         z.object({ id: text, topic: translatedText, technologies, description: translatedText }),

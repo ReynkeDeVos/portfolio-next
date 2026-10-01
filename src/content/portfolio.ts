@@ -191,10 +191,6 @@ export const portfolio = {
     ],
   },
   portfolioBuild: {
-    introduction: {
-      en: 'React and TypeScript on Cloudflare Workers. The less obvious choices:',
-      de: 'React und TypeScript auf Cloudflare Workers. Die weniger offensichtlichen Entscheidungen:',
-    },
     items: [
       {
         id: 'rendering',

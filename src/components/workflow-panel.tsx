@@ -115,9 +115,6 @@ function BuildSection({ locale }: { locale: Locale }) {
       <h3 id='build-heading' className='type-title-lg text-on-surface font-semibold'>
         {t.buildHeading}
       </h3>
-      <p className='type-body-md text-on-surface-variant mt-1 max-w-[68ch]'>
-        {portfolioBuild.introduction[locale]}
-      </p>
       <dl className='divide-outline-variant mt-3 divide-y'>
         {portfolioBuild.items.map((item) => (
           <div
