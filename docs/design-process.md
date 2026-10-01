@@ -25,9 +25,19 @@ directions is an incumbent or a reference to develop further.
 
 Fresh design exploration is requested from Opus 5.5 at High effort through local
 Claude Code. Fable 5.1 was tried first but reported that usage credits were required.
-The assignment produces standalone HTML/CSS mockups for browser-rendered image
-comparison. These are temporary design artifacts, not production implementation.
-The exact handoff and model execution evidence are retained outside the repository.
+The completed assignment produced The live sentence, Wall label and Waterline
+as standalone HTML/CSS mockups for browser-rendered image comparison. These are
+temporary design artifacts, not production implementation. The design run's
+model record confirms `claude-opus-5-5`; it reported no permission denials.
+
+Local Chromium captures cover light and dark desktop views at 1400x900 and
+English/German narrow views at 390x844. The checked views have no horizontal
+overflow, hidden heading/body text or JavaScript exceptions. These checks do
+not establish animation frame performance or Core Web Vitals.
+
+Development artifacts and the model evidence are in
+`.impeccable/mocks/opus-5.5/`, excluded from Git and production assets. The exact
+handoff remains in the OS temporary directory.
 
 No direction or mockup is approved yet. The route currently renders no designed
 page; it exists only to verify framework, build and hosting compatibility.

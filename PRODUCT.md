@@ -42,6 +42,6 @@ Renke Brixel is presented first as a software developer. His current role as an 
 
 ## Open Decisions
 
-- All three developer-focused image concepts were rejected. Fresh exploration is requested from Opus 5.5 after Fable 5.1 reported that usage credits were required. The owner will compare new previews before production UI implementation.
+- All three initial developer-focused image concepts were rejected. Opus 5.5 produced three fresh comparison mockups after Fable 5.1 reported that usage credits were required. The owner will compare them before production UI implementation.
 - The owner will provide new photos and final career details later.
 - Domain and production Cloudflare deployment are open.
