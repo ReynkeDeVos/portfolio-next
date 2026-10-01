@@ -24,7 +24,8 @@ portfolio grows into a large article archive.
 ## Theme
 
 Apply one synchronous data-theme attribute mutation to the document root. All component colors
-come from CSS variables. Initialize the choice in the head before first paint.
+come from CSS variables. Each color role is declared once as a `light-dark()` pair;
+the root's `color-scheme` follows the system or the stored `data-theme`. Initialize the choice in the head before first paint.
 No color transitions or per-component effects during a theme switch. Stored
 preferences must degrade gracefully when storage is blocked.
 
