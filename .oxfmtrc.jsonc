@@ -1,0 +1,38 @@
+{
+  "ignorePatterns": [
+    "**/.impeccable/questions/**",
+    "**/routeTree.gen.ts",
+    "**/.tanstack/**",
+    "**/.wrangler/**",
+    "**/dist/**",
+    "**/package-lock.json",
+    "**/npm-shrinkwrap.json",
+    "**/pnpm-lock.yaml",
+    "**/bun.lock",
+    "**/bun.lockb",
+    "**/aube-lock.yaml",
+    "**/deno.lock",
+  ],
+  "sortImports": true,
+  "sortTailwindcss": true,
+  "jsdoc": true,
+  //  {
+  // 	"addDefaultToDescription": false,
+  // 	// Prettier-like: keep the author's single-line vs multi-line comment shape.
+  // 	"commentLineStrategy": "multiline",
+  // 	// "multiline" or "keep": Keeps explicit @description tags used in file headers like course exercises.
+  // 	"descriptionTag": true,
+  // 	"keepUnparsableExampleIndent": true,
+  // 	// Prettier-like: avoid greedily reflowing already wrapped prose.
+  // 	"lineWrappingStyle": "balance"
+  // },
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  // "arrowParens": "avoid",
+  // "bracketSameLine": true,
+  // "semi": false, // Print semicolons at the ends of statements.
+  // "useTabs": true,
+  // "tabWidth": 3,
+  // "trailingComma": "none"
+  // "printWidth": 80,
+}

@@ -8,42 +8,39 @@ web
 
 ## Stack
 
-TanStack Start, React, TypeScript 7, Vite, Zod, shadcn/ui, Tailwind CSS,
-TanStack Query, Effect. aube als Paketmanager, Oxlint und Oxfmt nach der
-globalen Konfiguration des Eigentümers. Cloudflare Workers ist die empfohlene,
-noch nicht veröffentlichte Hosting-Basis.
+TanStack Start, React, TypeScript 7, Vite, Zod, shadcn/ui, Tailwind CSS, TanStack Query and Effect. aube manages packages. Oxlint and Oxfmt use the owner's global configuration as their baseline. Cloudflare Workers is the prepared hosting target. Production credentials and a domain are not configured yet.
 
 ## Users
 
-Arbeitgeber und Auftraggeber, einschließlich Bildungsträgern, die Renke als
-Softwareentwickler und Dozent kennenlernen und eine Zusammenarbeit prüfen.
+Employers, peers and potential collaborators exploring Renke’s technical skills and software projects.
 
 ## Product Purpose
 
-Ein persönliches, visuell ausdrucksstarkes Portfolio. Zunächst steht das Design
-im Mittelpunkt; Lebenslauf und Projekte können später ergänzt werden.
+A personal, visually expressive software developer portfolio. Demonstrate technical skills through selected projects without overloading the page. Renke is employed; never frame the portfolio as a job search or claim availability for new jobs.
 
 ## Positioning
 
-Renke Brixel entwickelt Software und unterrichtet Frontend und Backend.
-Aktuell gehören Algorithmen und Datenstrukturen mit Python sowie Backend mit
-C# und .NET zum Unterricht. Frühere Arbeit in biologischer Forschung ist
-vorläufiger Inhalt aus dem alten Portfolio und noch auf Aktualität zu prüfen.
+Renke Brixel is presented first as a software developer. His current role as an instructor belongs in his career history and relevant project context, rather than being the visual focus. His current teaching includes algorithms and data structures with Python, and backend with C# and .NET. Earlier biological research work is provisional content from the old portfolio, pending confirmation.
 
 ## Constraints
 
-- Eigenständiges neues Projekt; kein Design und keine Fotos des alten Portfolios übernehmen.
-- Inhalte aus dem alten Portfolio sind vorläufig, keine neuen Leistungsbehauptungen erfinden.
-- Jeder interne Klick soll den Inhalt ohne absichtliche Wartezeit anzeigen.
-- Erste Anzeige soll schnell sein; Inhalte möglichst vorgerendert ausliefern.
-- Theme-Wechsel gilt gleichzeitig für die gesamte Seite.
-- Einige besondere Animationen, die keine Navigation oder Lesbarkeit verzögern.
-- Tastaturbedienung und reduzierte Bewegung unterstützen.
-- Neues GitHub-Repository zunächst privat.
+- Independent new project; reuse neither the old design nor old photos.
+- Previous portfolio data is provisional content; do not invent professional claims.
+- Primary portfolio language is English, switchable to German.
+- Code, comments, documentation and project workflows use English.
+- Internal clicks should reveal content without deliberate delay.
+- First load should feel fast; prerender public content where possible.
+- Theme changes apply to the whole document simultaneously.
+- Subtle but distinctive animation must not delay navigation or hide readable content.
+- Development is the primary identity; teaching is visible in career context.
+- The first viewport is concise and uncluttered.
+- Never claim that the owner is looking for a job.
+- Avoid em dashes in documentation, comments, issues and project text; deliberate website typography may use them when appropriate.
+- Support keyboard navigation and reduced motion.
+- New GitHub repository remains private initially.
 
 ## Open Decisions
 
-- Konkrete visuelle Richtung wird als nächste Designentscheidung gemeinsam gewählt.
-- Neue Fotos und endgültige Lebenslaufdaten kommen später vom Eigentümer.
-- Sprache zunächst Deutsch als Arbeitsannahme; finale Sprachstrategie offen.
-- Domain und produktive Cloudflare-Veröffentlichung sind noch offen.
+- Visual direction is awaiting the owner's choice.
+- The owner will provide new photos and final career details later.
+- Domain and production Cloudflare deployment are open.

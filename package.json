@@ -1,0 +1,47 @@
+{
+  "name": "portfolio-next",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "aube run content:check && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --type-aware",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "deploy": "aube run build && wrangler deploy",
+    "check": "aube run content:check && aube run typecheck && aube run lint && aube run format:check",
+    "content:check": "node scripts/validate-content.ts"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.104.0",
+    "@tanstack/react-router": "^1.170.41",
+    "@tanstack/react-start": "^1.168.60",
+    "effect": "^4.0.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.62.3",
+    "@shadcn/lint": "^0.2.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "24",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "oxlint-tsgolint": "^7.0.2003",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "wrangler": "^4.145.0"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "aube@2.6.1"
+}
