@@ -34,6 +34,23 @@ Animate one characteristic visual interaction with short, interruptible
 transitions. Content starts visible. Reduced motion removes nonessential
 movement. Navigation never waits for an animation to finish.
 
+The animation target is the latest stable Chrome/Chromium. Prefer native CSS
+transitions/keyframes for simple motion and the Web Animations API when playback
+needs cancellation, reversal or orchestration. Keep repeated frame updates on
+the compositor where possible by animating transform and opacity. CSS is not
+intrinsically faster than WAAPI; the rendering work is the deciding factor.
+
+Use native scroll/view timelines for scroll-linked motion, and timeline triggers
+for time-based scroll entry effects. Avoid JavaScript scroll listeners and
+per-frame React state for these cases. Use element-scoped view transitions only
+when a shared-element change warrants their snapshot work. They are an optional
+effect, not the default navigation mechanism. Keep new content immediately
+readable, including while an animation runs.
+
+No animation library is needed for the current scope. Avoid blanket layer
+promotion with will-change; measure first. Large layers, blur effects, and
+animations of layout dimensions need explicit profiling even on current Chrome.
+
 ## Dependencies
 
 Node 24 is the development baseline. Node type definitions deliberately use
@@ -59,3 +76,6 @@ real deployment measurements across the audience's regions.
 - [Cloudflare TanStack Start integration](https://developers.cloudflare.com/workers/framework-guides/web-apps/tanstack-start/)
 - [TanStack Router preloading](https://tanstack.com/router/latest/docs/guide/preloading)
 - [TypeScript 7 release](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/)
+- [Animation rendering and compositor work](https://web.dev/articles/animations-overview)
+- [Native scroll-driven animations](https://developer.chrome.com/docs/css-ui/scroll-driven-animations)
+- [Current Chromium UI features, including timeline triggers and scoped view transitions](https://developer.chrome.com/blog/new-in-web-ui-io26)

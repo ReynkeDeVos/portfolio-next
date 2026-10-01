@@ -1,6 +1,6 @@
 {
   "title": "Your new portfolio",
-  "question": "Compare three revised developer-first designs. Teaching stays in career history. No job-search message.",
+  "question": "All three concepts were rejected. Fresh design exploration is requested from Opus 5.5.",
   "options": [
     {
       "id": "assigned",
@@ -29,7 +29,9 @@
           "from": "Darkroom",
           "raise": "One restrained motion moment."
         }
-      ]
+      ],
+      "status": "rejected",
+      "approved": false
     },
     {
       "id": "model-pick",
@@ -40,7 +42,9 @@
       "viewport": "Name and skills on mint left, selected projects on white right.",
       "risk": "Familiar studio structure needs personal project evidence to stand apart.",
       "kicker": "IMPECCABLE\u2019S PICK",
-      "comp": ".impeccable/mocks/decision/model-pick-developer.png"
+      "comp": ".impeccable/mocks/decision/model-pick-developer.png",
+      "status": "rejected",
+      "approved": false
     },
     {
       "id": "challenger-ascii",
@@ -54,7 +58,9 @@
       "case": "Technical audience identification is strong; broader collaborators need plain-language project context.",
       "comp": ".impeccable/mocks/decision/challenger-ascii-developer.png",
       "board": "https://impeccable.style/worlds/cards/medium-native-ascii-live-scene-render.webp",
-      "hero": "https://impeccable.style/worlds/cards/medium-native-ascii-live-scene-render-hero.webp"
+      "hero": "https://impeccable.style/worlds/cards/medium-native-ascii-live-scene-render-hero.webp",
+      "status": "rejected",
+      "approved": false
     }
   ],
   "reroll": {

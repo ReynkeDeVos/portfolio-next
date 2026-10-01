@@ -6,7 +6,7 @@ and selected work. Teaching remains visible in the career history. The owner
 is employed; no job-search language or availability claim may be added.
 
 The owner requested revised image mockups before an interactive implementation.
-Three developer-focused alternatives are being compared:
+The owner rejected all three developer-focused alternatives:
 
 1. **The technical poster:** a concise personal introduction on white, paired
    with a flat cobalt technical index and a narrow selected-work transition.
@@ -19,6 +19,15 @@ Three developer-focused alternatives are being compared:
 All alternatives use Work, Skills and About navigation, English as the default,
 an English/German language control, and a whole-document theme control.
 They avoid portraits until the owner supplies new photos.
+
+The owner specifically described the 3D ASCII visual as AI slop. None of these
+directions is an incumbent or a reference to develop further.
+
+Fresh design exploration is requested from Opus 5.5 at High effort through local
+Claude Code. Fable 5.1 was tried first but reported that usage credits were required.
+The assignment produces standalone HTML/CSS mockups for browser-rendered image
+comparison. These are temporary design artifacts, not production implementation.
+The exact handoff and model execution evidence are retained outside the repository.
 
 No direction or mockup is approved yet. The route currently renders no designed
 page; it exists only to verify framework, build and hosting compatibility.

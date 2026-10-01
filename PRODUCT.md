@@ -37,10 +37,11 @@ Renke Brixel is presented first as a software developer. His current role as an 
 - Never claim that the owner is looking for a job.
 - Avoid em dashes in documentation, comments, issues and project text; deliberate website typography may use them when appropriate.
 - Support keyboard navigation and reduced motion.
+- The owner requested animation recommendations based exclusively on the latest Chrome/Chromium features.
 - New GitHub repository remains private initially.
 
 ## Open Decisions
 
-- Visual direction is awaiting the owner's choice.
+- All three developer-focused image concepts were rejected. Fresh exploration is requested from Opus 5.5 after Fable 5.1 reported that usage credits were required. The owner will compare new previews before production UI implementation.
 - The owner will provide new photos and final career details later.
 - Domain and production Cloudflare deployment are open.
