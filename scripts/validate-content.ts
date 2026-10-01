@@ -16,6 +16,7 @@ const experience = z.object({
   url: z.url(),
   period: text,
   role: translatedText,
+  description: translatedText,
 });
 
 const project = z.object({

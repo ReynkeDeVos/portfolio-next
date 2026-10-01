@@ -11,8 +11,8 @@ and its contact components, inspected on 2026-10-01.
 
 The old site supplies provisional career stations and contact details. Its
 design and components are not reused. The owner supplied the current focus on
-software development, experimentation, terminal workflows, Arch Linux, more
-than 20 years using Linux, and practical daily evaluation of AI tools.
+software development, experimentation, terminal workflows, Arch Linux, more than 20 years with Linux as the main
+operating system, and practical daily evaluation of AI tools.
 
 ## Verified project evidence
 
@@ -43,10 +43,26 @@ will take effect within days. The owner also requested Claude Agent SDK
 under AI integration and automation, without a separate coming-soon entry.
 The Anthropic client SDK is listed separately from the Agent SDK.
 
+The owner teaches both WBS tracks: `sd-curriculum` (web development) and
+`se-curriculum` (software engineering). The teaching list was re-checked
+against both, and the lecture tree, after pulling on 2026-10-01. SD adds
+backend JavaScript and TypeScript with Node's HTTP module, Express, MongoDB,
+Zod and Swagger; JWT, cookie and bcrypt authentication; OpenAI, Anthropic and
+Google Gen AI SDKs, local models, MCP; and AI-assisted coding with GitHub
+Copilot, OpenSpec and n8n. SE's .NET modules use SQL Server and SQLite with
+Scalar and Serilog; PostgreSQL is only named there as a supported EF Core
+provider, so it stays with the Python and Flask module. Podman does not appear
+in any teaching material and is listed under skills only. Claude Agent SDK and Matt Pocock's agent skills (such as
+`/wayfinder`) are listed at the owner's request.
+
 The owner reports regular deployments to Cloudflare, Render, Vercel and Railway
 and use of Docker and Podman. Fallow appears in the general code-quality
 toolkit, supported by the lecture inventory; this portfolio does not claim to
 run Fallow in its build.
+
+The short career descriptions condense the old portfolio’s experience
+bullets in the same file into first-person sentences, at the owner’s request
+on 2026-10-01; no new claims were added.
 
 Employer links come from the old portfolio’s `src/data/index.ts`, including
 the specific LIV research-unit and UKE institute pages.

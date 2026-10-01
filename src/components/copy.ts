@@ -46,7 +46,7 @@ const en = {
   teachingHeading: 'Topics I teach',
   present: 'present',
   meta: {
-    title: 'Renke Brixel | Software Developer in Hamburg',
+    title: 'Renke Brixel · Dev',
     description:
       'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
     ogLocale: 'en_US',
@@ -97,7 +97,7 @@ const copy = {
     teachingHeading: 'Themen, die ich unterrichte',
     present: 'heute',
     meta: {
-      title: 'Renke Brixel | Softwareentwickler in Hamburg',
+      title: 'Renke Brixel · Dev',
       description:
         'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Werdegang.',
       ogLocale: 'de_DE',

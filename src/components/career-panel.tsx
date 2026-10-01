@@ -32,6 +32,9 @@ function CareerPanel({ locale }: { locale: Locale }) {
                 <p className='type-body-md text-on-surface-variant'>
                   <ExternalLink href={entry.url}>{entry.organization[locale]}</ExternalLink>
                 </p>
+                <p className='type-body-sm text-on-surface-variant mt-1 max-w-[68ch]'>
+                  {entry.description[locale]}
+                </p>
               </div>
             </li>
           ))}

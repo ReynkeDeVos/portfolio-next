@@ -32,16 +32,16 @@ export const portfolio = {
       id: 'exploration',
       title: { en: 'Curious by default', de: 'Neugierig auf Neues' },
       description: {
-        en: 'I enjoy trying new technologies and finding out where they help in real projects. For this portfolio, I mainly wanted to try TanStack Start and Cloudflare Workers.',
-        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Mit diesem Portfolio wollte ich vor allem TanStack Start und Cloudflare Workers ausprobieren.',
+        en: 'I enjoy trying new technologies and finding out where they help in real projects. This portfolio began as productive procrastination: a chance to try TanStack Start and Cloudflare Workers and finally have a portfolio.',
+        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Dieses Portfolio entstand aus produktiver Prokrastination: eine Gelegenheit, TanStack Start und Cloudflare Workers auszuprobieren und endlich ein Portfolio zu haben.',
       },
     },
     {
       id: 'terminal',
       title: { en: 'Terminal first', de: 'Terminal zuerst' },
       description: {
-        en: 'I love a terminal-first workflow and Arch Linux. Linux has been part of my life for more than 20 years.',
-        de: 'Ich liebe einen terminalbasierten Workflow und Arch Linux. Linux begleitet mich seit mehr als 20 Jahren.',
+        en: 'I love a terminal-first workflow and Arch Linux. Linux has been my main operating system for more than 20 years, and I can rarely resist trying a new tool that runs in the terminal.',
+        de: 'Ich liebe einen terminalbasierten Workflow und Arch Linux. Linux ist seit mehr als 20 Jahren mein Hauptbetriebssystem, und neuen Werkzeugen fürs Terminal kann ich selten widerstehen.',
       },
     },
     {
@@ -79,6 +79,7 @@ export const portfolio = {
         'TanStack Start',
         'React Router',
         'TanStack Query',
+        'Vite',
         'Tailwind CSS',
         'shadcn/ui',
         'Zod',
@@ -98,6 +99,7 @@ export const portfolio = {
         'Node.js',
         'Express',
         'Flask',
+        'SQL Server',
         'PostgreSQL',
         'MongoDB',
         'Mongoose',
@@ -117,7 +119,6 @@ export const portfolio = {
       technologies: [
         'Vitest',
         'Testing Library',
-        'pytest',
         'GitHub Actions',
         'Docker',
         'Podman',
@@ -125,10 +126,6 @@ export const portfolio = {
         'Git',
         'Oxc',
         'Fallow',
-        'Cloudflare',
-        'Render',
-        'Vercel',
-        'Railway',
       ],
       description: {
         en: 'I write unit and integration tests, use Docker and Podman, and deploy applications to Cloudflare, Render, Vercel or Railway.',
@@ -142,15 +139,21 @@ export const portfolio = {
         'OpenAI SDK',
         'OpenAI Agents SDK',
         'Anthropic SDK',
+        'Google Gen AI SDK',
+        'Claude Agent SDK',
         'MCP',
+        'Ollama',
         'n8n',
-        'Claude Code',
+        'claude',
         'Codex',
         'pi',
+        'GitHub Copilot',
+        'OpenSpec',
+        'Matt Pocock skills',
       ],
       description: {
-        en: 'Teaching examples and experiments with streaming, tool calls, agent handoffs and guardrails, alongside Claude Code workflows.',
-        de: 'Lehrbeispiele und Experimente mit Streaming, Tool-Aufrufen, Agenten-Übergaben und Guardrails sowie Claude-Code-Workflows.',
+        en: 'Teaching examples and experiments with streaming, tool calls, agent handoffs, guardrails and local models, plus spec-driven development with coding agents.',
+        de: 'Lehrbeispiele und Experimente mit Streaming, Tool-Aufrufen, Agenten-Übergaben, Guardrails und lokalen Modellen sowie spezifikationsgetriebene Entwicklung mit Coding-Agenten.',
       },
     },
   ],
@@ -240,11 +243,11 @@ export const portfolio = {
       },
       {
         id: 'images',
-        topic: { en: 'Images & fonts', de: 'Bilder & Schriften' },
-        technologies: ['AVIF', 'Google Sans Flex', 'Roboto Flex'],
+        topic: { en: 'Design & assets', de: 'Design & Assets' },
+        technologies: ['Material 3 Expressive', 'Google Sans Flex', 'Roboto Flex', 'AVIF'],
         description: {
-          en: 'The portraits are AVIF files, smaller than WebP at similar quality.',
-          de: 'Die Porträts sind AVIF-Dateien, kleiner als WebP bei ähnlicher Qualität.',
+          en: 'The design follows Material 3 Expressive, with its typeface Google Sans Flex for headings. The portraits are AVIF files, smaller than WebP at similar quality.',
+          de: 'Das Design folgt Material 3 Expressive, mit dessen Schrift Google Sans Flex für Überschriften. Die Porträts sind AVIF-Dateien, kleiner als WebP bei ähnlicher Qualität.',
         },
       },
       {
@@ -276,6 +279,10 @@ export const portfolio = {
       },
       { name: 'Oxlint', url: 'https://oxc.rs/docs/guide/usage/linter' },
       { name: 'Oxfmt', url: 'https://oxc.rs/docs/guide/usage/formatter' },
+      {
+        name: 'Material 3 Expressive',
+        url: 'https://m3.material.io/blog/building-with-m3-expressive',
+      },
       { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
       { name: 'Google Sans Flex', url: 'https://fontsource.org/fonts/google-sans-flex' },
       { name: 'Roboto Flex', url: 'https://fontsource.org/fonts/roboto-flex' },
@@ -285,20 +292,47 @@ export const portfolio = {
   },
   teaching: [
     {
+      en: 'Web foundations',
+      de: 'Web-Grundlagen',
+      technologies: ['HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'Git', 'GitHub'],
+    },
+    {
       en: 'Frontend development',
       de: 'Frontend-Entwicklung',
-      technologies: ['React', 'TypeScript'],
+      technologies: ['React', 'TypeScript', 'Vite'],
+    },
+    {
+      en: 'React frameworks & data',
+      de: 'React-Frameworks & Daten',
+      technologies: ['Next.js', 'React Router', 'TanStack Query', 'Zod'],
+    },
+    {
+      en: 'Node APIs in JavaScript & TypeScript',
+      de: 'Node-APIs mit JavaScript & TypeScript',
+      technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Zod', 'Swagger'],
+    },
+    {
+      en: 'Authentication',
+      de: 'Authentifizierung',
+      technologies: ['JWT', 'Cookies', 'bcrypt', 'ASP.NET Core Identity', 'Better Auth'],
+    },
+    { en: 'C# & .NET', de: 'C# & .NET', technologies: ['C#', '.NET', 'LINQ'] },
+    {
+      en: '.NET APIs & persistence',
+      de: '.NET-APIs & Persistenz',
+      technologies: [
+        'ASP.NET Core',
+        'Entity Framework Core',
+        'SQL Server',
+        'SQLite',
+        'Scalar',
+        'Serilog',
+      ],
     },
     {
       en: 'Algorithms & data structures',
       de: 'Algorithmen & Datenstrukturen',
       technologies: ['Python'],
-    },
-    { en: 'Backend development', de: 'Backend-Entwicklung', technologies: ['C#', '.NET'] },
-    {
-      en: 'React frameworks & data',
-      de: 'React-Frameworks & Daten',
-      technologies: ['Next.js', 'React Router', 'TanStack Query', 'Zod'],
     },
     {
       en: 'Python web & SQL',
@@ -306,31 +340,32 @@ export const portfolio = {
       technologies: ['Flask', 'PostgreSQL'],
     },
     {
-      en: 'Node APIs & authentication',
-      de: 'Node-APIs & Authentifizierung',
-      technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Better Auth'],
-    },
-    {
-      en: '.NET APIs & persistence',
-      de: '.NET-APIs & Persistenz',
-      technologies: ['ASP.NET Core', 'Entity Framework Core', 'ASP.NET Core Identity', 'OpenAPI'],
+      en: 'Computer science & terminal',
+      de: 'Informatik-Grundlagen & Terminal',
+      technologies: ['Networking', 'HTTP', 'Bash', 'zsh'],
     },
     {
       en: 'Testing & delivery',
       de: 'Tests & Bereitstellung',
-      technologies: ['Vitest', 'Testing Library', 'GitHub Actions', 'Docker', 'Podman', 'Azure'],
+      technologies: ['Vitest', 'Testing Library', 'GitHub Actions', 'Docker Compose', 'Azure'],
     },
     {
-      en: 'AI integration & automation',
-      de: 'KI-Integration & Automatisierung',
+      en: 'AI integration',
+      de: 'KI-Integration',
       technologies: [
         'OpenAI SDK',
-        'OpenAI Agents SDK',
         'Anthropic SDK',
+        'Google Gen AI SDK',
+        'OpenAI Agents SDK',
         'Claude Agent SDK',
         'MCP',
-        'n8n',
+        'Ollama',
       ],
+    },
+    {
+      en: 'AI-assisted coding & automation',
+      de: 'KI-gestütztes Programmieren & Automatisierung',
+      technologies: ['GitHub Copilot', 'OpenSpec', 'Matt Pocock skills', 'n8n'],
     },
   ],
   experience: [
@@ -339,18 +374,30 @@ export const portfolio = {
       url: 'https://www.wbscodingschool.com/',
       period: '2025-present',
       role: { en: 'Software development instructor', de: 'Dozent für Softwareentwicklung' },
+      description: {
+        en: 'I teach modern web development, frontend and backend.',
+        de: 'Ich unterrichte moderne Webentwicklung für Frontend und Backend.',
+      },
     },
     {
       organization: { en: 'Closelink', de: 'Closelink' },
       url: 'https://www.closelink.com/',
       period: '2024',
       role: { en: 'Frontend development intern', de: 'Praktikant Frontend-Entwicklung' },
+      description: {
+        en: 'I modernized interface components with React, TypeScript and Formik and worked with the developers and the designer to improve workflows for business customers.',
+        de: 'Ich habe Oberflächenkomponenten mit React, TypeScript und Formik modernisiert und mit Entwicklung und Design die Arbeitsabläufe für die Geschäftskunden verbessert.',
+      },
     },
     {
       organization: { en: 'Leibniz Institute for Virology', de: 'Leibniz-Institut für Virologie' },
       url: 'https://www.leibniz-liv.de/en/research/research-units/virus-host-interaction',
       period: '2014-2023',
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
+      description: {
+        en: 'I researched how common viruses hijack human cells. As hazardous materials officer, I introduced software solutions and trained the team, and I helped manage the lab in multidisciplinary teams.',
+        de: 'Ich habe erforscht, wie verbreitete Viren menschliche Zellen kapern. Als Gefahrstoffbeauftragter habe ich Softwarelösungen eingeführt und das Team geschult und in fachübergreifenden Teams das Labor mitorganisiert.',
+      },
     },
     {
       organization: {
@@ -360,6 +407,10 @@ export const portfolio = {
       url: 'https://www.uke.de/kliniken-institute/institute/institut-f%C3%BCr-tumorbiologie/index.html',
       period: '2012-2014',
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
+      description: {
+        en: 'I studied what triggers breast cancer cells to spread to other parts of the body, analysed samples, maintained the database and supervised interns.',
+        de: 'Ich habe untersucht, was Brustkrebszellen dazu bringt, sich in andere Körperregionen auszubreiten, Proben analysiert, die Datenbank gepflegt und Praktika betreut.',
+      },
     },
     {
       organization: {
@@ -369,6 +420,10 @@ export const portfolio = {
       url: 'https://medicine.utah.edu/',
       period: '2012',
       role: { en: 'Research intern', de: 'Forschungspraktikant' },
+      description: {
+        en: 'I reprogrammed patient skin cells into neurons to model brain injury risks during heart transplantation and maintained the plasmid database. I also built a team to-do app for phone and desktop on software the lab already licensed.',
+        de: 'Ich habe Hautzellen aus Patientenproben zu Nervenzellen umprogrammiert, um das Risiko von Hirnschäden bei Herztransplantationen zu modellieren, und die Plasmid-Datenbank gepflegt. Außerdem habe ich auf Basis bereits lizenzierter Software eine To-do-App fürs Team gebaut, für Smartphone und Desktop.',
+      },
     },
   ],
   // Display order is set here, not by catalog order. Catalog records that are
