@@ -28,7 +28,7 @@ export const portfolio = {
   },
   introduction: {
     en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
-    de: 'Ich liebe es, Neues zu lernen, zu programmieren, Kaffee zu trinken, lange Strecken zu laufen und mich mit Katzen & Hunden anzufreunden.',
+    de: 'Ich lerne gern Neues, programmiere, trinke Kaffee, laufe weit und freunde mich mit Katzen & Hunden an.',
   },
   interests: [
     {
