@@ -15,7 +15,7 @@ import { themeScript } from '@/lib/theme';
 import appCss from '../styles.css?url';
 
 const favicon = `data:image/svg+xml,${encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="50" font-size="88" text-anchor="middle" dominant-baseline="central">🧑‍💻</text></svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="50" font-size="88" text-anchor="middle" dominant-baseline="central">🦊</text></svg>',
 )}`;
 
 const Route = createRootRoute({
