@@ -3,6 +3,7 @@ dist/
 .output/
 .tanstack/
 .wrangler/
+.cloudflare-build/
 .env
 .env.*
 !.env.example
