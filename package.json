@@ -17,6 +17,7 @@
     "content:check": "node scripts/validate-content.ts"
   },
   "dependencies": {
+    "@fontsource-variable/google-sans-flex": "^5.3.1",
     "@fontsource-variable/roboto-flex": "^5.3.0",
     "@tanstack/react-router": "^1.170.41",
     "@tanstack/react-start": "^1.168.60",

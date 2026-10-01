@@ -4,7 +4,8 @@
 
 Prerender public portfolio routes at build time and serve their HTML as
 Cloudflare static assets. The page puts identity and all four content panels in the HTML. The self-hosted
-Latin variable font is preloaded. A 480x480 AVIF supplies the thumbnail; the
+Latin variable fonts are preloaded: Roboto Flex for text and Google Sans Flex
+for headings. A 480x480 AVIF supplies the thumbnail; the
 720x1080 AVIF loads when the portrait is hovered, focused or opened.
 
 Fingerprint-named assets use a one-year immutable browser cache via

@@ -43,25 +43,25 @@ colors:
   tab-track: light-dark(var(--md-sys-color-surface-container-low), var(--md-sys-color-surface-container-high))
 typography:
   headline-lg:
-    fontFamily: "'Roboto Flex Variable', ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: 2rem
     fontWeight: 650
     lineHeight: 2.5rem
     letterSpacing: -0.02em
   headline-md:
-    fontFamily: "'Roboto Flex Variable', ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: 1.75rem
     fontWeight: 650
     lineHeight: 2.25rem
     letterSpacing: -0.015em
   title-lg:
-    fontFamily: "'Roboto Flex Variable', ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: 1.375rem
     fontWeight: 600
     lineHeight: 1.75rem
     letterSpacing: -0.005em
   title-md:
-    fontFamily: "'Roboto Flex Variable', ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: 1rem
     fontWeight: 600
     lineHeight: 1.5rem
@@ -199,7 +199,7 @@ This system describes the private, undeployed draft. Historical career material 
 **Key Characteristics:**
 
 - Compact software developer identity with visible portrait, location and contact.
-- One self-hosted Roboto Flex family, using weight and size for hierarchy.
+- Two self-hosted variable families: Google Sans Flex for headings, Roboto Flex for everything else.
 - Warm tonal surfaces, connected shapes and no box shadows.
 - Immediate content changes with independent decorative feedback.
 - One sage keyboard ring across native and component interactions.
@@ -234,11 +234,11 @@ The role palette uses sage for action and keyboard focus, caramel for selected c
 
 ## Typography
 
-**Display Font:** No separate display font is used.
+**Heading Font:** Self-hosted Google Sans Flex Variable for headline and title roles, chosen by the owner on 2026-10-01 to replace Roboto Flex headings.
 **Body Font:** Self-hosted Roboto Flex Variable, with ui-sans-serif, system-ui and sans-serif fallbacks.
 **Label Font:** The same family; no separate monospace role.
 
-The font face loads only the Latin weight-axis WOFF2 from `@fontsource-variable/roboto-flex`, covers English and German, uses `font-display: swap`, and is preloaded by the root route. The face supports weights from 100 to 1000; the implemented hierarchy uses regular (400), medium (500), semibold (600) and emphasized (650). Optical sizing is automatic. Body text uses pretty wrapping; headings use balanced wrapping.
+Each face loads only the Latin weight-axis WOFF2 from its `@fontsource-variable` package, covers English and German, uses `font-display: swap`, and is preloaded by the root route. The faces support at least weights 100 to 1000; the implemented hierarchy uses regular (400), medium (500), semibold (600) and emphasized (650). Optical sizing is automatic. Body text uses pretty wrapping; headings use balanced wrapping.
 
 ### Hierarchy
 
@@ -248,7 +248,7 @@ The font face loads only the Latin weight-axis WOFF2 from `@fontsource-variable/
 - **Label:** `label-lg` serves buttons, tabs, strengths and project categories. `label-md` serves technology tags, table headings and timestamps. Selection can use semibold (600), while passive timestamps inherit regular weight (400).
 - **Reading width:** Featured-project summaries stop at 64ch; supporting project details at 72ch; skills and build explanations at 68ch. These are component constraints rather than a page-wide measure.
 
-**The One Family Rule.** Keep headings, body and labels in Roboto Flex. Use the implemented role sizes and separate weight emphasis rather than adding a display face.
+**The Two Family Rule.** Headline and title roles use Google Sans Flex; body and labels use Roboto Flex. Do not add a third face; use the implemented role sizes and weight emphasis.
 
 ## Layout
 

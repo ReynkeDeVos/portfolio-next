@@ -1,3 +1,4 @@
+import googleSansFlexLatin from '@fontsource-variable/google-sans-flex/files/google-sans-flex-latin-wght-normal.woff2?url';
 import robotoFlexLatin from '@fontsource-variable/roboto-flex/files/roboto-flex-latin-wght-normal.woff2?url';
 import {
   createRootRoute,
@@ -22,6 +23,13 @@ const Route = createRootRoute({
       {
         rel: 'preload',
         href: robotoFlexLatin,
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        href: googleSansFlexLatin,
         as: 'font',
         type: 'font/woff2',
         crossOrigin: 'anonymous',
