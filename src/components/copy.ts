@@ -22,6 +22,7 @@ const en = {
   photoClose: 'Close photo',
   email: 'Email',
   strengthsLabel: 'Profile highlights',
+  technologyNames: { Networking: 'Networking', 'Matt Pocock skills': 'Matt Pocock skills' },
   currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
     role,
     ` at ${organization}, since ${since}`,
@@ -74,6 +75,7 @@ const copy = {
     photoClose: 'Foto schließen',
     email: 'E-Mail',
     strengthsLabel: 'Kurzprofil',
+    technologyNames: { Networking: 'Netzwerke', 'Matt Pocock skills': 'Matt Pococks Skills' },
     currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
       role,
       ` bei ${organization}, seit ${since}`,
@@ -111,11 +113,16 @@ const copy = {
     meta: {
       title: 'Renke Brixel · Dev',
       description:
-        'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Werdegang.',
+        'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
       ogLocale: 'de_DE',
     },
   },
 } satisfies Record<Locale, typeof en>;
+
+// Product and library names stay unchanged; generic labels follow the locale.
+function formatTechnology(name: string, locale: Locale) {
+  return Object.entries(copy[locale].technologyNames).find(([key]) => key === name)?.[1] ?? name;
+}
 
 // "2025-present" -> "2025–present", localized.
 function formatPeriod(period: string, locale: Locale) {
@@ -153,6 +160,15 @@ function localeFromPathname(pathname: string): Locale {
   return pathname === '/de' || pathname.startsWith('/de/') ? 'de' : 'en';
 }
 
-export { copy, formatDate, formatPeriod, isSection, localeFromPathname, pageHead, sections };
+export {
+  copy,
+  formatDate,
+  formatPeriod,
+  formatTechnology,
+  isSection,
+  localeFromPathname,
+  pageHead,
+  sections,
+};
 
 export type { Locale, Section };

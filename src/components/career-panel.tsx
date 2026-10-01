@@ -1,6 +1,6 @@
 import { portfolio } from '@/content/portfolio';
 
-import { copy, formatPeriod } from './copy';
+import { copy, formatPeriod, formatTechnology } from './copy';
 import type { Locale } from './copy';
 import { ExternalLink } from './section-parts';
 
@@ -53,7 +53,7 @@ function CareerPanel({ locale }: { locale: Locale }) {
             <li key={topic.en}>
               <p className='type-body-md text-on-surface font-medium'>{topic[locale]}</p>
               <p className='type-body-sm text-on-surface-variant'>
-                {topic.technologies.join(', ')}
+                {topic.technologies.map((name) => formatTechnology(name, locale)).join(', ')}
               </p>
             </li>
           ))}

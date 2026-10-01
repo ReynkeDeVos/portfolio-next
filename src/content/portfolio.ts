@@ -17,7 +17,7 @@ export const portfolio = {
     src: '/images/renke-full-portrait.avif',
     alt: {
       en: 'Renke Brixel standing with a laptop',
-      de: 'Renke Brixel mit einem Laptop',
+      de: 'Renke Brixel steht mit einem Laptop',
     },
     width: 720,
     height: 1080,
@@ -28,7 +28,7 @@ export const portfolio = {
   },
   introduction: {
     en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
-    de: 'Ich entwickle Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop.',
+    de: 'Ich liebe es, Neues zu lernen, zu programmieren, Kaffee zu trinken, lange Strecken zu laufen und mich mit Katzen & Hunden anzufreunden.',
   },
   interests: [
     {
@@ -392,7 +392,7 @@ export const portfolio = {
     },
     {
       en: 'Computer science & terminal',
-      de: 'Informatik-Grundlagen & Terminal',
+      de: 'Informatik & Terminal',
       technologies: ['Networking', 'HTTP', 'Bash', 'zsh'],
     },
     {
@@ -460,7 +460,7 @@ export const portfolio = {
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
       description: {
         en: 'I studied what triggers breast cancer cells to spread to other parts of the body, analysed samples, maintained the database and supervised interns.',
-        de: 'Ich habe untersucht, was Brustkrebszellen dazu bringt, sich in andere Körperregionen auszubreiten, Proben analysiert, die Datenbank gepflegt und Praktika betreut.',
+        de: 'Ich habe untersucht, was Brustkrebszellen dazu bringt, sich in andere Körperregionen auszubreiten, Proben analysiert, die Datenbank gepflegt und Praktikantinnen und Praktikanten betreut.',
       },
     },
     {

@@ -1,6 +1,6 @@
 import { portfolio } from '@/content/portfolio';
 
-import { copy } from './copy';
+import { copy, formatTechnology } from './copy';
 import type { Locale } from './copy';
 import { TechList } from './section-parts';
 
@@ -21,7 +21,7 @@ function SkillsPanel({ locale }: { locale: Locale }) {
               <p className='type-body-md text-on-surface-variant max-w-[68ch]'>
                 {group.description[locale]}
               </p>
-              <TechList items={group.technologies} />
+              <TechList items={group.technologies.map((name) => formatTechnology(name, locale))} />
             </div>
           </li>
         ))}
