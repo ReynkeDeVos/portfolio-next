@@ -10,6 +10,7 @@ import {
 
 import { localeFromPathname } from '@/components/copy';
 import { NotFound } from '@/components/not-found';
+import { localeScript } from '@/lib/locale';
 import { themeScript } from '@/lib/theme';
 
 import appCss from '../styles.css?url';
@@ -54,9 +55,9 @@ function Root() {
     // The head script may set data-theme before hydration.
     <html lang={localeFromPathname(pathname)} suppressHydrationWarning>
       <head>
-        {/* Reviewed: themeScript is a constant string with no external input. */}
+        {/* Reviewed: both scripts are constant strings with no external input. */}
         {/* fallow-ignore-next-line security-sink */}
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: localeScript + themeScript }} />
         <HeadContent />
       </head>
       <body>

@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { Monitor, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { rememberLocale } from '@/lib/locale';
 import { setTheme, useThemePreference } from '@/lib/theme';
 import type { ThemePreference } from '@/lib/theme';
 
@@ -36,6 +37,9 @@ function SiteControls({ locale, section }: { locale: Locale; section: Section })
               hrefLang={target}
               lang={target}
               aria-current={target === locale ? 'page' : undefined}
+              onClick={() => {
+                rememberLocale(target);
+              }}
             >
               {t.languageNames[target]}
             </Link>
