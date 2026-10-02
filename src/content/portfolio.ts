@@ -1,3 +1,5 @@
+import type { Portfolio } from './schema.ts';
+
 export const portfolio = {
   name: 'Renke Brixel',
   location: {
@@ -57,12 +59,17 @@ export const portfolio = {
     },
   ],
   coreStrengths: [
-    { en: 'React & TypeScript', de: 'React & TypeScript' },
-    { en: 'C#/.NET', de: 'C#/.NET' },
-    { en: 'Python', de: 'Python' },
-    { en: 'Linux & terminal tools', de: 'Linux & Terminal-Werkzeuge' },
-    { en: 'Ultrarunning', de: 'Ultralaufen' },
+    { id: 'react-typescript', name: { en: 'React & TypeScript', de: 'React & TypeScript' } },
+    { id: 'dotnet', name: { en: 'C#/.NET', de: 'C#/.NET' } },
+    { id: 'python', name: { en: 'Python', de: 'Python' } },
+    { id: 'linux', name: { en: 'Linux & terminal tools', de: 'Linux & Terminal-Werkzeuge' } },
+    { id: 'ultrarunning', name: { en: 'Ultrarunning', de: 'Ultralaufen' } },
   ],
+  // Product and library names stay unchanged; only generic labels translate.
+  technologyNames: {
+    Networking: { en: 'Networking', de: 'Netzwerke' },
+    'Matt Pocock skills': { en: 'Matt Pocock skills', de: 'Matt Pococks Skills' },
+  },
   skills: [
     {
       id: 'languages',
@@ -168,24 +175,28 @@ export const portfolio = {
     },
     items: [
       {
+        id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
         model: 'Opus 5.5',
         effort: 'Medium',
         note: { en: 'High for complex work', de: 'High für komplexe Aufgaben' },
       },
       {
+        id: 'investigate',
         task: { en: 'Investigate & debug', de: 'Untersuchen & debuggen' },
         model: 'GPT-6.1 Sol',
         effort: 'Medium',
         note: { en: 'High for difficult diagnosis', de: 'High für schwierige Diagnosen' },
       },
       {
+        id: 'review',
         task: { en: 'Review code', de: 'Code prüfen' },
         model: 'GPT-6.1 Sol',
         effort: 'High',
         note: { en: 'Independent review', de: 'Unabhängige Prüfung' },
       },
       {
+        id: 'design',
         task: { en: 'Explore visual design', de: 'Visuelles Design erkunden' },
         model: 'Opus 5.5',
         effort: 'Medium',
@@ -345,34 +356,41 @@ export const portfolio = {
   },
   teaching: [
     {
-      en: 'Web foundations',
-      de: 'Web-Grundlagen',
+      id: 'web',
+      topic: { en: 'Web foundations', de: 'Web-Grundlagen' },
       technologies: ['HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'Git', 'GitHub'],
     },
     {
-      en: 'Frontend development',
-      de: 'Frontend-Entwicklung',
+      id: 'frontend',
+      topic: { en: 'Frontend development', de: 'Frontend-Entwicklung' },
       technologies: ['React', 'TypeScript', 'Vite'],
     },
     {
-      en: 'React frameworks & data',
-      de: 'React-Frameworks & Daten',
+      id: 'react-frameworks',
+      topic: { en: 'React frameworks & data', de: 'React-Frameworks & Daten' },
       technologies: ['Next.js', 'React Router', 'TanStack Query', 'Zod'],
     },
     {
-      en: 'Node APIs in JavaScript & TypeScript',
-      de: 'Node-APIs mit JavaScript & TypeScript',
+      id: 'node-apis',
+      topic: {
+        en: 'Node APIs in JavaScript & TypeScript',
+        de: 'Node-APIs mit JavaScript & TypeScript',
+      },
       technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Zod', 'Swagger'],
     },
     {
-      en: 'Authentication',
-      de: 'Authentifizierung',
+      id: 'authentication',
+      topic: { en: 'Authentication', de: 'Authentifizierung' },
       technologies: ['JWT', 'Cookies', 'bcrypt', 'ASP.NET Core Identity', 'Better Auth'],
     },
-    { en: 'C# & .NET', de: 'C# & .NET', technologies: ['C#', '.NET', 'LINQ'] },
     {
-      en: '.NET APIs & persistence',
-      de: '.NET-APIs & Persistenz',
+      id: 'csharp',
+      topic: { en: 'C# & .NET', de: 'C# & .NET' },
+      technologies: ['C#', '.NET', 'LINQ'],
+    },
+    {
+      id: 'dotnet-apis',
+      topic: { en: '.NET APIs & persistence', de: '.NET-APIs & Persistenz' },
       technologies: [
         'ASP.NET Core',
         'Entity Framework Core',
@@ -383,28 +401,28 @@ export const portfolio = {
       ],
     },
     {
-      en: 'Algorithms & data structures',
-      de: 'Algorithmen & Datenstrukturen',
+      id: 'algorithms',
+      topic: { en: 'Algorithms & data structures', de: 'Algorithmen & Datenstrukturen' },
       technologies: ['Python'],
     },
     {
-      en: 'Python web & SQL',
-      de: 'Python-Webentwicklung & SQL',
+      id: 'python-web',
+      topic: { en: 'Python web & SQL', de: 'Python-Webentwicklung & SQL' },
       technologies: ['Flask', 'PostgreSQL'],
     },
     {
-      en: 'Computer science & terminal',
-      de: 'Informatik & Terminal',
+      id: 'computer-science',
+      topic: { en: 'Computer science & terminal', de: 'Informatik & Terminal' },
       technologies: ['Networking', 'HTTP', 'Bash', 'zsh'],
     },
     {
-      en: 'Testing & delivery',
-      de: 'Tests & Bereitstellung',
+      id: 'testing',
+      topic: { en: 'Testing & delivery', de: 'Tests & Bereitstellung' },
       technologies: ['Vitest', 'Testing Library', 'GitHub Actions', 'Docker Compose', 'Azure'],
     },
     {
-      en: 'AI integration',
-      de: 'KI-Integration',
+      id: 'ai-integration',
+      topic: { en: 'AI integration', de: 'KI-Integration' },
       technologies: [
         'OpenAI SDK',
         'Anthropic SDK',
@@ -416,16 +434,20 @@ export const portfolio = {
       ],
     },
     {
-      en: 'AI-assisted coding & automation',
-      de: 'KI-gestütztes Programmieren & Automatisierung',
+      id: 'ai-coding',
+      topic: {
+        en: 'AI-assisted coding & automation',
+        de: 'KI-gestütztes Programmieren & Automatisierung',
+      },
       technologies: ['GitHub Copilot', 'OpenSpec', 'Matt Pocock skills', 'n8n'],
     },
   ],
   experience: [
     {
+      id: 'wbs',
       organization: { en: 'WBS Coding School', de: 'WBS Coding School' },
       url: 'https://www.wbscodingschool.com/',
-      period: '2025-present',
+      period: { from: 2025, to: null },
       role: { en: 'Software development instructor', de: 'Dozent für Softwareentwicklung' },
       description: {
         en: 'I teach modern web development, frontend and backend.',
@@ -433,9 +455,10 @@ export const portfolio = {
       },
     },
     {
+      id: 'closelink',
       organization: { en: 'Closelink', de: 'Closelink' },
       url: 'https://www.closelink.com/',
-      period: '2024',
+      period: { from: 2024, to: 2024 },
       role: { en: 'Frontend development intern', de: 'Praktikant Frontend-Entwicklung' },
       description: {
         en: 'I modernized interface components with React, TypeScript and Formik and worked with the developers and the designer to improve workflows for business customers.',
@@ -443,9 +466,10 @@ export const portfolio = {
       },
     },
     {
+      id: 'leibniz-virology',
       organization: { en: 'Leibniz Institute for Virology', de: 'Leibniz-Institut für Virologie' },
       url: 'https://www.leibniz-liv.de/en/research/research-units/virus-host-interaction',
-      period: '2014-2023',
+      period: { from: 2014, to: 2023 },
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
       description: {
         en: 'I researched how common viruses hijack human cells. As hazardous materials officer, I introduced software solutions and trained the team, and I helped manage the lab in multidisciplinary teams.',
@@ -453,12 +477,13 @@ export const portfolio = {
       },
     },
     {
+      id: 'uke',
       organization: {
         en: 'University Medical Center Hamburg-Eppendorf',
         de: 'Universitätsklinikum Hamburg-Eppendorf',
       },
       url: 'https://www.uke.de/kliniken-institute/institute/institut-f%C3%BCr-tumorbiologie/index.html',
-      period: '2012-2014',
+      period: { from: 2012, to: 2014 },
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
       description: {
         en: 'I studied what triggers breast cancer cells to spread to other parts of the body, analysed samples, maintained the database and supervised interns.',
@@ -466,12 +491,13 @@ export const portfolio = {
       },
     },
     {
+      id: 'utah',
       organization: {
         en: 'University of Utah School of Medicine',
         de: 'University of Utah School of Medicine',
       },
       url: 'https://medicine.utah.edu/',
-      period: '2012',
+      period: { from: 2012, to: 2012 },
       role: { en: 'Research intern', de: 'Forschungspraktikant' },
       description: {
         en: 'I reprogrammed patient skin cells into neurons to model brain injury risks during heart transplantation and maintained the plasmid database. I also built a team to-do app for phone and desktop on software the lab already licensed.',
@@ -577,4 +603,4 @@ export const portfolio = {
       },
     },
   ],
-};
+} satisfies Portfolio;

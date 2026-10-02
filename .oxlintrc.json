@@ -282,7 +282,7 @@
     },
     {
       // Zod schemas nest by design; extracting each level would hide the shape.
-      "files": ["scripts/validate-content.ts"],
+      "files": ["src/content/schema.ts"],
       "rules": {
         "unicorn/max-nested-calls": "off"
       }

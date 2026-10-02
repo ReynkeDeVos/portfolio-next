@@ -2,7 +2,7 @@ import { ArrowUpRight, Briefcase, Check, Copy, Mail } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { portfolio } from '@/content/portfolio';
+import { contentFor } from '@/content/content';
 import type { Locale } from '@/lib/locale';
 import type { Section } from '@/lib/section';
 
@@ -12,14 +12,11 @@ import { SiteControls } from './site-controls';
 
 function Identity({ locale, section, ticks }: { locale: Locale; section: Section; ticks: number }) {
   const t = copy[locale];
-  const [current] = portfolio.experience;
+  const { profile } = contentFor(locale);
+  const { currentRole } = profile;
 
-  const [role, rest] = current
-    ? t.currentRole(
-        current.role[locale],
-        current.organization[locale],
-        current.period.split('-')[0] ?? '',
-      )
+  const [role, rest] = currentRole
+    ? t.currentRole(currentRole.role, currentRole.organization, currentRole.since)
     : ['', ''];
 
   return (
@@ -34,29 +31,27 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
             id='identity-name'
             className='type-headline-md text-on-surface sm:type-headline-lg font-emphasized'
           >
-            {portfolio.name}
+            {profile.name}
           </h1>
-          <p className='type-title-md text-primary mt-1 font-medium'>
-            {portfolio.identity[locale]}
-          </p>
-          <p className='type-body-md text-on-surface-variant mt-1'>{portfolio.location[locale]}</p>
+          <p className='type-title-md text-primary mt-1 font-medium'>{profile.identity}</p>
+          <p className='type-body-md text-on-surface-variant mt-1'>{profile.location}</p>
         </div>
       </div>
 
-      <p className='type-body-lg text-on-surface'>{portfolio.introduction[locale]}</p>
+      <p className='type-body-lg text-on-surface'>{profile.introduction}</p>
 
       <ul aria-label={t.strengthsLabel} className='flex flex-wrap gap-2'>
-        {portfolio.coreStrengths.map((strength) => (
+        {profile.coreStrengths.map((strength) => (
           <li
-            key={strength.en}
+            key={strength.id}
             className='bg-surface-container-highest type-label-lg text-on-surface inline-flex h-8 items-center rounded-sm px-3 font-medium'
           >
-            {strength[locale]}
+            {strength.name}
           </li>
         ))}
       </ul>
 
-      {current ? (
+      {currentRole ? (
         <p className='border-outline-variant type-body-md text-on-surface-variant flex gap-3 border-t pt-4'>
           <Briefcase aria-hidden className='text-primary mt-0.5 size-4 shrink-0' />
           <span>
@@ -77,6 +72,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
 // the mail app and also shows the address, so a missing mail app is no dead end.
 function Contact({ locale }: { locale: Locale }) {
   const t = copy[locale];
+  const { emailEncoded, github, linkedin } = contentFor(locale).profile;
   const [address, setAddress] = useState<string>();
   const [copied, setCopied] = useState(false);
 
@@ -96,7 +92,7 @@ function Contact({ locale }: { locale: Locale }) {
         <li>
           <Button
             onClick={() => {
-              const decoded = globalThis.atob(portfolio.emailEncoded);
+              const decoded = globalThis.atob(emailEncoded);
               setAddress(decoded);
               // Reviewed: the target is a mailto: link to the build-validated address.
               // fallow-ignore-next-line security-sink
@@ -109,7 +105,7 @@ function Contact({ locale }: { locale: Locale }) {
         </li>
         <li>
           <Button asChild variant='tonal'>
-            <a href={portfolio.github} target='_blank' rel='noopener noreferrer'>
+            <a href={github} target='_blank' rel='noopener noreferrer'>
               GitHub
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
@@ -117,7 +113,7 @@ function Contact({ locale }: { locale: Locale }) {
         </li>
         <li>
           <Button asChild variant='tonal'>
-            <a href={portfolio.linkedin} target='_blank' rel='noopener noreferrer'>
+            <a href={linkedin} target='_blank' rel='noopener noreferrer'>
               LinkedIn
               <ArrowUpRight aria-hidden className='size-4' />
             </a>

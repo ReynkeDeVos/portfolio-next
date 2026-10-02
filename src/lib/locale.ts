@@ -64,6 +64,7 @@ function rememberLocale(locale: Locale) {
 }
 
 export {
+  defaultLocale,
   intlLocale,
   localeFromPathname,
   localeHead,

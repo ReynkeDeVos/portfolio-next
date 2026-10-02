@@ -1,4 +1,4 @@
-import { intlLocale, localeHead } from '@/lib/locale';
+import { localeHead } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 
 const en = {
@@ -9,14 +9,12 @@ const en = {
   contactLabel: 'Contact',
   photoOpen: 'View larger portrait',
   photoHint: { action: 'click me 😊' },
-  photoTitle: 'Portrait of Renke Brixel',
   photoClose: 'Close photo',
   email: 'Email',
   copyAddress: 'Copy email address',
   addressCopied: 'Email address copied',
   strengthsLabel: 'Profile highlights',
-  technologyNames: { Networking: 'Networking', 'Matt Pocock skills': 'Matt Pocock skills' },
-  currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
+  currentRole: (role: string, organization: string, since: number): readonly [string, string] => [
     role,
     ` at ${organization}, since ${since}`,
   ],
@@ -56,7 +54,6 @@ const en = {
     ],
     dismiss: 'Hide this note',
   },
-  present: 'present',
   meta: {
     title: 'Renke Brixel · Dev',
     description:
@@ -75,14 +72,12 @@ const copy = {
     contactLabel: 'Kontakt',
     photoOpen: 'Porträt vergrößern',
     photoHint: { action: 'klick mich 😊' },
-    photoTitle: 'Porträt von Renke Brixel',
     photoClose: 'Foto schließen',
     email: 'E-Mail',
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
     strengthsLabel: 'Kurzprofil',
-    technologyNames: { Networking: 'Netzwerke', 'Matt Pocock skills': 'Matt Pococks Skills' },
-    currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
+    currentRole: (role: string, organization: string, since: number): readonly [string, string] => [
       role,
       ` bei ${organization}, seit ${since}`,
     ],
@@ -127,7 +122,6 @@ const copy = {
       ],
       dismiss: 'Hinweis ausblenden',
     },
-    present: 'heute',
     meta: {
       title: 'Renke Brixel · Dev',
       description:
@@ -135,23 +129,6 @@ const copy = {
     },
   },
 } satisfies Record<Locale, typeof en>;
-
-// Product and library names stay unchanged; generic labels follow the locale.
-function formatTechnology(name: string, locale: Locale) {
-  return Object.entries(copy[locale].technologyNames).find(([key]) => key === name)?.[1] ?? name;
-}
-
-// "2025-present" -> "2025–present", localized.
-function formatPeriod(period: string, locale: Locale) {
-  return period.replace('present', copy[locale].present).replace('-', '–');
-}
-
-function formatDate(isoDate: string, locale: Locale) {
-  return new Intl.DateTimeFormat(intlLocale(locale), {
-    dateStyle: 'long',
-    timeZone: 'UTC',
-  }).format(new Date(`${isoDate}T00:00:00Z`));
-}
 
 function pageHead(locale: Locale) {
   const { meta } = copy[locale];
@@ -170,4 +147,4 @@ function pageHead(locale: Locale) {
   };
 }
 
-export { copy, formatDate, formatPeriod, formatTechnology, pageHead };
+export { copy, pageHead };

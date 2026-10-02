@@ -4,7 +4,8 @@ import type { CSSProperties } from 'react';
 import { flushSync } from 'react-dom';
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { portfolio } from '@/content/portfolio';
+import { contentFor } from '@/content/content';
+import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 
 import { copy } from './copy';
@@ -66,6 +67,9 @@ function hintBand(radius: number, em: number) {
 // so the browser can reuse its image data when the dialog opens again.
 let fullPortraitImage: HTMLImageElement | null = null;
 
+// The photo is the same file in every Locale.
+const fullPortraitSrc = contentFor(defaultLocale).profile.fullPortrait.src;
+
 function warmFullPortrait() {
   if (fullPortraitImage) {
     return;
@@ -81,7 +85,7 @@ function warmFullPortrait() {
     { once: true },
   );
 
-  fullPortraitImage.src = portfolio.fullPortrait.src;
+  fullPortraitImage.src = fullPortraitSrc;
 }
 
 // Opening and closing run as a same-document view transition: a plain surface
@@ -112,7 +116,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
   const t = copy[locale];
   const angle = ticks * stepDegrees;
   const rotation: CSSProperties = { '--portrait-angle': `${angle}deg` };
-  const { fullPortrait } = portfolio;
+  const { portrait, fullPortrait } = contentFor(locale).profile;
   const [open, setOpen] = useState(false);
 
   return (
@@ -127,7 +131,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
       <DialogTrigger asChild>
         <button
           type='button'
-          aria-label={`${portfolio.portrait.alt[locale]}: ${t.photoOpen}`}
+          aria-label={`${portrait.alt}: ${t.photoOpen}`}
           title={t.photoOpen}
           onPointerEnter={warmFullPortrait}
           onPointerDown={warmFullPortrait}
@@ -152,10 +156,10 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
               overshoot included, on the image. */}
           <span className='bg-primary-container relative block size-full [clip-path:url(#portrait-cookie)]'>
             <img
-              src={portfolio.portrait.src}
+              src={portrait.src}
               alt=''
-              width={portfolio.portrait.width}
-              height={portfolio.portrait.height}
+              width={portrait.width}
+              height={portrait.height}
               fetchPriority='high'
               className='size-full scale-[1.09] object-cover'
             />
@@ -204,12 +208,12 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
 
       {/* Content mounts only while open, so the large image loads on demand. */}
       <DialogContent closeLabel={t.photoClose} aria-describedby={undefined} morph>
-        <DialogTitle className='sr-only'>{t.photoTitle}</DialogTitle>
+        <DialogTitle className='sr-only'>{portrait.alt}</DialogTitle>
         {/* Both viewport axes bound the photo without another display crop.
             The height budget covers viewport margin, padding and the close row. */}
         <img
           src={fullPortrait.src}
-          alt={fullPortrait.alt[locale]}
+          alt={fullPortrait.alt}
           width={fullPortrait.width}
           height={fullPortrait.height}
           decoding='async'

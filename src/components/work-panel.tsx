@@ -1,6 +1,5 @@
-import { portfolio } from '@/content/portfolio';
-import { selectedWork } from '@/content/selected-work';
-import type { SelectedProject } from '@/content/selected-work';
+import { contentFor } from '@/content/content';
+import type { Project } from '@/content/content';
 import type { Locale } from '@/lib/locale';
 
 import { copy } from './copy';
@@ -21,7 +20,7 @@ import {
   TechList,
 } from './section-parts';
 
-function ProjectLink({ project, locale }: { project: SelectedProject; locale: Locale }) {
+function ProjectLink({ project, locale }: { project: Project; locale: Locale }) {
   return (
     <StretchedLink href={project.url}>
       {project.name}
@@ -32,7 +31,8 @@ function ProjectLink({ project, locale }: { project: SelectedProject; locale: Lo
 
 function WorkPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const { featured, supporting } = selectedWork.forLocale(locale);
+  const { work, profile } = contentFor(locale);
+  const { featured, supporting } = work;
 
   return (
     <div className='flex flex-col gap-10'>
@@ -70,7 +70,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
             </Card>
           ))}
         </CardGrid>
-        <ProfileLink href={portfolio.github}>{t.moreOnGitHub}</ProfileLink>
+        <ProfileLink href={profile.github}>{t.moreOnGitHub}</ProfileLink>
       </Subsection>
     </div>
   );
