@@ -8,7 +8,7 @@ function SkillsPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-10'>
       <h2 className='sr-only'>{t.sectionHeadings.skills}</h2>
 
       <ItemList>

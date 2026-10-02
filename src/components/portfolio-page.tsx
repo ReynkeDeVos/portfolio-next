@@ -65,7 +65,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
 
   return (
     <div className='min-h-dvh'>
-      <main className='mx-auto grid w-full max-w-300 gap-4 px-4 pt-4 pb-16 sm:px-6 sm:pt-6 lg:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[minmax(0,28rem)_minmax(0,1fr)]'>
+      <main className='mx-auto grid w-full max-w-300 gap-4 px-4 pt-4 pb-16 sm:px-6 sm:pt-6 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[minmax(0,28rem)_minmax(0,1fr)]'>
         <Identity locale={locale} section={section} ticks={ticks} />
 
         <Tabs value={section} onValueChange={changeSection} className='min-w-0'>

@@ -102,7 +102,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
           title={t.photoOpen}
           onPointerEnter={warmFullPortrait}
           onFocus={warmFullPortrait}
-          className='group focus-visible:focus-ring relative size-24 shrink-0 cursor-pointer rounded-full outline-none [--focus-ring-offset:8px] sm:size-32 lg:size-36'
+          className='group focus-visible:focus-ring relative size-24 shrink-0 cursor-pointer rounded-full outline-none [--focus-ring-offset:8px] sm:size-32 lg:size-28 xl:size-36'
           style={rotation}
         >
           <svg aria-hidden className='absolute size-0'>
@@ -179,7 +179,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
           width={fullPortrait.width}
           height={fullPortrait.height}
           decoding='async'
-          className='bg-surface-container mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] rounded-lg object-contain'
+          className='bg-surface-container mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] rounded-md object-contain sm:rounded-sm'
         />
       </DialogContent>
     </Dialog>
