@@ -311,7 +311,7 @@ Tabs form a connected pill track, height (48px), with padding (4px), equal-width
 
 ### Keyboard focus
 
-Every interactive element uses the primary green outline (3px). The default offset is (2px); connected tabs and control segments use an inset offset (-3px), tab panels use (4px) around `xl-inc` corners that match their first item, and the portrait trigger uses (8px) to clear the expanded frame. A noninheriting registered CSS property keeps each offset local. Rings appear through `:focus-visible`, retaining the mouse presentation. Stretched project links place their ring on the containing item. The owner explicitly requested removal of the skip-to-content link, and the current draft omits it.
+Every interactive element uses the primary green outline (3px). The default offset is (2px); connected tabs and control segments use an inset offset (-3px), tab panels use (4px) around `xl-inc` corners that match their first item, and the portrait trigger uses (8px) to clear the expanded frame. A noninheriting registered CSS property keeps each offset local. Rings appear through `:focus-visible`, retaining the mouse presentation. Stretched project links place their ring on the containing item. Following the WAI-ARIA tabs pattern, only panels whose content does not start with a focusable element (Skills, Workflow) are Tab stops; from the Work and Career tab, Tab moves straight to the first whole-item link. The owner explicitly requested removal of the skip-to-content link, and the current draft omits it.
 
 ### Portrait and photo viewer
 
