@@ -389,6 +389,18 @@
   }
 }
 
+/*
+ * Reduced motion: nothing carries a morph name, so the page and the viewer
+ * cross-fade in place. Opacity still confirms the change without travel.
+ */
+:root:active-view-transition-type(morph-fade) {
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 150ms;
+    animation-timing-function: var(--ease-effects-fast);
+  }
+}
+
 @keyframes morph-corners {
   from {
     border-radius: 50%;

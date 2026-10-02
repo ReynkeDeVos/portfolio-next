@@ -87,19 +87,18 @@ function warmFullPortrait() {
 // Opening and closing run as a same-document view transition: a plain surface
 // grows out of the frame into the photo panel and shrinks back into it. The
 // thumbnail never moves and the large photo fades in place at its final size.
+// With reduced motion the viewer cross-fades in place instead, without travel.
 // The transition types scope the morph names and keyframes to this one moment.
 function morphPortrait(open: boolean, commit: () => void) {
-  if (globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    commit();
-
-    return;
-  }
+  const reduceMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const morphTypes = ['morph', open ? 'morph-open' : 'morph-close'];
+  const types = reduceMotion ? ['morph-fade'] : morphTypes;
 
   document.startViewTransition({
     update: () => {
       flushSync(commit);
     },
-    types: ['morph', open ? 'morph-open' : 'morph-close'],
+    types,
   });
 }
 
