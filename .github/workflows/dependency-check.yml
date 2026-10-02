@@ -1,0 +1,61 @@
+name: Dependency checks
+
+on:
+  pull_request:
+    paths:
+      - package.json
+      - aube-lock.yaml
+      - aube-workspace.yaml
+      - .npmrc
+      - .tool-versions
+      - scripts/dependency-security*
+      - scripts/install-aube.sh
+      - .github/actions/setup-aube/**
+      - .github/workflows/dependency-*.yml
+  push:
+    branches: [main]
+    paths:
+      - package.json
+      - aube-lock.yaml
+      - aube-workspace.yaml
+      - .npmrc
+      - .tool-versions
+      - scripts/dependency-security*
+      - scripts/install-aube.sh
+      - .github/actions/setup-aube/**
+      - .github/workflows/dependency-*.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-aube
+      - name: Test security automation
+        run: node --test scripts/dependency-security.test.mjs
+      - name: Audit all dependencies for high and critical vulnerabilities
+        run: node scripts/dependency-security.mjs check
+      - name: Check manifest and lockfile, then validate the project
+        run: |
+          aube install --frozen-lockfile
+          aubr check
+          aubr build
+      - name: Save audit report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: dependency-check-${{ github.run_id }}
+          path: .security-report/
+          retention-days: 30
+          if-no-files-found: ignore
