@@ -4,6 +4,13 @@ Renke Brixel’s bilingual portfolio, built with TanStack Start, React and Cloud
 
 Live: [portfolio.renkebrixel.workers.dev](https://portfolio.renkebrixel.workers.dev/)
 
+Install the Node and uv versions from `.tool-versions` (for example, with
+`mise install`), then run `aube install` and `aubr dev`. Both `dev` and `build`
+generate smaller WOFF2 fonts from the English and German source content.
+uv installs the locked FontTools/Brotli dependencies in an isolated, cached
+environment; no Python packages need to be installed globally.
+See [font generation and verification](docs/fonts.md).
+
 Dependency security is checked weekly for production and monthly for development;
 critical development findings are also checked weekly. See
 [the automation policy and manual controls](docs/dependency-security.md).
