@@ -329,6 +329,10 @@ Every link is a Material component with a state layer and a stationary diagonal 
 
 The Email button decodes the address only when pressed. It opens the mail app and also reveals the address below the contact buttons in a full-shape, high-surface row: body-medium text that wraps anywhere and selects as a whole, followed by a standard small icon button that copies it. A copied state swaps the copy icon for a sage check and announces the result through a polite live region. The address never appears in the rendered HTML.
 
+### Engine note
+
+Browsers outside Chromium (no `Chromium` brand in User-Agent Client Hints) see a note at the top of the content column, above the tabs. It is a `lg-inc` card on `surface-card` with a copper flask icon, a `title-md` heading, a muted body-medium lead and a closed "Why only Chromium?" disclosure whose text button turns its chevron like the build disclosure. It explains that the site deliberately tries the newest Blink features, that Gecko and WebKit support would be possible but was not the goal, and suggests a Chromium-based browser or waiting for engines to catch up. A standard icon button hides it permanently and returns focus to the open tab. The note is prerendered and hidden; a head script reveals it before first paint, so it never shifts the layout.
+
 ### Compact list, table and disclosure
 
 Inventories that would otherwise become a wall of identical cards use denser forms on the card surface. The teaching topics are a compact list: one `lg-inc` card with outline-variant dividers, each row a `title-sm` label beside its technology tags from medium screens and above them on narrow ones. The AI model recommendations are a dated table on the same surface with label-medium column headings, a task row heading with its note in body-small, and body-medium model and thinking-level cells. The build explanation is a native disclosure, closed by default: its summary is a `lg-inc` card row with the subsection heading, the topic names in muted body-medium and a chevron that turns over (300ms) with the spatial curve. It carries the shared state layer and focus ring, and the content opens instantly.

@@ -56,6 +56,16 @@ const en = {
     back: 'Back to portfolio',
   },
   teachingHeading: 'Topics I teach',
+  engineNote: {
+    title: 'Built for Chromium, on purpose',
+    lead: 'This portfolio is my playground for the newest web features, and some of them have so far only landed in Blink, the engine behind Chrome. Your browser uses a different engine, so a few details may look off.',
+    why: 'Why only Chromium?',
+    details: [
+      'Trying out the latest features is the only reason. Making the site look just as good in Gecko (Firefox) or WebKit (Safari) would be no problem; it simply was not the goal of this project.',
+      'To see the page as intended, open it in Chrome, Edge, Brave, Opera or another Chromium-based browser. On iPhone and iPad, most browsers still run on WebKit, so a computer or Android device works best. Or give your browser a year or two to catch up, and the glitches should disappear on their own.',
+    ],
+    dismiss: 'Hide this note',
+  },
   present: 'present',
   meta: {
     title: 'Renke Brixel · Dev',
@@ -117,6 +127,16 @@ const copy = {
       back: 'Zurück zum Portfolio',
     },
     teachingHeading: 'Themen, die ich unterrichte',
+    engineNote: {
+      title: 'Bewusst für Chromium gebaut',
+      lead: 'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features, und einige davon gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine, daher können einzelne Details hier fehlerhaft aussehen.',
+      why: 'Warum nur Chromium?',
+      details: [
+        'Die neuesten Features auszuprobieren ist der einzige Grund. Die Seite genauso gut für Gecko (Firefox) oder WebKit (Safari) umzusetzen, wäre kein Problem; es war nur nicht das Ziel dieses Projekts.',
+        'Wenn du die Seite wie gedacht sehen möchtest, öffne sie in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser. Auf iPhone und iPad laufen die meisten Browser noch mit WebKit, daher eignet sich ein Computer oder Android-Gerät am besten. Oder gib deinem Browser ein, zwei Jahre Zeit, dann sollten die Fehler von selbst verschwinden.',
+      ],
+      dismiss: 'Hinweis ausblenden',
+    },
     present: 'heute',
     meta: {
       title: 'Renke Brixel · Dev',
