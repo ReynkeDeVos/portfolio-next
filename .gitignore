@@ -4,6 +4,7 @@ dist/
 .tanstack/
 .wrangler/
 .cloudflare-build/
+.security-report/
 .env
 .env.*
 !.env.example

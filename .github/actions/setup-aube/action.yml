@@ -1,0 +1,25 @@
+name: Set up Node and Aube
+description: Install the project's Node LTS and checksum-verified Aube binary.
+runs:
+  using: composite
+  steps:
+    - id: node-version
+      shell: bash
+      run: |
+        version=$(awk '$1 == "nodejs" { print $2 }' .tool-versions)
+        if [[ -z "$version" ]]; then
+          echo '::error::No Node version found in .tool-versions'
+          exit 1
+        fi
+        if [[ "$version" == lts ]]; then
+          version='lts/*'
+        fi
+        echo "version=$version" >> "$GITHUB_OUTPUT"
+    - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      with:
+        node-version: ${{ steps.node-version.outputs.version }}
+        package-manager-cache: false
+    - shell: bash
+      run: |
+        bash scripts/install-aube.sh "$RUNNER_TEMP/aube-bin"
+        echo "$RUNNER_TEMP/aube-bin" >> "$GITHUB_PATH"
