@@ -18,6 +18,11 @@ const panels = {
   career: CareerPanel,
 } satisfies Record<Section, (props: { locale: Locale }) => ReactNode>;
 
+// WAI-ARIA tabs: a panel is a Tab stop only when its content does not start
+// with a focusable element. Work and Career open with a whole-item link, so
+// Tab moves from the tab list straight to it, without a ring around the panel.
+const panelsStartingWithLink = new Set<Section>(['work', 'career']);
+
 function PortfolioPage({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const [section, setSection] = useState<Section>('work');
@@ -81,7 +86,12 @@ function PortfolioPage({ locale }: { locale: Locale }) {
 
             return (
               // Every panel is prerendered; inactive ones are only hidden.
-              <TabsContent key={value} value={value} forceMount>
+              <TabsContent
+                key={value}
+                value={value}
+                forceMount
+                tabIndex={panelsStartingWithLink.has(value) ? -1 : 0}
+              >
                 <Panel locale={locale} />
               </TabsContent>
             );
