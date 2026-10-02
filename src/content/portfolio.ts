@@ -24,7 +24,7 @@ export const portfolio = {
   },
   identity: {
     en: 'I build software and teach people to code.',
-    de: 'Ich entwickle Software und unterrichte Programmieren.',
+    de: 'Ich entwickle & lehre Software zu programmieren.',
   },
   introduction: {
     en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
