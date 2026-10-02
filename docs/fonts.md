@@ -4,7 +4,8 @@
 uses FontTools 4.66.1 and Brotli 1.2.0, pinned in the script and its uv lockfile.
 Install uv using the version in `.tool-versions`; uv supplies Python 3.11 or
 later and caches the script's isolated environment. The shared GitHub Actions
-setup installs uv before the project checks and build.
+setup installs uv before the project checks and build; `scripts/cloudflare-build.sh`
+installs the same version with pip, since the Cloudflare build image lacks uv.
 
 The generator reads text-bearing source files under `src/` in both languages,
 including JSX, UI dictionaries, CSS and JSON. It excludes generated files.
@@ -39,7 +40,8 @@ cannot ship with fonts from an earlier build.
 
 `aubr fonts:test` verifies decoded text and newly added characters, reproducible
 WOFF2 generation, preserved variable axes and licenses, OpenType feature tags,
-and unchanged glyph outlines and advance widths at weights 400, 500, 600 and 650. It runs as part of `aubr test` and `aubr check`. Generation also reopens
+and unchanged glyph outlines and advance widths at weights 400, 500, 600 and 650. It runs as part of `aubr test` and `aubr check`; `aubr check` generates the
+fonts first, because linting resolves `fonts.css` through `src/styles.css`. Generation also reopens
 each WOFF2 file and verifies that all requested, originally supported
 characters survived.
 

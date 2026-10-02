@@ -14,7 +14,7 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "deploy": "aubr build && wrangler deploy",
-    "check": "aubr content:check && aubr test && aubr typecheck && aubr lint && aubr format:check",
+    "check": "aubr content:check && aubr fonts:build && aubr test && aubr typecheck && aubr lint && aubr format:check",
     "content:check": "node scripts/validate-content.ts",
     "fonts:build": "uv run --locked scripts/subset-fonts.py",
     "fonts:test": "uv run --locked scripts/subset-fonts.py --test"
