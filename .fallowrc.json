@@ -2,11 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
   // Vendored upstream code; changes go through the install-anti-slop update procedure.
   "ignorePatterns": ["tools/oxlint/anti-slop/**"],
-  "duplicates": {
-    // Both Latin font faces need the same unicode-range; CSS font descriptors
-    // cannot share a declaration. Recheck if the clone content or count changes.
-    "ignoredClones": ["dup:42db39ba:2"]
-  },
   // Loaded through .oxlintrc.json jsPlugins, which Fallow does not read.
   "ignoreDependencies": ["@oxlint/plugins", "@shadcn/lint", "oxlint-tailwindcss"]
 }

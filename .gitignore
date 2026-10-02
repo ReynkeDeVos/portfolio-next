@@ -1,4 +1,8 @@
 node_modules/
+src/generated/fonts/
+public/fonts/roboto-flex-LICENSE.txt
+public/fonts/google-sans-flex-LICENSE.txt
+__pycache__/
 dist/
 .output/
 .tanstack/

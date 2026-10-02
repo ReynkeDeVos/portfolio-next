@@ -1,5 +1,3 @@
-import googleSansFlexLatin from '@fontsource-variable/google-sans-flex/files/google-sans-flex-latin-wght-normal.woff2?url';
-import robotoFlexLatin from '@fontsource-variable/roboto-flex/files/roboto-flex-latin-wght-normal.woff2?url';
 import {
   createRootRoute,
   HeadContent,
@@ -9,6 +7,8 @@ import {
 } from '@tanstack/react-router';
 
 import { NotFound } from '@/components/not-found';
+import googleSansFlexSubset from '@/generated/fonts/google-sans-flex-subset.woff2?url';
+import robotoFlexSubset from '@/generated/fonts/roboto-flex-subset.woff2?url';
 import { engineScript } from '@/lib/engine';
 import { localeFromPathname, localeScript } from '@/lib/locale';
 import { themeScript } from '@/lib/theme';
@@ -28,14 +28,14 @@ const Route = createRootRoute({
     links: [
       {
         rel: 'preload',
-        href: robotoFlexLatin,
+        href: robotoFlexSubset,
         as: 'font',
         type: 'font/woff2',
         crossOrigin: 'anonymous',
       },
       {
         rel: 'preload',
-        href: googleSansFlexLatin,
+        href: googleSansFlexSubset,
         as: 'font',
         type: 'font/woff2',
         crossOrigin: 'anonymous',

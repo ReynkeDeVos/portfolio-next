@@ -4,18 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "aubr content:check && vite",
-    "build": "aubr content:check && vite build",
+    "dev": "aubr content:check && aubr fonts:build && vite",
+    "build": "aubr content:check && aubr fonts:build && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "node --test 'src/**/*.test.ts' 'scripts/**/*.test.mjs'",
+    "test": "node --test 'src/**/*.test.ts' 'scripts/**/*.test.mjs' && aubr fonts:test",
     "test:prerender": "node --test tests/prerender.test.mjs",
     "lint": "oxlint --type-aware --deny-warnings",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "deploy": "aubr build && wrangler deploy",
-    "check": "aubr content:check && aubr test && aubr typecheck && aubr lint && aubr format:check",
-    "content:check": "node scripts/validate-content.ts"
+    "check": "aubr content:check && aubr fonts:build && aubr test && aubr typecheck && aubr lint && aubr format:check",
+    "content:check": "node scripts/validate-content.ts",
+    "fonts:build": "uv run --locked scripts/subset-fonts.py",
+    "fonts:test": "uv run --locked scripts/subset-fonts.py --test"
   },
   "dependencies": {
     "@fontsource-variable/google-sans-flex": "^5.3.1",
