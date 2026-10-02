@@ -67,6 +67,30 @@ function writeSecurityReport(
   ].join('\n\n');
 
   writeFileSync(`${reportDir}/report.md`, `${body}\n`);
+
+  const prBody = [
+    '## Summary',
+    'Update vulnerable dependencies and retain their fixes in the Aube lockfile.',
+    '```text\naudit → scoped repair → targeted parent upgrades if needed → reaudit → frozen install + checks + build\n```',
+    updates.join('\n') || 'See the lockfile diff for accumulated/transitive updates.',
+    '## Evidence',
+    `**Before this run:** ${selected.length} policy findings. **After:** ${remaining.length} policy findings, ${affectedRemaining.length} any-severity findings in affected packages, ${newSevere.length} newly detected severe findings.`,
+    '### Original advisories',
+    advisoryTable(selected),
+    '### Remaining advisories',
+    advisoryTable(remaining),
+    '### Other findings in affected packages',
+    advisoryTable(affectedRemaining),
+    '### New severe advisories',
+    advisoryTable(newSevere),
+    validation,
+    '## Merge Danger',
+    '**Door:** two-way. Reverting the dependency changes restores the previous versions and their known vulnerabilities.',
+    '**Blast Radius:** dependencies. Targeted parent upgrades may include major versions; review compatibility and advisory prerequisites. Dependency scope does not establish reachability.',
+    ...notes.map((note) => markdown(note)),
+  ].join('\n\n');
+
+  writeFileSync(`${reportDir}/pr.md`, `${prBody}\n`);
   writeFileSync(`${reportDir}/audit-before.json`, `${JSON.stringify(before, null, 2)}\n`);
   writeFileSync(`${reportDir}/audit-after.json`, `${JSON.stringify(after, null, 2)}\n`);
 }

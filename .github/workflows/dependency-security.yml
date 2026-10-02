@@ -73,7 +73,7 @@ jobs:
           branch: automation/dependency-security
           title: 'fix: update vulnerable dependencies'
           commit-message: 'fix: update vulnerable dependencies'
-          body-path: .security-report/report.md
+          body-path: .security-report/pr.md
           draft: ${{ steps.security.outputs.draft }}
           add-paths: |
             package.json
