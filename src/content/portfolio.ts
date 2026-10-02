@@ -258,8 +258,8 @@ export const portfolio = {
         topic: { en: 'Framework', de: 'Framework' },
         technologies: ['React 19', 'TanStack Start', 'Vite 8'],
         description: {
-          en: 'Prerenders both language versions to static HTML. Switching tabs sends no request.',
-          de: 'Rendert beide Sprachfassungen vorab als statisches HTML. Tabwechsel senden keine Anfrage.',
+          en: 'Prerenders both language versions to static HTML. Switching tabs sends no network request.',
+          de: 'Rendert beide Sprachfassungen vorab als statisches HTML. Tabwechsel senden keine Netzwerkanfrage.',
         },
       },
       {
