@@ -360,48 +360,281 @@
   }
 }
 
-/* A little browser bobs and blinks twice through the sequence, then rests. */
-.browser-mascot-character {
-  transform-box: fill-box;
-  transform-origin: center bottom;
-  animation: browser-mascot-bob 4.8s ease-in-out 2;
+/* Dark ink with white catchlights reads as eyes in both themes. */
+.browser-mascot-pupils,
+.browser-mascot-eyes-happy {
+  fill: light-dark(var(--md-sys-color-on-primary-container), oklch(20% 0.03 150));
+  stroke: light-dark(var(--md-sys-color-on-primary-container), oklch(20% 0.03 150));
 }
 
-.browser-mascot-eyes {
+.browser-mascot-eyes-happy {
+  fill: none;
+  opacity: 0;
+  --browser-mascot-greeting: browser-mascot-eyes-happy;
+}
+
+.browser-mascot-eyes-open {
+  --browser-mascot-greeting: browser-mascot-eyes-open;
+}
+
+/* The little browser breathes, sways, blinks and looks around at an unhurried
+   pace and waves hello now and then, less often over time. Pivots
+   are in viewBox units: feet for the body, shoulders for the arms. */
+.browser-mascot-sway,
+.browser-mascot-breathe,
+.browser-mascot-lean,
+.browser-mascot-arm-rest,
+.browser-mascot-arm-sway,
+.browser-mascot-arm-wave {
+  transform-box: view-box;
+}
+
+/* Each greeting (hop, wave, happy eyes, wide smile) plays once per delay. The
+   gaps roughly double, so the browser waves less and less and only idles after
+   four minutes. */
+.browser-mascot-arm-wave,
+.browser-mascot-lean,
+.browser-mascot-mouth,
+.browser-mascot-eyes-open,
+.browser-mascot-eyes-happy {
+  animation-name:
+    var(--browser-mascot-greeting), var(--browser-mascot-greeting), var(--browser-mascot-greeting),
+    var(--browser-mascot-greeting), var(--browser-mascot-greeting), var(--browser-mascot-greeting);
+  animation-duration: 4.2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.8s, 12s, 30s, 60s, 120s, 240s;
+}
+
+.browser-mascot-sway {
+  transform-origin: 32px 63px;
+  animation: browser-mascot-sway 6.8s ease-in-out infinite alternate;
+}
+
+.browser-mascot-breathe {
+  transform-origin: 32px 63px;
+  animation: browser-mascot-breathe 3.4s ease-in-out infinite alternate;
+}
+
+/* Hops a little as the arm goes up, then tilts toward the waving hand. */
+.browser-mascot-lean {
+  transform-origin: 32px 63px;
+  --browser-mascot-greeting: browser-mascot-lean;
+}
+
+.browser-mascot-shadow {
   transform-box: fill-box;
   transform-origin: center;
-  animation: browser-mascot-blink 4.8s ease-in-out 2;
+  animation: browser-mascot-shadow 3.4s ease-in-out infinite alternate;
 }
 
-@keyframes browser-mascot-bob {
+.browser-mascot-arm-rest {
+  transform-origin: 11px 39px;
+  animation: browser-mascot-arm-rest 3.4s ease-in-out infinite alternate;
+}
+
+.browser-mascot-arm-sway {
+  transform-origin: 53px 39px;
+  animation: browser-mascot-arm-sway 3.4s ease-in-out infinite alternate;
+}
+
+.browser-mascot-arm-wave {
+  transform-origin: 53px 39px;
+  --browser-mascot-greeting: browser-mascot-wave;
+}
+
+.browser-mascot-mouth {
+  transform-box: fill-box;
+  transform-origin: center top;
+  --browser-mascot-greeting: browser-mascot-mouth;
+}
+
+.browser-mascot-glance {
+  animation: browser-mascot-glance 9s ease-in-out infinite;
+}
+
+.browser-mascot-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: browser-mascot-blink 6.5s ease-in-out infinite;
+}
+
+@keyframes browser-mascot-sway {
+  from {
+    transform: rotate(-1.5deg);
+  }
+
+  to {
+    transform: rotate(1.5deg);
+  }
+}
+
+@keyframes browser-mascot-breathe {
+  from {
+    transform: scale(1.02, 0.975);
+  }
+
+  to {
+    transform: scale(0.985, 1.02);
+  }
+}
+
+@keyframes browser-mascot-shadow {
+  from {
+    transform: scaleX(1.05);
+  }
+
+  to {
+    transform: scaleX(0.95);
+  }
+}
+
+@keyframes browser-mascot-arm-rest {
+  from {
+    transform: rotate(-4deg);
+  }
+
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes browser-mascot-arm-sway {
+  from {
+    transform: rotate(4deg);
+  }
+
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+/* The arm overshoots as it goes up, waves from the shoulder three times and
+   bounces a touch on the way down. */
+@keyframes browser-mascot-wave {
   0%,
-  32%,
-  78%,
+  86%,
   100% {
     transform: none;
   }
 
-  15% {
-    transform: translateY(-2px) rotate(-2deg);
+  11% {
+    transform: rotate(-122deg);
   }
 
-  60% {
-    transform: translateY(-2px) rotate(-4deg);
+  17%,
+  73% {
+    transform: rotate(-106deg);
+  }
+
+  27%,
+  45%,
+  64% {
+    transform: rotate(-92deg);
+  }
+
+  36%,
+  55% {
+    transform: rotate(-118deg);
+  }
+
+  92% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes browser-mascot-lean {
+  0%,
+  89%,
+  100% {
+    transform: none;
+  }
+
+  9% {
+    transform: translateY(-1.5px);
+  }
+
+  17%,
+  73% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes browser-mascot-eyes-open {
+  0%,
+  14%,
+  77%,
+  100% {
+    opacity: 1;
+  }
+
+  17%,
+  74% {
+    opacity: 0;
+  }
+}
+
+@keyframes browser-mascot-eyes-happy {
+  0%,
+  14%,
+  77%,
+  100% {
+    opacity: 0;
+  }
+
+  17%,
+  74% {
+    opacity: 1;
+  }
+}
+
+@keyframes browser-mascot-mouth {
+  0%,
+  86%,
+  100% {
+    transform: none;
+  }
+
+  17%,
+  71% {
+    transform: scale(1.15, 1.5);
+  }
+}
+
+@keyframes browser-mascot-glance {
+  0%,
+  40%,
+  67%,
+  80%,
+  96%,
+  100% {
+    transform: none;
+  }
+
+  45%,
+  62% {
+    transform: translate(1.3px, 0.3px);
+  }
+
+  84%,
+  92% {
+    transform: translate(-0.8px, -0.7px);
   }
 }
 
 @keyframes browser-mascot-blink {
   0%,
-  20%,
-  24%,
-  65%,
-  69%,
+  44%,
+  48%,
+  88%,
+  92%,
+  96%,
   100% {
-    transform: scaleY(1);
+    transform: none;
   }
 
-  22%,
-  67% {
+  46%,
+  90%,
+  94% {
     transform: scaleY(0.1);
   }
 }
@@ -409,8 +642,7 @@
 @media (prefers-reduced-motion: reduce) {
   .ghost-mascot,
   .ghost-mascot-shadow,
-  .browser-mascot-character,
-  .browser-mascot-eyes {
+  [class*='browser-mascot-'] {
     animation: none;
   }
 
