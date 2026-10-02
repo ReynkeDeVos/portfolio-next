@@ -7,21 +7,21 @@ import test from 'node:test';
 
 const origin = 'https://portfolio.renkebrixel.workers.dev';
 
-const pages = [
-  { locale: 'en', file: 'dist/client/index.html' },
-  { locale: 'de', file: 'dist/client/de/index.html' },
+const localePages = [
+  { locale: 'en', path: '/', file: 'dist/client/index.html' },
+  { locale: 'de', path: '/de/', file: 'dist/client/de/index.html' },
 ];
 
-const languageSwitch = { en: '/', de: '/de/' };
+// The default Locale also answers for x-default.
+const alternates = [
+  ...localePages.map(({ locale, path }) => [locale, `${origin}${path}`]),
+  ['x-default', `${origin}/`],
+];
 
-const alternates = {
-  en: `${origin}/`,
-  de: `${origin}/de/`,
-  'x-default': `${origin}/`,
-};
+const localeLinks = localePages.map(({ locale, path }) => [locale, path]);
 
 // The attributes of every opening tag with the given name, keys lowercased.
-function tags(html, name) {
+function tagAttributes(html, name) {
   const tagPattern = new RegExp(`<${name}\\s(?<attributes>[^>]*)>`, 'giu');
   const attributePattern = /(?<key>[\w:-]+)="(?<value>[^"]*)"/gu;
 
@@ -35,22 +35,20 @@ function tags(html, name) {
   );
 }
 
-// Maps each element's hreflang to its href.
-function hrefsByLanguage(elements) {
-  return Object.fromEntries(
-    elements
-      .filter((element) => element.hreflang)
-      .map((element) => [element.hreflang, element.href]),
-  );
+// Every [hreflang, href] pair in document order, so a duplicate can't hide.
+function hreflangPairs(elements) {
+  return elements
+    .filter((element) => element.hreflang)
+    .map((element) => [element.hreflang, element.href]);
 }
 
-for (const { locale, file } of pages) {
+for (const { locale, file } of localePages) {
   test(`${file} is the ${locale} Locale page`, async () => {
     const html = await readFile(file, 'utf8');
-    const alternateLinks = tags(html, 'link').filter((link) => link.rel === 'alternate');
+    const alternateLinks = tagAttributes(html, 'link').filter((link) => link.rel === 'alternate');
 
-    assert.equal(tags(html, 'html')[0]?.lang, locale);
-    assert.deepEqual(hrefsByLanguage(alternateLinks), alternates);
-    assert.deepEqual(hrefsByLanguage(tags(html, 'a')), languageSwitch);
+    assert.equal(tagAttributes(html, 'html')[0]?.lang, locale);
+    assert.deepEqual(hreflangPairs(alternateLinks), alternates);
+    assert.deepEqual(hreflangPairs(tagAttributes(html, 'a')), localeLinks);
   });
 }
