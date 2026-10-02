@@ -1,7 +1,7 @@
 {
   "include": ["src/**/*.ts", "src/**/*.tsx", "scripts/**/*.ts", "vite.config.ts"],
   "compilerOptions": {
-    "lib": ["ES2025", "DOM", "DOM.Iterable"],
+    "lib": ["ES2025", "ESNext.TypedArrays", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
     "noEmit": true,
     "skipLibCheck": true,

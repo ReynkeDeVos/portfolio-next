@@ -61,6 +61,19 @@ No animation library is needed for the current scope. Avoid blanket layer
 promotion with will-change; measure first. Large layers, blur effects, and
 animations of layout dimensions need explicit profiling even on current Chrome.
 
+## Console greeting
+
+`src/client.tsx` starts a DevTools Console greeting once per document, before
+hydration and outside React rendering. The 320x160 animated WebP (146 KB) and
+its reduced-motion still (6 KB) are separate fingerprinted assets, not bundle
+bytes. One low-priority fetch loads the selected file; DevTools only accepts
+`data:` URLs in console CSS, so it is base64-encoded before logging; base64
+is the smallest text form a data URL allows. Desktop visitors download it even
+if they never open DevTools, but nothing waits for it. Devices whose primary
+pointer is coarse (phones, tablets) have no built-in DevTools and skip the
+download. They, and any failed load, get the text greeting alone. See the
+[console research](research-chrome-console.md).
+
 ## Dependencies
 
 Node runs local TypeScript and tool binaries; mise selects the LTS release.
