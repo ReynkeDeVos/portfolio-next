@@ -52,7 +52,7 @@ function BrowserMascot() {
                       <ellipse cx='24' cy='38' rx='4.2' ry='5' />
                       <ellipse cx='40' cy='38' rx='4.2' ry='5' />
                     </g>
-                    <g className='fill-white'>
+                    <g className='browser-mascot-catchlights'>
                       <circle cx='22.6' cy='36.1' r='1.6' />
                       <circle cx='38.6' cy='36.1' r='1.6' />
                       <circle cx='25.4' cy='39.8' r='0.7' />
