@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "node --test scripts/selected-work.test.ts",
-    "lint": "oxlint --type-aware",
+    "lint": "oxlint --type-aware --deny-warnings",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "deploy": "aubr build && wrangler deploy",

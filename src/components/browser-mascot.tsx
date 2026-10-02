@@ -8,7 +8,7 @@ function BrowserMascot() {
         viewBox='0 9 64 60'
         strokeLinecap='round'
         strokeLinejoin='round'
-        className='h-[45px] w-12 overflow-visible'
+        className='h-11.25 w-12 overflow-visible'
       >
         <ellipse
           cx='32'

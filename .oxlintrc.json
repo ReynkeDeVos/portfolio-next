@@ -76,6 +76,7 @@
     "shadcn/require-static-classes": "warn",
     "tailwindcss/enforce-canonical": "warn",
     "tailwindcss/enforce-shorthand": "warn",
+    "tailwindcss/prefer-scale-token": ["warn", { "step": 0.25 }],
     "oxc/no-accumulating-spread": "error",
     "anti-slop/no-array-filter-map": "error",
     "anti-slop/no-reduce-accumulator-copy": "error",
