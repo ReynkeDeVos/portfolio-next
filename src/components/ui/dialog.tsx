@@ -75,7 +75,7 @@ function DialogContent({
               title={closeLabel}
               className={cn(
                 '-me-1 -mt-1 self-end sm:-me-2 sm:-mt-2',
-                morph && 'view-transition-morph-content',
+                morph && 'view-transition-morph-control',
               )}
             >
               <XIcon aria-hidden className='size-5' />
