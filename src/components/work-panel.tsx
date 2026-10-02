@@ -1,5 +1,3 @@
-import { ArrowUpRight } from 'lucide-react';
-
 import { portfolio } from '@/content/portfolio';
 import { selectedWork } from '@/content/selected-work';
 import type { SelectedProject } from '@/content/selected-work';
@@ -16,28 +14,20 @@ import {
   ItemHeader,
   ItemList,
   ItemText,
+  LinkArrow,
   ProfileLink,
+  StretchedLink,
   Subsection,
   TechList,
 } from './section-parts';
 
-// The project name is the link; its ::after stretches over the whole item.
-// The item draws the focus ring.
 function ProjectLink({ project, locale }: { project: SelectedProject; locale: Locale }) {
   return (
-    <a
-      href={project.url}
-      className='text-on-surface cursor-pointer outline-none after:absolute after:inset-0 after:cursor-pointer'
-    >
+    <StretchedLink href={project.url}>
       {project.name}
       <span className='sr-only'>, {copy[locale].sourceOnGitHub}</span>
-    </a>
+    </StretchedLink>
   );
-}
-
-// A stationary arrow, like the contact buttons, marks the link target.
-function LinkArrow() {
-  return <ArrowUpRight aria-hidden className='text-on-surface size-5 shrink-0' />;
 }
 
 function WorkPanel({ locale }: { locale: Locale }) {

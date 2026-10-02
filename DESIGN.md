@@ -210,7 +210,7 @@ The role palette uses sage for action and keyboard focus, caramel for selected c
 
 ### Primary
 
-- **Sage action:** `primary` and `on-primary` form the Email button and keyboard rings. Primary also colors the developer identity, caret and native accents. Text links use on-surface, with stationary diagonal arrows.
+- **Sage action:** `primary` and `on-primary` form the Email button and keyboard rings. Primary also colors the developer identity, caret and native accents. Links follow the Links component rules.
 - **Sage tonal:** `primary-container` and `on-primary-container` support the portrait fallback and thinking-level chips.
 
 ### Secondary
@@ -306,9 +306,13 @@ Hover and keyboard focus expand the scalloped frame to (1.08), while coordinated
 
 The viewer uses a scrim and a high-surface dialog with extra-large corners. A tonal close button sits on its own top row, receives initial focus and remains distinct from the image. The visible title is omitted; a screen-reader title remains. Radix supplies the focus trap, Escape/outside dismissal and focus return. The image fits both viewport axes with a maximum width (960px), retains its full crop and uses rounded-lg corners. Opening fades over (150ms); closing unmounts immediately.
 
+### Links
+
+Every link is a Material component with a state layer and a stationary diagonal ArrowUpRight; text is never a bare colored link. An item with one destination (projects, career stations) is the link as a whole: its name stretches over the item, a (20px) arrow sits top right, hover adds an on-surface state layer (8%) and keyboard focus rings the item. Several destinations inside one card (AI tools, build technologies) are link chips: the `chip` button variant, outlined, `sm` corners, height (32px), label-large in on-surface. A standalone link ending a section (GitHub, LinkedIn) is a tonal button, identical to the identity's contact buttons. Copper tertiary text marks categories and employers, never a link. Non-interactive technology tags stay flat, borderless and arrowless so they never read as links.
+
 ### Build explanation
 
-The bilingual "How this portfolio is built" subsection is a grid of cards, each with the topic as title, the linked technologies and the reason. Every named technology links to its documentation in on-surface color, with a stationary diagonal ArrowUpRight and an `xs` focus shape. Employer names and the GitHub-profile footer use the same inline treatment. Project links use on-surface text and arrows while retaining their whole-item hit area. These text links have no underline or arrow movement on hover or keyboard focus. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
+The bilingual "How this portfolio is built" subsection is a grid of cards, each with the topic as title, the linked technologies and the reason. Its technologies, like the AI tools, are link chips. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
 
 All feedback is decorative. Reduced-motion preferences set transition and animation duration to zero throughout the document; content never depends on finishing an effect. Exact easing and state snippets live in the v2 sidecar because the frontmatter schema has no motion or focus fields. Sidecar tonal ramps are synthesized dark-to-light preview metadata, except the tab-track strip, which uses existing surface ladder values; these strips do not add shipped palette tokens. Component previews embed the actual AVIF media and expand utility styles into local CSS. Navigation and dialog previews show the implemented surfaces and states; runtime selection, image opening and focus trapping remain app behavior.
 

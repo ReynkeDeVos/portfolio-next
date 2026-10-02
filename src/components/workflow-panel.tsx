@@ -12,7 +12,7 @@ import {
   ItemHeader,
   ItemList,
   ItemText,
-  LinkSeries,
+  LinkChips,
   Subsection,
 } from './section-parts';
 
@@ -77,12 +77,8 @@ function AiSection({ locale }: { locale: Locale }) {
         {aiRecommendations.tips.map((tip) => (
           <Card key={tip.id}>
             <CardHeader title={tip.title[locale]} />
-            <CardText>
-              <span className='font-medium'>
-                <LinkSeries items={tip.links} />
-              </span>
-            </CardText>
-            <CardDetails>{tip.description[locale]}</CardDetails>
+            <CardText>{tip.description[locale]}</CardText>
+            <LinkChips links={tip.links} className='mt-4' />
           </Card>
         ))}
       </CardGrid>
@@ -90,8 +86,7 @@ function AiSection({ locale }: { locale: Locale }) {
   );
 }
 
-// Choices rather than a badge inventory: topic, stack and the reason.
-// Only named tools with a link get one.
+// Choices rather than a badge inventory: topic, the reason and its stack.
 function BuildSection({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const { portfolioBuild } = portfolio;
@@ -102,17 +97,15 @@ function BuildSection({ locale }: { locale: Locale }) {
         {portfolioBuild.items.map((item) => (
           <Card key={item.id}>
             <CardHeader title={item.topic[locale]} />
-            <CardText>
-              <span className='font-medium'>
-                <LinkSeries
-                  items={item.technologies.map((name) => ({
-                    name,
-                    url: portfolioBuild.links.find((link) => link.name === name)?.url,
-                  }))}
-                />
-              </span>
-            </CardText>
-            <CardDetails>{item.description[locale]}</CardDetails>
+            <CardText>{item.description[locale]}</CardText>
+            <LinkChips
+              links={item.technologies.flatMap((name) => {
+                const link = portfolioBuild.links.find((candidate) => candidate.name === name);
+
+                return link ? [link] : [];
+              })}
+              className='mt-4'
+            />
           </Card>
         ))}
       </CardGrid>

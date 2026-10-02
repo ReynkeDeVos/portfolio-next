@@ -1,7 +1,8 @@
 import { cn } from 'cn';
 import { ArrowUpRight } from 'lucide-react';
-import { Fragment } from 'react';
 import type { ReactNode } from 'react';
+
+import { Button } from '@/components/ui/button';
 
 // Every panel shares one grammar: a connected list of large items first,
 // then titled subsections of smaller cards, then an optional profile link.
@@ -9,7 +10,7 @@ import type { ReactNode } from 'react';
 // Hover state layer and whole-item focus ring for items whose title link
 // stretches over them. It rises above its closely spaced neighbours on focus.
 const linkedItem =
-  'group before:bg-on-surface before:ease-effects-fast before:rounded-inherit has-[a:focus-visible]:focus-ring before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10';
+  'group before:bg-on-surface before:ease-effects-fast before:rounded-inherit has-[a:focus-visible]:focus-ring before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 has-[a:focus-visible]:z-10';
 
 // Connected Expressive list: large outer corners, small inner ones.
 function ItemList({ ordered, children }: { ordered?: boolean; children: ReactNode }) {
@@ -120,10 +121,59 @@ function CardDetails({ children }: { children: ReactNode }) {
   return <p className='type-body-sm text-on-surface-variant mt-2'>{children}</p>;
 }
 
+// Links take one of three Material forms, all with a stationary ↗:
+// a whole item (one destination), outlined chips (several destinations in
+// one item) or a tonal button (a standalone link). Text is never a bare link.
+
+// The link's ::after stretches over the closest positioned item, which
+// draws the state layer and the focus ring.
+function StretchedLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      className='text-on-surface cursor-pointer outline-none after:absolute after:inset-0 after:cursor-pointer'
+    >
+      {children}
+    </a>
+  );
+}
+
+function LinkArrow() {
+  return <ArrowUpRight aria-hidden className='text-on-surface size-5 shrink-0' />;
+}
+
+function LinkChips({
+  links,
+  className,
+}: {
+  links: readonly { name: string; url: string }[];
+  className?: string;
+}) {
+  return (
+    <ul className={cn('flex flex-wrap gap-2', className)}>
+      {links.map((link) => (
+        <li key={link.name}>
+          <Button asChild variant='chip' size='sm'>
+            <a href={link.url}>
+              {link.name}
+              <ArrowUpRight aria-hidden className='size-4' />
+            </a>
+          </Button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function ProfileLink({ href, children }: { href: string; children: string }) {
   return (
-    <p className='type-body-md px-1'>
-      <ExternalLink href={href}>{children}</ExternalLink>
+    <p>
+      <Button asChild variant='tonal'>
+        <a href={href}>
+          {children}
+          <ArrowUpRight aria-hidden className='size-4' />
+        </a>
+      </Button>
     </p>
   );
 }
@@ -143,56 +193,20 @@ function TechList({ items, className }: { items: readonly string[]; className?: 
   );
 }
 
-// Inline external link. The word joiner keeps the arrow on the line of the
-// name's last character while long names still wrap anywhere.
-function ExternalLink({
-  href,
-  className,
-  children,
-}: {
-  href: string;
-  className?: string;
-  children: string;
-}) {
-  return (
-    <a
-      href={href}
-      target='_blank'
-      rel='noopener noreferrer'
-      className={cn('text-on-surface cursor-pointer rounded-xs wrap-anywhere', className)}
-    >
-      {children}
-      <span className='whitespace-nowrap'>
-        {'\u2060'}
-        <ArrowUpRight aria-hidden className='ms-0.5 inline size-[1em] align-[-0.125em]' />
-      </span>
-    </a>
-  );
-}
-
-// Comma-separated names; those with a URL become external links.
-function LinkSeries({ items }: { items: readonly { name: string; url?: string }[] }) {
-  return items.map((item, index) => (
-    <Fragment key={item.name}>
-      {index > 0 ? ', ' : null}
-      {item.url ? <ExternalLink href={item.url}>{item.name}</ExternalLink> : item.name}
-    </Fragment>
-  ));
-}
-
 export {
   Card,
   CardDetails,
   CardGrid,
   CardHeader,
   CardText,
-  ExternalLink,
   Item,
   ItemHeader,
   ItemList,
   ItemText,
-  LinkSeries,
+  LinkArrow,
+  LinkChips,
   ProfileLink,
+  StretchedLink,
   Subsection,
   TechList,
 };

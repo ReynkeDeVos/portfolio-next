@@ -6,12 +6,13 @@ import {
   Card,
   CardGrid,
   CardHeader,
-  ExternalLink,
   Item,
   ItemHeader,
   ItemList,
   ItemText,
+  LinkArrow,
   ProfileLink,
+  StretchedLink,
   Subsection,
   TechList,
 } from './section-parts';
@@ -25,20 +26,21 @@ function CareerPanel({ locale }: { locale: Locale }) {
 
       <ItemList ordered>
         {portfolio.experience.map((entry) => (
-          <Item key={`${entry.organization.en}-${entry.period}`}>
+          <Item key={`${entry.organization.en}-${entry.period}`} linked>
             <ItemHeader
               title={entry.role[locale]}
               meta={
-                <ExternalLink href={entry.url} className='text-tertiary'>
-                  {entry.organization[locale]}
-                </ExternalLink>
+                <>
+                  <StretchedLink href={entry.url}>
+                    <span className='text-tertiary'>{entry.organization[locale]}</span>
+                  </StretchedLink>
+                  <span className='text-on-surface-variant tabular-nums'>
+                    {' · '}
+                    {formatPeriod(entry.period, locale)}
+                  </span>
+                </>
               }
-              wrap
-              end={
-                <p className='type-label-lg text-on-surface-variant pt-1 tabular-nums'>
-                  {formatPeriod(entry.period, locale)}
-                </p>
-              }
+              end={<LinkArrow />}
             />
             <ItemText>{entry.description[locale]}</ItemText>
           </Item>

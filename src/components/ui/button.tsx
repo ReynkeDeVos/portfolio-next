@@ -13,6 +13,8 @@ const buttonVariants = cva(
         filled: 'bg-primary text-on-primary',
         tonal: 'bg-secondary-container text-on-secondary-container',
         outlined: 'border border-outline-variant text-on-surface-variant',
+        // Material assist chip used as a link: outlined, small corners.
+        chip: 'rounded-sm border border-outline-variant text-on-surface',
         text: 'text-primary',
         standard: 'text-on-surface-variant',
         // Connected button group item; selection is aria-pressed or aria-current.
