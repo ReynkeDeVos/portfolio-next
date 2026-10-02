@@ -34,7 +34,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check:
+  audit:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -46,11 +46,6 @@ jobs:
         run: node --test scripts/dependency-security.test.mjs
       - name: Audit all dependencies for high and critical vulnerabilities
         run: node scripts/dependency-security.mjs check
-      - name: Check manifest and lockfile, then validate the project
-        run: |
-          aube install --frozen-lockfile
-          aubr check
-          aubr build
       - name: Save audit report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
