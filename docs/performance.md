@@ -90,19 +90,26 @@ actually uses.
 
 ## Content validation
 
-`aube run content:check` validates the bilingual content shape with Zod and
-then checks the selected work against the project catalog: duplicate project
-IDs, IDs repeated within a group, IDs in both groups, unknown IDs and empty
-groups. It reports every problem at once. The check runs before `dev` starts
-and before `build`; there is no watcher, so restart the dev server after
-editing the selection. Both scripts live under `scripts/`, which keeps Zod
-and the validator out of the browser bundle.
+`src/content/schema.ts` declares the Content shape once. `portfolio.ts`
+satisfies its inferred type, so the editor flags misspelled keys, missing
+translations and unknown effort levels while writing. The page imports only
+that type, which keeps Zod out of the browser bundle.
 
-The page reads the selection through `src/content/selected-work.ts`. If a
-listed ID has no project, rendering throws an error naming the group and ID
+`aube run content:check` runs `validateContent` from `src/content/validate.ts`:
+the schema's value rules (non-empty text, URLs, kebab-case IDs, ISO dates) plus
+how the parts relate: unique IDs within every list, Selected work against the
+project catalog, a link for every build technology, no unused technology
+translation, at most one open-ended experience, and a decodable email address.
+It reports every problem at once. The check runs before `dev` starts and before
+`build`; there is no watcher, so restart the dev server after editing Content.
+
+The page reads Content through `contentFor(locale)` in `src/content/content.ts`,
+which hands every Section its text already localized and formatted. If a
+selected ID has no project, resolving throws an error naming the group and ID
 instead of silently leaving the project out. `aube run test` runs the native
-Node tests for both the read and validation interfaces; `aube run check`
-includes it.
+Node tests against small fixtures, plus two guards on the real Content: it is
+valid, and Selected work keeps the owner-approved order. `aube run check`
+includes them.
 
 ## Verification
 
@@ -125,8 +132,10 @@ real deployment measurements across the audience's regions.
 
 ## Language implementation
 
-The locale is represented by prerendered `/` and `/de` routes. TanStack Router
-links preserve the selected section in the URL hash. Typed local dictionaries
+Each Locale is a prerendered route, `/` and `/de/`; `src/lib/locale.ts` owns
+each Locale's path, tags, hreflang links and stored choice. The router writes trailing slashes, matching the static asset paths, so
+no internal link or hreflang URL hits Cloudflare's slash redirect. TanStack
+Router links preserve the open Section in the URL hash. Typed local dictionaries
 supply interface labels and bilingual content; Zod validates English and German
 content at build time. Native Intl formats dates. There is no separate i18n
 runtime or translation fetch, which is sufficient for two curated languages.

@@ -8,6 +8,8 @@ function getRouter() {
     defaultPreload: 'render',
     defaultPreloadStaleTime: Infinity,
     scrollRestoration: true,
+    // Matches the static asset paths, so links never hit Cloudflare's slash redirect.
+    trailingSlash: 'always',
   });
 }
 

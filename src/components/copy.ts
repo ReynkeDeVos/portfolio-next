@@ -1,16 +1,14 @@
-type Locale = 'en' | 'de';
+import { localeHead } from '../lib/locale.ts';
+import type { Locale } from '../lib/locale.ts';
 
-const sections = ['work', 'career', 'skills', 'workflow'] as const;
+type Years = Readonly<{ from: number; to: number | null }>;
 
-type Section = (typeof sections)[number];
+type CurrentRole = Readonly<{ role: string; organization: string; since: number }>;
 
-function isSection(value: string): value is Section {
-  return sections.some((section) => section === value);
+// "2014–2023", "2024", or "2025–present": an open end reads as the present.
+function years({ from, to }: Years, present: string) {
+  return to === from ? String(from) : `${from}–${to ?? present}`;
 }
-
-const localePaths = { en: '/', de: '/de' } as const;
-
-const siteOrigin = 'https://portfolio.renkebrixel.workers.dev';
 
 const en = {
   languageLabel: 'Language',
@@ -20,17 +18,16 @@ const en = {
   contactLabel: 'Contact',
   photoOpen: 'View larger portrait',
   photoHint: { action: 'click me 😊' },
-  photoTitle: 'Portrait of Renke Brixel',
   photoClose: 'Close photo',
   email: 'Email',
   copyAddress: 'Copy email address',
   addressCopied: 'Email address copied',
   strengthsLabel: 'Profile highlights',
-  technologyNames: { Networking: 'Networking', 'Matt Pocock skills': 'Matt Pocock skills' },
-  currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
+  currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
     role,
     ` at ${organization}, since ${since}`,
   ],
+  period: (span: Years) => years(span, 'present'),
   sectionsLabel: 'Portfolio sections',
   sectionNames: { work: 'Work', skills: 'Skills', workflow: 'Workflow', career: 'Career' },
   sectionHeadings: {
@@ -67,12 +64,10 @@ const en = {
     ],
     dismiss: 'Hide this note',
   },
-  present: 'present',
   meta: {
     title: 'Renke Brixel · Dev',
     description:
       'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
-    ogLocale: 'en_US',
   },
 };
 
@@ -87,17 +82,16 @@ const copy = {
     contactLabel: 'Kontakt',
     photoOpen: 'Porträt vergrößern',
     photoHint: { action: 'klick mich 😊' },
-    photoTitle: 'Porträt von Renke Brixel',
     photoClose: 'Foto schließen',
     email: 'E-Mail',
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
     strengthsLabel: 'Kurzprofil',
-    technologyNames: { Networking: 'Netzwerke', 'Matt Pocock skills': 'Matt Pococks Skills' },
-    currentRole: (role: string, organization: string, since: string): readonly [string, string] => [
+    currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
       role,
       ` bei ${organization}, seit ${since}`,
     ],
+    period: (span: Years) => years(span, 'heute'),
     sectionsLabel: 'Bereiche des Portfolios',
     sectionNames: {
       work: 'Projekte',
@@ -139,35 +133,17 @@ const copy = {
       ],
       dismiss: 'Hinweis ausblenden',
     },
-    present: 'heute',
     meta: {
       title: 'Renke Brixel · Dev',
       description:
         'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
-      ogLocale: 'de_DE',
     },
   },
 } satisfies Record<Locale, typeof en>;
 
-// Product and library names stay unchanged; generic labels follow the locale.
-function formatTechnology(name: string, locale: Locale) {
-  return Object.entries(copy[locale].technologyNames).find(([key]) => key === name)?.[1] ?? name;
-}
-
-// "2025-present" -> "2025–present", localized.
-function formatPeriod(period: string, locale: Locale) {
-  return period.replace('present', copy[locale].present).replace('-', '–');
-}
-
-function formatDate(isoDate: string, locale: Locale) {
-  return new Intl.DateTimeFormat(locale === 'de' ? 'de-DE' : 'en-US', {
-    dateStyle: 'long',
-    timeZone: 'UTC',
-  }).format(new Date(`${isoDate}T00:00:00Z`));
-}
-
 function pageHead(locale: Locale) {
   const { meta } = copy[locale];
+  const head = localeHead(locale);
 
   return {
     meta: [
@@ -176,29 +152,10 @@ function pageHead(locale: Locale) {
       { property: 'og:title', content: meta.title },
       { property: 'og:description', content: meta.description },
       { property: 'og:type', content: 'website' },
-      { property: 'og:locale', content: meta.ogLocale },
+      ...head.meta,
     ],
-    links: [
-      { rel: 'alternate', hrefLang: 'en', href: new URL(localePaths.en, siteOrigin).href },
-      { rel: 'alternate', hrefLang: 'de', href: new URL(localePaths.de, siteOrigin).href },
-      { rel: 'alternate', hrefLang: 'x-default', href: new URL(localePaths.en, siteOrigin).href },
-    ],
+    links: head.links,
   };
 }
 
-function localeFromPathname(pathname: string): Locale {
-  return pathname === '/de' || pathname.startsWith('/de/') ? 'de' : 'en';
-}
-
-export {
-  copy,
-  formatDate,
-  formatPeriod,
-  formatTechnology,
-  isSection,
-  localeFromPathname,
-  pageHead,
-  sections,
-};
-
-export type { Locale, Section };
+export { copy, pageHead };

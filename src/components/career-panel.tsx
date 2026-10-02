@@ -1,7 +1,7 @@
-import { portfolio } from '@/content/portfolio';
+import { contentFor } from '@/content/content';
+import type { Locale } from '@/lib/locale';
 
-import { copy, formatPeriod, formatTechnology } from './copy';
-import type { Locale } from './copy';
+import { copy } from './copy';
 import {
   CompactList,
   CompactRow,
@@ -18,43 +18,44 @@ import {
 
 function CareerPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
+  const { career, profile } = contentFor(locale);
 
   return (
     <div className='flex flex-col gap-10'>
       <h2 className='sr-only'>{t.sectionHeadings.career}</h2>
 
       <ItemList ordered>
-        {portfolio.experience.map((entry) => (
-          <Item key={`${entry.organization.en}-${entry.period}`} linked>
+        {career.experience.map((entry) => (
+          <Item key={entry.id} linked>
             <ItemHeader
-              title={entry.role[locale]}
+              title={entry.role}
               meta={
                 <>
                   <StretchedLink href={entry.url}>
-                    <span className='text-tertiary'>{entry.organization[locale]}</span>
+                    <span className='text-tertiary'>{entry.organization}</span>
                   </StretchedLink>
                   <span className='text-on-surface-variant tabular-nums'>
                     {' · '}
-                    {formatPeriod(entry.period, locale)}
+                    {t.period(entry.period)}
                   </span>
                 </>
               }
               end={<LinkArrow />}
             />
-            <ItemText>{entry.description[locale]}</ItemText>
+            <ItemText>{entry.description}</ItemText>
           </Item>
         ))}
       </ItemList>
 
       <Subsection id='teaching-heading' heading={t.teachingHeading}>
         <CompactList>
-          {portfolio.teaching.map((topic) => (
-            <CompactRow key={topic.en} label={topic[locale]}>
-              <TechList items={topic.technologies.map((name) => formatTechnology(name, locale))} />
+          {career.teaching.map((topic) => (
+            <CompactRow key={topic.id} label={topic.topic}>
+              <TechList items={topic.technologies} />
             </CompactRow>
           ))}
         </CompactList>
-        <ProfileLink href={portfolio.linkedin}>{t.moreOnLinkedIn}</ProfileLink>
+        <ProfileLink href={profile.linkedin}>{t.moreOnLinkedIn}</ProfileLink>
       </Subsection>
     </div>
   );

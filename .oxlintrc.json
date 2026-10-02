@@ -274,15 +274,15 @@
       }
     },
     {
-      // Build scripts and their tests run in Node.
-      "files": ["scripts/**"],
+      // Build scripts and tests run in Node.
+      "files": ["scripts/**", "**/*.test.ts"],
       "rules": {
         "import/no-nodejs-modules": "off"
       }
     },
     {
       // Zod schemas nest by design; extracting each level would hide the shape.
-      "files": ["scripts/validate-content.ts"],
+      "files": ["src/content/schema.ts"],
       "rules": {
         "unicorn/max-nested-calls": "off"
       }

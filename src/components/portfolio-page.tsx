@@ -1,32 +1,19 @@
 import { useLayoutEffect, useState } from 'react';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import type { Locale } from '@/lib/locale';
+import { defaultSection, isSection, sectionHash, sections } from '@/lib/section';
+import type { Section } from '@/lib/section';
 
-import { CareerPanel } from './career-panel';
-import { copy, isSection, sections } from './copy';
-import type { Locale, Section } from './copy';
+import { copy } from './copy';
 import { EngineNote } from './engine-note';
 import { Identity } from './identity';
-import { SkillsPanel } from './skills-panel';
-import { WorkPanel } from './work-panel';
-import { WorkflowPanel } from './workflow-panel';
-
-const panels = {
-  work: WorkPanel,
-  skills: SkillsPanel,
-  workflow: WorkflowPanel,
-  career: CareerPanel,
-} satisfies Record<Section, (props: { locale: Locale }) => ReactNode>;
-
-// WAI-ARIA tabs: a panel is a Tab stop only when its content does not start
-// with a focusable element. Work and Career open with a whole-item link, so
-// Tab moves from the tab list straight to it, without a ring around the panel.
-const panelsStartingWithLink = new Set<Section>(['work', 'career']);
+import { sectionPanels } from './section-panels';
 
 function PortfolioPage({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const [section, setSection] = useState<Section>('work');
+  const [section, setSection] = useState<Section>(defaultSection);
   const [ticks, setTicks] = useState(0);
   const [animateSelection, setAnimateSelection] = useState(false);
 
@@ -36,7 +23,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
     const sync = () => {
       const hash = globalThis.location.hash.slice(1);
       setAnimateSelection(false);
-      setSection(isSection(hash) ? hash : 'work');
+      setSection(isSection(hash) ? hash : defaultSection);
     };
 
     sync();
@@ -57,10 +44,11 @@ function PortfolioPage({ locale }: { locale: Locale }) {
     setSection(value);
     setTicks((count) => count + (sections.indexOf(value) > sections.indexOf(section) ? 1 : -1));
     const { pathname, search } = globalThis.location;
+    const hash = sectionHash(value);
     globalThis.history.replaceState(
       globalThis.history.state,
       '',
-      value === 'work' ? `${pathname}${search}` : `#${value}`,
+      hash === undefined ? `${pathname}${search}` : `#${hash}`,
     );
   }
 
@@ -90,7 +78,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
               ))}
             </TabsList>
             {sections.map((value) => {
-              const Panel = panels[value];
+              const { Panel, startsWithLink } = sectionPanels[value];
 
               return (
                 // Every panel is prerendered; inactive ones are only hidden.
@@ -98,7 +86,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
                   key={value}
                   value={value}
                   forceMount
-                  tabIndex={panelsStartingWithLink.has(value) ? -1 : 0}
+                  tabIndex={startsWithLink ? -1 : 0}
                 >
                   <Panel locale={locale} />
                 </TabsContent>
