@@ -292,10 +292,10 @@ export const portfolio = {
       {
         id: 'tooling',
         topic: { en: 'Code quality', de: 'Codequalität' },
-        technologies: ['TypeScript 7', 'Oxlint', 'Oxfmt'],
+        technologies: ['TypeScript 7', 'Oxlint', 'Oxfmt', 'Fallow'],
         description: {
-          en: 'TypeScript 7’s compiler is ported to Go and about 10x faster; Oxlint uses it for type-aware rules. Oxlint and Oxfmt come from VoidZero and replace ESLint and Prettier with Rust-based tools; Oxlint also runs anti-slop rules.',
-          de: 'Der Compiler von TypeScript 7 ist nach Go portiert und etwa zehnmal schneller; Oxlint nutzt ihn für typbasierte Regeln. Oxlint und Oxfmt stammen von VoidZero und ersetzen ESLint und Prettier durch Rust-basierte Werkzeuge; Oxlint prüft zusätzlich Anti-Slop-Regeln.',
+          en: 'TypeScript 7’s compiler is ported to Go and about 10x faster; Oxlint uses it for type-aware rules. Oxlint and Oxfmt come from VoidZero and replace ESLint and Prettier with Rust-based tools; Oxlint also runs anti-slop rules. Fallow finds unused files, exports and dependencies as well as duplicated code.',
+          de: 'Der Compiler von TypeScript 7 ist nach Go portiert und etwa zehnmal schneller; Oxlint nutzt ihn für typbasierte Regeln. Oxlint und Oxfmt stammen von VoidZero und ersetzen ESLint und Prettier durch Rust-basierte Werkzeuge; Oxlint prüft zusätzlich Anti-Slop-Regeln. Fallow findet ungenutzte Dateien, Exporte und Abhängigkeiten sowie doppelten Code.',
         },
       },
       {
@@ -333,6 +333,7 @@ export const portfolio = {
       { name: 'TypeScript 7', url: 'https://www.typescriptlang.org/' },
       { name: 'Oxlint', url: 'https://oxc.rs/' },
       { name: 'Oxfmt', url: 'https://oxc.rs/' },
+      { name: 'Fallow', url: 'https://fallow.tools/' },
       { name: 'Material 3 Expressive', url: 'https://m3.material.io/' },
       { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
       { name: 'Google Sans Flex', url: 'https://fonts.google.com/specimen/Google+Sans+Flex' },
