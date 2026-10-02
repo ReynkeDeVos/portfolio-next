@@ -41,6 +41,8 @@ colors:
   outline-variant-dark: oklch(40% 0.022 60)
   scrim-dark: oklch(10% 0.01 60 / 0.7)
   tab-track: light-dark(var(--md-sys-color-surface-container-low), var(--md-sys-color-surface-container-high))
+  surface-group: light-dark(var(--md-sys-color-surface-container-low), var(--md-sys-color-surface-container))
+  surface-card: light-dark(var(--md-sys-color-surface-container), var(--md-sys-color-surface-container-low))
 typography:
   headline-lg:
     fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
@@ -54,6 +56,12 @@ typography:
     fontWeight: 650
     lineHeight: 2.25rem
     letterSpacing: -0.015em
+  headline-sm:
+    fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
+    fontSize: 1.5rem
+    fontWeight: 600
+    lineHeight: 2rem
+    letterSpacing: -0.01em
   title-lg:
     fontFamily: "'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: 1.375rem
@@ -147,8 +155,8 @@ components:
     padding: '{spacing.1}'
     height: 48px
   strength-chip:
-    backgroundColor: '{colors.secondary-container}'
-    textColor: '{colors.on-secondary-container}'
+    backgroundColor: '{colors.surface-container-highest}'
+    textColor: '{colors.on-surface}'
     typography: '{typography.label-lg}'
     rounded: '{rounded.sm}'
     padding: 0 12px
@@ -160,17 +168,17 @@ components:
     rounded: '{rounded.xs}'
     padding: 2px 8px
   identity-panel:
-    backgroundColor: '{colors.surface-container-low}'
+    backgroundColor: '{colors.surface-group}'
     textColor: '{colors.on-surface}'
     rounded: '{rounded.xl-inc}'
     padding: '{spacing.5}'
   project-item:
-    backgroundColor: '{colors.surface-container-low}'
+    backgroundColor: '{colors.surface-group}'
     textColor: '{colors.on-surface}'
     rounded: '{rounded.xs}'
     padding: 20px
   section-card:
-    backgroundColor: '{colors.surface-container}'
+    backgroundColor: '{colors.surface-card}'
     textColor: '{colors.on-surface}'
     rounded: '{rounded.lg-inc}'
     padding: '{spacing.5}'
@@ -182,6 +190,12 @@ components:
     textColor: '{colors.on-surface}'
     rounded: '{rounded.xl}'
     padding: '{spacing.4}'
+  email-reveal:
+    backgroundColor: '{colors.surface-container-high}'
+    textColor: '{colors.on-surface}'
+    typography: '{typography.body-md}'
+    rounded: '{rounded.full}'
+    padding: 4px 4px 4px 16px
 ---
 
 # Design System: Renke Brixel Portfolio
@@ -206,16 +220,16 @@ This system describes the private, undeployed draft. Historical career material 
 
 ## Colors
 
-The role palette uses sage for action and keyboard focus, caramel for selected controls, copper for work categories and selection, and a warm sand or charcoal surface ladder. Descriptive names are documentation labels. The frontmatter keeps the source OKLCH strings, including alpha on scrims. Unsuffixed primitives describe light mode; matching `-dark` primitives record the dark overrides. Runtime components use the unsuffixed root CSS variables, whose values change together.
+The role palette uses sage for action and keyboard focus, caramel for selected and pressable controls, copper for work categories and selection, and a warm sand or charcoal surface ladder. Descriptive names are documentation labels. The frontmatter keeps the source OKLCH strings, including alpha on scrims. Unsuffixed primitives describe light mode; matching `-dark` primitives record the dark overrides. Runtime components use the unsuffixed root CSS variables, whose values change together.
 
 ### Primary
 
 - **Sage action:** `primary` and `on-primary` form the Email button and keyboard rings. Primary also colors the developer identity, caret and native accents. Links follow the Links component rules.
-- **Sage tonal:** `primary-container` and `on-primary-container` support the portrait fallback and thinking-level chips.
+- **Sage tonal:** `primary-container` and `on-primary-container` support the portrait fallback and the portrait hint.
 
 ### Secondary
 
-- **Caramel tonal:** `secondary-container` and `on-secondary-container` fill contact alternatives, strengths, the selected tab indicator and selected language/theme controls.
+- **Caramel tonal:** `secondary-container` and `on-secondary-container` fill contact alternatives, standalone profile links, the selected tab indicator and selected language/theme controls. Caramel always means pressable or selected; noninteractive labels stay neutral.
 
 ### Tertiary
 
@@ -225,7 +239,7 @@ The role palette uses sage for action and keyboard focus, caramel for selected c
 
 - **Sand / warm charcoal:** `surface` is the document ground and `on-surface` is primary reading text.
 - **Warm muted text:** `on-surface-variant` supports descriptions, dates, secondary icons and unselected controls.
-- **Tonal containers:** `surface-container-low` carries identity and every connected list. `surface-container` is the larger portrait's loading ground. `surface-container-high` carries grouped controls and the dialog. `surface-container-highest` carries technology tags.
+- **Tonal containers:** `surface-group` carries identity and every connected list; `surface-card` carries cards, compact lists, the AI table and the build disclosure. The light page sits between the container tones, so the two roles swap low and container between themes to keep primary groups one step above cards in both. `surface-container` is the larger portrait's loading ground. `surface-container-high` carries grouped controls, the revealed email address and the dialog. `surface-container-highest` carries technology tags and strength chips.
 - **Divisions:** `outline-variant` is the border and divider role. `outline` is the scrollbar thumb role.
 - **Scrim:** `scrim` dims the page behind the photo viewer.
 - **Tab track:** `tab-track` resolves to the low container in light mode and the high container in dark mode, preserving separation from the page.
@@ -243,7 +257,8 @@ Each face loads only the Latin weight-axis WOFF2 from its `@fontsource-variable`
 ### Hierarchy
 
 - **Headline:** The name uses `headline-md` on narrow screens and `headline-lg` from the small breakpoint, with emphasized weight (650). Their sizes, line heights and tracking are normative in frontmatter.
-- **Title:** `title-lg` heads every connected-list item. `title-md` heads cards, subsections and the developer identity. The identity uses medium (500); group headings use semibold (600).
+- **Headline:** `headline-sm` with semibold (600) heads every subsection (more projects, teaching topics, AI workflow, tools, build explanation), so it reads above both list-item and card titles.
+- **Title:** `title-lg` heads every connected-list item. `title-md` heads cards and the developer identity; `title-sm` labels compact-list rows. The identity uses medium (500); group headings use semibold (600).
 - **Body:** `body-lg` introduces the owner and carries every list item's main text; `body-md` carries card text and featured-project details; `body-sm` carries card details. Build and AI tool names emphasize `body-md` with medium (500).
 - **Label:** `label-lg` serves buttons, tabs, strengths, list-item accent lines (project categories, employers) and career periods. `label-md` serves technology tags, card accent lines and timestamps. Selection can use semibold (600), while passive timestamps inherit regular weight (400).
 - **Reading width:** List-item text stops at 64ch; featured-project details at 72ch; the AI introduction at 68ch. These are component constraints rather than a page-wide measure.
@@ -254,15 +269,15 @@ Each face loads only the Latin weight-axis WOFF2 from its `@fontsource-variable`
 
 The main container is centered with a maximum width (1200px), full available width and a minimum document height of one dynamic viewport. Narrow screens stack identity before content. The base page uses horizontal and top padding (16px), a column gap (16px) and bottom padding (64px). Small screens increase horizontal and top padding to (24px).
 
-At the large breakpoint (64rem), the page becomes two columns with a left identity track capped at (23rem), a flexible content track and a gap (24px). At the extra-large breakpoint (80rem), the identity track grows to (25rem). The identity remains aligned to the start of the content column. Its padding steps from (20px) to (24px) to (28px). Reused container padding is (20px), becoming (24px) from small screens.
+At the large breakpoint (64rem), the page becomes two columns with a left identity track capped at (24rem), a flexible content track and a gap (24px). At the extra-large breakpoint (80rem), the identity track grows to (28rem). The identity remains aligned to the start of the content column and sticks (24px) below the viewport top while the content scrolls, when the viewport is at least (46rem) tall. Its padding steps from (20px) to (24px) to (28px). Reused container padding is (20px), becoming (24px) from small screens.
 
 Related items use compact gaps: connected lists (4px), technology tags (6px), controls and strengths (8px), subsection groups (12px), major panel blocks (16px or 24px). Spacing follows the actual Tailwind quarter-rem rhythm recorded in frontmatter, not an invented new scale.
 
-Work, Career, Skills and Workflow are the section order, with Work initially open. All panels are prerendered and inactive ones are hidden. The URL hash preserves the selected panel across reloads and language navigation. Controls remain inside the identity panel. Every panel follows the Work grammar: a connected list of large items first (featured projects, experience, skill groups, interests), then titled subsections of two-column cards from medium screens (more projects, teaching topics, AI workflow, the build explanation), then an optional profile link. Shared parts live in `src/components/section-parts.tsx`; panels compose them rather than restyling.
+Work, Career, Skills and Workflow are the section order, with Work initially open. All panels are prerendered and inactive ones are hidden. The URL hash preserves the selected panel across reloads and language navigation. Controls remain inside the identity panel. Every panel follows the Work grammar: a connected list of large items first (featured projects, experience, skill groups, interests), then titled subsections, then an optional profile link. Subsections use the form that fits their content: two-column cards from medium screens (more projects, AI tools), a compact list of label and tags in one card surface (teaching topics), a dated table (AI model recommendations) or a closed disclosure (the build explanation). A last card without a partner spans both columns. Panels separate these blocks by (40px). Shared parts live in `src/components/section-parts.tsx`; panels compose them rather than restyling.
 
 ## Elevation & Depth
 
-The system is flat and uses tonal layering, borders and a translucent scrim. No component applies box shadows. Surface-container-low separates primary content from the document ground; higher containers distinguish small controls, technology tags and the portrait dialog. Cards (more projects, teaching topics, AI workflow, build explanation) use opaque surface-container fills, distinct from the page ground and the low-surface connected lists. A focused stretched project link raises its item above adjacent items so the green outline remains visible; this is stacking, not shadow elevation.
+The system is flat and uses tonal layering, borders and a translucent scrim. No component applies box shadows. `surface-group` separates primary content from the document ground; higher containers distinguish small controls, technology tags and the portrait dialog. Cards, compact lists, the AI table and the disclosure use `surface-card`, one step below primary groups in both themes. A focused stretched project link raises its item above adjacent items so the green outline remains visible; this is stacking, not shadow elevation.
 
 **The Tonal Depth Rule.** Use surface roles and outline-variant divisions for depth. The current portfolio has no box shadows.
 
@@ -282,11 +297,11 @@ Hover shows a current-color state layer (8% opacity), keyboard focus a state lay
 
 ### Chips
 
-Strength chips are noninteractive, caramel-toned, medium-weight label-large with `sm` corners, height (32px) and horizontal padding (12px). Technology tags are noninteractive, use the highest surface with muted text, label-medium, `xs` corners and padding (2px 8px). Thinking-level chips use primary-container/on-primary-container, label-medium and height (24px).
+Strength chips are noninteractive, use the highest surface with on-surface text, medium-weight label-large with `sm` corners, height (32px) and horizontal padding (12px). Technology tags are noninteractive, use the highest surface with muted text, label-medium, `xs` corners and padding (2px 8px). Neither uses caramel, so labels never resemble the tonal buttons beside them.
 
 ### Cards / Containers
 
-Primary containers use the low surface with enlarged corners and padding (20px or 24px). Featured work is a connected list: individual items have small corners, while the first and last items complete the large outer silhouette. Supporting projects use an outline-variant border and `lg-inc` corners.
+Primary containers use `surface-group` with enlarged corners and padding (20px or 24px). Featured work is a connected list: individual items have small corners, while the first and last items complete the large outer silhouette. Supporting projects use an outline-variant border and `lg-inc` corners.
 
 Project names are semantic links whose hit area stretches across the item. Hover adds an on-surface state layer (6%). The outgoing arrow stays stationary. Keyboard focus draws the shared ring around the whole item. Descriptive text and technologies remain readable during every state.
 
@@ -296,23 +311,31 @@ Tabs form a connected pill track, height (48px), with padding (4px), equal-width
 
 ### Keyboard focus
 
-Every interactive element uses the primary green outline (3px). The default offset is (2px); connected tabs and control segments use an inset offset (-3px), tab panels use (4px), and the portrait trigger uses (8px) to clear the expanded frame. A noninheriting registered CSS property keeps each offset local. Rings appear through `:focus-visible`, retaining the mouse presentation. Stretched project links place their ring on the containing item. The owner explicitly requested removal of the skip-to-content link, and the current draft omits it.
+Every interactive element uses the primary green outline (3px). The default offset is (2px); connected tabs and control segments use an inset offset (-3px), tab panels use (4px) around `xl-inc` corners that match their first item, and the portrait trigger uses (8px) to clear the expanded frame. A noninheriting registered CSS property keeps each offset local. Rings appear through `:focus-visible`, retaining the mouse presentation. Stretched project links place their ring on the containing item. The owner explicitly requested removal of the skip-to-content link, and the current draft omits it.
 
 ### Portrait and photo viewer
 
-The owner-selected AVIF thumbnail is an ordinary crop from DSC02990.jpg, mirrored to face right. The larger portrait is an ordinary crop from DSC03095.jpg; both retain their original brick backgrounds and have no AI editing. The thumbnail size steps from (96px) to (128px) to (144px).
+The owner-selected AVIF thumbnail is an ordinary crop from DSC02990.jpg, mirrored to face right. The larger portrait is an ordinary crop from DSC03095.jpg; both retain their original brick backgrounds and have no AI editing. The thumbnail size steps from (96px) to (128px), returns to (112px) in the narrower two-column range so the name stays on one line, and reaches (144px) from the extra-large breakpoint.
 
 Hover and keyboard focus expand the scalloped frame to (1.08), while coordinated image scaling keeps the visible photograph fixed: overscan starts at (1.09) and changes to (1.0093) as the frame expands. Rotation and expansion use the spatial curve over (500ms). Hover or focus warms the larger image cache without delaying opening. A sage hint appears inside the lower rim: “click me 😊” or “klick mich 😊”. The photo and hint remain upright. Hover does not rotate the frame; section changes retain the existing one-lobe rotation.
 
-The viewer uses a scrim and a high-surface dialog with extra-large corners. A tonal close button sits on its own top row, receives initial focus and remains distinct from the image. The visible title is omitted; a screen-reader title remains. Radix supplies the focus trap, Escape/outside dismissal and focus return. The image fits both viewport axes with a maximum width (960px), retains its full crop and uses rounded-lg corners. Opening fades over (150ms); closing unmounts immediately.
+The viewer uses a scrim and a high-surface dialog with extra-large corners, increased to `xl-inc` with the larger padding so the image corners stay concentric (`md` on narrow screens, `sm` from small). A tonal close button sits on its own top row, receives initial focus and remains distinct from the image. The visible title is omitted; a screen-reader title remains. Radix supplies the focus trap, Escape/outside dismissal and focus return. The image fits both viewport axes with a maximum width (960px), retains its full crop. Opening fades over (150ms); closing unmounts immediately.
 
 ### Links
 
 Every link is a Material component with a state layer and a stationary diagonal ArrowUpRight; text is never a bare colored link. An item with one destination (projects, career stations) is the link as a whole: its name stretches over the item, a (20px) arrow sits top right, hover adds an on-surface state layer (8%) and keyboard focus rings the item. Several destinations inside one card (AI tools, build technologies) are link chips: the `chip` button variant, outlined, `sm` corners, height (32px), label-large in on-surface. A standalone link ending a section (GitHub, LinkedIn) is a tonal button, identical to the identity's contact buttons. Copper tertiary text marks categories and employers, never a link. Non-interactive technology tags stay flat, borderless and arrowless so they never read as links.
 
+### Email contact
+
+The Email button decodes the address only when pressed. It opens the mail app and also reveals the address below the contact buttons in a full-shape, high-surface row: body-medium text that wraps anywhere and selects as a whole, followed by a standard small icon button that copies it. A copied state swaps the copy icon for a sage check and announces the result through a polite live region. The address never appears in the rendered HTML.
+
+### Compact list, table and disclosure
+
+Inventories that would otherwise become a wall of identical cards use denser forms on the card surface. The teaching topics are a compact list: one `lg-inc` card with outline-variant dividers, each row a `title-sm` label beside its technology tags from medium screens and above them on narrow ones. The AI model recommendations are a dated table on the same surface with label-medium column headings, a task row heading with its note in body-small, and body-medium model and thinking-level cells. The build explanation is a native disclosure, closed by default: its summary is a `lg-inc` card row with the subsection heading, the topic names in muted body-medium and a chevron that turns over (300ms) with the spatial curve. It carries the shared state layer and focus ring, and the content opens instantly.
+
 ### Build explanation
 
-The bilingual "How this portfolio is built" subsection is a grid of cards, each with the topic as title, the linked technologies and the reason. Its technologies, like the AI tools, are link chips. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
+The bilingual "How this portfolio is built" disclosure holds a grid of cards, each with the topic as title, the linked technologies and the reason. Its technologies, like the AI tools, are link chips. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
 
 All feedback is decorative. Reduced-motion preferences set transition and animation duration to zero throughout the document; content never depends on finishing an effect. Exact easing and state snippets live in the v2 sidecar because the frontmatter schema has no motion or focus fields. Sidecar tonal ramps are synthesized dark-to-light preview metadata, except the tab-track strip, which uses existing surface ladder values; these strips do not add shipped palette tokens. Component previews embed the actual AVIF media and expand utility styles into local CSS. Navigation and dialog previews show the implemented surfaces and states; runtime selection, image opening and focus trapping remain app behavior.
 

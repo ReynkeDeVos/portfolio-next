@@ -35,7 +35,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
   const { featured, supporting } = selectedWork.forLocale(locale);
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-10'>
       <h2 className='sr-only'>{t.sectionHeadings.work}</h2>
 
       <ItemList ordered>

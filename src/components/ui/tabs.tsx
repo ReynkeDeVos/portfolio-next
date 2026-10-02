@@ -56,7 +56,10 @@ function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPr
   return (
     <TabsPrimitive.Content
       data-slot='tabs-content'
-      className={cn('rounded-lg [--focus-ring-offset:4px] data-[state=inactive]:hidden', className)}
+      className={cn(
+        'rounded-xl-inc [--focus-ring-offset:4px] data-[state=inactive]:hidden',
+        className,
+      )}
       {...props}
     />
   );

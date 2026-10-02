@@ -1,4 +1,5 @@
-import { ArrowUpRight, Briefcase, Mail } from 'lucide-react';
+import { ArrowUpRight, Briefcase, Check, Copy, Mail } from 'lucide-react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { portfolio } from '@/content/portfolio';
@@ -23,7 +24,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
   return (
     <section
       aria-labelledby='identity-name'
-      className='rounded-xl-inc bg-surface-container-low flex flex-col gap-5 p-5 sm:p-6 lg:self-start lg:p-7'
+      className='rounded-xl-inc bg-surface-group flex flex-col gap-5 p-5 sm:p-6 lg:top-6 lg:self-start lg:p-7 lg:[@media(min-height:46rem)]:sticky'
     >
       <div className='flex items-center gap-4 sm:gap-5'>
         <Portrait locale={locale} ticks={ticks} />
@@ -47,7 +48,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
         {portfolio.coreStrengths.map((strength) => (
           <li
             key={strength.en}
-            className='bg-secondary-container type-label-lg text-on-secondary-container inline-flex h-8 items-center rounded-sm px-3 font-medium'
+            className='bg-surface-container-highest type-label-lg text-on-surface inline-flex h-8 items-center rounded-sm px-3 font-medium'
           >
             {strength[locale]}
           </li>
@@ -64,13 +65,41 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
         </p>
       ) : null}
 
+      <Contact locale={locale} />
+
+      <SiteControls locale={locale} section={section} />
+    </section>
+  );
+}
+
+// The address stays out of the HTML until Email is pressed. Pressing it opens
+// the mail app and also shows the address, so a missing mail app is no dead end.
+function Contact({ locale }: { locale: Locale }) {
+  const t = copy[locale];
+  const [address, setAddress] = useState<string>();
+  const [copied, setCopied] = useState(false);
+
+  // The address stays visible and selectable if the clipboard is unavailable.
+  async function copyAddress(value: string) {
+    try {
+      await globalThis.navigator.clipboard.writeText(value);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  return (
+    <div className='flex flex-col gap-3'>
       <ul aria-label={t.contactLabel} className='flex flex-wrap gap-2'>
         <li>
           <Button
             onClick={() => {
+              const decoded = globalThis.atob(portfolio.emailEncoded);
+              setAddress(decoded);
               // Reviewed: the target is a mailto: link to the build-validated address.
               // fallow-ignore-next-line security-sink
-              globalThis.location.href = `mailto:${globalThis.atob(portfolio.emailEncoded)}`;
+              globalThis.location.href = `mailto:${decoded}`;
             }}
           >
             <Mail aria-hidden />
@@ -95,8 +124,28 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
         </li>
       </ul>
 
-      <SiteControls locale={locale} section={section} />
-    </section>
+      {address ? (
+        <p className='bg-surface-container-high flex items-center gap-2 rounded-full py-1 ps-4 pe-1'>
+          <span className='type-body-md text-on-surface min-w-0 flex-1 break-all select-all'>
+            {address}
+          </span>
+          <Button
+            variant='standard'
+            size='icon-sm'
+            aria-label={t.copyAddress}
+            title={t.copyAddress}
+            onClick={() => {
+              void copyAddress(address);
+            }}
+          >
+            {copied ? <Check aria-hidden className='text-primary' /> : <Copy aria-hidden />}
+          </Button>
+        </p>
+      ) : null}
+      <p aria-live='polite' className='sr-only'>
+        {copied ? t.addressCopied : ''}
+      </p>
+    </div>
   );
 }
 

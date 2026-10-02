@@ -3,9 +3,8 @@ import { portfolio } from '@/content/portfolio';
 import { copy, formatPeriod, formatTechnology } from './copy';
 import type { Locale } from './copy';
 import {
-  Card,
-  CardGrid,
-  CardHeader,
+  CompactList,
+  CompactRow,
   Item,
   ItemHeader,
   ItemList,
@@ -21,7 +20,7 @@ function CareerPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-10'>
       <h2 className='sr-only'>{t.sectionHeadings.career}</h2>
 
       <ItemList ordered>
@@ -48,17 +47,13 @@ function CareerPanel({ locale }: { locale: Locale }) {
       </ItemList>
 
       <Subsection id='teaching-heading' heading={t.teachingHeading}>
-        <CardGrid>
+        <CompactList>
           {portfolio.teaching.map((topic) => (
-            <Card key={topic.en}>
-              <CardHeader title={topic[locale]} />
-              <TechList
-                items={topic.technologies.map((name) => formatTechnology(name, locale))}
-                className='mt-3'
-              />
-            </Card>
+            <CompactRow key={topic.en} label={topic[locale]}>
+              <TechList items={topic.technologies.map((name) => formatTechnology(name, locale))} />
+            </CompactRow>
           ))}
-        </CardGrid>
+        </CompactList>
         <ProfileLink href={portfolio.linkedin}>{t.moreOnLinkedIn}</ProfileLink>
       </Subsection>
     </div>
