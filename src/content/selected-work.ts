@@ -1,4 +1,4 @@
-import type { Locale } from '../components/copy.ts';
+import type { Locale } from '../lib/locale.ts';
 import { portfolio } from './portfolio.ts';
 
 type LocalizedText = Readonly<Record<Locale, string>>;

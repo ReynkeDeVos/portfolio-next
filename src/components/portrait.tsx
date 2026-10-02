@@ -5,9 +5,9 @@ import { flushSync } from 'react-dom';
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { portfolio } from '@/content/portfolio';
+import type { Locale } from '@/lib/locale';
 
 import { copy } from './copy';
-import type { Locale } from './copy';
 
 const lobes = 12;
 

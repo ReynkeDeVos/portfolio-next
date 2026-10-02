@@ -1,7 +1,7 @@
 import { portfolio } from '@/content/portfolio';
+import type { Locale } from '@/lib/locale';
 
 import { copy, formatTechnology } from './copy';
-import type { Locale } from './copy';
 import { Item, ItemHeader, ItemList, ItemText, TechList } from './section-parts';
 
 function SkillsPanel({ locale }: { locale: Locale }) {

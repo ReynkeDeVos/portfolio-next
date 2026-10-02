@@ -1,9 +1,9 @@
 import { portfolio } from '@/content/portfolio';
 import { selectedWork } from '@/content/selected-work';
 import type { SelectedProject } from '@/content/selected-work';
+import type { Locale } from '@/lib/locale';
 
 import { copy } from './copy';
-import type { Locale } from './copy';
 import {
   Card,
   CardDetails,

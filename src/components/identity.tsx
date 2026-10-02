@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { portfolio } from '@/content/portfolio';
+import type { Locale } from '@/lib/locale';
+import type { Section } from '@/lib/section';
 
 import { copy } from './copy';
-import type { Locale, Section } from './copy';
 import { Portrait } from './portrait';
 import { SiteControls } from './site-controls';
 

@@ -2,12 +2,14 @@ import { Link } from '@tanstack/react-router';
 import { Monitor, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { rememberLocale } from '@/lib/locale';
+import { localePath, locales, rememberLocale } from '@/lib/locale';
+import type { Locale } from '@/lib/locale';
+import { sectionHash } from '@/lib/section';
+import type { Section } from '@/lib/section';
 import { setTheme, useThemePreference } from '@/lib/theme';
 import type { ThemePreference } from '@/lib/theme';
 
 import { copy } from './copy';
-import type { Locale, Section } from './copy';
 
 const themeIcons = { system: Monitor, light: Sun, dark: Moon } as const;
 
@@ -17,8 +19,8 @@ const themeOrder: ThemePreference[] = ['system', 'light', 'dark'];
 function SiteControls({ locale, section }: { locale: Locale; section: Section }) {
   const t = copy[locale];
   const theme = useThemePreference();
-  // Preserve the open section across languages; the default needs no hash.
-  const hash = section === 'work' ? undefined : section;
+  // Preserve the open Section across Locales.
+  const hash = sectionHash(section);
 
   return (
     <div className='border-outline-variant flex flex-wrap items-center justify-between gap-2 border-t pt-4'>
@@ -26,10 +28,10 @@ function SiteControls({ locale, section }: { locale: Locale; section: Section })
         aria-label={t.languageLabel}
         className='bg-surface-container-high flex items-center gap-0.5 rounded-full p-1'
       >
-        {(['en', 'de'] as const).map((target) => (
+        {locales.map((target) => (
           <Button key={target} asChild variant='segment' size='sm'>
             <Link
-              to={target === 'de' ? '/de' : '/'}
+              to={localePath(target)}
               hash={hash}
               resetScroll={false}
               hashScrollIntoView={false}

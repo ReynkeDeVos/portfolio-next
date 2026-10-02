@@ -1,6 +1,8 @@
 import { Link, useRouterState } from '@tanstack/react-router';
 
-import { copy, localeFromPathname } from './copy';
+import { localeFromPathname, localePath } from '@/lib/locale';
+
+import { copy } from './copy';
 import { NotFoundAnimation } from './not-found-animation';
 import { Button } from './ui/button';
 
@@ -20,7 +22,7 @@ function NotFound() {
         <h1 className='type-headline-md text-on-surface'>{t.heading}</h1>
         <p className='type-body-lg text-on-surface-variant max-w-[30ch]'>{t.description}</p>
         <Button asChild className='mt-2'>
-          <Link to={locale === 'de' ? '/de' : '/'}>{t.back}</Link>
+          <Link to={localePath(locale)}>{t.back}</Link>
         </Button>
       </main>
     </>

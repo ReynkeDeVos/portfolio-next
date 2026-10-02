@@ -1,7 +1,7 @@
 import { portfolio } from '@/content/portfolio';
+import type { Locale } from '@/lib/locale';
 
 import { copy, formatDate } from './copy';
-import type { Locale } from './copy';
 import {
   Card,
   CardGrid,

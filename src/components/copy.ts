@@ -1,16 +1,5 @@
-type Locale = 'en' | 'de';
-
-const sections = ['work', 'career', 'skills', 'workflow'] as const;
-
-type Section = (typeof sections)[number];
-
-function isSection(value: string): value is Section {
-  return sections.some((section) => section === value);
-}
-
-const localePaths = { en: '/', de: '/de' } as const;
-
-const siteOrigin = 'https://portfolio.renkebrixel.workers.dev';
+import { intlLocale, localeHead } from '@/lib/locale';
+import type { Locale } from '@/lib/locale';
 
 const en = {
   languageLabel: 'Language',
@@ -72,7 +61,6 @@ const en = {
     title: 'Renke Brixel · Dev',
     description:
       'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
-    ogLocale: 'en_US',
   },
 };
 
@@ -144,7 +132,6 @@ const copy = {
       title: 'Renke Brixel · Dev',
       description:
         'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
-      ogLocale: 'de_DE',
     },
   },
 } satisfies Record<Locale, typeof en>;
@@ -160,7 +147,7 @@ function formatPeriod(period: string, locale: Locale) {
 }
 
 function formatDate(isoDate: string, locale: Locale) {
-  return new Intl.DateTimeFormat(locale === 'de' ? 'de-DE' : 'en-US', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'long',
     timeZone: 'UTC',
   }).format(new Date(`${isoDate}T00:00:00Z`));
@@ -168,6 +155,7 @@ function formatDate(isoDate: string, locale: Locale) {
 
 function pageHead(locale: Locale) {
   const { meta } = copy[locale];
+  const head = localeHead(locale);
 
   return {
     meta: [
@@ -176,29 +164,10 @@ function pageHead(locale: Locale) {
       { property: 'og:title', content: meta.title },
       { property: 'og:description', content: meta.description },
       { property: 'og:type', content: 'website' },
-      { property: 'og:locale', content: meta.ogLocale },
+      ...head.meta,
     ],
-    links: [
-      { rel: 'alternate', hrefLang: 'en', href: new URL(localePaths.en, siteOrigin).href },
-      { rel: 'alternate', hrefLang: 'de', href: new URL(localePaths.de, siteOrigin).href },
-      { rel: 'alternate', hrefLang: 'x-default', href: new URL(localePaths.en, siteOrigin).href },
-    ],
+    links: head.links,
   };
 }
 
-function localeFromPathname(pathname: string): Locale {
-  return pathname === '/de' || pathname.startsWith('/de/') ? 'de' : 'en';
-}
-
-export {
-  copy,
-  formatDate,
-  formatPeriod,
-  formatTechnology,
-  isSection,
-  localeFromPathname,
-  pageHead,
-  sections,
-};
-
-export type { Locale, Section };
+export { copy, formatDate, formatPeriod, formatTechnology, pageHead };

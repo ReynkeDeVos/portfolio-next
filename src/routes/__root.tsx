@@ -8,10 +8,9 @@ import {
   useRouterState,
 } from '@tanstack/react-router';
 
-import { localeFromPathname } from '@/components/copy';
 import { NotFound } from '@/components/not-found';
 import { engineScript } from '@/lib/engine';
-import { localeScript } from '@/lib/locale';
+import { localeFromPathname, localeScript } from '@/lib/locale';
 import { themeScript } from '@/lib/theme';
 
 import appCss from '../styles.css?url';

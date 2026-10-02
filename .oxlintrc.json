@@ -274,8 +274,8 @@
       }
     },
     {
-      // Build scripts and their tests run in Node.
-      "files": ["scripts/**"],
+      // Build scripts and tests run in Node.
+      "files": ["scripts/**", "**/*.test.ts"],
       "rules": {
         "import/no-nodejs-modules": "off"
       }
