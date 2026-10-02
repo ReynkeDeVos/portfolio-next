@@ -108,7 +108,7 @@ function Contact({ locale }: { locale: Locale }) {
         </li>
         <li>
           <Button asChild variant='tonal'>
-            <a href={portfolio.github}>
+            <a href={portfolio.github} target='_blank' rel='noopener noreferrer'>
               GitHub
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
@@ -116,7 +116,7 @@ function Contact({ locale }: { locale: Locale }) {
         </li>
         <li>
           <Button asChild variant='tonal'>
-            <a href={portfolio.linkedin}>
+            <a href={portfolio.linkedin} target='_blank' rel='noopener noreferrer'>
               LinkedIn
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
