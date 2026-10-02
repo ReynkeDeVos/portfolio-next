@@ -1,20 +1,7 @@
 import { intlLocale } from '../lib/locale.ts';
 import type { Locale } from '../lib/locale.ts';
 import { portfolio } from './portfolio.ts';
-import type { Portfolio } from './schema.ts';
-
-type Period = Portfolio['experience'][number]['period'];
-
-const presentLabel = { en: 'present', de: 'heute' } satisfies Record<Locale, string>;
-
-// "2014–2023", "2024", or "2025–present" in the reader's Locale.
-function formatPeriod({ from, to }: Period, locale: Locale) {
-  if (to === from) {
-    return String(from);
-  }
-
-  return `${from}–${to ?? presentLabel[locale]}`;
-}
+import type { Content } from './schema.ts';
 
 function formatDate(isoDate: string, locale: Locale) {
   return new Intl.DateTimeFormat(intlLocale(locale), {
@@ -24,13 +11,13 @@ function formatDate(isoDate: string, locale: Locale) {
 }
 
 // Resolves raw bilingual Content into what one Locale's page shows: text in
-// that Locale, formatted periods and dates, translated technology names, the
+// that Locale, formatted dates, translated technology names, the
 // Current role, and Selected work in the owner's order.
-function resolve(raw: Portfolio, locale: Locale) {
+function resolve(raw: Content, locale: Locale) {
   const technology = (name: string) => raw.technologyNames[name]?.[locale] ?? name;
   const technologyList = (names: readonly string[]) => names.map((name) => technology(name));
 
-  function project(id: string, group: keyof Portfolio['selectedWork']) {
+  function project(id: string, group: keyof Content['selectedWork']) {
     const found = raw.projects.find((candidate) => candidate.id === id);
 
     // content:check rejects this at build time; failing loudly here keeps a
@@ -84,7 +71,7 @@ function resolve(raw: Portfolio, locale: Locale) {
         role: entry.role[locale],
         organization: entry.organization[locale],
         url: entry.url,
-        period: formatPeriod(entry.period, locale),
+        period: entry.period,
         description: entry.description[locale],
       })),
       teaching: raw.teaching.map((topic) => ({
@@ -138,10 +125,10 @@ function resolve(raw: Portfolio, locale: Locale) {
 
 type LocalizedContent = ReturnType<typeof resolve>;
 
-type Project = LocalizedContent['work']['featured'][number];
+type SelectedProject = LocalizedContent['work']['featured'][number];
 
 // Returns a lookup that resolves each Locale once, on first use.
-function createContent(raw: Portfolio) {
+function createContent(raw: Content) {
   const resolved = new Map<Locale, LocalizedContent>();
 
   return (locale: Locale): LocalizedContent => {
@@ -156,4 +143,4 @@ const contentFor = createContent(portfolio);
 
 export { contentFor, createContent };
 
-export type { LocalizedContent, Project };
+export type { LocalizedContent, SelectedProject };

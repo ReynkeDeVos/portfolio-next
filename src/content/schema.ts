@@ -33,7 +33,7 @@ const project = z.strictObject({
   details: translatedText,
 });
 
-const portfolioSchema = z.strictObject({
+const contentSchema = z.strictObject({
   name: text,
   location: translatedText,
   emailEncoded: z.base64(),
@@ -102,8 +102,8 @@ const portfolioSchema = z.strictObject({
   projects: z.array(project),
 });
 
-type Portfolio = z.infer<typeof portfolioSchema>;
+type Content = z.infer<typeof contentSchema>;
 
-export { portfolioSchema };
+export { contentSchema };
 
-export type { Portfolio };
+export type { Content };

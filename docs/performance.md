@@ -132,11 +132,10 @@ real deployment measurements across the audience's regions.
 
 ## Language implementation
 
-The locale is represented by prerendered `/` and `/de/` routes;
-`src/lib/locale.ts` owns each locale's path, tags, hreflang links and stored
-choice. The router writes trailing slashes, matching the static asset paths, so
+Each Locale is a prerendered route, `/` and `/de/`; `src/lib/locale.ts` owns
+each Locale's path, tags, hreflang links and stored choice. The router writes trailing slashes, matching the static asset paths, so
 no internal link or hreflang URL hits Cloudflare's slash redirect. TanStack
-Router links preserve the selected section in the URL hash. Typed local dictionaries
+Router links preserve the open Section in the URL hash. Typed local dictionaries
 supply interface labels and bilingual content; Zod validates English and German
 content at build time. Native Intl formats dates. There is no separate i18n
 runtime or translation fetch, which is sufficient for two curated languages.

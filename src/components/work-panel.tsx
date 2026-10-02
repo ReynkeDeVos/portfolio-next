@@ -1,5 +1,5 @@
 import { contentFor } from '@/content/content';
-import type { Project } from '@/content/content';
+import type { SelectedProject } from '@/content/content';
 import type { Locale } from '@/lib/locale';
 
 import { copy } from './copy';
@@ -20,7 +20,7 @@ import {
   TechList,
 } from './section-parts';
 
-function ProjectLink({ project, locale }: { project: Project; locale: Locale }) {
+function ProjectLink({ project, locale }: { project: SelectedProject; locale: Locale }) {
   return (
     <StretchedLink href={project.url}>
       {project.name}

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { portfolioSchema } from './schema.ts';
-import type { Portfolio } from './schema.ts';
+import { contentSchema } from './schema.ts';
+import type { Content } from './schema.ts';
 
 // Counts how often each value occurs, keeping first-seen order for messages.
 function countOccurrences(values: readonly string[]) {
@@ -14,13 +14,13 @@ function countOccurrences(values: readonly string[]) {
   return counts;
 }
 
-function duplicateIds(list: string, entries: readonly { id: string }[]) {
+function duplicateIds(label: string, entries: readonly { id: string }[]) {
   return [...countOccurrences(entries.map((entry) => entry.id))].flatMap(([id, count]) =>
-    count > 1 ? [`${list} contains "${id}" ${count} times; give each entry its own ID.`] : [],
+    count > 1 ? [`${label} contains "${id}" ${count} times; give each entry its own ID.`] : [],
   );
 }
 
-function selectedWorkProblems({ projects, selectedWork }: Portfolio) {
+function selectedWorkProblems({ projects, selectedWork }: Content) {
   const problems: string[] = [];
   const catalogIds = new Set(projects.map((project) => project.id));
 
@@ -55,7 +55,7 @@ function selectedWorkProblems({ projects, selectedWork }: Portfolio) {
   return problems;
 }
 
-function experienceProblems({ experience }: Portfolio) {
+function experienceProblems({ experience }: Content) {
   const problems: string[] = [];
 
   for (const { id, period } of experience) {
@@ -74,7 +74,7 @@ function experienceProblems({ experience }: Portfolio) {
   return problems;
 }
 
-function technologyProblems(content: Portfolio) {
+function technologyProblems(content: Content) {
   const problems: string[] = [];
   const linked = new Set(content.portfolioBuild.links.map((link) => link.name));
 
@@ -106,25 +106,31 @@ function technologyProblems(content: Portfolio) {
   return problems;
 }
 
-function emailProblems({ emailEncoded }: Portfolio) {
-  const decoded = z.email().safeParse(globalThis.atob(emailEncoded));
-
-  return decoded.success ? [] : ['emailEncoded does not decode to an email address.'];
-}
-
-// TypeScript already holds Content to the Portfolio shape; this adds what types
-// cannot express (non-empty text, URLs, IDs, dates) and how the parts relate.
-// It reports every problem at once; an empty list means the Content is valid.
-function validateContent(raw: Portfolio): readonly string[] {
-  const parsed = portfolioSchema.safeParse(raw);
-
-  if (!parsed.success) {
-    return parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`);
+function emailProblems({ emailEncoded }: Content) {
+  try {
+    if (z.email().safeParse(globalThis.atob(emailEncoded)).success) {
+      return [];
+    }
+  } catch {
+    // Not base64; reported below.
   }
 
-  const content = parsed.data;
+  return ['emailEncoded does not decode to an email address.'];
+}
+
+// TypeScript already holds Content to its shape; this adds what types
+// cannot express (non-empty text, URLs, IDs, dates) and how the parts relate.
+// Both kinds of rule always run, so every problem is reported at once; an
+// empty list means the Content is valid.
+function validateContent(content: Content): readonly string[] {
+  const parsed = contentSchema.safeParse(content);
+
+  const schemaProblems = parsed.success
+    ? []
+    : parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`);
 
   return [
+    ...schemaProblems,
     ...duplicateIds('interests', content.interests),
     ...duplicateIds('coreStrengths', content.coreStrengths),
     ...duplicateIds('skills', content.skills),

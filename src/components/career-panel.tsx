@@ -36,7 +36,7 @@ function CareerPanel({ locale }: { locale: Locale }) {
                   </StretchedLink>
                   <span className='text-on-surface-variant tabular-nums'>
                     {' · '}
-                    {entry.period}
+                    {t.period(entry.period)}
                   </span>
                 </>
               }

@@ -1,4 +1,4 @@
-import type { Portfolio } from './schema.ts';
+import type { Content } from './schema.ts';
 
 // Builders for small, valid Content records; each test changes only what it is about.
 
@@ -29,7 +29,7 @@ function fixtureExperience(id: string, from: number, to: number | null) {
   };
 }
 
-function fixturePortfolio(): Portfolio {
+function fixtureContent(): Content {
   const image = { src: '/images/portrait.avif', alt: translated('portrait'), width: 1, height: 1 };
 
   return {
@@ -104,4 +104,4 @@ function fixturePortfolio(): Portfolio {
   };
 }
 
-export { fixtureExperience, fixturePortfolio, fixtureProject, translated };
+export { fixtureExperience, fixtureContent, fixtureProject, translated };

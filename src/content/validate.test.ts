@@ -2,24 +2,19 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { portfolio } from './portfolio.ts';
-import type { Portfolio } from './schema.ts';
-import {
-  fixtureExperience,
-  fixturePortfolio,
-  fixtureProject,
-  translated,
-} from './test-fixtures.ts';
+import type { Content } from './schema.ts';
+import { fixtureExperience, fixtureContent, fixtureProject, translated } from './test-fixtures.ts';
 import { validateContent } from './validate.ts';
 
-function problemsAfter(change: (content: Portfolio) => void) {
-  const content = fixturePortfolio();
+function problemsAfter(change: (content: Content) => void) {
+  const content = fixtureContent();
   change(content);
 
   return validateContent(content).join('\n');
 }
 
 await test('valid Content has no problems', () => {
-  assert.deepEqual(validateContent(fixturePortfolio()), []);
+  assert.deepEqual(validateContent(fixtureContent()), []);
 });
 
 await test('validation names the field of an empty translation', () => {
@@ -110,6 +105,16 @@ await test('validation rejects an encoded value that is not an email address', (
   });
 
   assert.match(problems, /emailEncoded does not decode to an email address/u);
+});
+
+await test('a shape problem does not hide relationship problems', () => {
+  const problems = problemsAfter((content) => {
+    content.identity.de = '';
+    content.selectedWork.supporting = ['typo'];
+  });
+
+  assert.match(problems, /^identity\.de: /mu);
+  assert.match(problems, /selectedWork\.supporting lists "typo"/u);
 });
 
 await test('validation reports every problem at once', () => {

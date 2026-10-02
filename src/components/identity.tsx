@@ -15,9 +15,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
   const { profile } = contentFor(locale);
   const { currentRole } = profile;
 
-  const [role, rest] = currentRole
-    ? t.currentRole(currentRole.role, currentRole.organization, currentRole.since)
-    : ['', ''];
+  const [role, rest] = currentRole ? t.currentRole(currentRole) : ['', ''];
 
   return (
     <section

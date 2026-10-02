@@ -1,5 +1,14 @@
-import { localeHead } from '@/lib/locale';
-import type { Locale } from '@/lib/locale';
+import { localeHead } from '../lib/locale.ts';
+import type { Locale } from '../lib/locale.ts';
+
+type Years = Readonly<{ from: number; to: number | null }>;
+
+type CurrentRole = Readonly<{ role: string; organization: string; since: number }>;
+
+// "2014–2023", "2024", or "2025–present": an open end reads as the present.
+function years({ from, to }: Years, present: string) {
+  return to === from ? String(from) : `${from}–${to ?? present}`;
+}
 
 const en = {
   languageLabel: 'Language',
@@ -14,10 +23,11 @@ const en = {
   copyAddress: 'Copy email address',
   addressCopied: 'Email address copied',
   strengthsLabel: 'Profile highlights',
-  currentRole: (role: string, organization: string, since: number): readonly [string, string] => [
+  currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
     role,
     ` at ${organization}, since ${since}`,
   ],
+  period: (span: Years) => years(span, 'present'),
   sectionsLabel: 'Portfolio sections',
   sectionNames: { work: 'Work', skills: 'Skills', workflow: 'Workflow', career: 'Career' },
   sectionHeadings: {
@@ -77,10 +87,11 @@ const copy = {
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
     strengthsLabel: 'Kurzprofil',
-    currentRole: (role: string, organization: string, since: number): readonly [string, string] => [
+    currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
       role,
       ` bei ${organization}, seit ${since}`,
     ],
+    period: (span: Years) => years(span, 'heute'),
     sectionsLabel: 'Bereiche des Portfolios',
     sectionNames: {
       work: 'Projekte',
