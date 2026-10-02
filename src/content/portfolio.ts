@@ -205,6 +205,7 @@ export const portfolio = {
           { name: 'herdr', url: 'https://herdr.dev/' },
           { name: 'pi', url: 'https://pi.dev/' },
           { name: 'Tailscale', url: 'https://tailscale.com/' },
+          { name: 'Hermes', url: 'https://hermes-agent.nousresearch.com/' },
         ],
       },
       {
