@@ -1,5 +1,132 @@
 import { cn } from 'cn';
 import { ArrowUpRight } from 'lucide-react';
+import { Fragment } from 'react';
+import type { ReactNode } from 'react';
+
+// Every panel shares one grammar: a connected list of large items first,
+// then titled subsections of smaller cards, then an optional profile link.
+
+// Hover state layer and whole-item focus ring for items whose title link
+// stretches over them. It rises above its closely spaced neighbours on focus.
+const linkedItem =
+  'group before:bg-on-surface before:ease-effects-fast before:rounded-inherit has-[a:focus-visible]:focus-ring before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-6 has-[a:focus-visible]:z-10';
+
+// Connected Expressive list: large outer corners, small inner ones.
+function ItemList({ ordered, children }: { ordered?: boolean; children: ReactNode }) {
+  const List = ordered ? 'ol' : 'ul';
+
+  return <List className='flex flex-col gap-1'>{children}</List>;
+}
+
+function Item({ linked, children }: { linked?: boolean; children: ReactNode }) {
+  return (
+    <li
+      className={cn(
+        'bg-surface-container-low first:rounded-t-xl-inc last:rounded-b-xl-inc relative rounded-xs p-5 sm:px-6',
+        linked && linkedItem,
+      )}
+    >
+      {children}
+    </li>
+  );
+}
+
+// Title, accent line and an optional end slot, the head of every list item.
+// A text end slot may wrap below the title; an icon stays beside it.
+function ItemHeader({
+  title,
+  meta,
+  end,
+  wrap,
+}: {
+  title: ReactNode;
+  meta?: ReactNode;
+  end?: ReactNode;
+  wrap?: boolean;
+}) {
+  return (
+    <div className={cn('flex items-start justify-between gap-x-4 gap-y-1', wrap && 'flex-wrap')}>
+      <div className='min-w-0'>
+        <h3 className='type-title-lg text-on-surface font-semibold'>{title}</h3>
+        {meta ? <p className='type-label-lg text-tertiary mt-0.5 font-medium'>{meta}</p> : null}
+      </div>
+      {end}
+    </div>
+  );
+}
+
+function ItemText({ children }: { children: ReactNode }) {
+  return <p className='type-body-lg text-on-surface mt-3 max-w-[64ch]'>{children}</p>;
+}
+
+function Subsection({
+  id,
+  heading,
+  aside,
+  children,
+}: {
+  id: string;
+  heading: string;
+  aside?: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <section aria-labelledby={id} className='flex flex-col gap-3'>
+      <div className='flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-1'>
+        <h3 id={id} className='type-title-md text-on-surface font-semibold'>
+          {heading}
+        </h3>
+        {aside}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function CardGrid({ children }: { children: ReactNode }) {
+  return <ul className='grid gap-3 md:grid-cols-2'>{children}</ul>;
+}
+
+function Card({ linked, children }: { linked?: boolean; children: ReactNode }) {
+  return (
+    <li
+      className={cn(
+        'rounded-lg-inc bg-surface-container relative flex flex-col p-5',
+        linked && linkedItem,
+      )}
+    >
+      {children}
+    </li>
+  );
+}
+
+function CardHeader({ title, meta, end }: { title: ReactNode; meta?: ReactNode; end?: ReactNode }) {
+  return (
+    <div className='flex items-start justify-between gap-3'>
+      <div className='min-w-0'>
+        <h4 className='type-title-md text-on-surface font-semibold'>{title}</h4>
+        {meta ? <p className='type-label-md text-on-surface-variant font-medium'>{meta}</p> : null}
+      </div>
+      {end}
+    </div>
+  );
+}
+
+function CardText({ children }: { children: ReactNode }) {
+  return <p className='type-body-md text-on-surface mt-2'>{children}</p>;
+}
+
+function CardDetails({ children }: { children: ReactNode }) {
+  return <p className='type-body-sm text-on-surface-variant mt-2'>{children}</p>;
+}
+
+function ProfileLink({ href, children }: { href: string; children: string }) {
+  return (
+    <p className='type-body-md px-1'>
+      <ExternalLink href={href}>{children}</ExternalLink>
+    </p>
+  );
+}
 
 function TechList({ items, className }: { items: readonly string[]; className?: string }) {
   return (
@@ -18,13 +145,21 @@ function TechList({ items, className }: { items: readonly string[]; className?: 
 
 // Inline external link. The word joiner keeps the arrow on the line of the
 // name's last character while long names still wrap anywhere.
-function ExternalLink({ href, children }: { href: string; children: string }) {
+function ExternalLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: string;
+}) {
   return (
     <a
       href={href}
       target='_blank'
       rel='noopener noreferrer'
-      className='text-on-surface cursor-pointer rounded-xs wrap-anywhere'
+      className={cn('text-on-surface cursor-pointer rounded-xs wrap-anywhere', className)}
     >
       {children}
       <span className='whitespace-nowrap'>
@@ -35,4 +170,29 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
   );
 }
 
-export { ExternalLink, TechList };
+// Comma-separated names; those with a URL become external links.
+function LinkSeries({ items }: { items: readonly { name: string; url?: string }[] }) {
+  return items.map((item, index) => (
+    <Fragment key={item.name}>
+      {index > 0 ? ', ' : null}
+      {item.url ? <ExternalLink href={item.url}>{item.name}</ExternalLink> : item.name}
+    </Fragment>
+  ));
+}
+
+export {
+  Card,
+  CardDetails,
+  CardGrid,
+  CardHeader,
+  CardText,
+  ExternalLink,
+  Item,
+  ItemHeader,
+  ItemList,
+  ItemText,
+  LinkSeries,
+  ProfileLink,
+  Subsection,
+  TechList,
+};

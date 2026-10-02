@@ -2,30 +2,27 @@ import { portfolio } from '@/content/portfolio';
 
 import { copy, formatTechnology } from './copy';
 import type { Locale } from './copy';
-import { TechList } from './section-parts';
+import { Item, ItemHeader, ItemList, ItemText, TechList } from './section-parts';
 
 function SkillsPanel({ locale }: { locale: Locale }) {
   const t = copy[locale];
 
   return (
-    <div>
+    <div className='flex flex-col gap-6'>
       <h2 className='sr-only'>{t.sectionHeadings.skills}</h2>
-      <ul className='divide-outline-variant rounded-xl-inc bg-surface-container-low divide-y px-5 sm:px-6'>
+
+      <ItemList>
         {portfolio.skills.map((group) => (
-          <li
-            key={group.id}
-            className='grid gap-x-6 gap-y-2 py-5 md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]'
-          >
-            <h3 className='type-title-md text-on-surface font-semibold'>{group.title[locale]}</h3>
-            <div className='flex flex-col gap-3'>
-              <p className='type-body-md text-on-surface-variant max-w-[68ch]'>
-                {group.description[locale]}
-              </p>
-              <TechList items={group.technologies.map((name) => formatTechnology(name, locale))} />
-            </div>
-          </li>
+          <Item key={group.id}>
+            <ItemHeader title={group.title[locale]} />
+            <ItemText>{group.description[locale]}</ItemText>
+            <TechList
+              items={group.technologies.map((name) => formatTechnology(name, locale))}
+              className='mt-4'
+            />
+          </Item>
         ))}
-      </ul>
+      </ItemList>
     </div>
   );
 }

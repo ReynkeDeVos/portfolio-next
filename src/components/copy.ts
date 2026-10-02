@@ -42,7 +42,7 @@ const en = {
   moreOnGitHub: 'See more on my GitHub profile',
   moreOnLinkedIn: 'See more on my LinkedIn profile',
   aiHeading: 'My AI workflow',
-  aiColumns: { task: 'Task', model: 'Model', effort: 'Thinking level' },
+  thinkingLevel: 'Thinking level',
   updated: 'Updated',
   buildHeading: 'How this portfolio is built',
   notFound: {
@@ -51,7 +51,6 @@ const en = {
     description: 'I couldn’t find the page you were looking for.',
     back: 'Back to portfolio',
   },
-  experienceHeading: 'Experience',
   teachingHeading: 'Topics I teach',
   present: 'present',
   meta: {
@@ -100,7 +99,7 @@ const copy = {
     moreOnGitHub: 'Mehr auf meinem GitHub-Profil',
     moreOnLinkedIn: 'Mehr auf meinem LinkedIn-Profil',
     aiHeading: 'Mein KI-Workflow',
-    aiColumns: { task: 'Aufgabe', model: 'Modell', effort: 'Denkstufe' },
+    thinkingLevel: 'Denkstufe',
     updated: 'Stand',
     buildHeading: 'So ist dieses Portfolio gebaut',
     notFound: {
@@ -109,7 +108,6 @@ const copy = {
       description: 'Ich konnte die Seite, nach der du gesucht hast, nicht finden.',
       back: 'Zurück zum Portfolio',
     },
-    experienceHeading: 'Berufserfahrung',
     teachingHeading: 'Themen, die ich unterrichte',
     present: 'heute',
     meta: {

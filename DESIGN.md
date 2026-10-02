@@ -169,10 +169,10 @@ components:
     textColor: '{colors.on-surface}'
     rounded: '{rounded.xs}'
     padding: 20px
-  build-section:
-    backgroundColor: '{colors.surface-container-low}'
+  section-card:
+    backgroundColor: '{colors.surface-container}'
     textColor: '{colors.on-surface}'
-    rounded: '{rounded.xl-inc}'
+    rounded: '{rounded.lg-inc}'
     padding: '{spacing.5}'
   portrait-trigger:
     rounded: '{rounded.full}'
@@ -225,7 +225,7 @@ The role palette uses sage for action and keyboard focus, caramel for selected c
 
 - **Sand / warm charcoal:** `surface` is the document ground and `on-surface` is primary reading text.
 - **Warm muted text:** `on-surface-variant` supports descriptions, dates, secondary icons and unselected controls.
-- **Tonal containers:** `surface-container-low` carries identity, featured work, career, skills and the build section. `surface-container` is the larger portrait's loading ground. `surface-container-high` carries grouped controls and the dialog. `surface-container-highest` carries technology tags.
+- **Tonal containers:** `surface-container-low` carries identity and every connected list. `surface-container` is the larger portrait's loading ground. `surface-container-high` carries grouped controls and the dialog. `surface-container-highest` carries technology tags.
 - **Divisions:** `outline-variant` is the border and divider role. `outline` is the scrollbar thumb role.
 - **Scrim:** `scrim` dims the page behind the photo viewer.
 - **Tab track:** `tab-track` resolves to the low container in light mode and the high container in dark mode, preserving separation from the page.
@@ -243,10 +243,10 @@ Each face loads only the Latin weight-axis WOFF2 from its `@fontsource-variable`
 ### Hierarchy
 
 - **Headline:** The name uses `headline-md` on narrow screens and `headline-lg` from the small breakpoint, with emphasized weight (650). Their sizes, line heights and tracking are normative in frontmatter.
-- **Title:** `title-lg` identifies featured projects and section containers. `title-md` serves smaller project titles, group headings and the developer identity. The identity uses medium (500); group headings use semibold (600).
-- **Body:** `body-lg` introduces the owner and featured projects; `body-md` carries supporting descriptions and list rows; `body-sm` carries compact project details and teaching technologies. Career roles and build technology names emphasize `body-lg` with medium (500).
-- **Label:** `label-lg` serves buttons, tabs, strengths and project categories. `label-md` serves technology tags, table headings and timestamps. Selection can use semibold (600), while passive timestamps inherit regular weight (400).
-- **Reading width:** Featured-project summaries stop at 64ch; supporting project details at 72ch; skills and build explanations at 68ch. These are component constraints rather than a page-wide measure.
+- **Title:** `title-lg` heads every connected-list item. `title-md` heads cards, subsections and the developer identity. The identity uses medium (500); group headings use semibold (600).
+- **Body:** `body-lg` introduces the owner and carries every list item's main text; `body-md` carries card text and featured-project details; `body-sm` carries card details. Build and AI tool names emphasize `body-md` with medium (500).
+- **Label:** `label-lg` serves buttons, tabs, strengths, list-item accent lines (project categories, employers) and career periods. `label-md` serves technology tags, card accent lines and timestamps. Selection can use semibold (600), while passive timestamps inherit regular weight (400).
+- **Reading width:** List-item text stops at 64ch; featured-project details at 72ch; the AI introduction at 68ch. These are component constraints rather than a page-wide measure.
 
 **The Two Family Rule.** Headline and title roles use Google Sans Flex; body and labels use Roboto Flex. Do not add a third face; use the implemented role sizes and weight emphasis.
 
@@ -258,11 +258,11 @@ At the large breakpoint (64rem), the page becomes two columns with a left identi
 
 Related items use compact gaps: connected lists (4px), technology tags (6px), controls and strengths (8px), subsection groups (12px), major panel blocks (16px or 24px). Spacing follows the actual Tailwind quarter-rem rhythm recorded in frontmatter, not an invented new scale.
 
-Work, Career, Skills and Workflow are the section order, with Work initially open. All panels are prerendered and inactive ones are hidden. The URL hash preserves the selected panel across reloads and language navigation. Controls remain inside the identity panel. The new bilingual build explanation ends Workflow; its definition-list rows reuse the career rhythm, using a (7.5rem) topic column from small screens. Skills use an (11rem) heading column from medium screens. More-project cards use two columns from medium screens; interest groups become a three-column connected row.
+Work, Career, Skills and Workflow are the section order, with Work initially open. All panels are prerendered and inactive ones are hidden. The URL hash preserves the selected panel across reloads and language navigation. Controls remain inside the identity panel. Every panel follows the Work grammar: a connected list of large items first (featured projects, experience, skill groups, interests), then titled subsections of two-column cards from medium screens (more projects, teaching topics, AI workflow, the build explanation), then an optional profile link. Shared parts live in `src/components/section-parts.tsx`; panels compose them rather than restyling.
 
 ## Elevation & Depth
 
-The system is flat and uses tonal layering, borders and a translucent scrim. No component applies box shadows. Surface-container-low separates primary content from the document ground; higher containers distinguish small controls, technology tags and the portrait dialog. Supporting project cards, AI starting points and current teaching use opaque surface-container fills, distinct from the page ground and main low-surface panels. Thin outline-variant dividers group career, skills, build rows and table content. A focused stretched project link raises its item above adjacent items so the green outline remains visible; this is stacking, not shadow elevation.
+The system is flat and uses tonal layering, borders and a translucent scrim. No component applies box shadows. Surface-container-low separates primary content from the document ground; higher containers distinguish small controls, technology tags and the portrait dialog. Cards (more projects, teaching topics, AI workflow, build explanation) use opaque surface-container fills, distinct from the page ground and the low-surface connected lists. A focused stretched project link raises its item above adjacent items so the green outline remains visible; this is stacking, not shadow elevation.
 
 **The Tonal Depth Rule.** Use surface roles and outline-variant divisions for depth. The current portfolio has no box shadows.
 
@@ -270,7 +270,7 @@ The system is flat and uses tonal layering, borders and a translucent scrim. No 
 
 Material Expressive shapes distinguish scale and grouping: compact tags use `xs`, strength chips use `sm`, secondary cards use `lg-inc`, the dialog uses `xl`, and identity or section containers use `xl-inc`. Buttons, tab tracks and language/theme groups are fully rounded. `full` records the compiled Tailwind radius, a large value that yields a pill or circle rather than a visible numeric curve.
 
-Connected project and interest lists keep small inner corners and enlarged outside corners. Interest groups change from a vertical joined silhouette to a horizontal one at the medium breakpoint. The portrait uses a twelve-lobe cookie clip path, generated from the same normalized path for all sizes. The photo remains upright as the frame turns one lobe (30 degrees) on a section change.
+Connected lists keep small inner corners and enlarged outside corners, always as a vertical joined silhouette. The portrait uses a twelve-lobe cookie clip path, generated from the same normalized path for all sizes. The photo remains upright as the frame turns one lobe (30 degrees) on a section change.
 
 ## Components
 
@@ -308,7 +308,7 @@ The viewer uses a scrim and a high-surface dialog with extra-large corners. A to
 
 ### Build explanation
 
-The bilingual "How this portfolio is built" section is a low-surface container with a title-large heading, body-medium introduction and divided topic/technology/reason rows. Every named technology links to its documentation in on-surface color, with a stationary diagonal ArrowUpRight and an `xs` focus shape. Employer names and the GitHub-profile footer use the same inline treatment. Project links use on-surface text and arrows while retaining their whole-item hit area. These text links have no underline or arrow movement on hover or keyboard focus. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
+The bilingual "How this portfolio is built" subsection is a grid of cards, each with the topic as title, the linked technologies and the reason. Every named technology links to its documentation in on-surface color, with a stationary diagonal ArrowUpRight and an `xs` focus shape. Employer names and the GitHub-profile footer use the same inline treatment. Project links use on-surface text and arrows while retaining their whole-item hit area. These text links have no underline or arrow movement on hover or keyboard focus. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
 
 All feedback is decorative. Reduced-motion preferences set transition and animation duration to zero throughout the document; content never depends on finishing an effect. Exact easing and state snippets live in the v2 sidecar because the frontmatter schema has no motion or focus fields. Sidecar tonal ramps are synthesized dark-to-light preview metadata, except the tab-track strip, which uses existing surface ladder values; these strips do not add shipped palette tokens. Component previews embed the actual AVIF media and expand utility styles into local CSS. Navigation and dialog previews show the implemented surfaces and states; runtime selection, image opening and focus trapping remain app behavior.
 
