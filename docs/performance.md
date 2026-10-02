@@ -33,7 +33,9 @@ preferences must degrade gracefully when storage is blocked.
 
 English routes and German routes should each be prerendered. A language switch
 preserves the current content section and produces a shareable URL. Set correct
-document language and alternate-language metadata.
+document language and alternate-language metadata. Store an explicit language
+choice locally; the head script sends a returning visitor from the bare root to
+the stored German route before first paint. Other URLs keep their language.
 
 ## Motion
 
