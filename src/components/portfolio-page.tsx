@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CareerPanel } from './career-panel';
 import { copy, isSection, sections } from './copy';
 import type { Locale, Section } from './copy';
+import { EngineNote } from './engine-note';
 import { Identity } from './identity';
 import { SkillsPanel } from './skills-panel';
 import { WorkPanel } from './work-panel';
@@ -73,30 +74,38 @@ function PortfolioPage({ locale }: { locale: Locale }) {
       <main className='mx-auto grid w-full max-w-300 gap-4 px-4 pt-4 pb-16 sm:px-6 sm:pt-6 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[minmax(0,28rem)_minmax(0,1fr)]'>
         <Identity locale={locale} section={section} ticks={ticks} />
 
-        <Tabs value={section} onValueChange={changeSection} className='min-w-0'>
-          <TabsList aria-label={t.sectionsLabel} style={indicator} data-animate={animateSelection}>
-            {sections.map((value) => (
-              <TabsTrigger key={value} value={value}>
-                {t.sectionNames[value]}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          {sections.map((value) => {
-            const Panel = panels[value];
+        <div className='flex min-w-0 flex-col gap-4'>
+          <EngineNote locale={locale} />
 
-            return (
-              // Every panel is prerendered; inactive ones are only hidden.
-              <TabsContent
-                key={value}
-                value={value}
-                forceMount
-                tabIndex={panelsStartingWithLink.has(value) ? -1 : 0}
-              >
-                <Panel locale={locale} />
-              </TabsContent>
-            );
-          })}
-        </Tabs>
+          <Tabs value={section} onValueChange={changeSection}>
+            <TabsList
+              aria-label={t.sectionsLabel}
+              style={indicator}
+              data-animate={animateSelection}
+            >
+              {sections.map((value) => (
+                <TabsTrigger key={value} value={value}>
+                  {t.sectionNames[value]}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {sections.map((value) => {
+              const Panel = panels[value];
+
+              return (
+                // Every panel is prerendered; inactive ones are only hidden.
+                <TabsContent
+                  key={value}
+                  value={value}
+                  forceMount
+                  tabIndex={panelsStartingWithLink.has(value) ? -1 : 0}
+                >
+                  <Panel locale={locale} />
+                </TabsContent>
+              );
+            })}
+          </Tabs>
+        </div>
       </main>
     </div>
   );
