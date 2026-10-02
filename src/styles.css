@@ -331,40 +331,17 @@
 }
 
 /* Feedback motion is decorative; content never depends on it. */
-.ghost-mascot {
-  fill: light-dark(var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface));
-  animation: ghost-float 2.4s ease-in-out 4;
-}
-
-.ghost-mascot-eyes {
-  fill: light-dark(var(--md-sys-color-primary), var(--md-sys-color-on-primary));
-}
-
-.ghost-mascot-shadow {
-  border-radius: 50%;
-  filter: blur(1px);
-  opacity: 0.16;
-  animation: ghost-shadow 2.4s ease-in-out 4;
-}
-
-@keyframes ghost-float {
-  50% {
-    transform: translateY(-10px) rotate(-2deg);
-  }
-}
-
-@keyframes ghost-shadow {
-  50% {
-    transform: scaleX(0.7);
-    opacity: 0.08;
-  }
-}
 
 /* Dark ink with white catchlights reads as eyes in both themes. */
 .browser-mascot-pupils,
 .browser-mascot-eyes-happy {
   fill: light-dark(var(--md-sys-color-on-primary-container), oklch(20% 0.03 150));
   stroke: light-dark(var(--md-sys-color-on-primary-container), oklch(20% 0.03 150));
+}
+
+/* The theme resets Tailwind's palette, so white catchlights need their own rule. */
+.browser-mascot-catchlights {
+  fill: white;
 }
 
 .browser-mascot-eyes-happy {
@@ -640,8 +617,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ghost-mascot,
-  .ghost-mascot-shadow,
   [class*='browser-mascot-'] {
     animation: none;
   }

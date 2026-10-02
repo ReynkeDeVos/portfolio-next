@@ -134,7 +134,7 @@ const copy = {
       why: 'Warum nur Chromium?',
       details: [
         'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features. Einige gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine. Ich könnte die Seite auch für Firefox (Gecko) und Safari (WebKit) genauso hübsch machen; hier möchte ich aber mit den neuesten Browser-Features experimentieren.',
-        'Öffne die Seite in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser auf einem Notebook oder Android-Gerät. Auf iPhone und iPad läuft immer WebKit. Danke, Apple. 🤷',
+        'Öffne die Seite in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser auf einem Notebook oder Android-Gerät. Auf iPhone und iPad läuft aber immer WebKit. Danke, Apple. 🤷',
         'Oder gib deinem Browser ein, zwei Jahre Zeit. Dann unterstützt er diese neuen Features auch.',
       ],
       dismiss: 'Hinweis ausblenden',
