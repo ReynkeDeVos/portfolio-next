@@ -59,11 +59,11 @@ const en = {
   engineNote: {
     title: 'Built for Chromium, on purpose',
     lead: 'Do a few animations look a little… wonky? Don’t worry, that’s just the browser. I’m trying out the latest web features, and your browser hasn’t caught up with all of them yet.',
-    why: 'Why only Chromium?',
+    why: 'Why only Chrome?',
     details: [
-      'This portfolio is my playground for the latest web features. Some are only available in Blink, the engine behind Chrome. Your browser uses a different engine. I could make it look just as good in Firefox (Gecko) and Safari (WebKit); for this project, I wanted to play with the shiny new toys.',
-      'For the show without the accidental acrobatics, open the page in Chrome, Edge, Brave, Opera or another Chromium-based browser on a computer or Android device. On iPhone and iPad, even browsers wearing a Chrome badge often use WebKit underneath. Thanks, Apple.',
-      'Or give your browser a year or two to catch up. With a bit of luck, this becomes the first website I’ve fixed by doing absolutely nothing.',
+      'This portfolio is my playground for the latest web features. Some are only available in Blink, the engine behind Chrome. Your browser uses a different engine. I could make it look just as good in Firefox (Gecko) and Safari (WebKit); here, though, I want to experiment with the newest browser features.',
+      'Open the page in Chrome, Edge, Brave, Opera or another Chromium-based browser on a laptop or Android device. On iPhone and iPad, there’s almost always WebKit under the hood, even behind a Chrome logo. Thanks, Apple. 🤷',
+      'Or give your browser a year or two. By then, it will support these new features too.',
     ],
     dismiss: 'Hide this note',
   },
@@ -131,11 +131,11 @@ const copy = {
     engineNote: {
       title: 'Bewusst für Chromium gebaut',
       lead: 'Sehen ein paar Animationen etwas … verunglückt aus? Keine Sorge, das ist nur der Browser. Ich probiere hier die neuesten Web-Features aus, und ein paar davon kennt er noch nicht.',
-      why: 'Warum nur Chromium?',
+      why: 'Warum nur Chrome?',
       details: [
-        'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features. Einige gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine. Ich könnte die Seite auch für Firefox (Gecko) und Safari (WebKit) genauso hübsch machen; hier wollte ich mit dem neuen Spielzeug experimentieren.',
-        'Für die Vorstellung ohne unfreiwillige Akrobatik: Öffne die Seite in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser auf einem Computer oder Android-Gerät. Auf iPhone und iPad steckt auch hinter einem Chrome-Logo oft WebKit. Danke, Apple.',
-        'Oder gib deinem Browser ein, zwei Jahre Zeit. Mit etwas Glück wird das die erste Website, die ich durch konsequentes Nichtstun repariert habe.',
+        'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features. Einige gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine. Ich könnte die Seite auch für Firefox (Gecko) und Safari (WebKit) genauso hübsch machen; hier möchte ich aber mit den neuesten Browser-Features experimentieren.',
+        'Öffne die Seite in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser auf einem Notebook oder Android-Gerät. Auf iPhone und iPad steckt auch hinter einem Chrome-Logo fast immer WebKit. Danke, Apple. 🤷',
+        'Oder gib deinem Browser ein, zwei Jahre Zeit. Dann unterstützt er diese neuen Features auch.',
       ],
       dismiss: 'Hinweis ausblenden',
     },
