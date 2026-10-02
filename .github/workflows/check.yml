@@ -28,3 +28,5 @@ jobs:
         run: aubr check
       - name: Build and prerender both Locale pages
         run: aubr build
+      - name: Check the prerendered Locale pages
+        run: aubr test:prerender

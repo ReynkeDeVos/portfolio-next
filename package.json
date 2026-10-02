@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "node --test 'src/**/*.test.ts' 'scripts/**/*.test.mjs'",
+    "test:prerender": "node --test tests/prerender.test.mjs",
     "lint": "oxlint --type-aware --deny-warnings",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
