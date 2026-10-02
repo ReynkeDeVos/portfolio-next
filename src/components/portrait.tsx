@@ -1,4 +1,7 @@
+import { cn } from 'cn';
+import { useState } from 'react';
 import type { CSSProperties } from 'react';
+import { flushSync } from 'react-dom';
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { portfolio } from '@/content/portfolio';
@@ -81,6 +84,25 @@ function warmFullPortrait() {
   fullPortraitImage.src = portfolio.fullPortrait.src;
 }
 
+// Opening and closing run as a same-document view transition: a plain surface
+// grows out of the frame into the photo panel and shrinks back into it. The
+// thumbnail never moves and the large photo fades in place at its final size.
+// The transition types scope the morph names and keyframes to this one moment.
+function morphPortrait(open: boolean, commit: () => void) {
+  if (globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    commit();
+
+    return;
+  }
+
+  document.startViewTransition({
+    update: () => {
+      flushSync(commit);
+    },
+    types: ['morph', open ? 'morph-open' : 'morph-close'],
+  });
+}
+
 // `ticks` advances the frame one lobe per section change. Only the clip shape
 // rotates and grows; the photo itself never transforms while animating, so the
 // browser repaints it at full resolution instead of resampling a cached layer.
@@ -92,19 +114,32 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
   const angle = ticks * stepDegrees;
   const rotation: CSSProperties = { '--portrait-angle': `${angle}deg` };
   const { fullPortrait } = portfolio;
+  const [open, setOpen] = useState(false);
 
   return (
-    <Dialog>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        morphPortrait(next, () => {
+          setOpen(next);
+        });
+      }}
+    >
       <DialogTrigger asChild>
         <button
           type='button'
           aria-label={`${portfolio.portrait.alt[locale]}: ${t.photoOpen}`}
           title={t.photoOpen}
           onPointerEnter={warmFullPortrait}
+          onPointerDown={warmFullPortrait}
           onFocus={warmFullPortrait}
           className='group focus-visible:focus-ring relative size-24 shrink-0 cursor-pointer rounded-full outline-none [--focus-ring-offset:8px] sm:size-32 lg:size-28 xl:size-36'
           style={rotation}
         >
+          {/* An empty stand-in marks where the morph starts, so the thumbnail
+              itself stays in the page instead of being lifted into the
+              transition. Only one end carries the name at a time. */}
+          <span aria-hidden className={cn('absolute inset-0', !open && 'view-transition-morph')} />
           <svg aria-hidden className='absolute size-0'>
             <clipPath id={clipId} clipPathUnits='objectBoundingBox'>
               <path
@@ -169,7 +204,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
       </DialogTrigger>
 
       {/* Content mounts only while open, so the large image loads on demand. */}
-      <DialogContent closeLabel={t.photoClose} aria-describedby={undefined}>
+      <DialogContent closeLabel={t.photoClose} aria-describedby={undefined} morph>
         <DialogTitle className='sr-only'>{t.photoTitle}</DialogTitle>
         {/* Both viewport axes bound the photo without another display crop.
             The height budget covers viewport margin, padding and the close row. */}
@@ -179,7 +214,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
           width={fullPortrait.width}
           height={fullPortrait.height}
           decoding='async'
-          className='bg-surface-container mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] rounded-md object-contain sm:rounded-sm'
+          className='bg-surface-container view-transition-morph-content mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] rounded-md object-contain sm:rounded-sm'
         />
       </DialogContent>
     </Dialog>
