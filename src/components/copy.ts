@@ -62,7 +62,7 @@ const en = {
     why: 'Why only Chromium?',
     details: [
       'Trying out the latest features is the only reason. Making the site look just as good in Gecko (Firefox) or WebKit (Safari) would be no problem; it simply was not the goal of this project.',
-      'To see the page as intended, open it in Chrome, Edge, Brave, Opera or another Chromium-based browser. On iPhone and iPad, most browsers still run on WebKit, so a computer or Android device works best. Or give your browser a year or two to catch up, and the glitches should disappear on their own.',
+      'To see the page as intended, open it in Chrome, Edge, Brave, Opera or another Chromium-based browser. On iPhone and iPad, all browsers run on WebKit (thanks Apple), so a notebook or Android device works best. Or give your browser a year or two to catch up, and the glitches should disappear on their own.',
     ],
     dismiss: 'Hide this note',
   },
@@ -133,7 +133,7 @@ const copy = {
       why: 'Warum nur Chromium?',
       details: [
         'Die neuesten Features auszuprobieren ist der einzige Grund. Die Seite genauso gut für Gecko (Firefox) oder WebKit (Safari) umzusetzen, wäre kein Problem; es war nur nicht das Ziel dieses Projekts.',
-        'Wenn du die Seite wie gedacht sehen möchtest, öffne sie in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser. Auf iPhone und iPad laufen die meisten Browser noch mit WebKit, daher eignet sich ein Computer oder Android-Gerät am besten. Oder gib deinem Browser ein, zwei Jahre Zeit, dann sollten die Fehler von selbst verschwinden.',
+        'Wenn du die Seite wie gedacht sehen möchtest, öffne sie in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser. Auf iPhone und iPad laufen alle Browser mit WebKit (danke, Apple), daher eignet sich ein Notebook oder Android-Gerät am besten. Oder gib deinem Browser ein, zwei Jahre Zeit, dann sollten die Fehler von selbst verschwinden.',
       ],
       dismiss: 'Hinweis ausblenden',
     },
