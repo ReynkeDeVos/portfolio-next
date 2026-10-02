@@ -1,8 +1,9 @@
-import { ChevronDown, FlaskConical, X } from 'lucide-react';
+import { ChevronDown, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { dismissEngineNote } from '@/lib/engine';
 
+import { BrowserMascot } from './browser-mascot';
 import { copy } from './copy';
 import type { Locale } from './copy';
 
@@ -16,7 +17,7 @@ function EngineNote({ locale }: { locale: Locale }) {
       aria-labelledby='engine-note-title'
       className='rounded-lg-inc bg-surface-card text-on-surface hidden grid-cols-[auto_minmax(0,1fr)_auto] gap-x-3 py-4 ps-4 pe-2 in-data-[engine-note=shown]:grid sm:gap-x-4 sm:ps-5'
     >
-      <FlaskConical aria-hidden className='text-tertiary mt-0.5 size-5' />
+      <BrowserMascot />
       <div className='min-w-0'>
         <h2 id='engine-note-title' className='type-title-md font-semibold'>
           {t.title}

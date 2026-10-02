@@ -58,11 +58,12 @@ const en = {
   teachingHeading: 'Topics I teach',
   engineNote: {
     title: 'Built for Chromium, on purpose',
-    lead: 'This portfolio is my playground for the newest web features, and some of them have so far only landed in Blink, the engine behind Chrome. Your browser uses a different engine, so a few details may look off.',
+    lead: 'Do a few animations look a little… wonky? Don’t worry, that’s just the browser. I’m trying out the latest web features, and your browser hasn’t caught up with all of them yet.',
     why: 'Why only Chromium?',
     details: [
-      'Trying out the latest features is the only reason. Making the site look just as good in Gecko (Firefox) or WebKit (Safari) would be no problem; it simply was not the goal of this project.',
-      'To see the page as intended, open it in Chrome, Edge, Brave, Opera or another Chromium-based browser. On iPhone and iPad, all browsers run on WebKit (thanks Apple), so a notebook or Android device works best. Or give your browser a year or two to catch up, and the glitches should disappear on their own.',
+      'This portfolio is my playground for the latest web features. Some are only available in Blink, the engine behind Chrome. Your browser uses a different engine. I could make it look just as good in Firefox (Gecko) and Safari (WebKit); for this project, I wanted to play with the shiny new toys.',
+      'For the show without the accidental acrobatics, open the page in Chrome, Edge, Brave, Opera or another Chromium-based browser on a computer or Android device. On iPhone and iPad, even browsers wearing a Chrome badge often use WebKit underneath. Thanks, Apple.',
+      'Or give your browser a year or two to catch up. With a bit of luck, this becomes the first website I’ve fixed by doing absolutely nothing.',
     ],
     dismiss: 'Hide this note',
   },
@@ -129,11 +130,12 @@ const copy = {
     teachingHeading: 'Themen, die ich unterrichte',
     engineNote: {
       title: 'Bewusst für Chromium gebaut',
-      lead: 'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features, und einige davon gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine, daher können einzelne Details hier fehlerhaft aussehen.',
+      lead: 'Sehen ein paar Animationen etwas … verunglückt aus? Keine Sorge, das ist nur der Browser. Ich probiere hier die neuesten Web-Features aus, und ein paar davon kennt er noch nicht.',
       why: 'Warum nur Chromium?',
       details: [
-        'Die neuesten Features auszuprobieren ist der einzige Grund. Die Seite genauso gut für Gecko (Firefox) oder WebKit (Safari) umzusetzen, wäre kein Problem; es war nur nicht das Ziel dieses Projekts.',
-        'Wenn du die Seite wie gedacht sehen möchtest, öffne sie in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser. Auf iPhone und iPad laufen alle Browser mit WebKit (danke, Apple), daher eignet sich ein Notebook oder Android-Gerät am besten. Oder gib deinem Browser ein, zwei Jahre Zeit, dann sollten die Fehler von selbst verschwinden.',
+        'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features. Einige gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine. Ich könnte die Seite auch für Firefox (Gecko) und Safari (WebKit) genauso hübsch machen; hier wollte ich mit dem neuen Spielzeug experimentieren.',
+        'Für die Vorstellung ohne unfreiwillige Akrobatik: Öffne die Seite in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser auf einem Computer oder Android-Gerät. Auf iPhone und iPad steckt auch hinter einem Chrome-Logo oft WebKit. Danke, Apple.',
+        'Oder gib deinem Browser ein, zwei Jahre Zeit. Mit etwas Glück wird das die erste Website, die ich durch konsequentes Nichtstun repariert habe.',
       ],
       dismiss: 'Hinweis ausblenden',
     },
