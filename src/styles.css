@@ -323,13 +323,9 @@
 
   &::view-transition-image-pair(morph) {
     overflow: clip;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-xl-inc);
     background-color: var(--md-sys-color-surface-container-high);
     animation-fill-mode: both;
-
-    @media (width >= 40rem) {
-      border-radius: var(--radius-xl-inc);
-    }
   }
 
   &::view-transition-old(morph),

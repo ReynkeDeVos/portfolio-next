@@ -60,7 +60,7 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot='dialog-content'
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-max max-w-[calc(100vw-2rem)] -translate-1/2 flex-col gap-4 rounded-xl bg-surface-container-high p-4 text-on-surface outline-none sm:rounded-xl-inc sm:p-6',
+          'rounded-xl-inc fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-max max-w-[calc(100vw-2rem)] -translate-1/2 flex-col gap-4 bg-surface-container-high p-4 text-on-surface outline-none sm:p-6',
           morph ? 'view-transition-morph' : 'data-[state=open]:animate-fade-in',
           className,
         )}

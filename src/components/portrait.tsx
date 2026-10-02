@@ -213,7 +213,7 @@ function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
           width={fullPortrait.width}
           height={fullPortrait.height}
           decoding='async'
-          className='bg-surface-container view-transition-morph-content mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] rounded-md object-contain sm:rounded-sm'
+          className='bg-surface-container view-transition-morph-content rounded-inherit mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] object-contain'
         />
       </DialogContent>
     </Dialog>
