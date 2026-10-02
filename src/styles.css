@@ -144,6 +144,30 @@
   --ease-spatial: cubic-bezier(0.38, 1.21, 0.22, 1);
   --ease-effects-fast: cubic-bezier(0.31, 0.94, 0.34, 1);
 
+  /*
+   * A sampled critically damped spring for larger travel: it starts at speed,
+   * spreads the path across the duration and settles without overshoot.
+   */
+  --ease-spatial-settle: linear(
+    0,
+    0.1,
+    0.287,
+    0.473,
+    0.627,
+    0.743,
+    0.827,
+    0.886,
+    0.925,
+    0.952,
+    0.969,
+    0.98,
+    0.987,
+    0.992,
+    0.995,
+    0.997,
+    1
+  );
+
   /* Entrance-only opacity; dialogs close without waiting for an exit. */
   --animate-fade-in: fade-in 150ms var(--ease-effects-fast);
 
@@ -278,6 +302,111 @@
   stroke-dashoffset: var(--hint-offset);
 }
 
+/*
+ * Container transform between a trigger and its dialog, used by the portrait
+ * viewer. Only the shape travels: `view-transition-morph` marks both ends, and
+ * the dialog's content captures separately so it never scales. The names only
+ * apply while a morph view transition runs.
+ */
+@utility view-transition-morph {
+  :root:active-view-transition-type(morph) & {
+    view-transition-name: morph;
+  }
+}
+
+@utility view-transition-morph-content {
+  :root:active-view-transition-type(morph) & {
+    view-transition-name: match-element;
+    view-transition-class: morph-content;
+  }
+}
+
+/*
+ * The shape is a plain dialog surface: the image pair paints it and turns the
+ * trigger's circle into the dialog corners, so neither snapshot is stretched.
+ * Content fades in place once the shape has nearly arrived and leaves first.
+ * The shape is translucent while it overlaps the thumbnail, so the portrait
+ * stays visible under it at both ends.
+ */
+:root:active-view-transition-type(morph) {
+  &::view-transition-group(morph) {
+    animation-duration: 300ms;
+    animation-timing-function: var(--ease-spatial-settle);
+  }
+
+  &::view-transition-image-pair(morph) {
+    overflow: clip;
+    border-radius: var(--radius-xl);
+    background-color: var(--md-sys-color-surface-container-high);
+    animation-fill-mode: both;
+
+    @media (width >= 40rem) {
+      border-radius: var(--radius-xl-inc);
+    }
+  }
+
+  &::view-transition-old(morph),
+  &::view-transition-new(morph) {
+    display: none;
+  }
+
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 200ms;
+    animation-timing-function: var(--ease-effects-fast);
+  }
+}
+
+:root:active-view-transition-type(morph-open) {
+  &::view-transition-image-pair(morph) {
+    animation-name: morph-corners, morph-fade-in;
+    animation-duration: 300ms, 140ms;
+    animation-timing-function: var(--ease-spatial-settle), linear;
+  }
+
+  &::view-transition-new(*.morph-content) {
+    animation: morph-fade-in 150ms var(--ease-effects-fast) 110ms both;
+  }
+}
+
+/* Closing clears the content before the shape starts back. */
+:root:active-view-transition-type(morph-close) {
+  &::view-transition-group(morph) {
+    animation-duration: 220ms;
+    animation-delay: 40ms;
+  }
+
+  &::view-transition-image-pair(morph) {
+    animation-name: morph-corners, morph-fade-out;
+    animation-duration: 220ms, 130ms;
+    animation-delay: 40ms, 130ms;
+    animation-timing-function: var(--ease-spatial-settle), linear;
+    animation-direction: reverse, normal;
+  }
+
+  &::view-transition-old(*.morph-content) {
+    animation: morph-fade-out 90ms var(--ease-effects-fast) both;
+  }
+}
+
+@keyframes morph-corners {
+  from {
+    border-radius: 50%;
+  }
+}
+
+@keyframes morph-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes morph-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 @layer base {
   html {
     background-color: var(--md-sys-color-surface);
@@ -287,6 +416,15 @@
     scrollbar-gutter: stable;
     scrollbar-color: var(--md-sys-color-outline) var(--md-sys-color-surface);
     -webkit-text-size-adjust: 100%;
+  }
+
+  /*
+   * The stable gutter already keeps the page in place when a dialog locks
+   * scrolling, so the lock's scrollbar compensation would shift it instead.
+   * A layered !important outranks the lock's unlayered one.
+   */
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
   }
 
   @media (pointer: fine) {
