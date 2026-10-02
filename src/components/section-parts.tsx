@@ -186,6 +186,8 @@ function StretchedLink({ href, children }: { href: string; children: ReactNode }
   return (
     <a
       href={href}
+      target='_blank'
+      rel='noopener noreferrer'
       className='text-on-surface cursor-pointer outline-none after:absolute after:inset-0 after:cursor-pointer'
     >
       {children}
@@ -209,7 +211,7 @@ function LinkChips({
       {links.map((link) => (
         <li key={link.name}>
           <Button asChild variant='chip' size='sm'>
-            <a href={link.url}>
+            <a href={link.url} target='_blank' rel='noopener noreferrer'>
               {link.name}
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
@@ -224,7 +226,7 @@ function ProfileLink({ href, children }: { href: string; children: string }) {
   return (
     <p>
       <Button asChild variant='tonal'>
-        <a href={href}>
+        <a href={href} target='_blank' rel='noopener noreferrer'>
           {children}
           <ArrowUpRight aria-hidden className='size-4' />
         </a>
