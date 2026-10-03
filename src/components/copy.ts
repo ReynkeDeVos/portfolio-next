@@ -11,8 +11,8 @@ function years({ from, to }: Years, present: string) {
 }
 
 const en = {
-  languageLabel: 'Language',
-  languageNames: { en: 'English', de: 'Deutsch' },
+  localeLabel: 'Language',
+  localeNames: { en: 'English', de: 'Deutsch' },
   themeLabel: 'Color theme',
   themes: { system: 'System theme', light: 'Light theme', dark: 'Dark theme' },
   contactLabel: 'Contact',
@@ -71,14 +71,14 @@ const en = {
   },
 };
 
-// Every locale repeats the English keys, with the same value types.
+// Every Locale repeats the English keys, with the same value types.
 const copy = {
   en,
   de: {
-    languageLabel: 'Sprache',
-    languageNames: { en: 'English', de: 'Deutsch' },
+    localeLabel: 'Sprache',
+    localeNames: { en: 'English', de: 'Deutsch' },
     themeLabel: 'Farbschema',
-    themes: { system: 'Systemeinstellung', light: 'Helles Farbschema', dark: 'Dunkles Farbschema' },
+    themes: { system: 'System-Farbschema', light: 'Helles Farbschema', dark: 'Dunkles Farbschema' },
     contactLabel: 'Kontakt',
     photoOpen: 'Porträt vergrößern',
     photoHint: { action: 'klick mich 😊' },

@@ -15,7 +15,7 @@ const themeIcons = { system: Monitor, light: Sun, dark: Moon } as const;
 
 const themeOrder: ThemePreference[] = ['system', 'light', 'dark'];
 
-// Language and theme in one compact row at the foot of the profile panel.
+// Locale and theme in one compact row at the foot of the profile panel.
 function SiteControls({ locale, section }: { locale: Locale; section: Section }) {
   const t = copy[locale];
   const theme = useThemePreference();
@@ -25,7 +25,7 @@ function SiteControls({ locale, section }: { locale: Locale; section: Section })
   return (
     <div className='border-outline-variant flex flex-wrap items-center justify-between gap-2 border-t pt-4'>
       <nav
-        aria-label={t.languageLabel}
+        aria-label={t.localeLabel}
         className='bg-surface-container-high flex items-center gap-0.5 rounded-full p-1'
       >
         {locales.map((target) => (
@@ -43,7 +43,7 @@ function SiteControls({ locale, section }: { locale: Locale; section: Section })
                 rememberLocale(target);
               }}
             >
-              {t.languageNames[target]}
+              {t.localeNames[target]}
             </Link>
           </Button>
         ))}

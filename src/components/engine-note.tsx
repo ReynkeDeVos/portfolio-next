@@ -48,7 +48,7 @@ function EngineNote({ locale }: { locale: Locale }) {
         className='-mt-1'
         onClick={() => {
           dismissEngineNote();
-          // Keep keyboard users in place: the open tab follows the note.
+          // Keep keyboard users in place: the open Section follows the note.
           document.querySelector<HTMLElement>('[role="tab"][aria-selected="true"]')?.focus();
         }}
       >
