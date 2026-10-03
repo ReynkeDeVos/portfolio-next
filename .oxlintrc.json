@@ -275,7 +275,7 @@
     },
     {
       // Build scripts and tests run in Node.
-      "files": ["scripts/**", "tests/**", "**/*.test.ts"],
+      "files": ["scripts/**", "tests/**", "**/*.test.ts", "src/lib/test-browser.ts"],
       "rules": {
         "import/no-nodejs-modules": "off"
       }

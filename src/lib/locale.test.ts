@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { runInNewContext } from 'node:vm';
 
 import { localeFromPathname, localeHead, localePath, locales, localeScript } from './locale.ts';
+import { runHeadScript } from './test-browser.ts';
 
 // Runs the head script against a stand-in browser and reports what it did.
 function runLocaleScript(pathname: string, stored: string | null) {
@@ -17,15 +17,12 @@ function runLocaleScript(pathname: string, stored: string | null) {
     },
   };
 
-  const documentElement = { hidden: false };
-
-  runInNewContext(localeScript, {
+  const { hidden } = runHeadScript(localeScript, {
     location,
-    localStorage: { getItem: () => stored },
-    document: { documentElement },
+    stored: stored === null ? {} : { locale: stored },
   });
 
-  return { replacedWith, hidden: documentElement.hidden };
+  return { replacedWith, hidden };
 }
 
 await test('every Locale path leads back to its Locale', () => {
