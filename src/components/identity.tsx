@@ -1,5 +1,5 @@
 import { ArrowUpRight, Briefcase, Check, Copy, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { contentFor } from '@/content/content';
@@ -74,11 +74,33 @@ function Contact({ locale }: { locale: Locale }) {
   const [address, setAddress] = useState<string>();
   const [copied, setCopied] = useState(false);
 
+  const resetTimer = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(
+    () => () => {
+      if (resetTimer.current) {
+        clearTimeout(resetTimer.current);
+      }
+    },
+    [],
+  );
+
   // The address stays visible and selectable if the clipboard is unavailable.
+  // The check and the announcement clear after a moment, so the live region
+  // changes again and a second copy is announced too.
   async function copyAddress(value: string) {
+    if (resetTimer.current) {
+      clearTimeout(resetTimer.current);
+    }
+
+    setCopied(false);
+
     try {
       await globalThis.navigator.clipboard.writeText(value);
       setCopied(true);
+      resetTimer.current = setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     } catch {
       setCopied(false);
     }

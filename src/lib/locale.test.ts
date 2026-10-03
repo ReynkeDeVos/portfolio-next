@@ -48,12 +48,29 @@ await test('a path that only starts with the letters de stays English', () => {
 await test('head links point every Locale at its final address', () => {
   const { meta, links } = localeHead('de');
 
-  assert.deepEqual(meta, [{ property: 'og:locale', content: 'de_DE' }]);
+  assert.deepEqual(meta, [
+    { property: 'og:url', content: 'https://portfolio.renkebrixel.workers.dev/de/' },
+    { property: 'og:locale', content: 'de_DE' },
+  ]);
   assert.deepEqual(links, [
+    { rel: 'canonical', href: 'https://portfolio.renkebrixel.workers.dev/de/' },
     { rel: 'alternate', hrefLang: 'en', href: 'https://portfolio.renkebrixel.workers.dev/' },
     { rel: 'alternate', hrefLang: 'de', href: 'https://portfolio.renkebrixel.workers.dev/de/' },
     { rel: 'alternate', hrefLang: 'x-default', href: 'https://portfolio.renkebrixel.workers.dev/' },
   ]);
+});
+
+await test('the default Locale is canonical at the site root', () => {
+  const { meta, links } = localeHead('en');
+
+  assert.deepEqual(
+    meta.find((tag) => tag.property === 'og:url'),
+    { property: 'og:url', content: 'https://portfolio.renkebrixel.workers.dev/' },
+  );
+  assert.deepEqual(
+    links.find((link) => link.rel === 'canonical'),
+    { rel: 'canonical', href: 'https://portfolio.renkebrixel.workers.dev/' },
+  );
 });
 
 await test('the bare root follows a remembered German choice', () => {

@@ -22,7 +22,9 @@ const favicon = `data:image/svg+xml,${encodeURIComponent(
 const Route = createRootRoute({
   head: () => ({
     meta: [
-      { charSet: 'utf8' },
+      // HTML only allows the label utf-8 here; the lint rule targets JavaScript APIs.
+      // oxlint-disable-next-line unicorn/text-encoding-identifier-case
+      { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     links: [

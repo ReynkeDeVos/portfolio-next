@@ -86,7 +86,13 @@ function AiSection({ locale }: { locale: Locale }) {
                 <td className='type-body-md text-on-surface py-3 pr-4 whitespace-nowrap'>
                   {item.model}
                 </td>
-                <td className='type-body-md text-on-surface py-3'>{item.effort}</td>
+                {/* The thinking levels keep the English names the model tools show. */}
+                <td
+                  lang={locale === 'en' ? undefined : 'en'}
+                  className='type-body-md text-on-surface py-3'
+                >
+                  {item.effort}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -123,11 +129,7 @@ function BuildSection({ locale }: { locale: Locale }) {
   const { build } = contentFor(locale).workflow;
 
   return (
-    <Disclosure
-      id='build-heading'
-      heading={t.buildHeading}
-      summary={build.map((item) => item.topic).join(' · ')}
-    >
+    <Disclosure heading={t.buildHeading} summary={build.map((item) => item.topic).join(' · ')}>
       <CardGrid>
         {build.map((item) => (
           <Card key={item.id}>

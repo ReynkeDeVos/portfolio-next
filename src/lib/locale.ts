@@ -34,12 +34,17 @@ function intlLocale(locale: Locale) {
 }
 
 // Head tags that tie the Locales together for search engines and link previews.
+// The canonical address folds query variants such as ?ref=cv into one page.
 function localeHead(locale: Locale) {
   const url = (target: Locale) => new URL(localePath(target), siteOrigin).href;
 
   return {
-    meta: [{ property: 'og:locale', content: localeSettings[locale].openGraph }],
+    meta: [
+      { property: 'og:url', content: url(locale) },
+      { property: 'og:locale', content: localeSettings[locale].openGraph },
+    ],
     links: [
+      { rel: 'canonical', href: url(locale) },
       ...locales.map((target) => ({ rel: 'alternate', hrefLang: target, href: url(target) })),
       { rel: 'alternate', hrefLang: 'x-default', href: url(defaultLocale) },
     ],
