@@ -1,4 +1,3 @@
-import { localeHead } from '../lib/locale.ts';
 import type { Locale } from '../lib/locale.ts';
 
 type Years = Readonly<{ from: number; to: number | null }>;
@@ -47,7 +46,7 @@ const en = {
   updated: 'Updated',
   buildHeading: 'How this portfolio is built',
   notFound: {
-    title: 'Page not found',
+    title: (name: string) => `Page not found · ${name}`,
     heading: 'Whoops!',
     description: 'I couldn’t find the page you were looking for.',
     back: 'Back to portfolio',
@@ -65,7 +64,7 @@ const en = {
     dismiss: 'Hide this note',
   },
   meta: {
-    title: 'Renke Brixel · Dev',
+    title: (name: string) => `${name} · Dev`,
     description:
       'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
   },
@@ -116,7 +115,7 @@ const copy = {
     updated: 'Stand',
     buildHeading: 'So ist dieses Portfolio gebaut',
     notFound: {
-      title: 'Seite nicht gefunden',
+      title: (name: string) => `Seite nicht gefunden · ${name}`,
       heading: 'Huch!',
       description: 'Ich konnte die Seite, nach der du gesucht hast, nicht finden.',
       back: 'Zurück zum Portfolio',
@@ -134,28 +133,11 @@ const copy = {
       dismiss: 'Hinweis ausblenden',
     },
     meta: {
-      title: 'Renke Brixel · Dev',
+      title: (name: string) => `${name} · Dev`,
       description:
         'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
     },
   },
 } satisfies Record<Locale, typeof en>;
 
-function pageHead(locale: Locale) {
-  const { meta } = copy[locale];
-  const head = localeHead(locale);
-
-  return {
-    meta: [
-      { title: meta.title },
-      { name: 'description', content: meta.description },
-      { property: 'og:title', content: meta.title },
-      { property: 'og:description', content: meta.description },
-      { property: 'og:type', content: 'website' },
-      ...head.meta,
-    ],
-    links: head.links,
-  };
-}
-
-export { copy, pageHead };
+export { copy };
