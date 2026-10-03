@@ -59,9 +59,12 @@ when a shared-element change warrants their snapshot work. They are an optional
 effect, not the default navigation mechanism. Keep new content immediately
 readable, including while an animation runs.
 
-No animation library is needed for the current scope. Avoid blanket layer
-promotion with will-change; measure first. Large layers, blur effects, and
-animations of layout dimensions need explicit profiling even on current Chrome.
+No animation library drives the page's own motion. The one exception is the
+decorative cat on the 404 page: its existing Lottie animation needs a player,
+so the light lottie-web SVG player loads with it, only on that page. Avoid
+blanket layer promotion with will-change; measure first. Large layers, blur
+effects, and animations of layout dimensions need explicit profiling even on
+current Chrome.
 
 ## Console greeting
 

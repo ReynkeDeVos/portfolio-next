@@ -339,7 +339,7 @@ Inventories that would otherwise become a wall of identical cards use denser for
 
 ### Build explanation
 
-The bilingual "How this portfolio is built" disclosure holds a grid of cards, each with the topic as title, the linked technologies and the reason. Its technologies, like the AI tools, are link chips. The section describes the actual renderer, editable UI, self-hosted font, AVIF crops, content validation and local tooling. `.tool-versions` provides a mise-compatible Node pin; Node runs local tooling, aube manages packages, and Cloudflare Workers with workerd is a prepared deployment target.
+The bilingual "How this portfolio is built" disclosure holds a grid of cards, each with the topic as title, the linked technologies and the reason. Its technologies, like the AI tools, are link chips. The section describes the actual framework, editable components, Content validation, runtime and packages, code quality, design assets, browser tests and deployment. mise selects Node LTS from `.tool-versions`; Node runs local tooling, aube manages packages, and Cloudflare Workers hosts the site on workerd.
 
 All feedback is decorative. Reduced-motion preferences set transition and animation duration to zero throughout the document; content never depends on finishing an effect. Exact easing and state snippets live in the v2 sidecar because the frontmatter schema has no motion or focus fields. Sidecar tonal ramps are synthesized dark-to-light preview metadata, except the tab-track strip, which uses existing surface ladder values; these strips do not add shipped palette tokens. Component previews embed the actual AVIF media and expand utility styles into local CSS. Navigation and dialog previews show the implemented surfaces and states; runtime selection, image opening and focus trapping remain app behavior.
 
@@ -353,7 +353,7 @@ All feedback is decorative. Reduced-motion preferences set transition and animat
 - **Do** show the shared green ring for keyboard focus, including whole-item project links.
 - **Do** commit content immediately and keep decorative motion independent of navigation.
 - **Do** respect reduced motion and restore the selected section without animation after language navigation or reload.
-- **Do** keep implementation explanations grounded in the real stack and describe Cloudflare as the prepared hosting target.
+- **Do** keep implementation explanations grounded in the real stack and describe Cloudflare Workers as the host.
 
 ### Don't
 

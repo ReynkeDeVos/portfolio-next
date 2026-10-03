@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-TanStack Start, React, TypeScript 7, Vite, Zod, shadcn/ui, Tailwind CSS, TanStack Query. Effect was removed from this project at the owner’s request; it remains in the general skills inventory. aube manages packages. Oxlint and Oxfmt use the owner's global configuration as their baseline. Cloudflare Workers is the prepared hosting target. Production credentials and a domain are not configured yet.
+TanStack Start, React, TypeScript 7, Vite, Zod, shadcn/ui, Tailwind CSS. Effect was removed from this project at the owner’s request; it remains in the general skills inventory. aube manages packages. Oxlint and Oxfmt use the owner's global configuration as their baseline. Cloudflare Workers Builds deploys `main` to the `portfolio` Worker at `portfolio.renkebrixel.workers.dev`. No custom domain is configured yet.
 
 ## Users
 
@@ -24,7 +24,7 @@ Renke Brixel is presented first as a software developer. His current role as an 
 
 Renke enjoys trying new technologies, prefers a terminal-first workflow and Arch Linux, and has more than twenty years of Linux experience. He follows AI news daily and evaluates which tools actually help his workflow. A small dated recommendation table is derived from his maintained model guide.
 
-Selected work leads with Reputation Assistant for Caves of Qud, Scoundrel TUI and Omarchy System Stats. Blitzlesen provides an additional web example. Teaching coverage and project experience are distinct; do not imply commercial production experience from curriculum presence alone. Better Auth is upcoming alongside the custom authentication solution.
+Selected work leads with Reputation Assistant for Caves of Qud, Scoundrel TUI and PokémonBattle, in that order. Elder Gym Bro App and Omarchy System Stats follow below them; Blitzlesen is not displayed. Teaching coverage and project experience are distinct; do not imply commercial production experience from curriculum presence alone. Better Auth is upcoming alongside the custom authentication solution.
 
 ## Visual Direction
 
@@ -32,7 +32,7 @@ The owner requested Material 3 Expressive after finding the previous mockups too
 
 Use Tailwind utilities and editable shadcn components first. Small CSS blocks cover design tokens, font declarations, keyframes and native features that are not supported clearly by utilities. Material 3 is visual guidance; no additional Material component framework is required. The `material-3` skill is installed for Codex and exposed to Claude Code.
 
-Use `@fontsource-variable` for self-hosted variable fonts. The draft uses Roboto Flex with only the Latin weight-axis font file required for its English and German content.
+Use `@fontsource-variable` for self-hosted variable fonts: Google Sans Flex for headings and Roboto Flex for text. Each build subsets both Latin files to the characters of the English and German content.
 
 ## Constraints
 
@@ -63,7 +63,7 @@ Use `@fontsource-variable` for self-hosted variable fonts. The draft uses Roboto
 
 - Material 3 Expressive is the requested replacement direction. Claude is responsible for the design, with a reviewable preview on a separate branch.
 - A portrait has been selected from the authorized photoshoot directory; final career dates and the updated downloadable CV still need confirmation.
-- Domain and production Cloudflare deployment are open.
+- A custom domain is open.
 
 ## Confirmed design preferences
 
@@ -80,5 +80,6 @@ retains its visual scale. Clickable controls use a pointer cursor.
 Navigation order is Work, Career, Skills, Workflow, with Work initially open.
 Restore the selected tab without motion on language navigation or reload.
 Design delegation conveys user requirements without prescribing a visual
-solution; Opus chooses the treatment. Local tooling runs directly on pinned
-Node, while aube remains the package manager and workerd the deployed runtime.
+solution; Opus chooses the treatment. Local tooling runs directly on the Node
+LTS that mise selects, while aube remains the package manager and workerd the
+deployed runtime.

@@ -21,6 +21,6 @@ None. The files are unmodified copies of the bundle.
 
 ## Repository integration
 
-- `@oxlint/plugins` is pinned exactly to `1.86.0`, the installed `oxlint` version. Upgrade the two packages together.
+- `@oxlint/plugins` uses the same caret range as `oxlint` (`^1.86.0`), and the lockfile resolves both to `1.86.0`. Upgrade the two packages together so they stay on the same version.
 - `.oxlintrc.json` sets all 18 generic anti-slop rules and `oxc/no-accumulating-spread` to `error`.
 - `.oxlintrc.json` and `.oxfmtrc.jsonc` both ignore agent tooling directories and this directory, so the formatter leaves the vendored code alone.
