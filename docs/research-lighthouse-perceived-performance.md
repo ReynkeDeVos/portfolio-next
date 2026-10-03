@@ -127,7 +127,9 @@ devices skip the image; reduced motion selects the small still. This is a
 separate approximately 142.6 KiB desktop download, not the 62.6 KiB unused
 JavaScript estimate. It does not gate hydration through an `await`, but its
 network and processing work are candidates for deferral. Whether they delay
-visible content or clicks remains unmeasured.
+visible content or clicks remains unmeasured. The greeting later switched to a
+29,796-byte AVIF animation (about 29.1 KiB); the figures above predate that
+change.
 
 ## Priorities for a page that feels instant
 
