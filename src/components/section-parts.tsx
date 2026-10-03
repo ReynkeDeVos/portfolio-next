@@ -141,12 +141,10 @@ function CompactRow({ label, children }: { label: ReactNode; children: ReactNode
 // A subsection that stays closed until asked for. The summary carries the
 // heading, a state layer and the shared focus ring; content opens instantly.
 function Disclosure({
-  id,
   heading,
   summary,
   children,
 }: {
-  id: string;
   heading: string;
   summary: string;
   children: ReactNode;
@@ -154,9 +152,7 @@ function Disclosure({
   return (
     <details className='group/disclosure'>
       <summary className='rounded-lg-inc bg-surface-card focus-visible:focus-ring before:bg-on-surface before:ease-effects-fast before:rounded-inherit relative grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 p-5 outline-none select-none before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 sm:px-6 [&::-webkit-details-marker]:hidden'>
-        <h3 id={id} className='type-headline-sm text-on-surface font-semibold'>
-          {heading}
-        </h3>
+        <h3 className='type-headline-sm text-on-surface font-semibold'>{heading}</h3>
         <ChevronDown
           aria-hidden
           className='text-on-surface ease-spatial row-span-2 size-6 transition-transform duration-300 group-open/disclosure:rotate-180'

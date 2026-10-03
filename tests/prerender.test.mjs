@@ -42,12 +42,20 @@ function hreflangPairs(elements) {
     .map((element) => [element.hreflang, element.href]);
 }
 
-for (const { locale, file } of localePages) {
+for (const { locale, path, file } of localePages) {
   test(`${file} is the ${locale} Locale page`, async () => {
     const html = await readFile(file, 'utf8');
-    const alternateLinks = tagAttributes(html, 'link').filter((link) => link.rel === 'alternate');
+    const links = tagAttributes(html, 'link');
+    const alternateLinks = links.filter((link) => link.rel === 'alternate');
+    const canonical = links.filter((link) => link.rel === 'canonical').map((link) => link.href);
+
+    const ogUrl = tagAttributes(html, 'meta')
+      .filter((meta) => meta.property === 'og:url')
+      .map((meta) => meta.content);
 
     assert.equal(tagAttributes(html, 'html')[0]?.lang, locale);
+    assert.deepEqual(canonical, [`${origin}${path}`]);
+    assert.deepEqual(ogUrl, [`${origin}${path}`]);
     assert.deepEqual(hreflangPairs(alternateLinks), alternates);
     assert.deepEqual(hreflangPairs(tagAttributes(html, 'a')), localeLinks);
   });
