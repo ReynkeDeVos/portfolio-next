@@ -6,20 +6,20 @@ import { copy } from '@/copy/copy';
 import { localePath, locales, rememberLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { sectionHash } from '@/lib/section';
-import type { Section } from '@/lib/section';
 import { setTheme, useThemePreference } from '@/lib/theme';
 import type { ThemePreference } from '@/lib/theme';
+
+import { useSectionNavigation } from './section-navigation';
 
 const themeIcons = { system: Monitor, light: Sun, dark: Moon } as const;
 
 const themeOrder: ThemePreference[] = ['system', 'light', 'dark'];
 
 // Locale and theme in one compact row at the foot of the profile panel.
-function SiteControls({ locale, section }: { locale: Locale; section: Section }) {
+function SiteControls({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const theme = useThemePreference();
-  // Preserve the open Section across Locales.
-  const hash = sectionHash(section);
+  const { section } = useSectionNavigation();
 
   return (
     <div className='border-outline-variant flex flex-wrap items-center justify-between gap-2 border-t pt-4'>
@@ -31,7 +31,10 @@ function SiteControls({ locale, section }: { locale: Locale; section: Section })
           <Button key={target} asChild variant='segment' size='sm'>
             <Link
               to={localePath(target)}
-              hash={hash}
+              // The open Section comes along to the other Locale. Not `hash: true`:
+              // that reads the address while hydrating, and React keeps the
+              // prerendered href when it differs, which has no hash.
+              hash={sectionHash(section)}
               resetScroll={false}
               hashScrollIntoView={false}
               activeOptions={{ exact: true }}

@@ -5,12 +5,11 @@ import { Button } from '@/components/ui/button';
 import { contentFor } from '@/content/content';
 import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
-import type { Section } from '@/lib/section';
 
 import { Portrait } from './portrait';
 import { SiteControls } from './site-controls';
 
-function Identity({ locale, section, ticks }: { locale: Locale; section: Section; ticks: number }) {
+function Identity({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const { profile } = contentFor(locale);
   const { currentRole } = profile;
@@ -23,7 +22,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
       className='rounded-xl-inc bg-surface-group flex flex-col gap-5 p-5 sm:p-6 lg:top-6 lg:self-start lg:p-7 lg:[@media(min-height:46rem)]:sticky'
     >
       <div className='flex items-center gap-4 sm:gap-5'>
-        <Portrait locale={locale} ticks={ticks} />
+        <Portrait locale={locale} />
         <div className='min-w-0'>
           <h1
             id='identity-name'
@@ -61,7 +60,7 @@ function Identity({ locale, section, ticks }: { locale: Locale; section: Section
 
       <Contact locale={locale} />
 
-      <SiteControls locale={locale} section={section} />
+      <SiteControls locale={locale} />
     </section>
   );
 }

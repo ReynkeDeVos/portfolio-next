@@ -125,6 +125,37 @@ test('a hash change from outside the tabs opens that Section', async ({ page }) 
   );
 });
 
+test('Back and Forward through hash links select their Sections', async ({ page }) => {
+  await page.goto('/');
+  await waitForHydration(page);
+
+  // Unlike the tabs, plain hash links push history entries.
+  await page.evaluate(() => {
+    globalThis.location.hash = '#career';
+  });
+  await page.evaluate(() => {
+    globalThis.location.hash = '#skills';
+  });
+  await expect(page.getByRole('tab', { name: 'Skills' })).toHaveAttribute('aria-selected', 'true');
+
+  await page.goBack();
+  await expect(page).toHaveURL('/#career');
+  await expect(page.getByRole('tab', { name: 'Career' })).toHaveAttribute('aria-selected', 'true');
+
+  await page.goForward();
+  await expect(page).toHaveURL('/#skills');
+  await expect(page.getByRole('tab', { name: 'Skills' })).toHaveAttribute('aria-selected', 'true');
+});
+
+test('a shared Section link carries its Section into the Locale links', async ({ page }) => {
+  await page.goto('/#career');
+  await waitForHydration(page);
+
+  // Hydration keeps the prerendered hrefs, so the Section has to arrive after it.
+  await expect(page.getByRole('link', { name: 'Deutsch' })).toHaveAttribute('href', '/de/#career');
+  await expect(page.getByRole('link', { name: 'English' })).toHaveAttribute('href', '/#career');
+});
+
 test('the portrait frame turns one lobe per Section change, in its direction', async ({ page }) => {
   await page.goto('/');
   await waitForHydration(page);

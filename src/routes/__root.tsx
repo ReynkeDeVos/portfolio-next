@@ -12,7 +12,7 @@ import robotoFlexSubset from '@/generated/fonts/roboto-flex-subset.woff2?url';
 import { documentHead } from '@/head/head';
 import { engineScript } from '@/lib/engine';
 import { localeFromPathname, localeScript } from '@/lib/locale';
-import { sectionScript } from '@/lib/section';
+import { sectionScript, sectionStyles } from '@/lib/section';
 import { themeScript } from '@/lib/theme';
 
 import appCss from '../styles.css?url';
@@ -37,6 +37,13 @@ function Root() {
             __html: localeScript + themeScript + engineScript + sectionScript,
           }}
         />
+        {/* The pre-hydration Section rules are built from the Section list, so they
+            can't live in the theme CSS; here they still apply before first paint. */}
+        {/* oxlint-disable shadcn/no-inline-styles */}
+        {/* Reviewed: the rules are a constant string built from the Section names. */}
+        {/* fallow-ignore-next-line security-sink */}
+        <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+        {/* oxlint-enable shadcn/no-inline-styles */}
         <HeadContent />
       </head>
       <body>
