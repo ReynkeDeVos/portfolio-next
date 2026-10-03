@@ -96,7 +96,7 @@ function warmFullPortrait() {
 // thumbnail never moves and the large photo fades in place at its final size.
 // With reduced motion the Portrait viewer cross-fades in place instead, without
 // travel. The transition types scope the morph names and keyframes, in
-// morph.css, to this one moment. Without view transitions the Portrait viewer
+// portrait.css, to this one moment. Without view transitions the Portrait viewer
 // simply opens and closes.
 function morphPortrait(open: boolean, commit: () => void) {
   const reduceMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;

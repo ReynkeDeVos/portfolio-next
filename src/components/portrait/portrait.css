@@ -1,7 +1,42 @@
 /*
- * The Portrait viewer's styles: its scrim fade, the scroll lock it causes and
- * the morph view transition between the thumbnail and the viewer.
+ * The Portrait's own styles: the hint on the thumbnail, and the Portrait
+ * viewer's scrim fade, the scroll lock it causes and the morph view
+ * transition between the thumbnail and the viewer.
  */
+
+/*
+ * Portrait hint. Sizes are in the 100-unit SVG box, which scales with the
+ * frame, so they land near 11px and then 13px once the frame has grown.
+ * The narrow two-column range uses the smaller frame again.
+ */
+@utility type-portrait-hint {
+  font-size: 10.6px;
+
+  @variant sm {
+    font-size: 9.4px;
+  }
+
+  @variant lg {
+    font-size: 10.6px;
+  }
+
+  @variant xl {
+    font-size: 8.6px;
+  }
+}
+
+/* The hint fades and rises together with the frame zoom. */
+@utility transition-portrait-hint {
+  transition-property: opacity, translate, scale;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+}
+
+/* One dash along the hint arc; the path sets the lengths as custom properties. */
+@utility portrait-hint-band {
+  stroke-dasharray: var(--hint-dash);
+  stroke-dashoffset: var(--hint-offset);
+}
 
 @theme {
   /* Entrance-only opacity; the Portrait viewer closes without waiting for an exit. */
