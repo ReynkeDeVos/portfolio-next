@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const port = 4317;
+// E2E_PORT lets parallel checkouts each run their own preview server.
+const port = Number(process.env.E2E_PORT ?? 4317);
 
 // Runs against the built site, so build first: `aubr build && aubr test:e2e`.
 // Chromium only, the engine the portfolio targets.
