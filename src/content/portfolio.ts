@@ -3,8 +3,8 @@ import type { Content } from './schema.ts';
 export const portfolio = {
   name: 'Renke Brixel',
   location: {
-    en: 'Based in Hamburg, Germany.',
-    de: 'Wohnhaft in Hamburg, Deutschland.',
+    en: 'Hamburg, Germany',
+    de: 'Hamburg, Deutschland',
   },
   emailEncoded: 'cmVua2UuYnJpeGVsK3BvcnRmb2xpb0BnbWFpbC5jb20=',
   github: 'https://github.com/ReynkeDeVos',
@@ -175,6 +175,13 @@ export const portfolio = {
     },
     items: [
       {
+        id: 'investigate',
+        task: { en: 'Investigate & debug', de: 'Untersuchen & debuggen' },
+        model: 'GPT-6.1 Sol',
+        effort: 'Medium',
+        note: { en: 'High for difficult diagnosis', de: 'High für schwierige Diagnosen' },
+      },
+      {
         id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
         model: 'GPT-6.1 Sol',
@@ -193,13 +200,6 @@ export const portfolio = {
           en: 'Ambiguous features, substantial refactoring or long ports',
           de: 'Unklare Anforderungen, größere Refactorings oder langwierige Portierungen',
         },
-      },
-      {
-        id: 'investigate',
-        task: { en: 'Investigate & debug', de: 'Untersuchen & debuggen' },
-        model: 'GPT-6.1 Sol',
-        effort: 'Medium',
-        note: { en: 'High for difficult diagnosis', de: 'High für schwierige Diagnosen' },
       },
       {
         id: 'review',
