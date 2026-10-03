@@ -10,16 +10,15 @@ test('the bare address opens Work', async ({ page }) => {
     'aria-selected',
     'true',
   );
-  await expect(page.getByRole('tabpanel')).toHaveAttribute('data-section', 'work');
+  await expect(page.getByRole('tabpanel', { name: 'Work', exact: true })).toBeVisible();
 });
 
 test('a shared Section link shows that Section before hydration', async ({ page }) => {
   await blockHydration(page);
   await page.goto('/#career');
 
-  await expect(page.locator('html')).toHaveAttribute('data-section', 'career');
-  await expect(page.locator('[data-slot="tabs-content"][data-section="career"]')).toBeVisible();
-  await expect(page.locator('[data-slot="tabs-content"][data-section="work"]')).toBeHidden();
+  await expect(page.getByRole('tabpanel', { name: 'Career' })).toBeVisible();
+  await expect(page.getByRole('tabpanel', { name: 'Work', exact: true })).toBeHidden();
 });
 
 test('a shared Section link selects that Section once hydrated', async ({ page }) => {
@@ -30,8 +29,12 @@ test('a shared Section link selects that Section once hydrated', async ({ page }
     'aria-selected',
     'true',
   );
-  await expect(page.getByRole('tabpanel')).toHaveAttribute('data-section', 'career');
-  await expect(page.locator('html')).not.toHaveAttribute('data-section');
+  await expect(page.getByRole('tabpanel', { name: 'Werdegang' })).toBeVisible();
+
+  // Once React has the Section, the pre-hydration display must let go of it.
+  await page.getByRole('tab', { name: 'Projekte' }).click();
+  await expect(page.getByRole('tabpanel', { name: 'Projekte' })).toBeVisible();
+  await expect(page.getByRole('tabpanel', { name: 'Werdegang' })).toBeHidden();
 });
 
 test('switching Sections puts the Section in the address and keeps the search', async ({
@@ -42,7 +45,7 @@ test('switching Sections puts the Section in the address and keeps the search', 
 
   await page.getByRole('tab', { name: 'Skills' }).click();
   await expect(page).toHaveURL('/?ref=cv#skills');
-  await expect(page.getByRole('tabpanel')).toHaveAttribute('data-section', 'skills');
+  await expect(page.getByRole('tabpanel', { name: 'Skills' })).toBeVisible();
 
   // The default Section needs no hash.
   await page.getByRole('tab', { name: 'Work', exact: true }).click();
@@ -61,13 +64,22 @@ test('switching Sections keeps the scroll position', async ({ page }) => {
   });
   const before = await page.evaluate(() => globalThis.scrollY);
   expect(before).toBeGreaterThan(0);
+  // Counts every scroll, so a reset that is later restored still shows.
+  await page.evaluate(() => {
+    globalThis.addEventListener('scroll', () => {
+      document.documentElement.dataset.scrolls = String(
+        Number(document.documentElement.dataset.scrolls ?? 0) + 1,
+      );
+    });
+  });
 
   await page.getByRole('tab', { name: 'Career' }).click();
   await expect(page).toHaveURL('/#career');
-  await expect(page.getByRole('tabpanel')).toHaveAttribute('data-section', 'career');
-  // A reset would follow the router's render; give it time to show.
-  await page.waitForTimeout(200);
+  await expect(page.getByRole('tabpanel', { name: 'Career' })).toBeVisible();
+  // A reset would follow the router's render; leave room for it to happen.
+  await page.waitForTimeout(300);
 
+  await expect(page.locator('html')).not.toHaveAttribute('data-scrolls');
   expect(await page.evaluate(() => globalThis.scrollY)).toBe(before);
 });
 
@@ -116,13 +128,14 @@ test('a hash change from outside the tabs opens that Section', async ({ page }) 
 test('the portrait frame turns one lobe per Section change, in its direction', async ({ page }) => {
   await page.goto('/');
   await waitForHydration(page);
-  const frame = page.getByRole('button', { name: /View larger portrait/u });
+  // The frame is the clip path's shape; its rotation settles after the transition.
+  const frame = page.locator('#portrait-cookie path');
 
   await page.getByRole('tab', { name: 'Workflow' }).click();
-  await expect(frame).toHaveCSS('--portrait-angle', '30deg');
+  await expect(frame).toHaveCSS('rotate', '30deg');
 
   await page.getByRole('tab', { name: 'Career' }).click();
-  await expect(frame).toHaveCSS('--portrait-angle', '0deg');
+  await expect(frame).toHaveCSS('rotate', '0deg');
 });
 
 test.describe('outside Chromium', () => {
