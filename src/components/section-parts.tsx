@@ -3,6 +3,8 @@ import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { copy } from '@/copy/copy';
+import type { Locale } from '@/lib/locale';
 
 // Every panel shares one grammar: a connected list of large items first,
 // then titled subsections of smaller cards, compact lists or a table, then
@@ -172,13 +174,28 @@ function CardDetails({ children }: { children: ReactNode }) {
   return <p className='type-body-sm text-on-surface-variant mt-2'>{children}</p>;
 }
 
-// Links take one of three Material forms, all with a stationary ↗:
-// a whole item (one destination), outlined chips (several destinations in
-// one item) or a tonal button (a standalone link). Text is never a bare link.
+// Links take one of three Material forms, all with a stationary ↗. A whole
+// item means the entry itself is the destination. Outlined chips are an
+// editorial group of tool or destination links that belong together, even a
+// group of one. A tonal button is a standalone link. Text is never a bare link.
+
+// Every link opens in a new tab. The ↗ shows that to sighted visitors; this
+// tells assistive tech, last in the link's name.
+function NewTabNotice({ locale }: { locale: Locale }) {
+  return <span className='sr-only'>, {copy[locale].opensInNewTab}</span>;
+}
 
 // The link's ::after stretches over the closest positioned item, which
 // draws the state layer and the focus ring.
-function StretchedLink({ href, children }: { href: string; children: ReactNode }) {
+function StretchedLink({
+  href,
+  locale,
+  children,
+}: {
+  href: string;
+  locale: Locale;
+  children: ReactNode;
+}) {
   return (
     <a
       href={href}
@@ -187,6 +204,7 @@ function StretchedLink({ href, children }: { href: string; children: ReactNode }
       className='text-on-surface cursor-pointer outline-none after:absolute after:inset-0 after:cursor-pointer'
     >
       {children}
+      <NewTabNotice locale={locale} />
     </a>
   );
 }
@@ -197,9 +215,11 @@ function LinkArrow() {
 
 function LinkChips({
   links,
+  locale,
   className,
 }: {
   links: readonly { name: string; url: string }[];
+  locale: Locale;
   className?: string;
 }) {
   return (
@@ -209,6 +229,7 @@ function LinkChips({
           <Button asChild variant='chip' size='sm'>
             <a href={link.url} target='_blank' rel='noopener noreferrer'>
               {link.name}
+              <NewTabNotice locale={locale} />
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
           </Button>
@@ -218,12 +239,21 @@ function LinkChips({
   );
 }
 
-function ProfileLink({ href, children }: { href: string; children: string }) {
+function ProfileLink({
+  href,
+  locale,
+  children,
+}: {
+  href: string;
+  locale: Locale;
+  children: string;
+}) {
   return (
     <p>
       <Button asChild variant='tonal'>
         <a href={href} target='_blank' rel='noopener noreferrer'>
           {children}
+          <NewTabNotice locale={locale} />
           <ArrowUpRight aria-hidden className='size-4' />
         </a>
       </Button>
