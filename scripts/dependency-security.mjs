@@ -8,8 +8,18 @@ import { writeSecurityReport } from './dependency-security-report.mjs';
 
 const sections = ['dependencies', 'devDependencies', 'optionalDependencies'];
 
+const validationSteps = [
+  ['aube', ['install', '--frozen-lockfile']],
+  ['aubr', ['check']],
+  ['aubr', ['build']],
+];
+
 function finding(id, advisory, scope = 'all') {
   return { ...advisory, id, scope };
+}
+
+function devThreshold(mode) {
+  return mode === 'weekly' ? 'critical' : 'high';
 }
 
 function selectFindings(scan, mode) {
@@ -24,7 +34,7 @@ function selectFindings(scan, mode) {
   };
 
   add(scan.prod, 'high', 'production');
-  add(scan.dev, mode === 'weekly' ? 'critical' : 'high', 'development');
+  add(scan.dev, devThreshold(mode), 'development');
 
   return [...found.values()];
 }
@@ -71,66 +81,77 @@ function raiseVersionFloors(manifest, before, after) {
   return changed;
 }
 
-function runSecurity({ mode, fix = false, run = execute, reportDir = '.security-report' }) {
-  if (!['weekly', 'monthly', 'check'].includes(mode) || (fix && mode === 'check')) {
-    throw new Error('Use weekly/monthly [--fix] or check');
-  }
-
-  mkdirSync(reportDir, { recursive: true });
-  const before = scanDependencies(run);
-  const selected = selectFindings(before, mode);
+function auditFix(run, mode) {
   const notes = [];
-  const oldVersions = directVersions(run);
-  let after = before;
 
-  if (fix && selected.length > 0) {
-    for (const [scope, level] of [
-      ['--prod', 'high'],
-      ['--dev', mode === 'weekly' ? 'critical' : 'high'],
-    ]) {
-      const result = run('aube', ['audit', scope, '--audit-level', level, '--fix=update']);
+  for (const [scope, level] of [
+    ['--prod', 'high'],
+    ['--dev', devThreshold(mode)],
+  ]) {
+    const result = run('aube', ['audit', scope, '--audit-level', level, '--fix=update']);
 
-      if (result.status !== 0) {
-        notes.push(`Initial ${scope} repair: ${result.stderr}`);
-      }
+    if (result.status !== 0) {
+      notes.push(`Initial ${scope} repair: ${result.stderr}`);
     }
-
-    after = scanDependencies(run);
-    const remaining = selectFindings(after, mode);
-    const parents = new Set();
-
-    for (const name of new Set(remaining.map((item) => item.module_name))) {
-      const result = checked(run, 'aube', ['why', name, '--json']);
-
-      for (const entry of JSON.parse(result.stdout)) {
-        const parent = entry.chain?.[0]?.name;
-
-        if (entry.importer === '.' && parent && oldVersions[parent]) {
-          parents.add(parent);
-        }
-      }
-    }
-
-    if (parents.size > 0) {
-      // Scope the fallback to parents of remaining findings; never update the whole manifest.
-      const result = run('aube', ['update', '--latest', '--lockfile-only', ...parents]);
-      notes.push(`Targeted fallback: ${[...parents].join(', ')} (may include major updates).`);
-
-      if (result.status !== 0) {
-        notes.push(`Fallback failed: ${result.stderr}`);
-      }
-    }
-
-    const manifest = JSON.parse(readFileSync('package.json', 'utf8'));
-
-    if (raiseVersionFloors(manifest, oldVersions, directVersions(run))) {
-      writeFileSync('package.json', `${JSON.stringify(manifest, null, 2)}\n`);
-      checked(run, 'aube', ['install', '--lockfile-only', '--ignore-scripts']);
-    }
-
-    after = scanDependencies(run);
   }
 
+  return notes;
+}
+
+function directParents(run, findings, oldVersions) {
+  const parents = new Set();
+
+  for (const name of new Set(findings.map((item) => item.module_name))) {
+    const result = checked(run, 'aube', ['why', name, '--json']);
+
+    for (const entry of JSON.parse(result.stdout)) {
+      const parent = entry.chain?.[0]?.name;
+
+      if (entry.importer === '.' && parent && oldVersions[parent]) {
+        parents.add(parent);
+      }
+    }
+  }
+
+  return parents;
+}
+
+function updateDirectParents(run, mode, oldVersions) {
+  const remaining = selectFindings(scanDependencies(run), mode);
+  const parents = directParents(run, remaining, oldVersions);
+
+  if (parents.size === 0) {
+    return [];
+  }
+
+  // Scope the fallback to parents of remaining findings; never update the whole manifest.
+  const result = run('aube', ['update', '--latest', '--lockfile-only', ...parents]);
+  const notes = [`Targeted fallback: ${[...parents].join(', ')} (may include major updates).`];
+
+  if (result.status !== 0) {
+    notes.push(`Fallback failed: ${result.stderr}`);
+  }
+
+  return notes;
+}
+
+function syncVersionFloors(run, oldVersions) {
+  const manifest = JSON.parse(readFileSync('package.json', 'utf8'));
+
+  if (raiseVersionFloors(manifest, oldVersions, directVersions(run))) {
+    writeFileSync('package.json', `${JSON.stringify(manifest, null, 2)}\n`);
+    checked(run, 'aube', ['install', '--lockfile-only', '--ignore-scripts']);
+  }
+}
+
+function repair(run, mode, oldVersions) {
+  const notes = [...auditFix(run, mode), ...updateDirectParents(run, mode, oldVersions)];
+  syncVersionFloors(run, oldVersions);
+
+  return { after: scanDependencies(run), notes };
+}
+
+function assessFindings({ mode, before, after, selected }) {
   const remaining = selectFindings(after, mode);
   const affectedNames = new Set(selected.map((item) => item.module_name));
 
@@ -142,67 +163,84 @@ function runSecurity({ mode, fix = false, run = execute, reportDir = '.security-
     .filter(([id, item]) => ranks[item.severity] >= ranks.high && !before.all.advisories[id])
     .map(([id, item]) => finding(id, item));
 
-  const unresolved = remaining.length > 0 || affectedRemaining.length > 0 || newSevere.length > 0;
-  const diff = checked(run, 'git', ['diff', 'HEAD', '--', 'package.json', 'aube-lock.yaml']).stdout;
-  let validation = 'No dependency update to validate.';
-  let validationFailed = false;
+  return {
+    remaining,
+    affectedRemaining,
+    newSevere,
+    unresolved: remaining.length > 0 || affectedRemaining.length > 0 || newSevere.length > 0,
+  };
+}
 
-  if (fix && diff) {
-    const checks = [
-      ['aube', ['install', '--frozen-lockfile']],
-      ['aubr', ['check']],
-      ['aubr', ['build']],
-    ];
+function validate(run, reportDir) {
+  const results = [];
 
-    const results = [];
+  for (const [command, args] of validationSteps) {
+    const result = run(command, args);
+    writeFileSync(`${reportDir}/${command}-${args[0]}.log`, `${result.stdout}\n${result.stderr}`);
+    results.push(`${command} ${args.join(' ')}: ${result.status === 0 ? 'PASS' : 'FAIL'}`);
 
-    for (const [command, args] of checks) {
-      const result = run(command, args);
-      writeFileSync(`${reportDir}/${command}-${args[0]}.log`, `${result.stdout}\n${result.stderr}`);
-      results.push(`${command} ${args.join(' ')}: ${result.status === 0 ? 'PASS' : 'FAIL'}`);
-
-      if (result.status !== 0) {
-        validationFailed = true;
-        break;
-      }
+    if (result.status !== 0) {
+      return { summary: results.join('\n'), failed: true };
     }
-
-    validation = results.join('\n');
   }
 
-  const newVersions = directVersions(run);
+  return { summary: results.join('\n'), failed: false };
+}
 
-  const updates = Object.keys(oldVersions)
+function versionUpdates(oldVersions, newVersions) {
+  return Object.keys(oldVersions)
     .filter((name) => oldVersions[name] !== newVersions[name])
     .map((name) => `- ${name}: ${oldVersions[name]} → ${newVersions[name]}`);
+}
 
-  const lower = Object.entries(after.all.advisories)
+function lowerSeverity(scan) {
+  return Object.entries(scan.all.advisories)
     .filter(([, item]) => ranks[item.severity] < ranks.high)
     .map(([id, item]) => finding(id, item));
+}
+
+function runSecurity({ mode, fix = false, run = execute, reportDir = '.security-report' }) {
+  if (!['weekly', 'monthly', 'check'].includes(mode) || (fix && mode === 'check')) {
+    throw new Error('Use weekly/monthly [--fix] or check');
+  }
+
+  mkdirSync(reportDir, { recursive: true });
+  const before = scanDependencies(run);
+  const selected = selectFindings(before, mode);
+  const oldVersions = directVersions(run);
+
+  const { after, notes } =
+    fix && selected.length > 0 ? repair(run, mode, oldVersions) : { after: before, notes: [] };
+
+  const { unresolved, ...findings } = assessFindings({ mode, before, after, selected });
+  const diff = checked(run, 'git', ['diff', 'HEAD', '--', 'package.json', 'aube-lock.yaml']).stdout;
+
+  const validation =
+    fix && diff
+      ? validate(run, reportDir)
+      : { summary: 'No dependency update to validate.', failed: false };
+
+  const lower = lowerSeverity(after);
 
   writeSecurityReport(reportDir, {
     mode,
     before,
     after,
     selected,
-    remaining,
-    affectedRemaining,
-    newSevere,
-    updates,
-    validation,
+    ...findings,
+    updates: versionUpdates(oldVersions, directVersions(run)),
+    validation: validation.summary,
     lower,
     notes,
   });
-  const failed = unresolved || validationFailed;
+  const failed = unresolved || validation.failed;
 
-  const outputs = {
+  return {
     changed: Boolean(diff),
     failed,
     draft: failed ? 'always-true' : 'false',
-    report_issue: unresolved || validationFailed || (mode === 'monthly' && lower.length > 0),
+    report_issue: failed || (mode === 'monthly' && lower.length > 0),
   };
-
-  return outputs;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
