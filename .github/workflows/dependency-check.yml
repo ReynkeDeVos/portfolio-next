@@ -8,6 +8,7 @@ on:
       - aube-workspace.yaml
       - .npmrc
       - .tool-versions
+      - mise.toml
       - scripts/dependency-security*
       - scripts/install-aube.sh
       - .github/actions/setup-aube/**
@@ -20,6 +21,7 @@ on:
       - aube-workspace.yaml
       - .npmrc
       - .tool-versions
+      - mise.toml
       - scripts/dependency-security*
       - scripts/install-aube.sh
       - .github/actions/setup-aube/**
