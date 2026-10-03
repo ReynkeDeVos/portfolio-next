@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { contentFor } from '@/content/content';
+import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
 import type { Section } from '@/lib/section';
 
-import { copy } from './copy';
 import { Portrait } from './portrait';
 import { SiteControls } from './site-controls';
 

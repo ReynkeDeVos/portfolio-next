@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 import type { CSSProperties } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
 import {
   defaultSection,
@@ -12,7 +13,6 @@ import {
 } from '@/lib/section';
 import type { Section } from '@/lib/section';
 
-import { copy } from './copy';
 import { EngineNote } from './engine-note';
 import { Identity } from './identity';
 import { sectionPanels } from './section-panels';

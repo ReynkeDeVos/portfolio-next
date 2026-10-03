@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { pageHead } from '@/components/copy';
 import { PortfolioPage } from '@/components/portfolio-page';
+import { pageHead } from '@/head/head';
 
 const Route = createFileRoute('/de')({
   head: () => pageHead('de'),

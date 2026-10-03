@@ -2,14 +2,13 @@ import { Link } from '@tanstack/react-router';
 import { Monitor, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { copy } from '@/copy/copy';
 import { localePath, locales, rememberLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { sectionHash } from '@/lib/section';
 import type { Section } from '@/lib/section';
 import { setTheme, useThemePreference } from '@/lib/theme';
 import type { ThemePreference } from '@/lib/theme';
-
-import { copy } from './copy';
 
 const themeIcons = { system: Monitor, light: Sun, dark: Moon } as const;
 

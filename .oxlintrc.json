@@ -295,16 +295,68 @@
       }
     },
     {
-      // Content and Locale sit below the views; they never reach up into components.
-      "files": ["src/content/**", "src/lib/**"],
+      // Layers, bottom up: lib, then Content and Copy, then head, then the views.
+      // lib is the floor and reaches up into nothing.
+      "files": ["src/lib/**"],
       "rules": {
         "no-restricted-imports": [
           "error",
           {
             "patterns": [
               {
-                "regex": "^(@/|(\\.\\.?/)+)components(/|$)",
-                "message": "Content and lib modules must not import from components; move the shared piece down instead."
+                "regex": "^(@/|(\\.\\.?/)+)(components|routes|content|copy|head)(/|$)",
+                "message": "lib is the bottom layer; it must not import Content, Copy, head or the views. Move the shared piece down instead."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      // Content is word-free facts: it never reaches up into Copy, head or the views.
+      "files": ["src/content/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "^(@/|(\\.\\.?/)+)(components|routes|copy|head)(/|$)",
+                "message": "Content must not import Copy, head or the views; move the shared piece down instead."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      // Copy sits beside Content, below head and the views.
+      "files": ["src/copy/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "^(@/|(\\.\\.?/)+)(components|routes|head)(/|$)",
+                "message": "Copy must not import head or the views; move the shared piece down instead."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      // head composes the layers below it and stays below the views.
+      "files": ["src/head/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "^(@/|(\\.\\.?/)+)(components|routes)(/|$)",
+                "message": "head must not import the views; move the shared piece down instead."
               }
             ]
           }

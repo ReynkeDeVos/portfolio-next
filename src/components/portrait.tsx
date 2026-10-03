@@ -5,11 +5,10 @@ import { flushSync } from 'react-dom';
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { contentFor } from '@/content/content';
+import { copy } from '@/copy/copy';
 import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { startViewTransition } from '@/lib/view-transition';
-
-import { copy } from './copy';
 
 const lobes = 12;
 
