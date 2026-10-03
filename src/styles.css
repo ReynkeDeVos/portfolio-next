@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './generated/fonts/fonts.css';
+@import './components/portrait/morph.css';
 
 /*
  * Material color roles on a warm sand ladder (Caramellatte as the main
@@ -121,15 +122,6 @@
 
   /* Material emphasized easing for transitions that begin and end on screen. */
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
-
-  /* Entrance-only opacity; dialogs close without waiting for an exit. */
-  --animate-fade-in: fade-in 150ms var(--ease-effects-fast);
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-  }
 }
 
 /*
@@ -256,142 +248,6 @@
   stroke-dashoffset: var(--hint-offset);
 }
 
-/*
- * Container transform between a trigger and its dialog, used by the portrait
- * viewer. Only the shape travels: `view-transition-morph` marks both ends, and
- * the dialog's content captures separately so it never scales. The names only
- * apply while a morph view transition runs.
- */
-@utility view-transition-morph {
-  :root:active-view-transition-type(morph) & {
-    view-transition-name: morph;
-  }
-}
-
-@utility view-transition-morph-content {
-  :root:active-view-transition-type(morph) & {
-    view-transition-name: match-element;
-    view-transition-class: morph-content;
-  }
-}
-
-/* Dialog controls enter on their own beat, after the content. */
-@utility view-transition-morph-control {
-  :root:active-view-transition-type(morph) & {
-    view-transition-name: match-element;
-    view-transition-class: morph-control;
-  }
-}
-
-/*
- * The shape is a plain dialog surface: the image pair paints it and turns the
- * trigger's circle into the dialog corners, so neither snapshot is stretched.
- * Content fades in place once the shape has nearly arrived and leaves first.
- * The shape is translucent while it overlaps the thumbnail, so the portrait
- * stays visible under it at both ends.
- */
-:root:active-view-transition-type(morph) {
-  &::view-transition-group(morph) {
-    animation-duration: 300ms;
-    animation-timing-function: var(--ease-emphasized);
-  }
-
-  &::view-transition-image-pair(morph) {
-    overflow: clip;
-    border-radius: var(--radius-xl-inc);
-    background-color: var(--md-sys-color-surface-container-high);
-    animation-fill-mode: both;
-  }
-
-  &::view-transition-old(morph),
-  &::view-transition-new(morph) {
-    display: none;
-  }
-
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    animation-duration: 200ms;
-    animation-timing-function: var(--ease-effects-fast);
-  }
-}
-
-:root:active-view-transition-type(morph-open) {
-  &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, morph-fade-in;
-    animation-duration: 300ms, 140ms;
-    animation-timing-function: var(--ease-emphasized), linear;
-  }
-
-  &::view-transition-new(*.morph-content) {
-    animation: morph-fade-in 150ms var(--ease-effects-fast) 110ms both;
-  }
-
-  /* The close button follows as the shape settles: a quick fade and a small
-     pop from 0.8 on the buttons' press spring, so it lands with the panel. */
-  &::view-transition-new(*.morph-control) {
-    animation:
-      morph-fade-in 120ms var(--ease-effects-fast) 160ms both,
-      morph-pop 240ms var(--ease-spatial-fast) 160ms both;
-  }
-}
-
-/* Closing clears the content before the shape starts back. */
-:root:active-view-transition-type(morph-close) {
-  &::view-transition-group(morph) {
-    animation-duration: 220ms;
-    animation-delay: 40ms;
-  }
-
-  &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, morph-fade-out;
-    animation-duration: 220ms, 130ms;
-    animation-delay: 40ms, 130ms;
-    animation-timing-function: var(--ease-emphasized), linear;
-    animation-direction: reverse, normal;
-  }
-
-  &::view-transition-old(*.morph-content),
-  &::view-transition-old(*.morph-control) {
-    animation: morph-fade-out 90ms var(--ease-effects-fast) both;
-  }
-}
-
-/*
- * Reduced motion: nothing carries a morph name, so the page and the viewer
- * cross-fade in place. Opacity still confirms the change without travel.
- */
-:root:active-view-transition-type(morph-fade) {
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    animation-duration: 150ms;
-    animation-timing-function: var(--ease-effects-fast);
-  }
-}
-
-@keyframes morph-corners {
-  from {
-    border-radius: 50%;
-  }
-}
-
-@keyframes morph-fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes morph-pop {
-  from {
-    scale: 0.8;
-  }
-}
-
-@keyframes morph-fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
 @layer base {
   html {
     background-color: var(--md-sys-color-surface);
@@ -401,15 +257,6 @@
     scrollbar-gutter: stable;
     scrollbar-color: var(--md-sys-color-outline) var(--md-sys-color-surface);
     -webkit-text-size-adjust: 100%;
-  }
-
-  /*
-   * The stable gutter already keeps the page in place when a dialog locks
-   * scrolling, so the lock's scrollbar compensation would shift it instead.
-   * A layered !important outranks the lock's unlayered one.
-   */
-  body[data-scroll-locked] {
-    margin-right: 0 !important;
   }
 
   @media (pointer: fine) {

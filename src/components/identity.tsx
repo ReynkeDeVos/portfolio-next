@@ -6,7 +6,7 @@ import { contentFor } from '@/content/content';
 import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
 
-import { Portrait } from './portrait';
+import { Portrait } from './portrait/portrait';
 import { SiteControls } from './site-controls';
 
 function Identity({ locale }: { locale: Locale }) {

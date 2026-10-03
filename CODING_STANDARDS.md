@@ -4,7 +4,7 @@ Judgement calls for review. Mechanical rules live in `.oxlintrc.json` (lint) and
 
 ## Glossary names
 
-- Identifiers, comments and docs use the `GLOSSARY.md` terms: Locale, Content, Copy, Section, Project, Selected work, Current role, Engine note. Flag the synonyms it lists under _Avoid_ (e.g. a Content type named `Portfolio`, `lang`, `tab`).
+- Identifiers, comments and docs use the `GLOSSARY.md` terms: Locale, Content, Copy, Section, Project, Selected work, Current role, Portrait viewer, Engine note. Flag the synonyms it lists under _Avoid_ (e.g. a Content type named `Portfolio`, `lang`, `tab`).
 - Capitalise the terms in prose and comments: "each Locale", "the Current role".
 - The terms are for code, not visitors. Visible text in Copy and Content keeps natural wording; a rename once turned the German "Dieses Portfolio" into "Dieses Content".
 

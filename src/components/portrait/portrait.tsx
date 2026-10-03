@@ -1,16 +1,17 @@
 import { cn } from 'cn';
+import { Dialog } from 'radix-ui';
 import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import { flushSync } from 'react-dom';
 
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useSectionNavigation } from '@/components/section-navigation';
 import { contentFor } from '@/content/content';
 import { copy } from '@/copy/copy';
 import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
-import { startViewTransition } from '@/lib/view-transition';
 
-import { useSectionNavigation } from './section-navigation';
+import { startViewTransition } from './view-transition';
+import { PortraitViewer } from './viewer';
 
 const lobes = 12;
 
@@ -66,7 +67,7 @@ function hintBand(radius: number, em: number) {
 }
 
 // Keep the preloaded Image alive across route remounts when switching Locales,
-// so the browser can reuse its image data when the dialog opens again.
+// so the browser can reuse its image data when the Portrait viewer opens again.
 let fullPortraitImage: HTMLImageElement | null = null;
 
 // The photo is the same file in every Locale.
@@ -93,9 +94,10 @@ function warmFullPortrait() {
 // Opening and closing run as a same-document view transition: a plain surface
 // grows out of the frame into the photo panel and shrinks back into it. The
 // thumbnail never moves and the large photo fades in place at its final size.
-// With reduced motion the viewer cross-fades in place instead, without travel.
-// The transition types scope the morph names and keyframes to this one moment.
-// Without view transitions the viewer simply opens and closes.
+// With reduced motion the Portrait viewer cross-fades in place instead, without
+// travel. The transition types scope the morph names and keyframes, in
+// morph.css, to this one moment. Without view transitions the Portrait viewer
+// simply opens and closes.
 function morphPortrait(open: boolean, commit: () => void) {
   const reduceMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const morphTypes = ['morph', open ? 'morph-open' : 'morph-close'];
@@ -118,11 +120,11 @@ function Portrait({ locale }: { locale: Locale }) {
   const { turns } = useSectionNavigation();
   const angle = turns * stepDegrees;
   const rotation: CSSProperties = { '--portrait-angle': `${angle}deg` };
-  const { portrait, fullPortrait } = contentFor(locale).profile;
+  const { portrait } = contentFor(locale).profile;
   const [open, setOpen] = useState(false);
 
   return (
-    <Dialog
+    <Dialog.Root
       open={open}
       onOpenChange={(next) => {
         morphPortrait(next, () => {
@@ -130,7 +132,7 @@ function Portrait({ locale }: { locale: Locale }) {
         });
       }}
     >
-      <DialogTrigger asChild>
+      <Dialog.Trigger asChild>
         <button
           type='button'
           aria-label={`${portrait.alt}: ${t.photoOpen}`}
@@ -206,23 +208,9 @@ function Portrait({ locale }: { locale: Locale }) {
             </svg>
           </span>
         </button>
-      </DialogTrigger>
-
-      {/* Content mounts only while open, so the large image loads on demand. */}
-      <DialogContent closeLabel={t.photoClose} aria-describedby={undefined} morph>
-        <DialogTitle className='sr-only'>{portrait.alt}</DialogTitle>
-        {/* Both viewport axes bound the photo without another display crop.
-            The height budget covers viewport margin, padding and the close row. */}
-        <img
-          src={fullPortrait.src}
-          alt={fullPortrait.alt}
-          width={fullPortrait.width}
-          height={fullPortrait.height}
-          decoding='async'
-          className='bg-surface-container view-transition-morph-content rounded-inherit mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] object-contain'
-        />
-      </DialogContent>
-    </Dialog>
+      </Dialog.Trigger>
+      <PortraitViewer locale={locale} />
+    </Dialog.Root>
   );
 }
 
