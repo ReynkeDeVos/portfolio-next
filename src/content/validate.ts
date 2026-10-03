@@ -74,6 +74,18 @@ function experienceProblems({ experience }: Content) {
   return problems;
 }
 
+// A model note qualifies a model in the table; a model the table never
+// names would read as a recommendation without a task.
+function modelNoteProblems({ aiRecommendations }: Content) {
+  const recommended = new Set(aiRecommendations.items.map((item) => item.model));
+
+  return aiRecommendations.modelNotes.flatMap(({ model }) =>
+    recommended.has(model)
+      ? []
+      : [`aiRecommendations.modelNotes has a note for "${model}", but no item uses that model.`],
+  );
+}
+
 function technologyProblems(content: Content) {
   const problems: string[] = [];
   const linked = new Set(content.portfolioBuild.links.map((link) => link.name));
@@ -142,6 +154,7 @@ function validateContent(content: Content): readonly string[] {
     ...duplicateIds('projects', content.projects),
     ...selectedWorkProblems(content),
     ...experienceProblems(content),
+    ...modelNoteProblems(content),
     ...technologyProblems(content),
     ...emailProblems(content),
   ];

@@ -55,7 +55,6 @@ function fixtureContent(): Content {
     ],
     aiRecommendations: {
       updated: '2026-10-01',
-      introduction: translated('introduction'),
       items: [
         {
           id: 'build',
@@ -65,6 +64,7 @@ function fixtureContent(): Content {
           note: translated('note'),
         },
       ],
+      modelNotes: [{ model: 'Opus', note: translated('model note') }],
       tips: [
         {
           id: 'harness',

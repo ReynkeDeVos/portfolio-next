@@ -261,7 +261,7 @@ Each face loads only the Latin weight-axis WOFF2 from its `@fontsource-variable`
 - **Title:** `title-lg` heads every connected-list item. `title-md` heads cards and the developer identity; `title-sm` labels compact-list rows. The identity uses medium (500); group headings use semibold (600).
 - **Body:** `body-lg` introduces the owner and carries every list item's main text; `body-md` carries card text and featured-project details; `body-sm` carries card details. Build and AI tool names emphasize `body-md` with medium (500).
 - **Label:** `label-lg` serves buttons, tabs, strengths, list-item accent lines (project categories, employers) and career periods. `label-md` serves technology tags, card accent lines and timestamps. Selection can use semibold (600), while passive timestamps inherit regular weight (400).
-- **Reading width:** List-item text stops at 64ch; featured-project details at 72ch; the AI introduction at 68ch. These are component constraints rather than a page-wide measure.
+- **Reading width:** List-item text stops at 64ch; featured-project details at 72ch. These are component constraints rather than a page-wide measure.
 
 **The Two Family Rule.** Headline and title roles use Google Sans Flex; body and labels use Roboto Flex. Do not add a third face; use the implemented role sizes and weight emphasis.
 
@@ -335,7 +335,7 @@ Browsers outside Chromium (no `Chromium` brand in User-Agent Client Hints) see a
 
 ### Compact list, table and disclosure
 
-Inventories that would otherwise become a wall of identical cards use denser forms on the card surface. The teaching topics are a compact list: one `lg-inc` card with outline-variant dividers, each row a `title-sm` label beside its technology tags from medium screens and above them on narrow ones. The AI model recommendations are a dated table on the same surface with label-medium column headings, a task row heading with its note in body-small, and body-medium model and thinking-level cells. The build explanation is a native disclosure, closed by default: its summary is a `lg-inc` card row with the subsection heading, the topic names in muted body-medium and a chevron that turns over (300ms) with the spatial curve. It carries the shared state layer and focus ring, and the content opens instantly.
+Inventories that would otherwise become a wall of identical cards use denser forms on the card surface. The teaching topics are a compact list: one `lg-inc` card with outline-variant dividers, each row a `title-sm` label beside its technology tags from medium screens and above them on narrow ones. The AI model recommendations are a dated table on the same surface with label-medium column headings, a task row heading with its note in body-small, and body-medium model and thinking-level cells. Below a divider in the same card, the thinking-level exceptions per model follow as body-small notes: the model name in medium on-surface beside the muted note. They qualify only models the table names, and they sit under the table rather than above it so the table stays the first thing read. The build explanation is a native disclosure, closed by default: its summary is a `lg-inc` card row with the subsection heading, the topic names in muted body-medium and a chevron that turns over (300ms) with the spatial curve. It carries the shared state layer and focus ring, and the content opens instantly.
 
 ### Build explanation
 

@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import { contentFor } from '@/content/content';
 import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
@@ -40,7 +42,8 @@ function WorkflowPanel({ locale }: { locale: Locale }) {
   );
 }
 
-// A small dated table: one row per task, the note under the task name.
+// A small dated table: one row per task, the note under the task name, then
+// the thinking-level exceptions per model as quieter notes inside the card.
 function AiSection({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const { ai } = contentFor(locale).workflow;
@@ -58,7 +61,6 @@ function AiSection({ locale }: { locale: Locale }) {
         </p>
       }
     >
-      <p className='type-body-md text-on-surface-variant max-w-[68ch] px-1'>{ai.introduction}</p>
       <div className='rounded-lg-inc bg-surface-card px-5 sm:px-6'>
         <table aria-labelledby='ai-heading' className='w-full border-collapse text-left'>
           <thead>
@@ -97,6 +99,16 @@ function AiSection({ locale }: { locale: Locale }) {
             ))}
           </tbody>
         </table>
+        <dl className='border-outline-variant grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-t py-4'>
+          {ai.modelNotes.map((entry) => (
+            <Fragment key={entry.model}>
+              <dt className='type-body-sm text-on-surface font-medium whitespace-nowrap'>
+                {entry.model}
+              </dt>
+              <dd className='type-body-sm text-on-surface-variant'>{entry.note}</dd>
+            </Fragment>
+          ))}
+        </dl>
       </div>
     </Subsection>
   );

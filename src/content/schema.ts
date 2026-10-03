@@ -53,7 +53,6 @@ const contentSchema = z.strictObject({
     .min(1),
   aiRecommendations: z.strictObject({
     updated: z.iso.date(),
-    introduction: translatedText,
     items: z
       .array(
         z.strictObject({
@@ -66,6 +65,7 @@ const contentSchema = z.strictObject({
       )
       .min(1)
       .max(5),
+    modelNotes: z.array(z.strictObject({ model: text, note: translatedText })).min(1),
     tips: z
       .array(
         z.strictObject({

@@ -95,13 +95,16 @@ function resolve(raw: Content, locale: Locale) {
       ai: {
         updated: aiRecommendations.updated,
         updatedLabel: formatDate(aiRecommendations.updated, locale),
-        introduction: aiRecommendations.introduction[locale],
         items: aiRecommendations.items.map((item) => ({
           id: item.id,
           task: item.task[locale],
           note: item.note[locale],
           model: item.model,
           effort: item.effort,
+        })),
+        modelNotes: aiRecommendations.modelNotes.map((entry) => ({
+          model: entry.model,
+          note: entry.note[locale],
         })),
       },
       tips: aiRecommendations.tips.map((tip) => ({
