@@ -54,7 +54,7 @@ export const portfolio = {
       title: { en: 'AI with a purpose', de: 'KI mit einem Zweck' },
       description: {
         en: 'I follow AI news daily and evaluate which tools actually help me build, investigate and review software. I participated in the Claude Code for Business course as part of our company’s preparation for the business partner program.',
-        de: 'Ich verfolge täglich KI-Nachrichten und prüfe, welche Werkzeuge mir beim Entwickeln, Untersuchen und Prüfen von Software wirklich helfen. Ich habe am Kurs Claude Code for Business teilgenommen, um unser Unternehmen auf das Business-Partnerprogramm vorzubereiten.',
+        de: 'Ich verfolge täglich KI-Nachrichten und prüfe, welche Werkzeuge mir beim Entwickeln, Untersuchen und Prüfen von Software wirklich helfen. Ich habe am Kurs Claude Code for Business teilgenommen, als Teil der Vorbereitung unseres Unternehmens auf das Business-Partnerprogramm.',
       },
     },
   ],
@@ -324,8 +324,8 @@ export const portfolio = {
         topic: { en: 'Deployment', de: 'Deployment' },
         technologies: ['Cloudflare Workers', 'Wrangler'],
         description: {
-          en: 'Prepared as the hosting target. Cloudflare is an official TanStack Start hosting partner and acquired VoidZero in 2026.',
-          de: 'Als Hosting-Ziel vorbereitet. Cloudflare ist offizieller Hosting-Partner von TanStack Start und hat 2026 VoidZero übernommen.',
+          en: 'Hosted on Cloudflare Workers, deployed on every push to main. Cloudflare is an official TanStack Start hosting partner and acquired VoidZero in 2026.',
+          de: 'Gehostet auf Cloudflare Workers, bei jedem Push auf main neu deployt. Cloudflare ist offizieller Hosting-Partner von TanStack Start und hat 2026 VoidZero übernommen.',
         },
       },
     ],
@@ -486,7 +486,7 @@ export const portfolio = {
       period: { from: 2012, to: 2014 },
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
       description: {
-        en: 'I studied what triggers breast cancer cells to spread to other parts of the body, analysed samples, maintained the database and supervised interns.',
+        en: 'I studied what triggers breast cancer cells to spread to other parts of the body, analyzed samples, maintained the database and supervised interns.',
         de: 'Ich habe untersucht, was Brustkrebszellen dazu bringt, sich in andere Körperregionen auszubreiten, Proben analysiert, die Datenbank gepflegt und Praktikantinnen und Praktikanten betreut.',
       },
     },
