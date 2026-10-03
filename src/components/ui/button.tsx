@@ -22,11 +22,12 @@ const buttonVariants = cva(
         segment:
           'text-on-surface-variant [--focus-ring-offset:-3px] aria-pressed:bg-secondary-container aria-pressed:text-on-secondary-container aria-[current=page]:bg-secondary-container aria-[current=page]:font-semibold aria-[current=page]:text-on-secondary-container',
       },
-      // Of-type, so the visually hidden new-tab notice beside a link's ↗
-      // leaves the padding as it was; the label's text node never counted.
+      // An icon is first when no visible element precedes it: the label's text
+      // node never counts, and neither does a link's visually hidden new-tab
+      // notice before its ↗.
       size: {
-        default: 'h-10 px-5 has-[>svg:first-of-type]:ps-4 has-[>svg:last-of-type]:pe-4',
-        sm: 'h-8 gap-1.5 px-3.5 has-[>svg:first-of-type]:ps-3 has-[>svg:last-of-type]:pe-3',
+        default: 'h-10 px-5 has-[>svg:not(:not(.sr-only)~*)]:ps-4 has-[>svg:last-child]:pe-4',
+        sm: 'h-8 gap-1.5 px-3.5 has-[>svg:not(:not(.sr-only)~*)]:ps-3 has-[>svg:last-child]:pe-3',
         icon: 'size-10',
         'icon-sm': "size-8 [&_svg:not([class*='size-'])]:size-4",
       },
