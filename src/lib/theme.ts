@@ -5,7 +5,7 @@ type ThemePreference = 'system' | 'light' | 'dark';
 const storageKey = 'theme';
 
 // Runs in the document head before first paint. Storage may be blocked.
-const themeScript = `try{var t=localStorage.getItem('${storageKey}');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}`;
+const themeScript = `try{const t=localStorage.getItem('${storageKey}');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch{}`;
 
 const listeners = new Set<() => void>();
 
