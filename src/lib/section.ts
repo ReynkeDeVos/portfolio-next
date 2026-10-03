@@ -24,7 +24,7 @@ function sectionFromHash(hash: string): Section {
 // Runs in the document head before first paint. The prerendered page opens on
 // the default Section; a hash link to another one marks the root with it, so
 // CSS can show that Section until React takes over and clears the mark.
-const sectionScript = `try{var h=location.hash.slice(1);if(${JSON.stringify(otherSections)}.indexOf(h)>=0)document.documentElement.dataset.section=h}catch(e){}`;
+const sectionScript = `try{const h=location.hash.slice(1);if(${JSON.stringify(otherSections)}.includes(h))document.documentElement.dataset.section=h}catch{}`;
 
 // The rules that act on the head script's mark, rendered into the document head
 // so they apply before first paint. They move the indicator to the marked
