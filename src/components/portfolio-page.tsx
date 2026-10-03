@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import type { Locale } from '@/lib/locale';
 
 import { EngineNote } from './engine-note';
@@ -5,6 +7,13 @@ import { Identity } from './identity';
 import { SectionNavigation, SectionTabs } from './section-navigation';
 
 function PortfolioPage({ locale }: { locale: Locale }) {
+  // Effects run children first, so once this one runs the whole page has
+  // hydrated and run its own effects. Browser tests wait for this mark, since
+  // the prerendered markup looks the same before React takes over.
+  useEffect(() => {
+    document.documentElement.dataset.hydrated = '';
+  }, []);
+
   return (
     <div className='min-h-dvh'>
       <SectionNavigation>
