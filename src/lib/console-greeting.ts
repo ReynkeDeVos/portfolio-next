@@ -1,5 +1,5 @@
-import stillUrl from '@/assets/console/hello-there-still.webp?no-inline';
-import animationUrl from '@/assets/console/hello-there.webp?no-inline';
+import stillUrl from '@/assets/console/hello-there-still.avif?no-inline';
+import animationUrl from '@/assets/console/hello-there.avif?no-inline';
 
 // The images stay separate fingerprinted files instead of entering the
 // bundle. DevTools only accepts data: URLs in console CSS, so the selected
@@ -12,8 +12,9 @@ const loggedKey = Symbol.for('portfolio-next.console-greeting');
 
 const sourceUrl = 'https://github.com/ReynkeDeVos/portfolio-next';
 
-// DevTools drops width and height; the padding box shows the 320x160 image at
-// its native size, since enlarging it would magnify compression artifacts.
+// DevTools drops width and height, so the padding box sets a 320x160 area. The
+// 480x240 image is the source's full resolution: 2x screens draw that area
+// with 640x320 pixels and would blur a 320x160 file.
 const imageStyle = (dataUrl: string) =>
   'font-size:0;line-height:0;padding:80px 160px;' +
   `background:url("${dataUrl}") center / contain no-repeat`;
@@ -55,7 +56,7 @@ async function loadDataUrl(url: string) {
 
   const bytes = await response.bytes();
 
-  return `data:image/webp;base64,${bytes.toBase64()}`;
+  return `data:image/avif;base64,${bytes.toBase64()}`;
 }
 
 async function startConsoleGreeting() {
