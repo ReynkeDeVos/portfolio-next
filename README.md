@@ -4,8 +4,8 @@ Renke Brixel’s bilingual portfolio, built with TanStack Start, React and Cloud
 
 Live: [portfolio.renkebrixel.workers.dev](https://portfolio.renkebrixel.workers.dev/)
 
-Install the Node and uv versions from `.tool-versions` (for example, with
-`mise install`), then run `aube install` and `aubr dev`. Both `dev` and `build`
+Install Node from `.tool-versions` and uv from `mise.toml` (`mise install`
+reads both), then run `aube install` and `aubr dev`. Both `dev` and `build`
 generate smaller WOFF2 fonts from the English and German source content.
 uv installs the locked FontTools/Brotli dependencies in an isolated, cached
 environment; no Python packages need to be installed globally.

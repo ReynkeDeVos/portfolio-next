@@ -2,7 +2,8 @@
 
 `aubr dev` and `aubr build` run `aubr fonts:build` before Vite. The generator
 uses FontTools 4.66.1 and Brotli 1.2.0, pinned in the script and its uv lockfile.
-Install uv using the version in `.tool-versions`; uv supplies Python 3.11 or
+Install uv using the version in `mise.toml` (not `.tool-versions`, which
+Cloudflare's asdf would fail on); uv supplies Python 3.11 or
 later and caches the script's isolated environment. CI and the Cloudflare build
 install the checksum-verified uv binary with `scripts/install-uv.sh`, like Aube;
 the Cloudflare build image has no uv.
