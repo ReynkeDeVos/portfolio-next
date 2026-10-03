@@ -31,7 +31,7 @@ function CareerPanel({ locale }: { locale: Locale }) {
               title={entry.role}
               meta={
                 <>
-                  <StretchedLink href={entry.url}>
+                  <StretchedLink href={entry.url} locale={locale}>
                     <span className='text-tertiary'>{entry.organization}</span>
                   </StretchedLink>
                   <span className='text-on-surface-variant tabular-nums'>
@@ -55,7 +55,9 @@ function CareerPanel({ locale }: { locale: Locale }) {
             </CompactRow>
           ))}
         </CompactList>
-        <ProfileLink href={profile.linkedin}>{t.moreOnLinkedIn}</ProfileLink>
+        <ProfileLink href={profile.linkedin} locale={locale}>
+          {t.moreOnLinkedIn}
+        </ProfileLink>
       </Subsection>
     </div>
   );

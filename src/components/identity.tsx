@@ -126,6 +126,7 @@ function Contact({ locale }: { locale: Locale }) {
           <Button asChild variant='tonal'>
             <a href={github} target='_blank' rel='noopener noreferrer'>
               GitHub
+              <span className='sr-only'>, {t.opensInNewTab}</span>
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
           </Button>
@@ -134,6 +135,7 @@ function Contact({ locale }: { locale: Locale }) {
           <Button asChild variant='tonal'>
             <a href={linkedin} target='_blank' rel='noopener noreferrer'>
               LinkedIn
+              <span className='sr-only'>, {t.opensInNewTab}</span>
               <ArrowUpRight aria-hidden className='size-4' />
             </a>
           </Button>

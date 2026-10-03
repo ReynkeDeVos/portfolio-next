@@ -22,7 +22,7 @@ import {
 
 function ProjectLink({ project, locale }: { project: SelectedProject; locale: Locale }) {
   return (
-    <StretchedLink href={project.url}>
+    <StretchedLink href={project.url} locale={locale}>
       {project.name}
       <span className='sr-only'>, {copy[locale].sourceOnGitHub}</span>
     </StretchedLink>
@@ -70,7 +70,9 @@ function WorkPanel({ locale }: { locale: Locale }) {
             </Card>
           ))}
         </CardGrid>
-        <ProfileLink href={profile.github}>{t.moreOnGitHub}</ProfileLink>
+        <ProfileLink href={profile.github} locale={locale}>
+          {t.moreOnGitHub}
+        </ProfileLink>
       </Subsection>
     </div>
   );
