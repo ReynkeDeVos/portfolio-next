@@ -32,6 +32,10 @@ _Avoid_: showcase, highlights
 The owner's present job, shown in the profile summary.
 _Avoid_: current job, position
 
+**Portrait viewer**:
+The dialog that opens the larger portrait from the thumbnail.
+_Avoid_: lightbox, photo modal
+
 **Engine note**:
 The dismissible notice shown outside Chromium-based browsers explaining that the portfolio targets Chromium.
 _Avoid_: browser warning, compatibility banner
