@@ -38,7 +38,7 @@ export const portfolio = {
       title: { en: 'Curious by default', de: 'Neugierig auf Neues' },
       description: {
         en: 'I enjoy trying new technologies and finding out where they help in real projects. This portfolio began as productive procrastination: a chance to try TanStack Start and Cloudflare Workers and finally have a portfolio.',
-        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Dieses Content entstand aus produktiver Prokrastination: eine Gelegenheit, TanStack Start und Cloudflare Workers auszuprobieren und endlich ein Content zu haben.',
+        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Dieses Portfolio entstand aus produktiver Prokrastination: eine Gelegenheit, TanStack Start und Cloudflare Workers auszuprobieren und endlich ein Portfolio zu haben.',
       },
     },
     {
