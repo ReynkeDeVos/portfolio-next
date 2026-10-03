@@ -295,6 +295,45 @@
       }
     },
     {
+      // Content and Locale sit below the views; they never reach up into components.
+      "files": ["src/content/**", "src/lib/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "^(@/|(\\.\\.?/)+)components(/|$)",
+                "message": "Content and lib modules must not import from components; move the shared piece down instead."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      // Views read Content only through contentFor in @/content/content.
+      "files": ["src/components/**", "src/routes/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "^(@/|(\\.\\./)+)content/portfolio(\\.ts)?$",
+                "message": "Read Content through contentFor from @/content/content, not the raw portfolio data."
+              },
+              {
+                "regex": "^(@/|(\\.\\./)+)content/schema(\\.ts)?$",
+                "allowTypeImports": true,
+                "message": "Views may only import types from the Content schema; read Content through contentFor."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       // Keep the lecture's explicit imports and consistent test(...) spelling.
       "files": [
         "**/*.{test,spec}.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
