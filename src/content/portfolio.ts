@@ -169,10 +169,6 @@ export const portfolio = {
   ],
   aiRecommendations: {
     updated: '2026-10-03',
-    introduction: {
-      en: 'I start by investigating with GPT-6.1 Sol at Medium. With Sol, I skip Max and use Extra High only when High falls short; I reserve Low for small, well-defined tasks. With Opus 5.5, I avoid Low and Max. For codebase scans and short texts, GPT-6 Luna is quick and cheap.',
-      de: 'Zuerst untersuche ich mit GPT-6.1 Sol auf Medium. Bei Sol lasse ich Max aus und nutze Extra High nur, wenn High nicht ausreicht; Low ist kleinen, klar definierten Aufgaben vorbehalten. Bei Opus 5.5 vermeide ich Low und Max. Für Code-Scans und kurze Texte ist GPT-6 Luna schnell und günstig.',
-    },
     items: [
       {
         id: 'investigate',
@@ -215,6 +211,16 @@ export const portfolio = {
         effort: 'Extra High',
         note: { en: 'Layout and UX refinements', de: 'Layout und UX verfeinern' },
       },
+    ],
+    modelNotes: [
+      {
+        model: 'GPT-6.1 Sol',
+        note: {
+          en: 'Low for small, well-defined tasks; Extra High only when High falls short; no Max.',
+          de: 'Low für kleine, klar definierte Aufgaben; Extra High nur, wenn High nicht ausreicht; kein Max.',
+        },
+      },
+      { model: 'Opus 5.5', note: { en: 'No Low or Max.', de: 'Kein Low und kein Max.' } },
     ],
     tips: [
       {

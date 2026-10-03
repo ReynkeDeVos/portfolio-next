@@ -67,6 +67,14 @@ await test('validation rejects an empty or repeating Selected work group', () =>
   assert.match(problems, /selectedWork\.supporting lists "c" 2 times/u);
 });
 
+await test('validation rejects a model note for a model no item uses', () => {
+  const problems = problemsAfter((content) => {
+    content.aiRecommendations.modelNotes.push({ model: 'Luna', note: translated('scans') });
+  });
+
+  assert.match(problems, /modelNotes has a note for "Luna", but no item uses that model/u);
+});
+
 await test('validation rejects a build technology without a link', () => {
   const problems = problemsAfter((content) => {
     content.portfolioBuild.items[0]?.technologies.push('Wrangler');
