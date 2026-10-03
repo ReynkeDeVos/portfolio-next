@@ -346,8 +346,8 @@ export const portfolio = {
         topic: { en: 'Deployment', de: 'Deployment' },
         technologies: ['Cloudflare Workers', 'Wrangler'],
         description: {
-          en: 'Hosted on Cloudflare Workers, deployed on every push to main. Cloudflare is an official TanStack Start hosting partner and acquired VoidZero in 2026.',
-          de: 'Gehostet auf Cloudflare Workers, bei jedem Push auf main neu deployt. Cloudflare ist offizieller Hosting-Partner von TanStack Start und hat 2026 VoidZero übernommen.',
+          en: 'Hosted on Cloudflare Workers. Cloudflare is an official TanStack Start hosting partner and acquired VoidZero in 2026.',
+          de: 'Gehostet auf Cloudflare Workers. Cloudflare ist offizieller Hosting-Partner von TanStack Start und hat 2026 VoidZero übernommen.',
         },
       },
     ],
