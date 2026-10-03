@@ -3,7 +3,13 @@ import type { CSSProperties } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import type { Locale } from '@/lib/locale';
-import { defaultSection, isSection, sectionHash, sections } from '@/lib/section';
+import {
+  defaultSection,
+  isSection,
+  sectionAddress,
+  sectionFromHash,
+  sections,
+} from '@/lib/section';
 import type { Section } from '@/lib/section';
 
 import { copy } from './copy';
@@ -17,16 +23,18 @@ function PortfolioPage({ locale }: { locale: Locale }) {
   const [ticks, setTicks] = useState(0);
   const [animateSelection, setAnimateSelection] = useState(false);
 
-  // The hash names the open section. Read it before paint so a language
-  // switch or shared link shows the right panel without a visible swap.
+  // The hash names the open Section. Reading it before paint keeps a
+  // client-side Locale switch on the same Section. On first load the
+  // prerendered page opens on the default Section; the head script's mark
+  // lets CSS show the requested one until this state takes over.
   useLayoutEffect(() => {
     const sync = () => {
-      const hash = globalThis.location.hash.slice(1);
       setAnimateSelection(false);
-      setSection(isSection(hash) ? hash : defaultSection);
+      setSection(sectionFromHash(globalThis.location.hash));
     };
 
     sync();
+    delete document.documentElement.dataset.section;
     globalThis.addEventListener('hashchange', sync);
 
     return () => {
@@ -39,16 +47,14 @@ function PortfolioPage({ locale }: { locale: Locale }) {
       return;
     }
 
-    // Content commits first; the indicator and portrait frame follow.
+    // The Section panel switches at once; the indicator and portrait frame follow.
     setAnimateSelection(true);
     setSection(value);
     setTicks((count) => count + (sections.indexOf(value) > sections.indexOf(section) ? 1 : -1));
-    const { pathname, search } = globalThis.location;
-    const hash = sectionHash(value);
     globalThis.history.replaceState(
       globalThis.history.state,
       '',
-      hash === undefined ? `${pathname}${search}` : `#${hash}`,
+      sectionAddress(value, globalThis.location),
     );
   }
 
@@ -72,7 +78,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
               data-animate={animateSelection}
             >
               {sections.map((value) => (
-                <TabsTrigger key={value} value={value}>
+                <TabsTrigger key={value} value={value} data-section={value}>
                   {t.sectionNames[value]}
                 </TabsTrigger>
               ))}
@@ -82,9 +88,11 @@ function PortfolioPage({ locale }: { locale: Locale }) {
 
               return (
                 // Every panel is prerendered; inactive ones are only hidden.
+                // data-section lets the head script's mark pick one before hydration.
                 <TabsContent
                   key={value}
                   value={value}
+                  data-section={value}
                   forceMount
                   tabIndex={startsWithLink ? -1 : 0}
                 >

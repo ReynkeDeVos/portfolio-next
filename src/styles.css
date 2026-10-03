@@ -257,6 +257,52 @@
 }
 
 /*
+ * A link to another Section (/#career) opens on it before hydration. The head
+ * script in src/lib/section.ts marks the root with that Section; these rules
+ * show its panel, select its tab and move the indicator until React selects
+ * it and clears the mark. Every Section but the default needs a line here.
+ */
+:root[data-section='career'] {
+  --section-index: 1;
+}
+
+:root[data-section='skills'] {
+  --section-index: 2;
+}
+
+:root[data-section='workflow'] {
+  --section-index: 3;
+}
+
+:root[data-section] {
+  & [data-slot='tabs-list'] {
+    --tab-index: var(--section-index) !important;
+  }
+
+  & [data-slot='tabs-trigger'] {
+    @apply text-on-surface-variant font-medium;
+  }
+
+  & [data-slot='tabs-content'] {
+    display: none;
+  }
+}
+
+:is(
+  :root[data-section='career'] [data-section='career'],
+  :root[data-section='skills'] [data-section='skills'],
+  :root[data-section='workflow'] [data-section='workflow']
+) {
+  &[data-slot='tabs-trigger'] {
+    @apply text-on-secondary-container font-semibold;
+  }
+
+  &[data-slot='tabs-content'] {
+    display: block;
+  }
+}
+
+/*
  * Container transform between a trigger and its dialog, used by the portrait
  * viewer. Only the shape travels: `view-transition-morph` marks both ends, and
  * the dialog's content captures separately so it never scales. The names only
