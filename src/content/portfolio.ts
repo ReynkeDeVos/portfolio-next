@@ -168,18 +168,31 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-10-01',
+    updated: '2026-10-03',
     introduction: {
-      en: 'With Opus 5.5, avoid Low and Max. For GPT-6.1 Sol, skip Max and use Extra High (xhigh) only when High falls short; try Low only for small, well-defined tasks.',
-      de: 'Bei Opus 5.5 Low und Max vermeiden. Bei GPT-6.1 Sol Max auslassen und Extra High (xhigh) nur nutzen, wenn High nicht ausreicht; Low nur für kleine, klar definierte Aufgaben ausprobieren.',
+      en: 'These are my starting settings. For Opus 5.5, Extra High (xhigh) is my default; I avoid Low and Max. For GPT-6.1 Sol, I skip Max and use Extra High only when High falls short; I reserve Low for small, well-defined tasks.',
+      de: 'Das sind meine Ausgangseinstellungen. Bei Opus 5.5 nutze ich standardmäßig Extra High (xhigh); Low und Max vermeide ich. Bei GPT-6.1 Sol lasse ich Max aus und nutze Extra High nur, wenn High nicht ausreicht; Low ist kleinen, klar definierten Aufgaben vorbehalten.',
     },
     items: [
       {
         id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
-        model: 'Opus 5.5',
+        model: 'GPT-6.1 Sol',
         effort: 'Medium',
-        note: { en: 'High for complex work', de: 'High für komplexe Aufgaben' },
+        note: {
+          en: 'Clear requirements; High for difficult work',
+          de: 'Klare Anforderungen; High für schwierige Aufgaben',
+        },
+      },
+      {
+        id: 'refactor',
+        task: { en: 'Refactor & port', de: 'Umbauen & portieren' },
+        model: 'Opus 5.5',
+        effort: 'Extra High',
+        note: {
+          en: 'Ambiguous features, substantial refactoring or long ports',
+          de: 'Unklare Anforderungen, größere Refactorings oder langwierige Portierungen',
+        },
       },
       {
         id: 'investigate',
@@ -199,8 +212,8 @@ export const portfolio = {
         id: 'design',
         task: { en: 'Explore visual design', de: 'Visuelles Design erkunden' },
         model: 'Opus 5.5',
-        effort: 'Medium',
-        note: { en: 'Layout and visual refinements', de: 'Layout und visuelle Verfeinerung' },
+        effort: 'Extra High',
+        note: { en: 'Layout and UX refinements', de: 'Layout und UX verfeinern' },
       },
     ],
     tips: [

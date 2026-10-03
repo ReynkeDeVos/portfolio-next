@@ -87,10 +87,12 @@ of Utah School of Medicine retain their names in both languages. The official
 agent library name is [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview).
 
 The small dated model recommendation list follows the owner's maintained
-model guide, checked on 2026-10-01, with the owner’s current preference for
-Opus 5.5 for design. Thinking levels are practical starting
-settings rather than rankings or guarantees. The portfolio does not publish
-the local guide or duplicate its source transcript archive.
+model guide, checked on 2026-10-03: GPT-6.1 Sol for routine implementation,
+investigation and review; Opus 5.5 at Extra High for ambiguous work, substantial
+refactoring, long ports and visual design. Thinking levels are practical
+starting settings rather than rankings or guarantees. The portfolio presents
+the owner's workflow without source attribution and does not publish the local
+guide or duplicate its source transcript archive.
 
 The bilingual “My AI workflow” section also includes linked tools,
 checked against their official repositories on 2026-10-01:
