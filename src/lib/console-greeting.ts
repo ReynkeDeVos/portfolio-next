@@ -44,7 +44,9 @@ function logGreeting(withImage: boolean) {
   );
 }
 
+// Only called with the two bundled greeting images.
 async function loadDataUrl(url: string) {
+  // fallow-ignore-next-line security-sink
   const response = await fetch(url, { priority: 'low', signal: AbortSignal.timeout(20_000) });
 
   if (!response.ok) {

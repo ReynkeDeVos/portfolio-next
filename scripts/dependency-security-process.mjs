@@ -1,6 +1,9 @@
 import { spawnSync } from 'node:child_process';
 
+// Callers pass fixed tool names; without a shell, package names in the
+// arguments can't become commands.
 function execute(command, args) {
+  // fallow-ignore-next-line security-sink
   const result = spawnSync(command, args, {
     encoding: 'utf8',
     timeout: 600_000,

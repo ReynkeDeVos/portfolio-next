@@ -11,3 +11,4 @@ export PATH="$build_tools_dir:$PATH"
 aube install --frozen-lockfile
 aubr check
 aubr build
+aubr test:prerender

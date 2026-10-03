@@ -18,6 +18,7 @@ function NotFoundAnimation() {
       try {
         const [{ default: lottie }, response] = await Promise.all([
           import('lottie-web/build/player/lottie_light'),
+          // fallow-ignore-next-line security-sink -- a bundled asset URL
           fetch(animationUrl),
         ]);
 
