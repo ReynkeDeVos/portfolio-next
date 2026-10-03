@@ -64,23 +64,32 @@ test('switching Sections keeps the scroll position', async ({ page }) => {
   });
   const before = await page.evaluate(() => globalThis.scrollY);
   expect(before).toBeGreaterThan(0);
-  // Counts every scroll, so a reset that is later restored still shows.
-  await page.evaluate(() => {
+  // Marks any moment the page leaves that position, so a reset that is later
+  // restored still shows. The scroll event from scrolling there above can
+  // still arrive, but it finds the page in place.
+  await page.evaluate((position) => {
     globalThis.addEventListener('scroll', () => {
-      document.documentElement.dataset.scrolls = String(
-        Number(document.documentElement.dataset.scrolls ?? 0) + 1,
-      );
+      if (globalThis.scrollY !== position) {
+        document.documentElement.dataset.scrolledAway = String(globalThis.scrollY);
+      }
     });
-  });
+  }, before);
 
-  await page.getByRole('tab', { name: 'Career' }).click();
-  await expect(page).toHaveURL('/#career');
-  await expect(page.getByRole('tabpanel', { name: 'Career' })).toBeVisible();
-  // A reset would follow the router's render; leave room for it to happen.
-  await page.waitForTimeout(300);
+  async function switchAndExpectStill(name: string, url: string) {
+    await page.getByRole('tab', { name, exact: true }).click();
+    await expect(page).toHaveURL(url);
+    await expect(page.getByRole('tabpanel', { name, exact: true })).toBeVisible();
+    // A reset would follow the router's render; leave room for it to happen.
+    await page.waitForTimeout(300);
 
-  await expect(page.locator('html')).not.toHaveAttribute('data-scrolls');
-  expect(await page.evaluate(() => globalThis.scrollY)).toBe(before);
+    await expect(page.locator('html')).not.toHaveAttribute('data-scrolled-away');
+    expect(await page.evaluate(() => globalThis.scrollY)).toBe(before);
+  }
+
+  await switchAndExpectStill('Career', '/#career');
+  // Back to Work too: the router only scrolls to the top on an address
+  // without a hash, so leaving the default Section alone could not show it.
+  await switchAndExpectStill('Work', '/');
 });
 
 test('Section switches replace the history entry, so Back leaves the page', async ({ page }) => {
