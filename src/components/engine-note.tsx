@@ -6,11 +6,13 @@ import { dismissEngineNote } from '@/lib/engine';
 import type { Locale } from '@/lib/locale';
 
 import { BrowserMascot } from './browser-mascot';
+import { useSectionNavigation } from './section-navigation';
 
 // Prerendered for everyone; the head script reveals it outside Chromium before
 // first paint. The explanation stays one click away so the note keeps quiet.
 function EngineNote({ locale }: { locale: Locale }) {
   const t = copy[locale].engineNote;
+  const { focusOpenSection } = useSectionNavigation();
 
   return (
     <aside
@@ -49,7 +51,7 @@ function EngineNote({ locale }: { locale: Locale }) {
         onClick={() => {
           dismissEngineNote();
           // Keep keyboard users in place: the open Section follows the note.
-          document.querySelector<HTMLElement>('[role="tab"][aria-selected="true"]')?.focus();
+          focusOpenSection();
         }}
       >
         <X aria-hidden />

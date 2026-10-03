@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 
 import {
   defaultSection,
-  sectionAddress,
   sectionFromHash,
+  sectionHash,
   sections,
   sectionScript,
+  sectionStyles,
 } from './section.ts';
 import { runHeadScript } from './test-browser.ts';
 
@@ -19,28 +19,24 @@ function markedSection(hash: string) {
 
 await test('a hash names its Section', () => {
   for (const section of sections) {
-    assert.equal(sectionFromHash(`#${section}`), section);
+    assert.equal(sectionFromHash(section), section);
   }
 });
 
 await test('no hash or an unknown one opens the default Section', () => {
   assert.equal(sectionFromHash(''), defaultSection);
-  assert.equal(sectionFromHash('#'), defaultSection);
-  assert.equal(sectionFromHash('#contact'), defaultSection);
+  assert.equal(sectionFromHash('contact'), defaultSection);
+  // Router hashes carry no '#'; a browser-style hash is not a Section.
+  assert.equal(sectionFromHash('#career'), defaultSection);
 });
 
-await test('a Section address keeps the Locale path and search', () => {
-  const location = { pathname: '/de/', search: '?ref=cv' };
-
-  assert.equal(sectionAddress('career', location), '/de/?ref=cv#career');
-  assert.equal(sectionAddress(defaultSection, location), '/de/?ref=cv');
+await test('the default Section clears the hash', () => {
+  assert.equal(sectionHash(defaultSection), '');
 });
 
-await test('every Section address opens that Section again', () => {
+await test('every Section hash opens that Section again', () => {
   for (const section of sections) {
-    const address = new URL(sectionAddress(section, { pathname: '/', search: '' }), 'https://x');
-
-    assert.equal(sectionFromHash(address.hash), section);
+    assert.equal(sectionFromHash(sectionHash(section)), section);
   }
 });
 
@@ -56,18 +52,27 @@ await test('the head script leaves the default Section and unknown hashes unmark
   assert.equal(markedSection('#contact'), undefined);
 });
 
-// The pre-hydration rules name each Section by hand, so a new one must be added there.
-await test('the stylesheet can open every Section the head script marks', async () => {
-  const styles = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
-
+await test('the pre-hydration rules open every Section the head script marks', () => {
   for (const section of otherSections) {
+    const mark = `:root[data-section='${section}']`;
+
     assert.ok(
-      styles.includes(`:root[data-section='${section}'] {`),
-      `styles.css has no indicator position for ${section}`,
+      sectionStyles.includes(`${mark}{--section-index:${sections.indexOf(section)}}`),
+      `no indicator position for ${section}`,
     );
     assert.ok(
-      styles.includes(`:root[data-section='${section}'] [data-section='${section}']`),
-      `styles.css cannot show the ${section} panel before hydration`,
+      sectionStyles.includes(
+        `${mark} [data-slot='tabs-content'][data-section='${section}']{display:block}`,
+      ),
+      `the ${section} panel stays hidden`,
+    );
+    assert.ok(
+      sectionStyles.includes(`${mark} [data-slot='tabs-trigger'][data-section='${section}']{`),
+      `the ${section} trigger is not shown as selected`,
     );
   }
+});
+
+await test('the pre-hydration rules leave the default Section to the markup', () => {
+  assert.ok(!sectionStyles.includes(`[data-section='${defaultSection}']`));
 });

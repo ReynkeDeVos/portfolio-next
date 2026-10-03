@@ -10,6 +10,8 @@ import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { startViewTransition } from '@/lib/view-transition';
 
+import { useSectionNavigation } from './section-navigation';
+
 const lobes = 12;
 
 const stepDegrees = 360 / lobes;
@@ -104,15 +106,17 @@ function morphPortrait(open: boolean, commit: () => void) {
   }, types);
 }
 
-// `ticks` advances the frame one lobe per section change. Only the clip shape
-// rotates and grows; the photo itself never transforms while animating, so the
-// browser repaints it at full resolution instead of resampling a cached layer.
+// The frame turns one lobe per Section the visitor picks, the way the tabs
+// went. Only the clip shape rotates and grows; the photo itself never
+// transforms while animating, so the browser repaints it at full resolution
+// instead of resampling a cached layer.
 // The thumbnail opens the owner's selected larger portrait. Grown lobe tips,
 // overshoot included, reach about 4% past the box (6px at the largest size),
 // so the focus ring sits 8px out and never touches the frame.
-function Portrait({ locale, ticks }: { locale: Locale; ticks: number }) {
+function Portrait({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const angle = ticks * stepDegrees;
+  const { turns } = useSectionNavigation();
+  const angle = turns * stepDegrees;
   const rotation: CSSProperties = { '--portrait-angle': `${angle}deg` };
   const { portrait, fullPortrait } = contentFor(locale).profile;
   const [open, setOpen] = useState(false);

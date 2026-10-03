@@ -64,23 +64,32 @@ test('switching Sections keeps the scroll position', async ({ page }) => {
   });
   const before = await page.evaluate(() => globalThis.scrollY);
   expect(before).toBeGreaterThan(0);
-  // Counts every scroll, so a reset that is later restored still shows.
-  await page.evaluate(() => {
+  // Marks any moment the page leaves that position, so a reset that is later
+  // restored still shows. The scroll event from scrolling there above can
+  // still arrive, but it finds the page in place.
+  await page.evaluate((position) => {
     globalThis.addEventListener('scroll', () => {
-      document.documentElement.dataset.scrolls = String(
-        Number(document.documentElement.dataset.scrolls ?? 0) + 1,
-      );
+      if (globalThis.scrollY !== position) {
+        document.documentElement.dataset.scrolledAway = String(globalThis.scrollY);
+      }
     });
-  });
+  }, before);
 
-  await page.getByRole('tab', { name: 'Career' }).click();
-  await expect(page).toHaveURL('/#career');
-  await expect(page.getByRole('tabpanel', { name: 'Career' })).toBeVisible();
-  // A reset would follow the router's render; leave room for it to happen.
-  await page.waitForTimeout(300);
+  async function switchAndExpectStill(name: string, url: string) {
+    await page.getByRole('tab', { name, exact: true }).click();
+    await expect(page).toHaveURL(url);
+    await expect(page.getByRole('tabpanel', { name, exact: true })).toBeVisible();
+    // A reset would follow the router's render; leave room for it to happen.
+    await page.waitForTimeout(300);
 
-  await expect(page.locator('html')).not.toHaveAttribute('data-scrolls');
-  expect(await page.evaluate(() => globalThis.scrollY)).toBe(before);
+    await expect(page.locator('html')).not.toHaveAttribute('data-scrolled-away');
+    expect(await page.evaluate(() => globalThis.scrollY)).toBe(before);
+  }
+
+  await switchAndExpectStill('Career', '/#career');
+  // Back to Work too: the router only scrolls to the top on an address
+  // without a hash, so leaving the default Section alone could not show it.
+  await switchAndExpectStill('Work', '/');
 });
 
 test('Section switches replace the history entry, so Back leaves the page', async ({ page }) => {
@@ -123,6 +132,70 @@ test('a hash change from outside the tabs opens that Section', async ({ page }) 
     'aria-selected',
     'true',
   );
+});
+
+test('Back and Forward through hash links select their Sections', async ({ page }) => {
+  await page.goto('/');
+  await waitForHydration(page);
+
+  // Unlike the tabs, plain hash links push history entries.
+  await page.evaluate(() => {
+    globalThis.location.hash = '#career';
+  });
+  await page.evaluate(() => {
+    globalThis.location.hash = '#skills';
+  });
+  await expect(page.getByRole('tab', { name: 'Skills' })).toHaveAttribute('aria-selected', 'true');
+
+  await page.goBack();
+  await expect(page).toHaveURL('/#career');
+  await expect(page.getByRole('tab', { name: 'Career' })).toHaveAttribute('aria-selected', 'true');
+
+  await page.goForward();
+  await expect(page).toHaveURL('/#skills');
+  await expect(page.getByRole('tab', { name: 'Skills' })).toHaveAttribute('aria-selected', 'true');
+});
+
+test('Sections that arrive through the address appear without motion', async ({ page }) => {
+  await page.goto('/#workflow');
+  await waitForHydration(page);
+  const frame = page.locator('#portrait-cookie path');
+  const tabList = page.getByRole('tablist');
+
+  // A wrong turn would animate for half a second; check once it would have settled.
+  async function expectStill() {
+    await page.waitForTimeout(600);
+    await expect(frame).toHaveCSS('rotate', '0deg');
+    await expect(tabList).toHaveAttribute('data-animate', 'false');
+  }
+
+  await expect(page.getByRole('tab', { name: 'Workflow' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  await expectStill();
+
+  await page.evaluate(() => {
+    globalThis.location.hash = '#career';
+  });
+  await expect(page.getByRole('tab', { name: 'Career' })).toHaveAttribute('aria-selected', 'true');
+  await expectStill();
+
+  await page.goBack();
+  await expect(page.getByRole('tab', { name: 'Workflow' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  await expectStill();
+});
+
+test('a shared Section link carries its Section into the Locale links', async ({ page }) => {
+  await page.goto('/#career');
+  await waitForHydration(page);
+
+  // Hydration keeps the prerendered hrefs, so the Section has to arrive after it.
+  await expect(page.getByRole('link', { name: 'Deutsch' })).toHaveAttribute('href', '/de/#career');
+  await expect(page.getByRole('link', { name: 'English' })).toHaveAttribute('href', '/#career');
 });
 
 test('the portrait frame turns one lobe per Section change, in its direction', async ({ page }) => {
