@@ -30,7 +30,7 @@ export const portfolio = {
   },
   introduction: {
     en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
-    de: 'Ich lerne gern Neues, programmiere, trinke Kaffee, laufe weit und freunde mich mit Katzen & Hunden an.',
+    de: 'Ich liebe Neues, Programmieren, Kaffee, lange Läufe und Freundschaft mit Katzen & Hunden.',
   },
   interests: [
     {
@@ -170,8 +170,8 @@ export const portfolio = {
   aiRecommendations: {
     updated: '2026-10-03',
     introduction: {
-      en: 'These are my starting settings. For Opus 5.5, Extra High (xhigh) is my default; I avoid Low and Max. For GPT-6.1 Sol, I skip Max and use Extra High only when High falls short; I reserve Low for small, well-defined tasks.',
-      de: 'Das sind meine Ausgangseinstellungen. Bei Opus 5.5 nutze ich standardmäßig Extra High (xhigh); Low und Max vermeide ich. Bei GPT-6.1 Sol lasse ich Max aus und nutze Extra High nur, wenn High nicht ausreicht; Low ist kleinen, klar definierten Aufgaben vorbehalten.',
+      en: 'I start by investigating with GPT-6.1 Sol at Medium. With Sol, I skip Max and use Extra High only when High falls short; I reserve Low for small, well-defined tasks. With Opus 5.5, I avoid Low and Max. For codebase scans and short texts, GPT-6 Luna is quick and cheap.',
+      de: 'Zuerst untersuche ich mit GPT-6.1 Sol auf Medium. Bei Sol lasse ich Max aus und nutze Extra High nur, wenn High nicht ausreicht; Low ist kleinen, klar definierten Aufgaben vorbehalten. Bei Opus 5.5 vermeide ich Low und Max. Für Code-Scans und kurze Texte ist GPT-6 Luna schnell und günstig.',
     },
     items: [
       {
@@ -299,7 +299,7 @@ export const portfolio = {
       {
         id: 'content',
         topic: { en: 'Content', de: 'Inhalte' },
-        technologies: ['Zod'],
+        technologies: ['Zod 4'],
         description: {
           en: 'I use Zod before each build to catch missing translations, empty text and malformed URLs in the English and German content.',
           de: 'Vor jedem Build prüfe ich die englischen und deutschen Inhalte mit Zod auf fehlende Übersetzungen, leere Texte und ungültige URLs.',
@@ -326,10 +326,19 @@ export const portfolio = {
       {
         id: 'images',
         topic: { en: 'Design & assets', de: 'Design & Assets' },
-        technologies: ['Material 3 Expressive', 'Google Sans Flex', 'Roboto Flex', 'AVIF'],
+        technologies: ['Material 3 Expressive', 'Fontsource', 'fontTools', 'AVIF'],
         description: {
-          en: 'The design follows Material 3 Expressive, with its typeface Google Sans Flex for headings. The portraits are AVIF files, smaller than WebP at similar quality.',
-          de: 'Das Design folgt Material 3 Expressive, mit dessen Schrift Google Sans Flex für Überschriften. Die Porträts sind AVIF-Dateien, kleiner als WebP bei ähnlicher Qualität.',
+          en: 'The design follows Material 3 Expressive. Fontsource provides the fonts as npm packages, so the site serves them itself instead of loading them from Google Fonts. fontTools strips them down to the characters this site uses, which makes them about a third smaller. The portraits are AVIF files, smaller than WebP at similar quality.',
+          de: 'Das Design folgt Material 3 Expressive. Fontsource stellt die Schriften als npm-Pakete bereit, so liefert die Seite sie selbst aus, statt sie von Google Fonts zu laden. fontTools reduziert sie auf die Zeichen, die diese Seite nutzt, und macht sie so etwa ein Drittel kleiner. Die Porträts sind AVIF-Dateien, kleiner als WebP bei ähnlicher Qualität.',
+        },
+      },
+      {
+        id: 'testing',
+        topic: { en: 'Browser tests', de: 'Browsertests' },
+        technologies: ['Playwright'],
+        description: {
+          en: 'Playwright checks what only a real browser shows: tab switching, Back and Forward, the portrait viewer and keyboard focus.',
+          de: 'Playwright prüft, was nur ein echter Browser zeigt: Tabwechsel, Zurück und Vor, die Porträtansicht und den Tastaturfokus.',
         },
       },
       {
@@ -351,7 +360,7 @@ export const portfolio = {
       { name: 'cn', url: 'https://github.com/shadcn-ui/cn' },
       { name: '@shadcn/lint', url: 'https://github.com/shadcn-ui/lint' },
       { name: 'Lucide', url: 'https://lucide.dev/' },
-      { name: 'Zod', url: 'https://zod.dev/' },
+      { name: 'Zod 4', url: 'https://zod.dev/' },
       { name: 'mise', url: 'https://mise.jdx.dev/' },
       { name: 'Node.js', url: 'https://nodejs.org/' },
       { name: 'aube', url: 'https://aube.sh/' },
@@ -361,8 +370,9 @@ export const portfolio = {
       { name: 'Fallow', url: 'https://fallow.tools/' },
       { name: 'Material 3 Expressive', url: 'https://m3.material.io/' },
       { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
-      { name: 'Google Sans Flex', url: 'https://fonts.google.com/specimen/Google+Sans+Flex' },
-      { name: 'Roboto Flex', url: 'https://fonts.google.com/specimen/Roboto+Flex' },
+      { name: 'Fontsource', url: 'https://fontsource.org/' },
+      { name: 'fontTools', url: 'https://github.com/fonttools/fonttools' },
+      { name: 'Playwright', url: 'https://playwright.dev/' },
       { name: 'Cloudflare Workers', url: 'https://www.cloudflare.com/products/workers/' },
       { name: 'Wrangler', url: 'https://github.com/cloudflare/workers-sdk' },
     ],
