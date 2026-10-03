@@ -123,11 +123,11 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     },
     pick,
     animate: motion.animate,
-    registerTab: (tab, element) => {
+    registerTab: (tabSection, element) => {
       if (element) {
-        tabs.current[tab] = element;
+        tabs.current[tabSection] = element;
       } else {
-        delete tabs.current[tab];
+        delete tabs.current[tabSection];
       }
     },
   };

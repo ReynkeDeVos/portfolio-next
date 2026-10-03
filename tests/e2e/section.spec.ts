@@ -147,6 +147,39 @@ test('Back and Forward through hash links select their Sections', async ({ page 
   await expect(page.getByRole('tab', { name: 'Skills' })).toHaveAttribute('aria-selected', 'true');
 });
 
+test('Sections that arrive through the address appear without motion', async ({ page }) => {
+  await page.goto('/#workflow');
+  await waitForHydration(page);
+  const frame = page.locator('#portrait-cookie path');
+  const tabList = page.getByRole('tablist');
+
+  // A wrong turn would animate for half a second; check once it would have settled.
+  async function expectStill() {
+    await page.waitForTimeout(600);
+    await expect(frame).toHaveCSS('rotate', '0deg');
+    await expect(tabList).toHaveAttribute('data-animate', 'false');
+  }
+
+  await expect(page.getByRole('tab', { name: 'Workflow' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  await expectStill();
+
+  await page.evaluate(() => {
+    globalThis.location.hash = '#career';
+  });
+  await expect(page.getByRole('tab', { name: 'Career' })).toHaveAttribute('aria-selected', 'true');
+  await expectStill();
+
+  await page.goBack();
+  await expect(page.getByRole('tab', { name: 'Workflow' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  await expectStill();
+});
+
 test('a shared Section link carries its Section into the Locale links', async ({ page }) => {
   await page.goto('/#career');
   await waitForHydration(page);
