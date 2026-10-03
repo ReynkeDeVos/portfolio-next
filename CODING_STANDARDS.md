@@ -31,3 +31,4 @@ Judgement calls for review. Mechanical rules live in `.oxlintrc.json` (lint) and
 
 - Comments explain why: a constraint, a guard, a browser quirk. Don't narrate what the code does.
 - Tests use `node:test` and small fixtures (`src/content/test-fixtures.ts`). Only guards that must hold for the owner's data (valid Content, Selected work order) read the real Content.
+- Behaviour that needs a real browser (hydration, history, focus, view transitions) goes in `tests/e2e/`, written with Playwright against the built site. Find elements by role and accessible name, as a visitor would.
