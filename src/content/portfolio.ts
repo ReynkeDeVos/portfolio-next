@@ -328,8 +328,8 @@ export const portfolio = {
         topic: { en: 'Design & assets', de: 'Design & Assets' },
         technologies: ['Material 3 Expressive', 'Fontsource', 'fontTools', 'AVIF'],
         description: {
-          en: 'The design follows Material 3 Expressive. Fontsource provides the fonts as npm packages, so the site serves them itself instead of loading them from Google Fonts. fontTools strips them down to the characters this site uses, which makes them about a third smaller. The portraits are AVIF files, smaller than WebP at similar quality.',
-          de: 'Das Design folgt Material 3 Expressive. Fontsource stellt die Schriften als npm-Pakete bereit, so liefert die Seite sie selbst aus, statt sie von Google Fonts zu laden. fontTools reduziert sie auf die Zeichen, die diese Seite nutzt, und macht sie so etwa ein Drittel kleiner. Die Porträts sind AVIF-Dateien, kleiner als WebP bei ähnlicher Qualität.',
+          en: 'The design follows Material 3 Expressive. Fontsource provides the fonts as npm packages, so the site serves them itself instead of loading them from Google Fonts. fontTools strips them down to the characters this site uses, which makes them about a third smaller.',
+          de: 'Das Design folgt Material 3 Expressive. Fontsource stellt die Schriften als npm-Pakete bereit, so liefert die Seite sie selbst aus, statt sie von Google Fonts zu laden. fontTools reduziert sie auf die Zeichen, die diese Seite nutzt, und macht sie so etwa ein Drittel kleiner.',
         },
       },
       {
