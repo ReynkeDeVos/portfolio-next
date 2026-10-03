@@ -259,7 +259,7 @@
 /*
  * A link to another Section (/#career) opens on it before hydration. The head
  * script in src/lib/section.ts marks the root with that Section; these rules
- * show its panel, select its tab and move the indicator until React selects
+ * show its panel, select its trigger and move the indicator until React selects
  * it and clears the mark. Every Section but the default needs a line here.
  */
 :root[data-section='career'] {
