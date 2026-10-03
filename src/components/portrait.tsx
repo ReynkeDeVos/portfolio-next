@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 import { contentFor } from '@/content/content';
 import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
+import { startViewTransition } from '@/lib/view-transition';
 
 import { copy } from './copy';
 
@@ -63,7 +64,7 @@ function hintBand(radius: number, em: number) {
   };
 }
 
-// Keep the preloaded Image alive across route remounts when switching languages,
+// Keep the preloaded Image alive across route remounts when switching Locales,
 // so the browser can reuse its image data when the dialog opens again.
 let fullPortraitImage: HTMLImageElement | null = null;
 
@@ -93,17 +94,15 @@ function warmFullPortrait() {
 // thumbnail never moves and the large photo fades in place at its final size.
 // With reduced motion the viewer cross-fades in place instead, without travel.
 // The transition types scope the morph names and keyframes to this one moment.
+// Without view transitions the viewer simply opens and closes.
 function morphPortrait(open: boolean, commit: () => void) {
   const reduceMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const morphTypes = ['morph', open ? 'morph-open' : 'morph-close'];
   const types = reduceMotion ? ['morph-fade'] : morphTypes;
 
-  document.startViewTransition({
-    update: () => {
-      flushSync(commit);
-    },
-    types,
-  });
+  startViewTransition(() => {
+    flushSync(commit);
+  }, types);
 }
 
 // `ticks` advances the frame one lobe per section change. Only the clip shape

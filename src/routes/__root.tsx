@@ -11,6 +11,7 @@ import googleSansFlexSubset from '@/generated/fonts/google-sans-flex-subset.woff
 import robotoFlexSubset from '@/generated/fonts/roboto-flex-subset.woff2?url';
 import { engineScript } from '@/lib/engine';
 import { localeFromPathname, localeScript } from '@/lib/locale';
+import { sectionScript } from '@/lib/section';
 import { themeScript } from '@/lib/theme';
 
 import appCss from '../styles.css?url';
@@ -54,12 +55,16 @@ function Root() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   return (
-    // The head script may set data-theme before hydration.
+    // The head scripts may mark the root before hydration.
     <html lang={localeFromPathname(pathname)} suppressHydrationWarning>
       <head>
         {/* Reviewed: the scripts are constant strings with no external input. */}
         {/* fallow-ignore-next-line security-sink */}
-        <script dangerouslySetInnerHTML={{ __html: localeScript + themeScript + engineScript }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: localeScript + themeScript + engineScript + sectionScript,
+          }}
+        />
         <HeadContent />
       </head>
       <body>
