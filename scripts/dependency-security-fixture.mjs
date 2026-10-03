@@ -35,6 +35,8 @@ function fixture(options, exercise) {
   writeFileSync('aube-lock.yaml', 'initial lockfile\n');
 
   git('init', '--quiet');
+  // Keep the developer's global signing setup out of the throwaway repository.
+  git('config', 'commit.gpgsign', 'false');
   git('config', 'user.name', 'Security test');
   git('config', 'user.email', 'test@example.invalid');
   git('add', 'package.json', 'aube-lock.yaml');
