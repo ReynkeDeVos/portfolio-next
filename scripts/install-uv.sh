@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# CI and the Cloudflare build pin a release so its checksum can be verified;
+# local mise installs the latest uv.
 uv_version="0.12.22"
 uv_sha256="b9980552309f09c15172b8be828555e375097f16deb459795ce7bfd200380f0b"
 install_dir="${1:?Pass the binary installation directory}"
-
-if [[ "$(awk -F'"' '/^uv *=/ { print $2 }' mise.toml)" != "$uv_version" ]]; then
-  echo "Update scripts/install-uv.sh to match mise.toml's uv version." >&2
-  exit 1
-fi
 
 mkdir -p "$install_dir"
 archive="$(mktemp)"

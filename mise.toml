@@ -1,5 +1,5 @@
-# uv is pinned here, not in .tool-versions: Cloudflare's build installs every
+# uv lives here, not in .tool-versions: Cloudflare's build installs every
 # tool listed there with asdf, which has no uv plugin, and fails before the
 # build command runs.
 [tools]
-uv = "0.12.22"
+uv = "latest"
