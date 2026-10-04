@@ -9,6 +9,8 @@
  * selected-work evidence. Dark mode is warm charcoal with softer accents.
  * Each role is one light-dark() pair: the root follows the system color
  * scheme unless it carries an explicit data-theme preference.
+ * The highest container, worn only by labels that do nothing when pressed,
+ * stays a quiet neutral sand, so caramel alone marks what can be pressed.
  */
 :root {
   color-scheme: light dark;
@@ -27,7 +29,7 @@
   --md-sys-color-surface-container-low: light-dark(oklch(97% 0.018 82), oklch(23% 0.014 60));
   --md-sys-color-surface-container: light-dark(oklch(94.5% 0.028 78), oklch(25.5% 0.016 60));
   --md-sys-color-surface-container-high: light-dark(oklch(92% 0.038 75), oklch(29% 0.018 60));
-  --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.048 72), oklch(33% 0.02 60));
+  --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.021 80), oklch(33% 0.02 60));
   --md-sys-color-outline: light-dark(oklch(58% 0.035 62), oklch(64% 0.03 65));
   --md-sys-color-outline-variant: light-dark(oklch(84% 0.04 70), oklch(40% 0.022 60));
   --md-sys-color-scrim: light-dark(oklch(20% 0.02 55 / 0.6), oklch(10% 0.01 60 / 0.7));
