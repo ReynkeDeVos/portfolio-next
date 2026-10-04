@@ -67,7 +67,7 @@ function SiteControls({ locale }: { locale: Locale }) {
               title={t.themes[option]}
               aria-pressed={theme === option}
               onClick={(event) => {
-                revealTheme(option, event.currentTarget);
+                void revealTheme(option, event.currentTarget);
               }}
             >
               <Icon aria-hidden />

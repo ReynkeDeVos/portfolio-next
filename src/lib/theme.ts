@@ -66,7 +66,7 @@ function isDark(preference: ThemePreference) {
 // radius, so the final shape clears the farthest viewport corner. Reduced
 // motion cross-fades instead, and a choice that keeps the same colours, such
 // as System while the system is already light, applies without a transition.
-function revealTheme(preference: ThemePreference, from: Element) {
+async function revealTheme(preference: ThemePreference, from: Element) {
   const update = () => {
     setTheme(preference);
   };
@@ -88,21 +88,23 @@ function revealTheme(preference: ThemePreference, from: Element) {
   const y = box.y + box.height / 2;
   const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) / 0.94;
   const steps = 8;
+
   const frames = Array.from({ length: steps + 1 }, (_, step) => ({
     clipPath: `path('${cookiePath((radius * step) / steps, x, y, (step / steps) * ((Math.PI * 2) / lobes))}')`,
   }));
 
-  startViewTransition(update, ['theme'])?.ready.then(
-    () => {
-      document.documentElement.animate(frames, {
-        duration: 500,
-        easing: 'cubic-bezier(0.2, 0, 0, 1)',
-        pseudoElement: '::view-transition-new(root)',
-      });
-    },
+  try {
+    await startViewTransition(update, ['theme'])?.ready;
+  } catch {
     // A newer choice skipped this transition; it already applied.
-    () => {},
-  );
+    return;
+  }
+
+  document.documentElement.animate(frames, {
+    duration: 500,
+    easing: 'cubic-bezier(0.2, 0, 0, 1)',
+    pseudoElement: '::view-transition-new(root)',
+  });
 }
 
 function useThemePreference() {
