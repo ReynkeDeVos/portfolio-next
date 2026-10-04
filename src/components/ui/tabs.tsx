@@ -18,7 +18,7 @@ function TabsList({ children, ...props }: React.ComponentProps<typeof TabsPrimit
   return (
     <TabsPrimitive.List
       data-slot='tabs-list'
-      className='group/tabs-list bg-tab-track relative isolate grid h-12 auto-cols-fr grid-flow-col overflow-hidden rounded-full p-1'
+      className='group/tabs-list bg-tab-track relative isolate grid h-12 scroll-mt-4 auto-cols-fr grid-flow-col overflow-hidden rounded-full p-1'
       {...props}
     >
       <span

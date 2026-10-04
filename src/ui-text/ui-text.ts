@@ -24,6 +24,8 @@ const en = {
   email: 'Email',
   copyAddress: 'Copy email address',
   addressCopied: 'Email address copied',
+  addressShown: (address: string) => `Email address: ${address}`,
+  copyFailed: 'Couldn’t copy the email address; it’s now shown below the contact buttons.',
   strengthsLabel: 'Profile highlights',
   currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
     role,
@@ -31,6 +33,7 @@ const en = {
   ],
   period: (span: Years) => years(span, 'present'),
   sectionsLabel: 'Portfolio sections',
+  toolbarLabel: 'Jump to a section',
   sectionNames: { work: 'Work', skills: 'Skills', workflow: 'Workflow', career: 'Career' },
   sectionHeadings: {
     work: 'Selected work',
@@ -88,6 +91,8 @@ const uiText = {
     email: 'E-Mail',
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
+    addressShown: (address: string) => `E-Mail-Adresse: ${address}`,
+    copyFailed: 'Die E-Mail-Adresse ließ sich nicht kopieren; sie steht jetzt unter den Kontaktbuttons.',
     strengthsLabel: 'Kurzprofil',
     currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
       role,
@@ -95,6 +100,7 @@ const uiText = {
     ],
     period: (span: Years) => years(span, 'heute'),
     sectionsLabel: 'Bereiche des Portfolios',
+    toolbarLabel: 'Zu einem Bereich springen',
     sectionNames: {
       work: 'Projekte',
       skills: 'Kenntnisse',

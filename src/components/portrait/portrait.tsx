@@ -178,11 +178,11 @@ function Portrait({ locale }: { locale: Locale }) {
           />
           {/* The hint peeks up from the rim on the zoom's curve and drops
               back quickly. It grows with the frame, so it reads as a
-              label inside it. */}
+              label inside it. Without hover it peeks once by itself. */}
           <svg
             aria-hidden
             viewBox='0 0 100 100'
-            className='ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial type-portrait-hint transition-portrait-hint absolute inset-0 size-full translate-y-[15%] font-medium opacity-0 duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-500 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-500'
+            className='portrait-hint-peek ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial type-portrait-hint transition-portrait-hint absolute inset-0 size-full translate-y-[15%] font-medium opacity-0 duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-500 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-500'
           >
             <path
               id='portrait-hint'

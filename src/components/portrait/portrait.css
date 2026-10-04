@@ -32,6 +32,31 @@
   transition-duration: var(--tw-duration, var(--default-transition-duration));
 }
 
+/*
+ * Touch screens have no hover to reveal the hint, so it peeks once a moment
+ * after the page appears and settles back into the rim. Only the start is
+ * filled: afterwards the hint is back in its resting state anyway.
+ */
+@utility portrait-hint-peek {
+  @media (hover: none) and (prefers-reduced-motion: no-preference) {
+    animation: portrait-hint-peek 3.2s var(--ease-spatial) 1.2s backwards;
+  }
+}
+
+@keyframes portrait-hint-peek {
+  0%,
+  100% {
+    opacity: 0;
+    translate: 0 15%;
+  }
+
+  15%,
+  80% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
 /* One dash along the hint arc; the path sets the lengths as custom properties. */
 @utility portrait-hint-band {
   stroke-dasharray: var(--hint-dash);

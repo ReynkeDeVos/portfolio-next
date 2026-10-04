@@ -26,6 +26,10 @@ const variants = {
   // neighbours never cover it.
   segment:
     'text-on-surface-variant [--focus-ring-offset:-3px] aria-pressed:text-on-secondary-container aria-[current=page]:font-semibold aria-[current=page]:text-on-secondary-container',
+  // Floating toolbar item on its vibrant container. The current item fills
+  // with primary and squares off, the Expressive selection shape.
+  toolbar:
+    'group/toolbar-item text-on-primary-container aria-[current=true]:rounded-md aria-[current=true]:bg-primary aria-[current=true]:text-on-primary',
 };
 
 // An icon is first when no visible element precedes it: the label's text
@@ -41,6 +45,13 @@ const sizes = {
   segment: 'h-8 rounded-lg px-3.5 pointer-coarse:h-10 pointer-coarse:rounded-lg-inc pointer-coarse:px-3',
   'icon-segment':
     "size-8 rounded-lg pointer-coarse:size-10 pointer-coarse:rounded-lg-inc [&_svg:not([class*='size-'])]:size-4",
+  // The icon sits centred in a 40px pill; a label adds its own spacing.
+  toolbar: 'h-10 gap-0 rounded-lg-inc px-2.75',
+  // The two halves of an Expressive split button: round outer corners, small
+  // inner ones that round out while pressed; the outer ones stay put.
+  'split-start':
+    'h-10 rounded-s-lg-inc rounded-e-xs px-5 active:rounded-s-lg-inc active:rounded-e-md has-[>svg:not(:not(.sr-only)~*)]:ps-4',
+  'split-end': 'h-10 w-11 rounded-s-xs rounded-e-lg-inc active:rounded-s-md active:rounded-e-lg-inc',
 };
 
 function Button({

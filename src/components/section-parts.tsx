@@ -179,17 +179,20 @@ function LinkChips({
   );
 }
 
+// A grid wrapper stretches the button over its cell.
 function ProfileLink({
   href,
   locale,
+  className,
   children,
 }: {
   href: string;
   locale: Locale;
+  className?: string;
   children: string;
 }) {
   return (
-    <p>
+    <p className={className}>
       <Button asChild variant='tonal'>
         <a href={href} target='_blank' rel='noopener noreferrer'>
           {children}
