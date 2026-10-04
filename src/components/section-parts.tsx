@@ -35,11 +35,23 @@ function Item({ linked, children }: { linked?: boolean; children: ReactNode }) {
   );
 }
 
-// Title, accent line and an optional end slot, the head of every list item.
-function ItemHeader({ title, meta, end }: { title: ReactNode; meta?: ReactNode; end?: ReactNode }) {
+// Title, accent line and optional lead and end slots, the head of every list
+// item. A lead sits before the title, centred on it.
+function ItemHeader({
+  title,
+  meta,
+  lead,
+  end,
+}: {
+  title: ReactNode;
+  meta?: ReactNode;
+  lead?: ReactNode;
+  end?: ReactNode;
+}) {
   return (
     <div className='flex items-start justify-between gap-x-4 gap-y-1'>
-      <div className='min-w-0'>
+      {lead}
+      <div className='min-w-0 flex-1 self-center'>
         <h3 className='type-title-lg text-on-surface font-semibold'>{title}</h3>
         {meta ? <p className='type-label-lg text-tertiary mt-0.5 font-medium'>{meta}</p> : null}
       </div>
