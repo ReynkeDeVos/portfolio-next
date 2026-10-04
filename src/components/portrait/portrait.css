@@ -92,15 +92,18 @@
 }
 
 /*
- * The shape is a plain dialog surface: the image pair paints it and turns the
- * trigger's circle into the dialog corners, so neither snapshot is stretched.
+ * The shape is a plain dialog surface: the image pair paints it and
+ * portrait.tsx clips it from the frame's cookie to the dialog corners, so
+ * neither snapshot is stretched. The corners here only stand in without it.
  * Content fades in place once the shape has nearly arrived and leaves first.
  * The shape is translucent while it overlaps the thumbnail, so the portrait
- * stays visible under it at both ends.
+ * stays visible under it at both ends. The shape travels at the theme
+ * reveal's speed, and the beats around it are fractions of that speed, so
+ * opening ends exactly when a theme change would.
  */
 :root:active-view-transition-type(morph) {
   &::view-transition-group(morph) {
-    animation-duration: 300ms;
+    animation-duration: var(--transition-duration-spatial-fast);
     animation-timing-function: var(--ease-emphasized);
   }
 
@@ -125,37 +128,37 @@
 
 :root:active-view-transition-type(morph-open) {
   &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, fade-in;
-    animation-duration: 300ms, 140ms;
-    animation-timing-function: var(--ease-emphasized), linear;
+    animation: fade-in 140ms linear;
   }
 
   &::view-transition-new(*.morph-content) {
-    animation: fade-in 150ms var(--ease-effects-fast) 110ms both;
+    animation: fade-in 150ms var(--ease-effects-fast)
+      calc(var(--transition-duration-spatial-fast) / 3) both;
   }
 
-  /* The close button follows as the shape settles: a quick fade and a small
-     pop from 0.8 on the buttons' press spring, so it lands with the panel. */
+  /* The close button follows as the shape settles, halfway through: a quick
+     fade and a small pop from 0.8 on the buttons' press spring, so it lands
+     with the panel. */
   &::view-transition-new(*.morph-control) {
     animation:
-      fade-in 120ms var(--ease-effects-fast) 160ms both,
-      morph-pop 240ms var(--ease-spatial-fast) 160ms both;
+      fade-in 120ms var(--ease-effects-fast) calc(var(--transition-duration-spatial-fast) / 2) both,
+      morph-pop calc(var(--transition-duration-spatial-fast) / 2) var(--ease-spatial-fast)
+        calc(var(--transition-duration-spatial-fast) / 2) both;
   }
 }
 
-/* Closing clears the content before the shape starts back. */
+/* Closing clears the content before the shape starts back. As an exit it
+   runs shorter, the shape in two thirds of the opening's time, and the shape
+   dissolves over its last 130ms. */
 :root:active-view-transition-type(morph-close) {
   &::view-transition-group(morph) {
-    animation-duration: 220ms;
+    animation-duration: calc(var(--transition-duration-spatial-fast) * 2 / 3);
     animation-delay: 40ms;
   }
 
   &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, morph-fade-out;
-    animation-duration: 220ms, 130ms;
-    animation-delay: 40ms, 130ms;
-    animation-timing-function: var(--ease-emphasized), linear;
-    animation-direction: reverse, normal;
+    animation: morph-fade-out 130ms linear
+      calc(var(--transition-duration-spatial-fast) * 2 / 3 - 90ms) both;
   }
 
   &::view-transition-old(*.morph-content),
@@ -173,12 +176,6 @@
   &::view-transition-new(root) {
     animation-duration: 150ms;
     animation-timing-function: var(--ease-effects-fast);
-  }
-}
-
-@keyframes morph-corners {
-  from {
-    border-radius: 50%;
   }
 }
 

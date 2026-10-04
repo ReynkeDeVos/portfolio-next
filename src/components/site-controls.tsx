@@ -36,7 +36,7 @@ function SegmentPill({ index, from = index }: { index: number; from?: number }) 
       aria-hidden
       data-slot='segment-pill'
       style={position}
-      className='bg-secondary-container ease-spatial-fast absolute inset-0 -z-10 translate-x-[calc(var(--segment-index)*(100%+0.125rem))] rounded-full transition-transform duration-350 [grid-area:1/1/2/2] starting:translate-x-[calc(var(--segment-from)*(100%+0.125rem))]'
+      className='bg-secondary-container ease-spatial-fast duration-spatial-fast absolute inset-0 -z-10 translate-x-[calc(var(--segment-index)*(100%+0.125rem))] rounded-full transition-transform [grid-area:1/1/2/2] starting:translate-x-[calc(var(--segment-from)*(100%+0.125rem))]'
     />
   );
 }
