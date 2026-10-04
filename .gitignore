@@ -4,7 +4,6 @@ public/fonts/roboto-flex-LICENSE.txt
 public/fonts/google-sans-flex-LICENSE.txt
 __pycache__/
 dist/
-.output/
 .tanstack/
 .wrangler/
 .cloudflare-build/
@@ -13,8 +12,3 @@ dist/
 !.env.example
 .dev.vars*
 *.log
-.impeccable/mocks/
-.impeccable/review/
-.impeccable/questions/
-test-results/
-playwright-report/

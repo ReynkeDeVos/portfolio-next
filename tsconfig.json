@@ -1,12 +1,5 @@
 {
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "scripts/**/*.ts",
-    "tests/**/*.ts",
-    "vite.config.ts",
-    "playwright.config.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"],
   "compilerOptions": {
     "lib": ["ES2025", "ESNext.TypedArrays", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
@@ -19,7 +12,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["vite/client", "node"],
+    "types": ["vite/client"],
     "paths": { "@/*": ["./src/*"] }
   }
 }

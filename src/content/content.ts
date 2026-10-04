@@ -20,7 +20,7 @@ function resolve(raw: Content, locale: Locale) {
   function project(id: string, group: keyof Content['selectedWork']) {
     const found = raw.projects.find((candidate) => candidate.id === id);
 
-    // content:check rejects this at build time; failing loudly here keeps a
+    // The content check rejects this; failing loudly here keeps a
     // Project from silently disappearing if the check was skipped.
     if (found === undefined) {
       throw new Error(`selectedWork.${group} lists "${id}", but no project has that ID.`);
@@ -117,7 +117,7 @@ function resolve(raw: Content, locale: Locale) {
         id: item.id,
         topic: item.topic[locale],
         description: item.description[locale],
-        // content:check guarantees every technology has a link.
+        // The content check guarantees every technology has a link.
         links: item.technologies.flatMap((name) =>
           portfolioBuild.links.filter((candidate) => candidate.name === name),
         ),
