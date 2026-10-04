@@ -69,9 +69,11 @@ function Identity({ locale }: { locale: Locale }) {
 // The address stays out of the HTML until it is asked for. Email, the
 // leading half of an Expressive split button, opens the mail app and also
 // shows the address, so a missing mail app is no dead end; the trailing half
-// copies it. A failed copy shows the address instead. Both outcomes are
-// announced. Narrow profiles give the split button its own row and share the
-// next between the two profile links.
+// copies it and, once the write succeeds, turns to a check under a Material
+// plain tooltip. A failed copy shows the address instead. Both outcomes are
+// announced; the tooltip stays out of the accessibility tree. Narrow profiles
+// give the split button its own row and share the next between the two
+// profile links.
 function Contact({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const { emailEncoded, github, linkedin } = contentFor(locale).profile;
@@ -143,16 +145,25 @@ function Contact({ locale }: { locale: Locale }) {
             <Mail aria-hidden />
             {t.email}
           </Button>
-          <Button
-            size='split-end'
-            aria-label={t.copyAddress}
-            title={t.copyAddress}
-            onClick={() => {
-              void copyAddress();
-            }}
-          >
-            {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
-          </Button>
+          <span className='relative flex'>
+            <Button
+              size='split-end'
+              aria-label={t.copyAddress}
+              title={t.copyAddress}
+              onClick={() => {
+                void copyAddress();
+              }}
+            >
+              {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
+            </Button>
+            <span
+              aria-hidden
+              data-shown={copied}
+              className='bg-inverse-surface text-inverse-on-surface type-body-sm duration-pill ease-spatial-fast data-[shown=false]:ease-emphasized transition-presence data-[shown=false]:duration-pill-exit pointer-events-none absolute bottom-full left-1/2 mb-1 flex min-h-6 origin-bottom -translate-x-1/2 items-center rounded-xs px-2 whitespace-nowrap data-[shown=false]:scale-80 data-[shown=false]:opacity-0'
+            >
+              {t.copied}
+            </span>
+          </span>
         </li>
         <li>
           <ProfileLink href={github} locale={locale} className='grid'>

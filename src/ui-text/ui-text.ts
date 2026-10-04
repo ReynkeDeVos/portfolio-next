@@ -24,6 +24,7 @@ const en = {
   email: 'Email',
   copyAddress: 'Copy email address',
   addressCopied: 'Email address copied',
+  copied: 'Copied',
   addressShown: (address: string) => `Email address: ${address}`,
   copyFailed: 'Couldn’t copy the email address; it’s now shown below the contact buttons.',
   strengthsLabel: 'Profile highlights',
@@ -92,6 +93,7 @@ const uiText = {
     email: 'E-Mail',
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
+    copied: 'Kopiert',
     addressShown: (address: string) => `E-Mail-Adresse: ${address}`,
     copyFailed:
       'Die E-Mail-Adresse ließ sich nicht kopieren; sie steht jetzt unter den Kontaktbuttons.',
