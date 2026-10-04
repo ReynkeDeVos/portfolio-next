@@ -4,11 +4,9 @@
 # ///
 """Subset both variable fonts from the complete local source corpus."""
 
-import argparse
 import html
 import re
 import unicodedata
-import unittest
 from pathlib import Path
 
 from fontTools import subset
@@ -138,15 +136,4 @@ def build_fonts() -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--test", action="store_true", help="Run font-subsetting regression tests"
-    )
-    arguments = parser.parse_args()
-    if arguments.test:
-        suite = unittest.defaultTestLoader.discover(
-            str(ROOT / "scripts"), pattern="test_subset_fonts.py"
-        )
-        result = unittest.TextTestRunner(verbosity=2).run(suite)
-        raise SystemExit(0 if result.wasSuccessful() else 1)
     build_fonts()

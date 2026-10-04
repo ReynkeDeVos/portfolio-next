@@ -19,7 +19,7 @@ import { WorkflowPanel } from './workflow-panel';
 // user just heard, so Tab moves from the tab list straight to the link.
 // Career opens each entry with the role heading, real information its
 // organization link leaves out, so its panel keeps its own Tab stop.
-// tests/e2e/section-focus.spec.ts checks these flags against the panels.
+// The browser tests check these flags against the panels.
 const sectionPanels = {
   work: { Panel: WorkPanel, startsWithLink: true },
   career: { Panel: CareerPanel, startsWithLink: false },

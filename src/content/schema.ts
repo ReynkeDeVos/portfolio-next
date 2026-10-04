@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 // The one declaration of the Content shape. The page imports only its type, so
-// Zod stays out of the browser bundle; content:check runs the schema itself.
+// Zod stays out of the browser bundle; the content check runs the schema itself.
 // Strict objects reject misspelled keys instead of silently dropping them.
 
 const text = z.string().min(1);
