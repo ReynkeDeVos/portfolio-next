@@ -543,8 +543,8 @@ export const portfolio = {
   // Display order is set here, not by catalog order. Catalog records that are
   // not listed stay in the catalog without being shown.
   selectedWork: {
-    featured: ['reputation-assistant', 'scoundrel-tui', 'pokemon-battle'],
-    supporting: ['elder-gym-bro', 'omarchy-stats', 'portfolio'],
+    featured: ['reputation-assistant', 'elder-gym-bro', 'pokemon-battle'],
+    supporting: ['scoundrel-tui', 'omarchy-stats', 'portfolio'],
   },
   projects: [
     {
@@ -626,8 +626,12 @@ export const portfolio = {
       technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express'],
       url: 'https://github.com/ReynkeDeVos/ElderGymBroApp',
       details: {
-        en: 'Built by a team of four: Michal, Sebastian, Alex and Renke.',
-        de: 'Im Viererteam mit Michal, Sebastian, Alex und Renke entwickelt.',
+        en: 'Built by a team of four: Michal, Sebastian, Alex and Renke. This is my fork of the team repository.',
+        de: 'Im Viererteam mit Michal, Sebastian, Alex und Renke entwickelt. Das ist mein Fork des Team-Repositorys.',
+      },
+      engineering: {
+        en: 'The React frontend runs on Netlify and passes API calls to an Express backend on Render. The backend keeps accounts and workout progress in MongoDB and profile pictures on Cloudinary.',
+        de: 'Das React-Frontend läuft auf Netlify und reicht API-Aufrufe an ein Express-Backend auf Render weiter. Das Backend speichert Konten und Trainingsfortschritte in MongoDB und Profilbilder bei Cloudinary.',
       },
     },
     {
