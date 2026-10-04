@@ -175,7 +175,9 @@ function LinkChips({
   className?: string;
 }) {
   return (
-    <ul className={cn('flex flex-wrap gap-2', className)}>
+    // Rows of 32px chips sit 16px apart on touch screens, so their 48px
+    // touch targets meet without overlapping.
+    <ul className={cn('flex flex-wrap gap-2 pointer-coarse:gap-y-4', className)}>
       {links.map((link) => (
         <li key={link.name}>
           <Button asChild variant='chip' size='sm'>

@@ -9,10 +9,11 @@ import { Slot } from 'radix-ui';
 // and springs back on release. Each size sets its own resting corner, half its
 // height, because a numeric radius morphs smoothly where a pill's never-ending
 // one would only snap. Only the corners and opacity transition, so theme
-// changes never animate color. The ::after keeps the touch target 48px tall
-// however small the visible shape, and 48px wide too for coarse pointers.
+// changes never animate color. For coarse pointers the ::after grows the
+// touch target to at least 48px square however small the visible shape;
+// lists of compact buttons leave room for it. A mouse hits the shape itself.
 const base =
-  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium whitespace-nowrap type-label-lg transition-[border-radius] duration-spatial-fast ease-spatial-fast select-none active:rounded-sm active:duration-150 before:pointer-events-none before:absolute before:inset-0 before:rounded-inherit before:bg-current before:opacity-0 before:transition-opacity before:duration-150 before:ease-effects-fast hover:before:opacity-8 focus-visible:before:opacity-10 active:before:opacity-10 after:absolute after:top-1/2 after:left-1/2 after:h-12 after:min-h-full after:w-full after:-translate-1/2 pointer-coarse:after:min-w-12 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5";
+  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium whitespace-nowrap type-label-lg transition-[border-radius] duration-spatial-fast ease-spatial-fast select-none active:rounded-sm active:duration-150 before:pointer-events-none before:absolute before:inset-0 before:rounded-inherit before:bg-current before:opacity-0 before:transition-opacity before:duration-150 before:ease-effects-fast hover:before:opacity-8 focus-visible:before:opacity-10 active:before:opacity-10 after:absolute after:top-1/2 after:left-1/2 after:size-full after:-translate-1/2 pointer-coarse:after:min-h-12 pointer-coarse:after:min-w-12 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5";
 
 const variants = {
   filled: 'bg-primary text-on-primary',
