@@ -3,8 +3,8 @@ import { ArrowUpRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 // Every panel shares one grammar: a connected list of large items first,
 // then titled subsections of smaller cards, compact lists or a table, then
@@ -122,7 +122,7 @@ function CardText({ children }: { children: ReactNode }) {
 // Every link opens in a new tab. The ↗ shows that to sighted visitors; this
 // tells assistive tech, last in the link's name.
 function NewTabNotice({ locale }: { locale: Locale }) {
-  return <span className='sr-only'>, {copy[locale].opensInNewTab}</span>;
+  return <span className='sr-only'>, {uiText[locale].opensInNewTab}</span>;
 }
 
 // The link's ::after stretches over the closest positioned item, which

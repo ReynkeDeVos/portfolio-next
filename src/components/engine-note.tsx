@@ -1,9 +1,9 @@
 import { ChevronDown, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { copy } from '@/copy/copy';
 import { dismissEngineNote } from '@/lib/engine';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import { BrowserMascot } from './browser-mascot';
 import { useSectionNavigation } from './section-navigation';
@@ -11,7 +11,7 @@ import { useSectionNavigation } from './section-navigation';
 // Prerendered for everyone; the head script reveals it outside Chromium before
 // first paint. The explanation stays one click away so the note keeps quiet.
 function EngineNote({ locale }: { locale: Locale }) {
-  const t = copy[locale].engineNote;
+  const t = uiText[locale].engineNote;
   const { focusOpenSection } = useSectionNavigation();
 
   return (

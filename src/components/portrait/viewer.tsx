@@ -3,8 +3,8 @@ import type { Ref } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { contentFor } from '@/content/content';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 // The Portrait viewer, a basic Material dialog: extra-large shape on
 // surface-container-high, no shadow (tonal elevation). The modal dialog traps
@@ -23,7 +23,7 @@ function PortraitViewer({
   ref: Ref<HTMLDialogElement>;
   onDismiss: () => void;
 }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { portrait, fullPortrait } = contentFor(locale).profile;
 
   return (
