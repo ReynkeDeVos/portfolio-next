@@ -17,7 +17,7 @@ export default defineConfig({
         failOnError: true,
       },
     }),
-    react(),
+    react({ compiler: true }),
     tailwindcss(),
   ],
 });
