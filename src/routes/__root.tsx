@@ -9,6 +9,7 @@ import {
 import { NotFound } from '@/components/not-found';
 import googleSansFlexSubset from '@/generated/fonts/google-sans-flex-subset.woff2?url';
 import robotoFlexSubset from '@/generated/fonts/roboto-flex-subset.woff2?url';
+import { buildDisclosureScript } from '@/lib/build-disclosure';
 import { engineScript } from '@/lib/engine';
 import { localeFromPathname, localeScript } from '@/lib/locale';
 import { sectionScript, sectionStyles } from '@/lib/section';
@@ -52,7 +53,9 @@ function Root() {
     // The head scripts may mark the root before hydration.
     <html lang={localeFromPathname(pathname)} suppressHydrationWarning>
       <head>
-        <script>{localeScript + themeScript + engineScript + sectionScript}</script>
+        <script>
+          {localeScript + themeScript + engineScript + sectionScript + buildDisclosureScript}
+        </script>
         {/* The pre-hydration Section rules are built from the Section list, so they
             can't live in the theme CSS; here they still apply before first paint. */}
         {/* oxlint-disable shadcn/no-inline-styles */}
