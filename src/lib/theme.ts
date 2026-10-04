@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-import { cookiePath, lobes } from './cookie.ts';
+import { cookiePath, cookieReach, lobes } from './cookie.ts';
 import { startViewTransition } from './view-transition.ts';
 
 type ThemePreference = 'system' | 'light' | 'dark';
@@ -62,10 +62,13 @@ function isDark(preference: ThemePreference) {
 // The new theme grows out of the pressed control as the Portrait's cookie and
 // turns one lobe on its way out, the way the frame turns one lobe per Section.
 // The whole document switches at once underneath; only its new snapshot is
-// clipped, on the Material emphasized curve. The valleys sit at 94% of the
-// radius, so the final shape clears the farthest viewport corner. Reduced
-// motion cross-fades instead, and a choice that keeps the same colours, such
-// as System while the system is already light, applies without a transition.
+// clipped, on the Material emphasized curve. Chromium ignores clicks until a
+// view transition ends, so the reveal stays short and ends exactly as its edge
+// leaves the last viewport corner: one lobe on, the cookie is back in its
+// starting shape, which fixes the radius that just reaches every corner.
+// Reduced motion cross-fades instead, and a choice that keeps the same
+// colours, such as System while the system is already light, applies without
+// a transition.
 async function revealTheme(preference: ThemePreference, from: Element) {
   const update = () => {
     setTheme(preference);
@@ -86,7 +89,18 @@ async function revealTheme(preference: ThemePreference, from: Element) {
   const box = from.getBoundingClientRect();
   const x = box.x + box.width / 2;
   const y = box.y + box.height / 2;
-  const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) / 0.94;
+  const corners = [
+    [0, 0],
+    [innerWidth, 0],
+    [0, innerHeight],
+    [innerWidth, innerHeight],
+  ] as const;
+
+  const radius = Math.max(
+    ...corners.map(
+      ([cx, cy]) => Math.hypot(cx - x, cy - y) / cookieReach(Math.atan2(cy - y, cx - x)),
+    ),
+  );
   const steps = 8;
 
   const frames = Array.from({ length: steps + 1 }, (_, step) => ({
@@ -101,7 +115,7 @@ async function revealTheme(preference: ThemePreference, from: Element) {
   }
 
   document.documentElement.animate(frames, {
-    duration: 500,
+    duration: 350,
     easing: 'cubic-bezier(0.2, 0, 0, 1)',
     pseudoElement: '::view-transition-new(root)',
   });
