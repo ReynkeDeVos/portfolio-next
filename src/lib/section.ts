@@ -36,10 +36,10 @@ const sectionStyles = [
     (section) => `:root[data-section='${section}']{--section-index:${sections.indexOf(section)}}`,
   ),
   ":root[data-section] [data-slot='tabs-list']{--tab-index:var(--section-index)!important}",
-  ":root[data-section] [data-slot='tabs-trigger']{color:var(--md-sys-color-on-surface-variant);font-weight:500}",
+  ":root[data-section] [data-slot='tabs-trigger']{color:var(--color-on-surface-variant);font-weight:500}",
   ":root[data-section] [data-slot='tabs-content']{display:none}",
   ...otherSections.flatMap((section) => [
-    `:root[data-section='${section}'] [data-slot='tabs-trigger'][data-section='${section}']{color:var(--md-sys-color-on-secondary-container);font-weight:600}`,
+    `:root[data-section='${section}'] [data-slot='tabs-trigger'][data-section='${section}']{color:var(--color-on-secondary-container);font-weight:600}`,
     `:root[data-section='${section}'] [data-slot='tabs-content'][data-section='${section}']{display:block}`,
   ]),
 ].join('');

@@ -13,30 +13,57 @@
  * The highest container, worn only by labels that do nothing when pressed,
  * stays a quiet neutral sand, so caramel alone marks what can be pressed.
  * Inverse surface flips the theme for brief plain tooltips.
+ * Static keeps every role on the root, including those only plain CSS and
+ * the head styles read, such as surface and outline.
  */
+@theme static {
+  --color-*: initial;
+  --color-primary: light-dark(oklch(47% 0.075 150), oklch(80% 0.08 145));
+  --color-on-primary: light-dark(oklch(99% 0.01 90), oklch(26% 0.05 150));
+  --color-primary-container: light-dark(oklch(88% 0.055 140), oklch(36% 0.055 150));
+  --color-on-primary-container: light-dark(oklch(28% 0.05 150), oklch(90% 0.05 140));
+  --color-secondary-container: light-dark(oklch(87% 0.075 68), oklch(38% 0.05 55));
+  --color-on-secondary-container: light-dark(oklch(32% 0.07 45), oklch(91% 0.05 72));
+  --color-tertiary: light-dark(oklch(48% 0.13 40), oklch(78% 0.1 50));
+  --color-tertiary-container: light-dark(oklch(90% 0.06 50), oklch(38% 0.09 40));
+  --color-on-tertiary-container: light-dark(oklch(30% 0.09 38), oklch(91% 0.05 55));
+  --color-surface: light-dark(oklch(91.5% 0.038 76), oklch(20% 0.012 60));
+  --color-on-surface: light-dark(oklch(26% 0.025 55), oklch(92% 0.02 75));
+  --color-on-surface-variant: light-dark(oklch(40% 0.035 60), oklch(80% 0.03 70));
+  --color-surface-container-low: light-dark(oklch(97% 0.018 82), oklch(23% 0.014 60));
+  --color-surface-container: light-dark(oklch(94.5% 0.028 78), oklch(25.5% 0.016 60));
+  --color-surface-container-high: light-dark(oklch(92% 0.038 75), oklch(29% 0.018 60));
+  --color-surface-container-highest: light-dark(oklch(89.5% 0.021 80), oklch(33% 0.02 60));
+  --color-outline: light-dark(oklch(58% 0.035 62), oklch(64% 0.03 65));
+  --color-outline-variant: light-dark(oklch(84% 0.04 70), oklch(40% 0.022 60));
+  --color-inverse-surface: light-dark(oklch(30% 0.02 58), oklch(90% 0.022 76));
+  --color-inverse-on-surface: light-dark(oklch(95% 0.02 80), oklch(27% 0.016 60));
+  --color-scrim: light-dark(oklch(20% 0.02 55 / 0.6), oklch(10% 0.01 60 / 0.7));
+
+  /* Tab track: high nearly matches the light page, so light steps up to low. */
+  --color-tab-track: light-dark(
+    var(--color-surface-container-low),
+    var(--color-surface-container-high)
+  );
+
+  /*
+   * Grouped surfaces. The light page sits between the container tones, so
+   * light mode reads low above container, while dark mode needs the ladder's
+   * order: primary groups (identity, connected lists) stay one step above
+   * secondary cards in both themes.
+   */
+  --color-surface-group: light-dark(
+    var(--color-surface-container-low),
+    var(--color-surface-container)
+  );
+  --color-surface-card: light-dark(
+    var(--color-surface-container),
+    var(--color-surface-container-low)
+  );
+}
+
 :root {
   color-scheme: light dark;
-  --md-sys-color-primary: light-dark(oklch(47% 0.075 150), oklch(80% 0.08 145));
-  --md-sys-color-on-primary: light-dark(oklch(99% 0.01 90), oklch(26% 0.05 150));
-  --md-sys-color-primary-container: light-dark(oklch(88% 0.055 140), oklch(36% 0.055 150));
-  --md-sys-color-on-primary-container: light-dark(oklch(28% 0.05 150), oklch(90% 0.05 140));
-  --md-sys-color-secondary-container: light-dark(oklch(87% 0.075 68), oklch(38% 0.05 55));
-  --md-sys-color-on-secondary-container: light-dark(oklch(32% 0.07 45), oklch(91% 0.05 72));
-  --md-sys-color-tertiary: light-dark(oklch(48% 0.13 40), oklch(78% 0.1 50));
-  --md-sys-color-tertiary-container: light-dark(oklch(90% 0.06 50), oklch(38% 0.09 40));
-  --md-sys-color-on-tertiary-container: light-dark(oklch(30% 0.09 38), oklch(91% 0.05 55));
-  --md-sys-color-surface: light-dark(oklch(91.5% 0.038 76), oklch(20% 0.012 60));
-  --md-sys-color-on-surface: light-dark(oklch(26% 0.025 55), oklch(92% 0.02 75));
-  --md-sys-color-on-surface-variant: light-dark(oklch(40% 0.035 60), oklch(80% 0.03 70));
-  --md-sys-color-surface-container-low: light-dark(oklch(97% 0.018 82), oklch(23% 0.014 60));
-  --md-sys-color-surface-container: light-dark(oklch(94.5% 0.028 78), oklch(25.5% 0.016 60));
-  --md-sys-color-surface-container-high: light-dark(oklch(92% 0.038 75), oklch(29% 0.018 60));
-  --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.021 80), oklch(33% 0.02 60));
-  --md-sys-color-outline: light-dark(oklch(58% 0.035 62), oklch(64% 0.03 65));
-  --md-sys-color-outline-variant: light-dark(oklch(84% 0.04 70), oklch(40% 0.022 60));
-  --md-sys-color-inverse-surface: light-dark(oklch(30% 0.02 58), oklch(90% 0.022 76));
-  --md-sys-color-inverse-on-surface: light-dark(oklch(95% 0.02 80), oklch(27% 0.016 60));
-  --md-sys-color-scrim: light-dark(oklch(20% 0.02 55 / 0.6), oklch(10% 0.01 60 / 0.7));
 }
 
 :root[data-theme='light'] {
@@ -65,12 +92,12 @@
 }
 
 :root[data-theme] [data-theme-option] {
-  color: var(--md-sys-color-on-surface-variant);
+  color: var(--color-on-surface-variant);
 }
 
 :root[data-theme='light'] [data-theme-option='light'],
 :root[data-theme='dark'] [data-theme-option='dark'] {
-  color: var(--md-sys-color-on-secondary-container);
+  color: var(--color-on-secondary-container);
 }
 
 /*
@@ -83,47 +110,6 @@
     animation: none;
     mix-blend-mode: normal;
   }
-}
-
-@theme inline {
-  --color-*: initial;
-  --color-primary: var(--md-sys-color-primary);
-  --color-on-primary: var(--md-sys-color-on-primary);
-  --color-primary-container: var(--md-sys-color-primary-container);
-  --color-on-primary-container: var(--md-sys-color-on-primary-container);
-  --color-secondary-container: var(--md-sys-color-secondary-container);
-  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
-  --color-tertiary: var(--md-sys-color-tertiary);
-  --color-on-surface: var(--md-sys-color-on-surface);
-  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
-  --color-surface-container: var(--md-sys-color-surface-container);
-  --color-surface-container-high: var(--md-sys-color-surface-container-high);
-  --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
-  --color-outline-variant: var(--md-sys-color-outline-variant);
-  --color-inverse-surface: var(--md-sys-color-inverse-surface);
-  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
-  --color-scrim: var(--md-sys-color-scrim);
-
-  /* Tab track: high nearly matches the light page, so light steps up to low. */
-  --color-tab-track: light-dark(
-    var(--md-sys-color-surface-container-low),
-    var(--md-sys-color-surface-container-high)
-  );
-
-  /*
-   * Grouped surfaces. The light page sits between the container tones, so
-   * light mode reads low above container, while dark mode needs the ladder's
-   * order: primary groups (identity, connected lists) stay one step above
-   * secondary cards in both themes.
-   */
-  --color-surface-group: light-dark(
-    var(--md-sys-color-surface-container-low),
-    var(--md-sys-color-surface-container)
-  );
-  --color-surface-card: light-dark(
-    var(--md-sys-color-surface-container),
-    var(--md-sys-color-surface-container-low)
-  );
 }
 
 @theme {
@@ -253,7 +239,7 @@
 }
 
 @utility focus-ring {
-  outline: 3px solid var(--md-sys-color-primary);
+  outline: 3px solid var(--color-primary);
   outline-offset: var(--focus-ring-offset, 2px);
 }
 
@@ -337,12 +323,12 @@
 
 @layer base {
   html {
-    background-color: var(--md-sys-color-surface);
-    color: var(--md-sys-color-on-surface);
-    accent-color: var(--md-sys-color-primary);
-    caret-color: var(--md-sys-color-primary);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    accent-color: var(--color-primary);
+    caret-color: var(--color-primary);
     scrollbar-gutter: stable;
-    scrollbar-color: var(--md-sys-color-outline) var(--md-sys-color-surface);
+    scrollbar-color: var(--color-outline) var(--color-surface);
     -webkit-text-size-adjust: 100%;
   }
 
@@ -361,8 +347,8 @@
   }
 
   ::selection {
-    background-color: var(--md-sys-color-tertiary-container);
-    color: var(--md-sys-color-on-tertiary-container);
+    background-color: var(--color-tertiary-container);
+    color: var(--color-on-tertiary-container);
   }
 
   h1,
@@ -382,7 +368,7 @@
 
   /* Same ring as the focus-ring utility, for native links and panels. */
   :focus-visible {
-    outline: 3px solid var(--md-sys-color-primary);
+    outline: 3px solid var(--color-primary);
     outline-offset: var(--focus-ring-offset, 2px);
   }
 }
@@ -392,8 +378,8 @@
 /* Dark ink with white catchlights reads as eyes in both themes. */
 .browser-mascot-pupils,
 .browser-mascot-eyes-happy {
-  fill: light-dark(var(--md-sys-color-on-primary-container), oklch(20% 0.03 150));
-  stroke: light-dark(var(--md-sys-color-on-primary-container), oklch(20% 0.03 150));
+  fill: light-dark(var(--color-on-primary-container), oklch(20% 0.03 150));
+  stroke: light-dark(var(--color-on-primary-container), oklch(20% 0.03 150));
 }
 
 /* The theme resets Tailwind's palette, so white catchlights need their own rule. */
