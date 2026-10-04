@@ -1,5 +1,5 @@
 import { XIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import type { Ref } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -15,8 +15,9 @@ import { uiText } from '@/ui-text/ui-text';
 // on opening, disappears at once on closing and carries the pointer cursor.
 // The surface skips its own fade: the morph view transition grows it out of
 // the thumbnail and fades the content in place.
-// The large image is lazy, so it loads only once the viewer opens; until it
-// has, the Expressive loading indicator morphs where it will appear.
+// The large image is lazy, so it loads only once the viewer opens. Should it
+// take longer than a moment, the Expressive loading indicator fades in where
+// it will appear; a quick load never shows it.
 function PortraitViewer({
   locale,
   ref,
@@ -29,6 +30,17 @@ function PortraitViewer({
   const t = uiText[locale];
   const { portrait, fullPortrait } = contentFor(locale).profile;
   const [loaded, setLoaded] = useState(false);
+  const photo = useRef<HTMLImageElement>(null);
+
+  // After a reload the photo can come from the memory cache while the page is
+  // still parsing, before React listens for its load event.
+  useLayoutEffect(() => {
+    if (photo.current?.complete) {
+      // Only the element knows it has already loaded.
+      // oxlint-disable-next-line react/set-state-in-effect
+      setLoaded(true);
+    }
+  }, []);
 
   return (
     <dialog
@@ -62,6 +74,7 @@ function PortraitViewer({
           The height budget covers viewport margin, padding and the close row. */}
       <div className='rounded-inherit relative mx-auto'>
         <img
+          ref={photo}
           src={fullPortrait.src}
           alt={fullPortrait.alt}
           width={fullPortrait.width}
@@ -77,7 +90,7 @@ function PortraitViewer({
           className='bg-surface-container view-transition-morph-content rounded-inherit h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] object-contain'
         />
         {loaded ? null : (
-          <div className='pointer-events-none absolute inset-0 grid place-items-center'>
+          <div className='animate-fade-in-late pointer-events-none absolute inset-0 grid place-items-center'>
             <LoadingIndicator label={t.photoLoading} />
           </div>
         )}

@@ -67,6 +67,10 @@
   /* Entrance-only opacity; the Portrait viewer closes without waiting for an exit. */
   --animate-fade-in: fade-in 150ms var(--ease-effects-fast);
 
+  /* The same fade after a 400ms grace, for what only a slow load should show.
+     A display: none ancestor holds it back, so it starts with the viewer. */
+  --animate-fade-in-late: fade-in 150ms var(--ease-effects-fast) 400ms both;
+
   @keyframes fade-in {
     from {
       opacity: 0;
