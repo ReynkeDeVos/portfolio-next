@@ -6,7 +6,7 @@ Live: [portfolio.renkebrixel.workers.dev](https://portfolio.renkebrixel.workers.
 
 ```sh
 mise install    # Node LTS and uv
-aubr dev        # installs dependencies first
+aubr dev        # installs dependencies, subsets the fonts, starts Vite
 ```
 
 `aubr build` subsets the fonts to the characters the source uses, then builds the Worker.
