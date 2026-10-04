@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
-import { cookiePath, lobes } from '@/lib/cookie';
-import { startViewTransition } from '@/lib/view-transition';
+import { cookiePath, lobes } from './cookie.ts';
+import { startViewTransition } from './view-transition.ts';
 
 type ThemePreference = 'system' | 'light' | 'dark';
 
