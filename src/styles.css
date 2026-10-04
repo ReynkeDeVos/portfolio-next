@@ -41,6 +41,18 @@
   color-scheme: dark;
 }
 
+/*
+ * Theme switch: the new snapshot covers the old one without blending while
+ * theme.ts grows its clip from the pressed control.
+ */
+:root:active-view-transition-type(theme) {
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+}
+
 @theme inline {
   --color-*: initial;
   --color-primary: var(--md-sys-color-primary);

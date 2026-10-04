@@ -3,38 +3,23 @@ import type { CSSProperties } from 'react';
 
 import { useSectionNavigation } from '@/components/section-navigation';
 import { contentFor } from '@/content/content';
+import { cookiePath, lobes } from '@/lib/cookie';
 import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
+import { startViewTransition } from '@/lib/view-transition';
 import { uiText } from '@/ui-text/ui-text';
 
 import { PortraitViewer } from './viewer';
 
-const lobes = 12;
-
 const stepDegrees = 360 / lobes;
-
-// A twelve-lobe "cookie" from the Expressive shape set, in bounding-box units
-// so one path fits every portrait size. Peaks touch the inscribed circle.
-// The path is centred on the origin so CSS can rotate and scale it in place;
-// a 0.5px translate (bounding-box units) moves it back to the centre.
-function cookiePath() {
-  const points = lobes * 16;
-  let path = '';
-
-  for (let index = 0; index < points; index += 1) {
-    const angle = (index / points) * Math.PI * 2;
-    const radius = 0.47 + 0.03 * Math.cos(lobes * angle);
-    const x = radius * Math.cos(angle);
-    const y = radius * Math.sin(angle);
-    path += `${index === 0 ? 'M' : 'L'}${x.toFixed(4)} ${y.toFixed(4)}`;
-  }
-
-  return `${path}Z`;
-}
 
 const clipId = 'portrait-cookie';
 
-const clipPath = cookiePath();
+// The cookie in bounding-box units, so one path fits every portrait size.
+// Peaks touch the inscribed circle. The path is centred on the origin so CSS
+// can rotate and scale it in place; a 0.5px translate (bounding-box units)
+// moves it back to the centre.
+const clipPath = cookiePath(0.5);
 
 // The hint runs along the lower inner rim on a sage band, in a
 // 100-unit box. Its middle baseline sits on a radius-38 arc, so text
@@ -76,25 +61,14 @@ function warmFullPortrait() {
 // thumbnail never moves and the large photo fades in place at its final size.
 // With reduced motion the Portrait viewer cross-fades in place instead, without
 // travel. The transition types scope the morph names and keyframes, in
-// portrait.css, to this one moment. Without view transitions (Firefox before
-// 144, Safari before 18) the Portrait viewer simply opens and closes. Safari
-// 18.0 and 18.1 only take the callback form and throw on the options object;
-// they get the default cross-fade, since the types scope the custom styles.
+// portrait.css, to this one moment.
 function morphPortrait(open: boolean, update: () => void) {
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const types = reduceMotion ? ['morph-fade'] : ['morph', open ? 'morph-open' : 'morph-close'];
 
-  if (!('startViewTransition' in document)) {
-    update();
-
-    return;
-  }
-
-  try {
-    document.startViewTransition({ update, types });
-  } catch {
-    document.startViewTransition(update);
-  }
+  startViewTransition(
+    update,
+    reduceMotion ? ['morph-fade'] : ['morph', open ? 'morph-open' : 'morph-close'],
+  );
 }
 
 // The frame turns one lobe per Section the visitor picks, the way the tabs
