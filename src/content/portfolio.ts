@@ -281,6 +281,7 @@ export const portfolio = {
             name: 'code-review',
             url: 'https://www.aihero.dev/skills-code-review',
           },
+          { name: 'ponytail', url: 'https://ponytail.dev/' },
         ],
       },
     ],
