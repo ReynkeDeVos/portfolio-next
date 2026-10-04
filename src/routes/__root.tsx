@@ -30,19 +30,11 @@ function Root() {
     // The head scripts may mark the root before hydration.
     <html lang={localeFromPathname(pathname)} suppressHydrationWarning>
       <head>
-        {/* Reviewed: the scripts are constant strings with no external input. */}
-        {/* fallow-ignore-next-line security-sink */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: localeScript + themeScript + engineScript + sectionScript,
-          }}
-        />
+        <script>{localeScript + themeScript + engineScript + sectionScript}</script>
         {/* The pre-hydration Section rules are built from the Section list, so they
             can't live in the theme CSS; here they still apply before first paint. */}
         {/* oxlint-disable shadcn/no-inline-styles */}
-        {/* Reviewed: the rules are a constant string built from the Section names. */}
-        {/* fallow-ignore-next-line security-sink */}
-        <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+        <style>{sectionStyles}</style>
         {/* oxlint-enable shadcn/no-inline-styles */}
         <HeadContent />
       </head>
