@@ -76,9 +76,20 @@
 
 @layer base {
   /* The open Portrait viewer locks page scrolling; the stable scrollbar gutter
-     keeps the page in place. */
+     keeps the page in place. The scrim stops short of the gutter, which shows
+     the canvas color, so the canvas takes the scrim's opaque shade at its
+     opacity (60% light, 70% dark) over the surface, and the body keeps the
+     plain surface under the real scrim: both read the same. */
   :root:has(dialog[open]) {
     overflow: hidden;
+    background-color: light-dark(
+      color-mix(in srgb, oklch(from var(--md-sys-color-scrim) l c h / 1) 60%, var(--md-sys-color-surface)),
+      color-mix(in srgb, oklch(from var(--md-sys-color-scrim) l c h / 1) 70%, var(--md-sys-color-surface))
+    );
+
+    & body {
+      background-color: var(--md-sys-color-surface);
+    }
   }
 }
 
