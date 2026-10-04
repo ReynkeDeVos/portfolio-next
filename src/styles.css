@@ -287,6 +287,54 @@
   border-radius: inherit;
 }
 
+/*
+ * The loading indicator's figure steps through the seven outlines its
+ * component sets as --loading-outline-0 to -6, springing into each on the
+ * default spatial curve, while the whole turns. Reduced motion stops both
+ * with every other animation, which leaves the first outline at rest.
+ */
+@theme {
+  --animate-loading-indicator:
+    loading-morph 4550ms var(--ease-spatial) infinite, loading-turn 4666ms linear infinite;
+
+  @keyframes loading-morph {
+    0%,
+    100% {
+      clip-path: var(--loading-outline-0);
+    }
+
+    14.2857% {
+      clip-path: var(--loading-outline-1);
+    }
+
+    28.5714% {
+      clip-path: var(--loading-outline-2);
+    }
+
+    42.8571% {
+      clip-path: var(--loading-outline-3);
+    }
+
+    57.1429% {
+      clip-path: var(--loading-outline-4);
+    }
+
+    71.4286% {
+      clip-path: var(--loading-outline-5);
+    }
+
+    85.7143% {
+      clip-path: var(--loading-outline-6);
+    }
+  }
+
+  @keyframes loading-turn {
+    to {
+      rotate: 1turn;
+    }
+  }
+}
+
 @layer base {
   html {
     background-color: var(--md-sys-color-surface);
