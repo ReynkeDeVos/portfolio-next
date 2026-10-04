@@ -101,8 +101,17 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     // layout effect starts that render before paint.
     // oxlint-disable-next-line react/set-state-in-effect
     setHydrated(true);
-    delete document.documentElement.dataset.section;
   }, []);
+
+  // The CSS lets go only once the tabs show the address's Section themselves.
+  // Effects that measure the page can run in between, and dropping it earlier
+  // would show them the default Section's shorter page, which clamps a
+  // restored scroll position.
+  useLayoutEffect(() => {
+    if (hydrated) {
+      delete document.documentElement.dataset.section;
+    }
+  }, [hydrated]);
 
   // Only a Section the visitor picked slides the indicator and turns the
   // frame; one the address brings in from elsewhere just appears.

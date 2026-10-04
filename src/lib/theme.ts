@@ -52,6 +52,10 @@ function setTheme(preference: ThemePreference) {
   }
 }
 
+// The radius at which the reveal's lobes reach their full depth, about the
+// largest Portrait frame's.
+const fullLobes = 72;
+
 function isDark(preference: ThemePreference) {
   return (
     preference === 'dark' ||
@@ -104,11 +108,26 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     ),
   );
 
-  const steps = 8;
+  // The speed and curve come from the motion tokens in styles.css, which the
+  // Portrait morph shares. The minifier may rewrite 350ms as .35s.
+  const tokens = getComputedStyle(document.documentElement);
+  const speed = tokens.getPropertyValue('--transition-duration-spatial-fast');
+  const easing = tokens.getPropertyValue('--ease-emphasized');
 
-  const frames = Array.from({ length: steps + 1 }, (_, step) => ({
-    clipPath: `path('${cookiePath((radius * step) / steps, x, y, (step / steps) * ((Math.PI * 2) / lobes))}')`,
-  }));
+  // Small, the cookie's lobes read as a spiky star, so they grow in with the
+  // size: it leaves the control as a round bloom and is a full cookie by the
+  // time it is as large as the Portrait. Frames crowd the start, where the
+  // shape changes most.
+  const steps = 16;
+
+  const frames = Array.from({ length: steps + 1 }, (_, step) => {
+    const progress = (step / steps) ** 2;
+    const grown = radius * progress;
+    const turn = progress * ((Math.PI * 2) / lobes);
+    const depth = Math.min(1, grown / fullLobes);
+
+    return { offset: progress, clipPath: `path('${cookiePath(grown, x, y, turn, depth)}')` };
+  });
 
   try {
     await startViewTransition(update, ['theme'])?.ready;
@@ -117,19 +136,18 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     return;
   }
 
-  // The speed and curve come from the motion tokens in styles.css, which the
-  // Portrait morph and the sliding pills share.
-  // The minifier may rewrite 350ms as .35s.
-  const tokens = getComputedStyle(document.documentElement);
-  const speed = tokens.getPropertyValue('--transition-duration-spatial-fast');
+  // parseFloat, unlike Number, reads past the unit.
+  // oxlint-disable-next-line unicorn/prefer-number-coercion
+  const duration = Number.parseFloat(speed) * (speed.endsWith('ms') ? 1 : 1000);
+  const root = document.documentElement;
 
-  document.documentElement.animate(frames, {
-    // parseFloat, unlike Number, reads past the unit.
-    // oxlint-disable-next-line unicorn/prefer-number-coercion
-    duration: Number.parseFloat(speed) * (speed.endsWith('ms') ? 1 : 1000),
-    easing: tokens.getPropertyValue('--ease-emphasized'),
+  // The new colours fade in over the first quarter, so the first small bloom
+  // never flashes at full contrast over the control.
+  root.animate([{ opacity: 0 }, { opacity: 1 }], {
+    duration: duration / 4,
     pseudoElement: '::view-transition-new(root)',
   });
+  root.animate(frames, { duration, easing, pseudoElement: '::view-transition-new(root)' });
 }
 
 function useThemePreference() {

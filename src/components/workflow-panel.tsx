@@ -1,7 +1,8 @@
 import { ChevronDown } from 'lucide-react';
-import { Fragment } from 'react';
+import { Fragment, useLayoutEffect, useRef } from 'react';
 
 import { contentFor } from '@/content/content';
+import { readBuildOpen, rememberBuildOpen } from '@/lib/build-disclosure';
 import type { Locale } from '@/lib/locale';
 import { uiText } from '@/ui-text/ui-text';
 
@@ -137,12 +138,31 @@ function ToolsSection({ locale }: { locale: Locale }) {
 // Choices rather than a badge inventory: topic, the reason and its stack.
 // Closed by default; technical readers open it, everyone else skips it. The
 // summary carries the heading and a state layer; content opens instantly.
+// An open disclosure stays open across reloads in the tab: the head script
+// reopens the prerendered one, and a page React renders itself reopens it
+// before paint.
 function BuildSection({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const { build } = contentFor(locale).workflow;
+  const disclosure = useRef<HTMLDetailsElement>(null);
+
+  useLayoutEffect(() => {
+    if (disclosure.current && readBuildOpen()) {
+      disclosure.current.open = true;
+    }
+  }, []);
 
   return (
-    <details className='group/disclosure'>
+    <details
+      ref={disclosure}
+      data-slot='build-disclosure'
+      // The head script may open it before React takes over.
+      suppressHydrationWarning
+      onToggle={(event) => {
+        rememberBuildOpen(event.currentTarget.open);
+      }}
+      className='group/disclosure'
+    >
       <summary className='rounded-lg-inc bg-surface-card before:bg-on-surface before:ease-effects-fast before:rounded-inherit relative grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 p-5 select-none before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 sm:px-6 [&::-webkit-details-marker]:hidden'>
         <h3 className='type-headline-sm text-on-surface font-semibold'>{t.buildHeading}</h3>
         <ChevronDown
