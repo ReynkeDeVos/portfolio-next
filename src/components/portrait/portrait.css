@@ -92,8 +92,9 @@
 }
 
 /*
- * The shape is a plain dialog surface: the image pair paints it and turns the
- * trigger's circle into the dialog corners, so neither snapshot is stretched.
+ * The shape is a plain dialog surface: the image pair paints it and
+ * portrait.tsx clips it from the frame's cookie to the dialog corners, so
+ * neither snapshot is stretched. The corners here only stand in without it.
  * Content fades in place once the shape has nearly arrived and leaves first.
  * The shape is translucent while it overlaps the thumbnail, so the portrait
  * stays visible under it at both ends. The shape travels at the theme
@@ -127,9 +128,7 @@
 
 :root:active-view-transition-type(morph-open) {
   &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, fade-in;
-    animation-duration: var(--transition-duration-spatial-fast), 140ms;
-    animation-timing-function: var(--ease-emphasized), linear;
+    animation: fade-in 140ms linear;
   }
 
   &::view-transition-new(*.morph-content) {
@@ -158,11 +157,8 @@
   }
 
   &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, morph-fade-out;
-    animation-duration: calc(var(--transition-duration-spatial-fast) * 2 / 3), 130ms;
-    animation-delay: 40ms, calc(var(--transition-duration-spatial-fast) * 2 / 3 - 90ms);
-    animation-timing-function: var(--ease-emphasized), linear;
-    animation-direction: reverse, normal;
+    animation: morph-fade-out 130ms linear
+      calc(var(--transition-duration-spatial-fast) * 2 / 3 - 90ms) both;
   }
 
   &::view-transition-old(*.morph-content),
@@ -180,12 +176,6 @@
   &::view-transition-new(root) {
     animation-duration: 150ms;
     animation-timing-function: var(--ease-effects-fast);
-  }
-}
-
-@keyframes morph-corners {
-  from {
-    border-radius: 50%;
   }
 }
 
