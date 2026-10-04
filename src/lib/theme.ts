@@ -62,9 +62,10 @@ function isDark(preference: ThemePreference) {
 // The new theme grows out of the pressed control as the Portrait's cookie and
 // turns one lobe on its way out, the way the frame turns one lobe per Section.
 // The whole document switches at once underneath; only its new snapshot is
-// clipped, on the Material emphasized curve. Chromium ignores clicks until a
-// view transition ends, so the reveal stays short and ends exactly as its edge
-// leaves the last viewport corner: one lobe on, the cookie is back in its
+// clipped, on the Material emphasized curve at the fast spatial speed.
+// Chromium ignores clicks until a view transition ends, so the reveal stays
+// short and ends exactly as its edge leaves the last viewport corner: one
+// lobe on, the cookie is back in its
 // starting shape, which fixes the radius that just reaches every corner.
 // Reduced motion cross-fades instead, and a choice that keeps the same
 // colours, such as System while the system is already light, applies without
@@ -116,9 +117,17 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     return;
   }
 
+  // The speed and curve come from the motion tokens in styles.css, which the
+  // Portrait morph and the sliding pills share.
+  // The minifier may rewrite 350ms as .35s.
+  const tokens = getComputedStyle(document.documentElement);
+  const speed = tokens.getPropertyValue('--transition-duration-spatial-fast');
+
   document.documentElement.animate(frames, {
-    duration: 350,
-    easing: 'cubic-bezier(0.2, 0, 0, 1)',
+    // parseFloat, unlike Number, reads past the unit.
+    // oxlint-disable-next-line unicorn/prefer-number-coercion
+    duration: Number.parseFloat(speed) * (speed.endsWith('ms') ? 1 : 1000),
+    easing: tokens.getPropertyValue('--ease-emphasized'),
     pseudoElement: '::view-transition-new(root)',
   });
 }

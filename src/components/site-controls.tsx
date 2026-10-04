@@ -46,7 +46,7 @@ function SegmentPill({
       style={position}
       className={cn(
         'bg-secondary-container absolute inset-0 -z-10 [grid-area:1/1/2/2] translate-x-[calc(var(--segment-index)*(100%+0.125rem))] rounded-full starting:translate-x-[calc(var(--segment-from)*(100%+0.125rem))]',
-        animate && 'ease-spatial-fast transition-transform duration-350',
+        animate && 'ease-spatial-fast transition-transform duration-spatial-fast',
       )}
     />
   );
