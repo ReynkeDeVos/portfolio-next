@@ -1,3 +1,5 @@
+import { store } from './storage.ts';
+
 const storageKey = 'build-open';
 
 // The tab remembers an open build explanation, so a reload lays the page out
@@ -16,15 +18,7 @@ function readBuildOpen() {
 }
 
 function rememberBuildOpen(open: boolean) {
-  try {
-    if (open) {
-      sessionStorage.setItem(storageKey, '1');
-    } else {
-      sessionStorage.removeItem(storageKey);
-    }
-  } catch {
-    // The disclosure still works; a reload just starts closed.
-  }
+  store('sessionStorage', storageKey, open ? '1' : null);
 }
 
 export { buildDisclosureScript, readBuildOpen, rememberBuildOpen };

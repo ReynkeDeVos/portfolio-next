@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
 import { cookiePath, cookieReach, lobes } from './cookie.ts';
+import { store } from './storage.ts';
 import { startViewTransition } from './view-transition.ts';
 
 type ThemePreference = 'system' | 'light' | 'dark';
@@ -37,15 +38,7 @@ function setTheme(preference: ThemePreference) {
     root.dataset.theme = preference;
   }
 
-  try {
-    if (preference === 'system') {
-      localStorage.removeItem(storageKey);
-    } else {
-      localStorage.setItem(storageKey, preference);
-    }
-  } catch {
-    // The choice still applies for this page view.
-  }
+  store('localStorage', storageKey, preference === 'system' ? null : preference);
 
   for (const listener of listeners) {
     listener();
