@@ -26,7 +26,7 @@ const variants = {
   // over the group's sliding pill. The focus ring is inset so the track and
   // neighbours never cover it.
   segment:
-    'text-on-surface-variant [--focus-ring-offset:-3px] aria-pressed:text-on-secondary-container aria-current:font-semibold aria-current:text-on-secondary-container aria-[current=page]:font-semibold aria-[current=page]:text-on-secondary-container',
+    'text-on-surface-variant [--focus-ring-offset:-3px] aria-pressed:text-on-secondary-container aria-[current=page]:font-semibold aria-[current=page]:text-on-secondary-container',
   // The same item on the floating toolbar's vibrant primary container.
   'segment-vibrant':
     'text-on-primary-container [--focus-ring-offset:-3px] aria-current:font-semibold aria-current:text-on-secondary-container',
