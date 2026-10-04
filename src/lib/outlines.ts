@@ -23,9 +23,7 @@ function polygon(sides: number, rounding: number): Outline {
   return (angle) => {
     const within = (((angle + Math.PI / 2) % sector) + sector) % sector;
 
-    return (
-      Math.cos(Math.PI / sides) / Math.cos((within - sector / 2) * (1 - rounding)) / corner
-    );
+    return Math.cos(Math.PI / sides) / Math.cos((within - sector / 2) * (1 - rounding)) / corner;
   };
 }
 
@@ -61,13 +59,14 @@ const outlines = {
   oval: oval(0.72, -Math.PI / 4),
 } satisfies Record<string, Outline>;
 
-type ShapeName = keyof typeof outlines;
+type OutlineName = keyof typeof outlines;
 
 const points = 72;
 
-// The shape as a CSS polygon() filling its box.
-function shapePolygon(name: ShapeName) {
+// The outline as a CSS polygon() filling its box.
+function outlinePolygon(name: OutlineName) {
   const outline = outlines[name];
+
   const list = Array.from({ length: points }, (_, index) => {
     const angle = (index / points) * Math.PI * 2;
     const reach = 50 * outline(angle);
@@ -78,6 +77,6 @@ function shapePolygon(name: ShapeName) {
   return `polygon(${list.join(',')})`;
 }
 
-export { shapePolygon };
+export { outlinePolygon };
 
-export type { ShapeName };
+export type { OutlineName };

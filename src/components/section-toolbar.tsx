@@ -1,4 +1,5 @@
 import { BriefcaseBusiness, FolderCode, Layers, SquareTerminal } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -14,7 +15,7 @@ const sectionIcons = {
   career: BriefcaseBusiness,
   skills: Layers,
   workflow: SquareTerminal,
-} satisfies Record<Section, unknown>;
+} satisfies Record<Section, LucideIcon>;
 
 // Once the Section tabs have scrolled above the viewport, a floating
 // Expressive toolbar rises at the foot of the content column with the same
@@ -30,15 +31,13 @@ function SectionToolbar({ locale }: { locale: Locale }) {
   useEffect(() => {
     const tabs = document.querySelector('[data-slot="tabs-list"]');
 
-    if (!tabs) {
-      return;
-    }
-
     const observer = new IntersectionObserver(([entry]) => {
       setShown(entry !== undefined && !entry.isIntersecting && entry.boundingClientRect.top < 0);
     });
 
-    observer.observe(tabs);
+    if (tabs) {
+      observer.observe(tabs);
+    }
 
     return () => {
       observer.disconnect();
@@ -63,7 +62,7 @@ function SectionToolbar({ locale }: { locale: Locale }) {
         aria-hidden={!shown || undefined}
         inert={!shown}
         data-shown={shown}
-        className='bg-primary-container duration-spatial-fast ease-spatial-fast data-[shown=false]:ease-emphasized pointer-events-auto absolute bottom-0 left-1/2 flex w-max origin-bottom -translate-x-1/2 items-center gap-1 rounded-full p-2 transition-[opacity,translate,scale] data-[shown=false]:pointer-events-none data-[shown=false]:translate-y-4 data-[shown=false]:scale-90 data-[shown=false]:opacity-0 data-[shown=false]:duration-[calc(var(--transition-duration-spatial-fast)*2/3)]'
+        className='bg-primary-container duration-spatial-fast ease-spatial-fast data-[shown=false]:ease-emphasized transition-presence data-[shown=false]:duration-spatial-fast-exit pointer-events-auto absolute bottom-0 left-1/2 flex w-max origin-bottom -translate-x-1/2 items-center gap-1 rounded-full p-2 data-[shown=false]:pointer-events-none data-[shown=false]:translate-y-4 data-[shown=false]:scale-90 data-[shown=false]:opacity-0'
       >
         {sections.map((value) => {
           const Icon = sectionIcons[value];
@@ -84,7 +83,7 @@ function SectionToolbar({ locale }: { locale: Locale }) {
               {/* The label opens out of the icon for the open Section. */}
               <span
                 aria-hidden
-                className='grid grid-cols-[0fr] transition-[grid-template-columns] duration-[inherit] ease-[inherit] group-aria-[current=true]/toolbar-item:grid-cols-[1fr] sm:grid-cols-[1fr]'
+                className='duration-spatial-fast ease-spatial-fast transition-columns grid grid-cols-[0fr] group-aria-current/toolbar-item:grid-cols-[1fr] sm:grid-cols-[1fr]'
               >
                 <span className='overflow-hidden'>
                   <span className='block ps-2'>{t.sectionNames[value]}</span>

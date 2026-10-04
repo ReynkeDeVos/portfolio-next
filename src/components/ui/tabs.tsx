@@ -38,7 +38,7 @@ function TabsTrigger(props: React.ComponentProps<typeof TabsPrimitive.Trigger>) 
   return (
     <TabsPrimitive.Trigger
       data-slot='tabs-trigger'
-      className='type-label-lg @max-[22rem]/tabs:type-label-md text-on-surface-variant before:ease-effects-fast data-[state=active]:text-on-secondary-container rounded-lg-inc duration-spatial-fast ease-spatial-fast before:rounded-inherit relative inline-flex min-w-0 cursor-pointer items-center justify-center px-2 font-medium transition-[border-radius,font-weight] select-none [--focus-ring-offset:-3px] before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 after:absolute after:-inset-y-1 after:inset-x-0 hover:before:opacity-8 focus-visible:before:opacity-10 active:rounded-sm active:duration-150 data-[state=active]:font-semibold data-[state=active]:hover:before:opacity-0'
+      className='type-label-lg @max-[22rem]/tabs:type-label-md text-on-surface-variant before:ease-effects-fast data-[state=active]:text-on-secondary-container rounded-lg-inc duration-spatial-fast ease-spatial-fast before:rounded-inherit relative inline-flex min-w-0 cursor-pointer items-center justify-center px-2 font-medium transition-[border-radius,font-weight] select-none [--focus-ring-offset:-3px] before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 after:absolute after:inset-x-0 after:-inset-y-1 hover:before:opacity-8 focus-visible:before:opacity-10 active:rounded-sm active:duration-150 data-[state=active]:font-semibold data-[state=active]:hover:before:opacity-0'
       {...props}
     />
   );

@@ -29,7 +29,7 @@ const variants = {
   // Floating toolbar item on its vibrant container. The current item fills
   // with primary and squares off, the Expressive selection shape.
   toolbar:
-    'group/toolbar-item text-on-primary-container aria-[current=true]:rounded-md aria-[current=true]:bg-primary aria-[current=true]:text-on-primary',
+    'group/toolbar-item text-on-primary-container aria-current:rounded-md aria-current:bg-primary aria-current:text-on-primary',
 };
 
 // An icon is first when no visible element precedes it: the label's text
@@ -42,7 +42,8 @@ const sizes = {
   sm: 'h-8 gap-1.5 rounded-lg px-3.5 has-[>svg:not(:not(.sr-only)~*)]:ps-3 has-[>svg:last-child]:pe-3',
   icon: 'size-10 rounded-lg-inc',
   'icon-sm': "size-8 rounded-lg [&_svg:not([class*='size-'])]:size-4",
-  segment: 'h-8 rounded-lg px-3.5 pointer-coarse:h-10 pointer-coarse:rounded-lg-inc pointer-coarse:px-3',
+  segment:
+    'h-8 rounded-lg px-3.5 pointer-coarse:h-10 pointer-coarse:rounded-lg-inc pointer-coarse:px-3',
   'icon-segment':
     "size-8 rounded-lg pointer-coarse:size-10 pointer-coarse:rounded-lg-inc [&_svg:not([class*='size-'])]:size-4",
   // The icon sits centred in a 40px pill; a label adds its own spacing.
@@ -51,7 +52,8 @@ const sizes = {
   // inner ones that round out while pressed; the outer ones stay put.
   'split-start':
     'h-10 rounded-s-lg-inc rounded-e-xs px-5 active:rounded-s-lg-inc active:rounded-e-md has-[>svg:not(:not(.sr-only)~*)]:ps-4',
-  'split-end': 'h-10 w-11 rounded-s-xs rounded-e-lg-inc active:rounded-s-md active:rounded-e-lg-inc',
+  'split-end':
+    'h-10 w-11 rounded-s-xs rounded-e-lg-inc active:rounded-s-md active:rounded-e-lg-inc',
 };
 
 function Button({

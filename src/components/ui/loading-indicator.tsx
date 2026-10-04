@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 
-import { shapePolygon } from '@/lib/shapes';
-import type { ShapeName } from '@/lib/shapes';
+import { outlinePolygon } from '@/lib/outlines';
+import type { OutlineName } from '@/lib/outlines';
 
-// The Material 3 Expressive loading indicator, contained: a shape inside a
+// The Material 3 Expressive loading indicator, contained: a figure inside a
 // round container morphs through the Expressive set while the whole turns.
-const sequence: ShapeName[] = [
+const sequence: OutlineName[] = [
   'softBurst',
   'cookie9',
   'pentagon',
@@ -16,7 +16,7 @@ const sequence: ShapeName[] = [
   'oval',
 ];
 
-const polygons = sequence.map((name) => shapePolygon(name));
+const polygons = sequence.map((name) => outlinePolygon(name));
 
 // Each morph springs on the default spatial curve and gives way to the next.
 const morphMs = 650;
@@ -24,25 +24,24 @@ const morphMs = 650;
 const turnMs = 4666;
 
 function LoadingIndicator({ label }: { label: string }) {
-  const shape = useRef<HTMLSpanElement>(null);
+  const figure = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const element = shape.current;
-
-    if (!element || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-
+    const element = figure.current;
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const easing = getComputedStyle(document.documentElement).getPropertyValue('--ease-spatial');
     const frames = [...polygons, polygons[0]].map((clipPath) => ({ clipPath, easing }));
 
-    const animations = [
-      element.animate(frames, { duration: morphMs * sequence.length, iterations: Infinity }),
-      element.animate([{ rotate: '0turn' }, { rotate: '1turn' }], {
-        duration: turnMs,
-        iterations: Infinity,
-      }),
-    ];
+    const animations =
+      element && !still
+        ? [
+            element.animate(frames, { duration: morphMs * sequence.length, iterations: Infinity }),
+            element.animate([{ rotate: '0turn' }, { rotate: '1turn' }], {
+              duration: turnMs,
+              iterations: Infinity,
+            }),
+          ]
+        : [];
 
     return () => {
       for (const animation of animations) {
@@ -51,18 +50,18 @@ function LoadingIndicator({ label }: { label: string }) {
     };
   }, []);
 
-  const resting: CSSProperties = { '--loading-shape': polygons[0] };
+  const resting: CSSProperties = { '--loading-outline': polygons[0] };
 
+  // A native indeterminate progress element tells assistive tech; the
+  // morphing figure is what everyone else sees.
   return (
-    <span
-      role='progressbar'
-      aria-label={label}
-      className='bg-primary-container grid size-12 place-items-center rounded-full'
-    >
+    <span className='bg-primary-container grid size-12 place-items-center rounded-full'>
+      <progress aria-label={label} className='sr-only' />
       <span
-        ref={shape}
+        ref={figure}
+        aria-hidden
         style={resting}
-        className='bg-on-primary-container size-9.5 [clip-path:var(--loading-shape)]'
+        className='bg-on-primary-container size-9.5 [clip-path:var(--loading-outline)]'
       />
     </span>
   );

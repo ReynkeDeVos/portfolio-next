@@ -93,7 +93,8 @@ const uiText = {
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
     addressShown: (address: string) => `E-Mail-Adresse: ${address}`,
-    copyFailed: 'Die E-Mail-Adresse ließ sich nicht kopieren; sie steht jetzt unter den Kontaktbuttons.',
+    copyFailed:
+      'Die E-Mail-Adresse ließ sich nicht kopieren; sie steht jetzt unter den Kontaktbuttons.',
     strengthsLabel: 'Kurzprofil',
     currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
       role,

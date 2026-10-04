@@ -145,8 +145,10 @@
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
 
   /* The fast spatial duration, one speed for every shape that travels: the
-     theme reveal, the Portrait morph, the tab indicator and segment pills. */
+     theme reveal, the Portrait morph, the tab indicator and segment pills.
+     Exits take two thirds of it. */
   --transition-duration-spatial-fast: 350ms;
+  --transition-duration-spatial-fast-exit: calc(var(--transition-duration-spatial-fast) * 2 / 3);
 }
 
 /*
@@ -260,6 +262,17 @@
   &:is([data-direction='backward'], [data-direction='backward'] > *) {
     transition-delay: 0s, var(--stretch-lag);
   }
+}
+
+/* Floating surfaces appear and leave by moving, growing and fading; their
+   colors never transition. */
+@utility transition-presence {
+  transition-property: opacity, translate, scale;
+}
+
+/* A label that opens out of its icon through a 0fr to 1fr grid column. */
+@utility transition-columns {
+  transition-property: grid-template-columns;
 }
 
 /* State layers on ::before follow their container's corners. */
