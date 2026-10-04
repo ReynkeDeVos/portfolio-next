@@ -122,20 +122,20 @@
 
 :root:active-view-transition-type(morph-open) {
   &::view-transition-image-pair(morph) {
-    animation-name: morph-corners, morph-fade-in;
+    animation-name: morph-corners, fade-in;
     animation-duration: 300ms, 140ms;
     animation-timing-function: var(--ease-emphasized), linear;
   }
 
   &::view-transition-new(*.morph-content) {
-    animation: morph-fade-in 150ms var(--ease-effects-fast) 110ms both;
+    animation: fade-in 150ms var(--ease-effects-fast) 110ms both;
   }
 
   /* The close button follows as the shape settles: a quick fade and a small
      pop from 0.8 on the buttons' press spring, so it lands with the panel. */
   &::view-transition-new(*.morph-control) {
     animation:
-      morph-fade-in 120ms var(--ease-effects-fast) 160ms both,
+      fade-in 120ms var(--ease-effects-fast) 160ms both,
       morph-pop 240ms var(--ease-spatial-fast) 160ms both;
   }
 }
@@ -188,11 +188,5 @@
 @keyframes morph-pop {
   from {
     scale: 0.8;
-  }
-}
-
-@keyframes morph-fade-in {
-  from {
-    opacity: 0;
   }
 }

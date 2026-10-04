@@ -1,4 +1,4 @@
-import { ArrowUpRight, Briefcase, Check, Copy, Mail } from 'lucide-react';
+import { Briefcase, Check, Copy, Mail } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
 
 import { Portrait } from './portrait/portrait';
+import { ProfileLink } from './section-parts';
 import { SiteControls } from './site-controls';
 
 function Identity({ locale }: { locale: Locale }) {
@@ -123,22 +124,14 @@ function Contact({ locale }: { locale: Locale }) {
           </Button>
         </li>
         <li>
-          <Button asChild variant='tonal'>
-            <a href={github} target='_blank' rel='noopener noreferrer'>
-              GitHub
-              <span className='sr-only'>, {t.opensInNewTab}</span>
-              <ArrowUpRight aria-hidden className='size-4' />
-            </a>
-          </Button>
+          <ProfileLink href={github} locale={locale}>
+            GitHub
+          </ProfileLink>
         </li>
         <li>
-          <Button asChild variant='tonal'>
-            <a href={linkedin} target='_blank' rel='noopener noreferrer'>
-              LinkedIn
-              <span className='sr-only'>, {t.opensInNewTab}</span>
-              <ArrowUpRight aria-hidden className='size-4' />
-            </a>
-          </Button>
+          <ProfileLink href={linkedin} locale={locale}>
+            LinkedIn
+          </ProfileLink>
         </li>
       </ul>
 

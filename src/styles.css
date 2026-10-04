@@ -16,27 +16,20 @@
   --md-sys-color-on-primary: light-dark(oklch(99% 0.01 90), oklch(26% 0.05 150));
   --md-sys-color-primary-container: light-dark(oklch(88% 0.055 140), oklch(36% 0.055 150));
   --md-sys-color-on-primary-container: light-dark(oklch(28% 0.05 150), oklch(90% 0.05 140));
-  --md-sys-color-secondary: light-dark(oklch(48% 0.09 55), oklch(82% 0.07 65));
-  --md-sys-color-on-secondary: light-dark(oklch(99% 0.01 75), oklch(28% 0.05 50));
   --md-sys-color-secondary-container: light-dark(oklch(87% 0.075 68), oklch(38% 0.05 55));
   --md-sys-color-on-secondary-container: light-dark(oklch(32% 0.07 45), oklch(91% 0.05 72));
   --md-sys-color-tertiary: light-dark(oklch(48% 0.13 40), oklch(78% 0.1 50));
-  --md-sys-color-on-tertiary: light-dark(oklch(99% 0.01 70), oklch(28% 0.08 40));
   --md-sys-color-tertiary-container: light-dark(oklch(90% 0.06 50), oklch(38% 0.09 40));
   --md-sys-color-on-tertiary-container: light-dark(oklch(30% 0.09 38), oklch(91% 0.05 55));
   --md-sys-color-surface: light-dark(oklch(91.5% 0.038 76), oklch(20% 0.012 60));
   --md-sys-color-on-surface: light-dark(oklch(26% 0.025 55), oklch(92% 0.02 75));
   --md-sys-color-on-surface-variant: light-dark(oklch(40% 0.035 60), oklch(80% 0.03 70));
-  --md-sys-color-surface-container-lowest: light-dark(oklch(99% 0.008 80), oklch(16.5% 0.01 60));
   --md-sys-color-surface-container-low: light-dark(oklch(97% 0.018 82), oklch(23% 0.014 60));
   --md-sys-color-surface-container: light-dark(oklch(94.5% 0.028 78), oklch(25.5% 0.016 60));
   --md-sys-color-surface-container-high: light-dark(oklch(92% 0.038 75), oklch(29% 0.018 60));
   --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.048 72), oklch(33% 0.02 60));
   --md-sys-color-outline: light-dark(oklch(58% 0.035 62), oklch(64% 0.03 65));
   --md-sys-color-outline-variant: light-dark(oklch(84% 0.04 70), oklch(40% 0.022 60));
-  --md-sys-color-inverse-surface: light-dark(oklch(30% 0.02 55), oklch(92% 0.02 75));
-  --md-sys-color-inverse-on-surface: light-dark(oklch(95% 0.02 75), oklch(28% 0.02 60));
-  --md-sys-color-inverse-primary: light-dark(oklch(78% 0.08 145), oklch(47% 0.075 150));
   --md-sys-color-scrim: light-dark(oklch(20% 0.02 55 / 0.6), oklch(10% 0.01 60 / 0.7));
 }
 
@@ -54,27 +47,15 @@
   --color-on-primary: var(--md-sys-color-on-primary);
   --color-primary-container: var(--md-sys-color-primary-container);
   --color-on-primary-container: var(--md-sys-color-on-primary-container);
-  --color-secondary: var(--md-sys-color-secondary);
-  --color-on-secondary: var(--md-sys-color-on-secondary);
   --color-secondary-container: var(--md-sys-color-secondary-container);
   --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
   --color-tertiary: var(--md-sys-color-tertiary);
-  --color-on-tertiary: var(--md-sys-color-on-tertiary);
-  --color-tertiary-container: var(--md-sys-color-tertiary-container);
-  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
-  --color-surface: var(--md-sys-color-surface);
   --color-on-surface: var(--md-sys-color-on-surface);
   --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
-  --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
-  --color-surface-container-low: var(--md-sys-color-surface-container-low);
   --color-surface-container: var(--md-sys-color-surface-container);
   --color-surface-container-high: var(--md-sys-color-surface-container-high);
   --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
-  --color-outline: var(--md-sys-color-outline);
   --color-outline-variant: var(--md-sys-color-outline-variant);
-  --color-inverse-surface: var(--md-sys-color-inverse-surface);
-  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
-  --color-inverse-primary: var(--md-sys-color-inverse-primary);
   --color-scrim: var(--md-sys-color-scrim);
 
   /* Tab track: high nearly matches the light page, so light steps up to low. */
@@ -104,16 +85,12 @@
   --font-heading: 'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif;
   --font-weight-emphasized: 650;
 
-  /* Material shape scale, including the Expressive increased steps. */
+  /* The Material shape steps in use, including the Expressive increased ones. */
   --radius-*: initial;
   --radius-xs: 4px;
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
   --radius-lg-inc: 20px;
-  --radius-xl: 28px;
   --radius-xl-inc: 32px;
-  --radius-2xl: 48px;
 
   /* Official web approximations of the Expressive fast springs. */
   --ease-spatial-fast: cubic-bezier(0.42, 1.67, 0.21, 0.9);

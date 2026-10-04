@@ -107,9 +107,7 @@ typography:
 rounded:
   xs: 4px
   sm: 8px
-  lg: 16px
   lg-inc: 20px
-  xl: 28px
   xl-inc: 32px
   full: 2147483647px
 spacing:
@@ -293,7 +291,7 @@ Connected lists keep small inner corners and enlarged outside corners, always as
 
 Filled contact actions use primary/on-primary; tonal alternatives use secondary-container/on-secondary-container. Buttons use label-large, medium weight, a full shape and a height (40px), with horizontal padding (20px) reduced to (16px) beside an edge icon. Icons default to (18px). Small grouped controls use height (32px), padding (14px), and (16px) icons; icon-only sizes are square.
 
-Hover shows a current-color state layer (8% opacity), keyboard focus a state layer (10%) and the green ring, and pressing scales the control (0.97) with a (10%) state layer. Transform and opacity use separate fast spatial/effects curves over (150ms). Colors do not transition. Disabled controls suppress pointer events and use opacity (40%). The editable button library also defines outlined, text and standard variants; they are not used as contact alternatives in this draft.
+Hover shows a current-color state layer (8% opacity), keyboard focus a state layer (10%) and the green ring, and pressing scales the control (0.97) with a (10%) state layer. Transform and opacity use separate fast spatial/effects curves over (150ms). Colors do not transition. Disabled controls suppress pointer events and use opacity (40%). The quiet standard variant serves icon-only actions such as dismissing the Engine note and copying the email address.
 
 ### Chips
 

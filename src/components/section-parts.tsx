@@ -36,20 +36,9 @@ function Item({ linked, children }: { linked?: boolean; children: ReactNode }) {
 }
 
 // Title, accent line and an optional end slot, the head of every list item.
-// A text end slot may wrap below the title; an icon stays beside it.
-function ItemHeader({
-  title,
-  meta,
-  end,
-  wrap,
-}: {
-  title: ReactNode;
-  meta?: ReactNode;
-  end?: ReactNode;
-  wrap?: boolean;
-}) {
+function ItemHeader({ title, meta, end }: { title: ReactNode; meta?: ReactNode; end?: ReactNode }) {
   return (
-    <div className={cn('flex items-start justify-between gap-x-4 gap-y-1', wrap && 'flex-wrap')}>
+    <div className='flex items-start justify-between gap-x-4 gap-y-1'>
       <div className='min-w-0'>
         <h3 className='type-title-lg text-on-surface font-semibold'>{title}</h3>
         {meta ? <p className='type-label-lg text-tertiary mt-0.5 font-medium'>{meta}</p> : null}

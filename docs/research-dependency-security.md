@@ -1,6 +1,6 @@
 # Monatliche Sicherheitsprüfung der Abhängigkeiten
 
-Geprüft am 2026-10-02. Ursprüngliches Ziel: einmal monatlich nach bekannten schweren Sicherheitslücken suchen und bei verfügbarer Korrektur automatisch einen Pull Request erstellen. Recherche anhand offizieller Dokumentation und des Aube-Quellcodes der im Projekt verwendeten Version 2.6.1. Die anschließende Umsetzung verwendet wöchentliche Produktions- und monatliche Entwicklungsprüfungen; siehe [Dependency security automation](dependency-security.md). Die folgenden Abschnitte dokumentieren den ursprünglichen Recherchestand.
+Geprüft am 2026-10-02. Ursprüngliches Ziel: einmal monatlich nach bekannten schweren Sicherheitslücken suchen und bei verfügbarer Korrektur automatisch einen Pull Request erstellen. Recherche anhand offizieller Dokumentation und des Aube-Quellcodes der im Projekt verwendeten Version 2.6.1. Eine zwischenzeitliche Reparatur-Automatisierung mit eigenen PRs wurde wieder entfernt; heute lässt der Check-Workflow bei `aube audit --audit-level high` fehlschlagen. Die folgenden Abschnitte dokumentieren den ursprünglichen Recherchestand.
 
 ## Empfehlung für dieses Repository
 

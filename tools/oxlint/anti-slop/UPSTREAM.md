@@ -12,12 +12,12 @@ Use this snapshot hash as the merge base for future updates. Record a real upstr
 
 - `tools/oxlint/anti-slop/index.ts` is the generic plugin, registered in `.oxlintrc.json` as `anti-slop`.
 - `tools/oxlint/anti-slop/rules/` and `tools/oxlint/anti-slop/shared/` hold the generic rules and their helpers.
-- `tools/oxlint/anti-slop/effect/` is the opt-in Effect plugin. It is copied but **not registered**, because `package.json` does not depend on `effect`.
 - `tools/oxlint/anti-slop/vendor/eslint-stylistic/` holds code vendored from ESLint Stylistic. It keeps that project's `LICENSE` and has its own `UPSTREAM.md`.
 
 ## Intentional deviations
 
-None. The files are unmodified copies of the bundle.
+- The bundle's opt-in Effect plugin (`effect/`) is not installed, because `package.json` does not depend on `effect`. Skip it when updating. The snapshot hash above still covers the full bundle, `effect/` included.
+- The remaining files are unmodified copies of the bundle.
 
 ## Repository integration
 
