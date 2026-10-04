@@ -25,7 +25,7 @@ const headingStyle = line('oklch(80% 0.08 145)', '700 15px/1.7');
 
 const linkStyle = line('oklch(78% 0.1 50)', 'italic 12px/1.7');
 
-const copy = {
+const text = {
   opening: '…and welcome fellow dev! 👋',
   fallbackOpening: 'Hello there, and welcome fellow dev! 👋',
   link: 'Curious how this site is built? The source is on GitHub:',
@@ -33,7 +33,7 @@ const copy = {
 
 function logGreeting(withImage: boolean) {
   console.log(
-    `%c${withImage ? copy.opening : copy.fallbackOpening}%c\n%c${copy.link}%c\n${sourceUrl}`,
+    `%c${withImage ? text.opening : text.fallbackOpening}%c\n%c${text.link}%c\n${sourceUrl}`,
     headingStyle,
     '',
     linkStyle,

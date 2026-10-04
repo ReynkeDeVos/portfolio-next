@@ -1,7 +1,7 @@
 import { contentFor } from '@/content/content';
 import type { SelectedProject } from '@/content/content';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import {
   Card,
@@ -23,13 +23,13 @@ function ProjectLink({ project, locale }: { project: SelectedProject; locale: Lo
   return (
     <StretchedLink href={project.url} locale={locale}>
       {project.name}
-      <span className='sr-only'>, {copy[locale].sourceOnGitHub}</span>
+      <span className='sr-only'>, {uiText[locale].sourceOnGitHub}</span>
     </StretchedLink>
   );
 }
 
 function WorkPanel({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { work, profile } = contentFor(locale);
   const { featured, supporting } = work;
 

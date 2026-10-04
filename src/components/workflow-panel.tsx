@@ -2,8 +2,8 @@ import { ChevronDown } from 'lucide-react';
 import { Fragment } from 'react';
 
 import { contentFor } from '@/content/content';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import {
   Card,
@@ -19,7 +19,7 @@ import {
 } from './section-parts';
 
 function WorkflowPanel({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { interests } = contentFor(locale).workflow;
 
   return (
@@ -45,7 +45,7 @@ function WorkflowPanel({ locale }: { locale: Locale }) {
 // A small dated table: one row per task, the note under the task name, then
 // the thinking-level exceptions per model as quieter notes inside the card.
 function AiSection({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { ai } = contentFor(locale).workflow;
 
   return (
@@ -116,7 +116,7 @@ function AiSection({ locale }: { locale: Locale }) {
 
 // The tools around the models, each with its links as chips.
 function ToolsSection({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { tips } = contentFor(locale).workflow;
 
   return (
@@ -138,7 +138,7 @@ function ToolsSection({ locale }: { locale: Locale }) {
 // Closed by default; technical readers open it, everyone else skips it. The
 // summary carries the heading and a state layer; content opens instantly.
 function BuildSection({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { build } = contentFor(locale).workflow;
 
   return (

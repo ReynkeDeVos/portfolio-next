@@ -1,8 +1,8 @@
 import { Link, useRouterState } from '@tanstack/react-router';
 
-import { copy } from '@/copy/copy';
 import { notFoundHead } from '@/head/head';
 import { localeFromPathname, localePath } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import { NotFoundAnimation } from './not-found-animation';
 import { Button } from './ui/button';
@@ -10,7 +10,7 @@ import { Button } from './ui/button';
 function NotFound() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const locale = localeFromPathname(pathname);
-  const t = copy[locale].notFound;
+  const t = uiText[locale].notFound;
   const head = notFoundHead(locale);
 
   return (

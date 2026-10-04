@@ -3,15 +3,15 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { contentFor } from '@/content/content';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import { Portrait } from './portrait/portrait';
 import { ProfileLink } from './section-parts';
 import { SiteControls } from './site-controls';
 
 function Identity({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { profile } = contentFor(locale);
   const { currentRole } = profile;
 
@@ -69,7 +69,7 @@ function Identity({ locale }: { locale: Locale }) {
 // The address stays out of the HTML until Email is pressed. Pressing it opens
 // the mail app and also shows the address, so a missing mail app is no dead end.
 function Contact({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { emailEncoded, github, linkedin } = contentFor(locale).profile;
   const [address, setAddress] = useState<string>();
   const [copied, setCopied] = useState(false);

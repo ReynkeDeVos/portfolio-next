@@ -2,12 +2,12 @@ import { Link } from '@tanstack/react-router';
 import { Monitor, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { copy, localeNames } from '@/copy/copy';
 import { localePath, locales, rememberLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { sectionHash } from '@/lib/section';
 import { setTheme, useThemePreference } from '@/lib/theme';
 import type { ThemePreference } from '@/lib/theme';
+import { localeNames, uiText } from '@/ui-text/ui-text';
 
 import { useSectionNavigation } from './section-navigation';
 
@@ -17,7 +17,7 @@ const themeOrder: ThemePreference[] = ['system', 'light', 'dark'];
 
 // Locale and theme in one compact row at the foot of the profile panel.
 function SiteControls({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const theme = useThemePreference();
   const { section } = useSectionNavigation();
 

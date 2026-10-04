@@ -3,9 +3,9 @@ import type { CSSProperties } from 'react';
 
 import { useSectionNavigation } from '@/components/section-navigation';
 import { contentFor } from '@/content/content';
-import { copy } from '@/copy/copy';
 import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import { PortraitViewer } from './viewer';
 
@@ -105,7 +105,7 @@ function morphPortrait(open: boolean, update: () => void) {
 // overshoot included, reach about 4% past the box (6px at the largest size),
 // so the focus ring sits 8px out and never touches the frame.
 function Portrait({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { turns } = useSectionNavigation();
   const angle = turns * stepDegrees;
   const rotation: CSSProperties = { '--portrait-angle': `${angle}deg` };

@@ -1,11 +1,11 @@
 import { contentFor } from '@/content/content';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
+import { uiText } from '@/ui-text/ui-text';
 
 import { Item, ItemHeader, ItemList, ItemText, TechList } from './section-parts';
 
 function SkillsPanel({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { skills } = contentFor(locale);
 
   return (

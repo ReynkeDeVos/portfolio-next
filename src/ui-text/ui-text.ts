@@ -73,7 +73,7 @@ const en = {
 };
 
 // Every Locale repeats the English keys, with the same value types.
-const copy = {
+const uiText = {
   en,
   de: {
     localeLabel: 'Sprache',
@@ -141,4 +141,4 @@ const copy = {
   },
 } satisfies Record<Locale, typeof en>;
 
-export { copy, localeNames };
+export { localeNames, uiText };

@@ -3,10 +3,10 @@ import { createContext, use, useLayoutEffect, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
 import { defaultSection, isSection, sectionFromHash, sectionHash, sections } from '@/lib/section';
 import type { Section } from '@/lib/section';
+import { uiText } from '@/ui-text/ui-text';
 
 import { CareerPanel } from './career-panel';
 import { SkillsPanel } from './skills-panel';
@@ -140,7 +140,7 @@ function SectionNavigation({ children }: { children: ReactNode }) {
 
 // The tab list and every Section's panel.
 function SectionTabs({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = uiText[locale];
   const { section, pick, animate } = useSectionNavigation();
 
   const indicator: CSSProperties = {
