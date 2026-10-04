@@ -24,7 +24,7 @@ const segmentGroup =
 // Each Locale has its own page, so a Locale link remounts these controls. The
 // Locale the visitor just left lets the new page's pill start where the old
 // one stood; the new page clears it, so Back and Forward simply appear.
-let leftLocale: Locale | undefined;
+let leftLocale: Locale | null = null;
 
 // The selected pill of an equal-column group. It fills the first grid cell and
 // slides to the selected one on the Section tabs' spatial spring; the group
@@ -59,10 +59,9 @@ function SiteControls({ locale }: { locale: Locale }) {
   const { section } = useSectionNavigation();
   // The stored theme arrives after hydration; only a click slides its pill.
   const [themePicked, setThemePicked] = useState(false);
-  const [localeFrom] = useState(leftLocale);
 
   useEffect(() => {
-    leftLocale = undefined;
+    leftLocale = null;
   }, []);
 
   return (
@@ -70,7 +69,7 @@ function SiteControls({ locale }: { locale: Locale }) {
       <nav aria-label={t.localeLabel} className={segmentGroup}>
         <SegmentPill
           index={locales.indexOf(locale)}
-          from={localeFrom && locales.indexOf(localeFrom)}
+          from={locales.indexOf(leftLocale ?? locale)}
           animate
         />
         {locales.map((target) => (
