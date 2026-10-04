@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { Monitor, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { copy } from '@/copy/copy';
+import { copy, localeNames } from '@/copy/copy';
 import { localePath, locales, rememberLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { sectionHash } from '@/lib/section';
@@ -45,7 +45,7 @@ function SiteControls({ locale }: { locale: Locale }) {
                 rememberLocale(target);
               }}
             >
-              {t.localeNames[target]}
+              {localeNames[target]}
             </Link>
           </Button>
         ))}

@@ -26,7 +26,7 @@ function EngineNote({ locale }: { locale: Locale }) {
         </h2>
         <p className='type-body-md text-on-surface-variant mt-1 max-w-[72ch]'>{t.lead}</p>
         <details className='group/why mt-1'>
-          <summary className='type-label-lg focus-visible:focus-ring before:ease-effects-fast before:rounded-inherit relative -ms-3 inline-flex h-8 cursor-pointer list-none items-center gap-1 rounded-full px-3 font-medium outline-none select-none before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 [&::-webkit-details-marker]:hidden'>
+          <summary className='type-label-lg before:ease-effects-fast before:rounded-inherit relative -ms-3 inline-flex h-8 cursor-pointer list-none items-center gap-1 rounded-full px-3 font-medium select-none before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 [&::-webkit-details-marker]:hidden'>
             {t.why}
             <ChevronDown
               aria-hidden

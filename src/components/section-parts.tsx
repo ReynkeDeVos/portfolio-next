@@ -1,5 +1,5 @@
 import { cn } from 'cn';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -110,57 +110,8 @@ function CardHeader({ title, meta, end }: { title: ReactNode; meta?: ReactNode; 
   );
 }
 
-// Dense rows inside one card surface, for inventories that would otherwise
-// become a wall of identical cards. Label left, content right from md.
-function CompactList({ children }: { children: ReactNode }) {
-  return (
-    <ul className='rounded-lg-inc bg-surface-card divide-outline-variant divide-y px-5'>
-      {children}
-    </ul>
-  );
-}
-
-function CompactRow({ label, children }: { label: ReactNode; children: ReactNode }) {
-  return (
-    <li className='flex flex-col gap-2 py-4 md:grid md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:gap-6'>
-      <h4 className='type-title-sm text-on-surface font-semibold md:pt-0.5'>{label}</h4>
-      {children}
-    </li>
-  );
-}
-
-// A subsection that stays closed until asked for. The summary carries the
-// heading, a state layer and the shared focus ring; content opens instantly.
-function Disclosure({
-  heading,
-  summary,
-  children,
-}: {
-  heading: string;
-  summary: string;
-  children: ReactNode;
-}) {
-  return (
-    <details className='group/disclosure'>
-      <summary className='rounded-lg-inc bg-surface-card focus-visible:focus-ring before:bg-on-surface before:ease-effects-fast before:rounded-inherit relative grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 p-5 outline-none select-none before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 sm:px-6 [&::-webkit-details-marker]:hidden'>
-        <h3 className='type-headline-sm text-on-surface font-semibold'>{heading}</h3>
-        <ChevronDown
-          aria-hidden
-          className='text-on-surface ease-spatial row-span-2 size-6 transition-transform duration-300 group-open/disclosure:rotate-180'
-        />
-        <span className='type-body-md text-on-surface-variant'>{summary}</span>
-      </summary>
-      <div className='mt-3'>{children}</div>
-    </details>
-  );
-}
-
 function CardText({ children }: { children: ReactNode }) {
   return <p className='type-body-md text-on-surface mt-2'>{children}</p>;
-}
-
-function CardDetails({ children }: { children: ReactNode }) {
-  return <p className='type-body-sm text-on-surface-variant mt-2'>{children}</p>;
 }
 
 // Links take one of three Material forms, all with a stationary ↗. A whole
@@ -267,13 +218,9 @@ function TechList({ items, className }: { items: readonly string[]; className?: 
 
 export {
   Card,
-  CardDetails,
   CardGrid,
   CardHeader,
   CardText,
-  CompactList,
-  CompactRow,
-  Disclosure,
   Item,
   ItemHeader,
   ItemList,

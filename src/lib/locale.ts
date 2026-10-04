@@ -51,15 +51,10 @@ function localeHead(locale: Locale) {
   };
 }
 
-// Where a remembered choice redirects the bare root: every Locale but the default.
-const redirectPaths = Object.fromEntries(
-  locales.flatMap((locale) => (locale === defaultLocale ? [] : [[locale, localePath(locale)]])),
-);
-
-// Runs in the document head before first paint. Only the bare root follows the
-// stored choice, so explicit Locale links and section hashes keep working.
-// Hiding the page avoids a flash of English while the other Locale loads.
-const localeScript = `try{const s=localStorage.getItem('${storageKey}'),p=${JSON.stringify(redirectPaths)};if(location.pathname==='/'&&s&&Object.hasOwn(p,s)){location.replace(p[s]+location.search+location.hash);document.documentElement.hidden=true}}catch{}`;
+// Runs in the document head before first paint. Only the bare root follows a
+// stored German choice, so explicit Locale links and section hashes keep
+// working. Hiding the page avoids a flash of English while German loads.
+const localeScript = `try{if(location.pathname==='/'&&localStorage.getItem('${storageKey}')==='de'){location.replace('${localePath('de')}'+location.search+location.hash);document.documentElement.hidden=true}}catch{}`;
 
 function rememberLocale(locale: Locale) {
   try {

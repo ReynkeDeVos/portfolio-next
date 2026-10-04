@@ -4,16 +4,13 @@
 # ///
 """Subset both variable fonts from the complete local source corpus."""
 
-import html
-import re
-import unicodedata
 from pathlib import Path
 
 from fontTools import subset
 from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE_EXTENSIONS = {".ts", ".tsx", ".js", ".jsx", ".css", ".json", ".html"}
+SOURCE_EXTENSIONS = {".ts", ".tsx", ".css", ".json"}
 FONTS = (
     ("roboto-flex", "Roboto Flex Variable"),
     ("google-sans-flex", "Google Sans Flex Variable"),
@@ -22,10 +19,6 @@ GENERATED = ROOT / "src/generated/fonts"
 # Printable ASCII covers Intl dates, numeric values and the decoded email.
 # Keep German letters even when a particular spelling isn't currently in use.
 BASE_TEXT = "".join(chr(code) for code in range(0x20, 0x7F)) + "ÄÖÜäöüßẞ\u00a0"
-JS_ESCAPE = re.compile(
-    r"\\(?:u\{([0-9a-fA-F]{1,6})\}|u([0-9a-fA-F]{4})|x([0-9a-fA-F]{2}))"
-)
-CSS_ESCAPE = re.compile(r"\\([0-9a-fA-F]{1,6})(?:\s)?")
 
 
 def source_characters(source: Path) -> set[int]:
@@ -39,28 +32,8 @@ def source_characters(source: Path) -> set[int]:
             or path.name == "routeTree.gen.ts"
         ):
             continue
-        text = path.read_text(encoding="utf-8")
-        texts.append(text)
-        # Decode entities and escapes as well as keeping their literal source.
-        # This is conservative: comments and identifiers may retain a few extra glyphs.
-        text = html.unescape(text)
-        if path.suffix == ".css":
-            text = CSS_ESCAPE.sub(lambda match: chr(int(match[1], 16)), text)
-        else:
-            text = JS_ESCAPE.sub(
-                lambda match: chr(
-                    int(next(value for value in match.groups() if value), 16)
-                ),
-                text,
-            )
-        texts.append(text)
-    corpus = "".join(texts)
-    # Cover both spellings of accented letters and CSS casing transformations.
-    corpus += corpus.upper() + corpus.lower()
-    corpus += unicodedata.normalize("NFC", corpus) + unicodedata.normalize(
-        "NFD", corpus
-    )
-    return {ord(character) for character in corpus}
+        texts.append(path.read_text(encoding="utf-8"))
+    return {ord(character) for character in "".join(texts)}
 
 
 def unicode_range(codepoints: set[int]) -> str:

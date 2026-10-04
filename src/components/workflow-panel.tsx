@@ -1,3 +1,4 @@
+import { ChevronDown } from 'lucide-react';
 import { Fragment } from 'react';
 
 import { contentFor } from '@/content/content';
@@ -9,7 +10,6 @@ import {
   CardGrid,
   CardHeader,
   CardText,
-  Disclosure,
   Item,
   ItemHeader,
   ItemList,
@@ -135,23 +135,36 @@ function ToolsSection({ locale }: { locale: Locale }) {
 }
 
 // Choices rather than a badge inventory: topic, the reason and its stack.
-// Closed by default; technical readers open it, everyone else skips it.
+// Closed by default; technical readers open it, everyone else skips it. The
+// summary carries the heading and a state layer; content opens instantly.
 function BuildSection({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const { build } = contentFor(locale).workflow;
 
   return (
-    <Disclosure heading={t.buildHeading} summary={build.map((item) => item.topic).join(' · ')}>
-      <CardGrid>
-        {build.map((item) => (
-          <Card key={item.id}>
-            <CardHeader title={item.topic} />
-            <CardText>{item.description}</CardText>
-            <LinkChips links={item.links} locale={locale} className='mt-auto pt-4' />
-          </Card>
-        ))}
-      </CardGrid>
-    </Disclosure>
+    <details className='group/disclosure'>
+      <summary className='rounded-lg-inc bg-surface-card before:bg-on-surface before:ease-effects-fast before:rounded-inherit relative grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 p-5 select-none before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 sm:px-6 [&::-webkit-details-marker]:hidden'>
+        <h3 className='type-headline-sm text-on-surface font-semibold'>{t.buildHeading}</h3>
+        <ChevronDown
+          aria-hidden
+          className='text-on-surface ease-spatial row-span-2 size-6 transition-transform duration-300 group-open/disclosure:rotate-180'
+        />
+        <span className='type-body-md text-on-surface-variant'>
+          {build.map((item) => item.topic).join(' · ')}
+        </span>
+      </summary>
+      <div className='mt-3'>
+        <CardGrid>
+          {build.map((item) => (
+            <Card key={item.id}>
+              <CardHeader title={item.topic} />
+              <CardText>{item.description}</CardText>
+              <LinkChips links={item.links} locale={locale} className='mt-auto pt-4' />
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+    </details>
   );
 }
 

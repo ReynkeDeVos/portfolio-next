@@ -307,8 +307,8 @@ export const portfolio = {
         topic: { en: 'Content', de: 'Inhalte' },
         technologies: ['Zod 4'],
         description: {
-          en: 'I use Zod before each build to catch missing translations, empty text and malformed URLs in the English and German content.',
-          de: 'Vor jedem Build prüfe ich die englischen und deutschen Inhalte mit Zod auf fehlende Übersetzungen, leere Texte und ungültige URLs.',
+          en: 'Zod checks the English and German content for missing translations, empty text and malformed URLs. The check runs in the test pipeline.',
+          de: 'Zod prüft die englischen und deutschen Inhalte auf fehlende Übersetzungen, leere Texte und ungültige URLs. Die Prüfung läuft in der Testpipeline.',
         },
       },
       {
@@ -340,11 +340,11 @@ export const portfolio = {
       },
       {
         id: 'testing',
-        topic: { en: 'Browser tests', de: 'Browsertests' },
-        technologies: ['Playwright'],
+        topic: { en: 'Test pipeline', de: 'Testpipeline' },
+        technologies: ['GitHub Actions', 'Playwright'],
         description: {
-          en: 'Playwright checks what only a real browser shows: tab switching, Back and Forward, the portrait viewer and keyboard focus.',
-          de: 'Playwright prüft, was nur ein echter Browser zeigt: Tabwechsel, Zurück und Vor, die Porträtansicht und den Tastaturfokus.',
+          en: 'The tests live in a private repository, where GitHub Actions runs them against this site: the content check, unit tests, linting and type checks. Playwright then checks what only a real browser shows: tab switching, Back and Forward, the portrait viewer and keyboard focus.',
+          de: 'Die Tests liegen in einem privaten Repository, in dem GitHub Actions sie gegen diese Seite ausführt: die Inhaltsprüfung, Unit-Tests, Linting und Typprüfung. Playwright prüft danach, was nur ein echter Browser zeigt: Tabwechsel, Zurück und Vor, die Porträtansicht und den Tastaturfokus.',
         },
       },
       {
@@ -379,6 +379,7 @@ export const portfolio = {
       { name: 'Fontsource', url: 'https://fontsource.org/' },
       { name: 'fontTools', url: 'https://github.com/fonttools/fonttools' },
       { name: 'lottie-web', url: 'https://lottie.airbnb.tech/' },
+      { name: 'GitHub Actions', url: 'https://github.com/features/actions' },
       { name: 'Playwright', url: 'https://playwright.dev/' },
       { name: 'Cloudflare Workers', url: 'https://www.cloudflare.com/products/workers/' },
       { name: 'Wrangler', url: 'https://github.com/cloudflare/workers-sdk' },

@@ -3,8 +3,6 @@ import { copy } from '@/copy/copy';
 import type { Locale } from '@/lib/locale';
 
 import {
-  CompactList,
-  CompactRow,
   Item,
   ItemHeader,
   ItemList,
@@ -48,13 +46,21 @@ function CareerPanel({ locale }: { locale: Locale }) {
       </ItemList>
 
       <Subsection id='teaching-heading' heading={t.teachingHeading}>
-        <CompactList>
+        {/* Dense rows inside one card surface instead of a wall of identical
+            cards. Label left, technologies right from md. */}
+        <ul className='rounded-lg-inc bg-surface-card divide-outline-variant divide-y px-5'>
           {career.teaching.map((topic) => (
-            <CompactRow key={topic.id} label={topic.topic}>
+            <li
+              key={topic.id}
+              className='flex flex-col gap-2 py-4 md:grid md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:gap-6'
+            >
+              <h4 className='type-title-sm text-on-surface font-semibold md:pt-0.5'>
+                {topic.topic}
+              </h4>
               <TechList items={topic.technologies} />
-            </CompactRow>
+            </li>
           ))}
-        </CompactList>
+        </ul>
         <ProfileLink href={profile.linkedin} locale={locale}>
           {t.moreOnLinkedIn}
         </ProfileLink>
