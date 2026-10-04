@@ -9,6 +9,7 @@ import type { Locale } from '@/lib/locale';
 import { startViewTransition } from '@/lib/view-transition';
 import { uiText } from '@/ui-text/ui-text';
 
+import { morphFrames } from './morph-shape';
 import { PortraitViewer } from './viewer';
 
 const stepDegrees = 360 / lobes;
@@ -57,18 +58,62 @@ function warmFullPortrait() {
 }
 
 // Opening and closing run as a same-document view transition: a plain surface
-// grows out of the frame into the photo panel and shrinks back into it. The
-// thumbnail never moves and the large photo fades in place at its final size.
-// With reduced motion the Portrait viewer cross-fades in place instead, without
-// travel. The transition types scope the morph names and keyframes, in
-// portrait.css, to this one moment.
-function morphPortrait(open: boolean, update: () => void) {
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// leaves the frame as its cookie, turns one lobe while its lobes smooth out
+// into the photo panel's corners, and gathers back into the cookie on closing.
+// The thumbnail never moves and the large photo fades in place at its final
+// size. With reduced motion the Portrait viewer cross-fades in place instead,
+// without travel. The transition types scope the morph names and keyframes,
+// in portrait.css, to this one moment; the shape's clip follows the morph's
+// own timing from there.
+async function morphPortrait(open: boolean, viewer: HTMLDialogElement, update: () => void) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    startViewTransition(update, ['morph-fade']);
 
-  startViewTransition(
-    update,
-    reduceMotion ? ['morph-fade'] : ['morph', open ? 'morph-open' : 'morph-close'],
-  );
+    return;
+  }
+
+  // The panel is measured while it is open: after opening, before closing.
+  let panel = viewer.getBoundingClientRect();
+
+  const transition = startViewTransition(() => {
+    update();
+
+    if (open) {
+      panel = viewer.getBoundingClientRect();
+    }
+  }, ['morph', open ? 'morph-open' : 'morph-close']);
+
+  try {
+    await transition?.ready;
+  } catch {
+    return;
+  }
+
+  const travel = document
+    .getAnimations()
+    .find(
+      ({ effect }) =>
+        effect instanceof KeyframeEffect &&
+        effect.pseudoElement === '::view-transition-group(morph)',
+    );
+
+  if (!transition || !travel?.effect) {
+    return;
+  }
+
+  const { duration, delay } = travel.effect.getTiming();
+  // getComputedStyle always reports the corner radius in px.
+  // oxlint-disable-next-line unicorn/prefer-number-coercion
+  const radius = Number.parseFloat(getComputedStyle(viewer).borderTopLeftRadius);
+  const frames = morphFrames(panel.width, panel.height, radius);
+
+  document.documentElement.animate(open ? frames : frames.toReversed(), {
+    duration,
+    delay,
+    easing: getComputedStyle(document.documentElement).getPropertyValue('--ease-emphasized'),
+    fill: 'both',
+    pseudoElement: '::view-transition-image-pair(morph)',
+  });
 }
 
 // The frame turns one lobe per Section the visitor picks, the way the tabs
@@ -98,9 +143,11 @@ function Portrait({ locale }: { locale: Locale }) {
         onPointerDown={warmFullPortrait}
         onFocus={warmFullPortrait}
         onClick={() => {
-          morphPortrait(true, () => {
-            viewer.current?.showModal();
-          });
+          if (viewer.current) {
+            void morphPortrait(true, viewer.current, () => {
+              viewer.current?.showModal();
+            });
+          }
         }}
         className='group relative size-24 shrink-0 cursor-pointer rounded-full [--focus-ring-offset:8px] sm:size-32 lg:size-28 xl:size-36'
         style={rotation}
@@ -164,9 +211,11 @@ function Portrait({ locale }: { locale: Locale }) {
         ref={viewer}
         locale={locale}
         onDismiss={() => {
-          morphPortrait(false, () => {
-            viewer.current?.close();
-          });
+          if (viewer.current) {
+            void morphPortrait(false, viewer.current, () => {
+              viewer.current?.close();
+            });
+          }
         }}
       />
     </>

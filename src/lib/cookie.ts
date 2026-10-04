@@ -1,8 +1,9 @@
 const lobes = 12;
 
-// How far the cookie reaches at `angle`, as a share of its radius.
-function cookieReach(angle: number) {
-  return 0.94 + 0.06 * Math.cos(lobes * angle);
+// How far the cookie reaches at `angle`, as a share of its radius. A smaller
+// `depth` flattens the lobes towards a circle.
+function cookieReach(angle: number, depth = 1) {
+  return 0.94 + 0.06 * depth * Math.cos(lobes * angle);
 }
 
 // The twelve-lobe "cookie" from the Expressive shape set, centred on (x, y)
