@@ -7,7 +7,7 @@ function startViewTransition(update: () => void, types: string[]) {
   if (!('startViewTransition' in document)) {
     update();
 
-    return;
+    return null;
   }
 
   try {
