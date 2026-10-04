@@ -1,5 +1,4 @@
-import { BriefcaseBusiness, FolderCode, Layers, SquareTerminal } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { cn } from 'cn';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -9,33 +8,39 @@ import type { Section } from '@/lib/section';
 import { uiText } from '@/ui-text/ui-text';
 
 import { useSectionNavigation } from './section-navigation';
+import { SegmentPill, segmentGroup } from './site-controls';
 
-const sectionIcons = {
-  work: FolderCode,
-  career: BriefcaseBusiness,
-  skills: Layers,
-  workflow: SquareTerminal,
-} satisfies Record<Section, LucideIcon>;
-
-// Once the Section tabs have scrolled above the viewport, a floating
-// Expressive toolbar rises at the foot of the content column with the same
-// Sections, within thumb reach. Narrow screens show icons and name only the
-// open Section, which takes a squarer shape; wider ones name them all.
-// Picking a Section opens it and returns to the tabs, which then take over
-// again. While hidden, the toolbar is inert.
+// On phones, once the Section tabs have scrolled above the viewport, a
+// floating copy of them rises within thumb reach: the same names in the same
+// order, with the same stretching pill. It steps aside while the visitor
+// scrolls down to read and returns when they scroll back up or reach the end.
+// Its slot at the foot of the content column is reserved, so at the end it
+// sits below the last content instead of covering it. Picking a Section opens
+// it and returns to the tabs. Wider screens keep the tabs in easy reach and
+// never show it; while hidden it is inert.
 function SectionToolbar({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const { section, pick } = useSectionNavigation();
   const [shown, setShown] = useState(false);
 
-  // Shown while the tabs sit wholly above the viewport. Reading their position
-  // on every scroll, rather than waiting for an intersection change, also
-  // catches jumps that carry the tabs from below the viewport to above it.
+  // Reading the tabs' position on every scroll, rather than waiting for an
+  // intersection change, also catches jumps from below the viewport to above
+  // it. Small scroll jitter keeps the last direction.
   useEffect(() => {
     const tabs = document.querySelector('[data-slot="tabs-list"]');
+    let lastY = scrollY;
+    let up = false;
 
     const update = () => {
-      setShown(tabs !== null && tabs.getBoundingClientRect().bottom < 0);
+      if (Math.abs(scrollY - lastY) > 8) {
+        up = scrollY < lastY;
+        lastY = scrollY;
+      }
+
+      const above = tabs !== null && tabs.getBoundingClientRect().bottom < 0;
+      const end = scrollY + innerHeight >= document.documentElement.scrollHeight - 8;
+
+      setShown(above && (up || end));
     };
 
     update();
@@ -60,42 +65,31 @@ function SectionToolbar({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className='pointer-events-none sticky bottom-4 z-10 h-0'>
+    <div className='sticky bottom-4 z-10 h-12 sm:hidden'>
       <nav
         aria-label={t.toolbarLabel}
         aria-hidden={!shown || undefined}
         inert={!shown}
         data-shown={shown}
-        className='bg-primary-container duration-spatial-fast ease-spatial-fast data-[shown=false]:ease-emphasized transition-presence data-[shown=false]:duration-spatial-fast-exit pointer-events-auto absolute bottom-0 left-1/2 flex w-max origin-bottom -translate-x-1/2 items-center gap-1 rounded-full p-2 data-[shown=false]:pointer-events-none data-[shown=false]:translate-y-4 data-[shown=false]:scale-90 data-[shown=false]:opacity-0'
+        className={cn(
+          segmentGroup,
+          'bg-primary-container duration-spatial-fast ease-spatial-fast data-[shown=false]:ease-emphasized transition-presence data-[shown=false]:duration-spatial-fast-exit h-12 origin-bottom data-[shown=false]:pointer-events-none data-[shown=false]:translate-y-4 data-[shown=false]:scale-90 data-[shown=false]:opacity-0',
+        )}
       >
-        {sections.map((value) => {
-          const Icon = sectionIcons[value];
-          const current = value === section;
-
-          return (
-            <Button
-              key={value}
-              variant='toolbar'
-              size='toolbar'
-              aria-label={t.sectionNames[value]}
-              aria-current={current ? 'true' : undefined}
-              onClick={() => {
-                open(value);
-              }}
-            >
-              <Icon aria-hidden />
-              {/* The label opens out of the icon for the open Section. */}
-              <span
-                aria-hidden
-                className='duration-spatial-fast ease-spatial-fast transition-columns grid grid-cols-[0fr] group-aria-current/toolbar-item:grid-cols-[1fr] sm:grid-cols-[1fr]'
-              >
-                <span className='overflow-hidden'>
-                  <span className='block ps-2'>{t.sectionNames[value]}</span>
-                </span>
-              </span>
-            </Button>
-          );
-        })}
+        <SegmentPill index={sections.indexOf(section)} />
+        {sections.map((value) => (
+          <Button
+            key={value}
+            variant='segment-vibrant'
+            size='segment'
+            aria-current={value === section ? 'true' : undefined}
+            onClick={() => {
+              open(value);
+            }}
+          >
+            {t.sectionNames[value]}
+          </Button>
+        ))}
       </nav>
     </div>
   );

@@ -144,11 +144,13 @@
   /* Material emphasized easing for transitions that begin and end on screen. */
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
 
-  /* The fast spatial duration, one speed for every shape that travels: the
-     theme reveal, the Portrait morph, the tab indicator and segment pills.
-     Exits take two thirds of it. */
+  /* The fast spatial duration, one speed for every shape that travels across
+     the page: the theme reveal, the Portrait morph and the floating toolbar.
+     Exits take two thirds of it. Controls move a short way, so their pills,
+     press morphs and label weight run on a quicker one. */
   --transition-duration-spatial-fast: 350ms;
   --transition-duration-spatial-fast-exit: calc(var(--transition-duration-spatial-fast) * 2 / 3);
+  --transition-duration-pill: 250ms;
 }
 
 /*
@@ -246,13 +248,12 @@
 
 /*
  * A selection pill that stretches as it travels: its edges are positioned
- * separately and the trailing one sets off a sixth of the fast spatial
- * duration later, so the pill elongates towards its target and the spring
- * settles it back. data-direction, on the pill or its track, names the way
- * it goes.
+ * separately and the trailing one sets off a sixth of the pill duration
+ * later, so the pill elongates towards its target and the spring settles it
+ * back. data-direction, on the pill or its track, names the way it goes.
  */
 @utility stretch-pill {
-  --stretch-lag: calc(var(--transition-duration-spatial-fast) / 6);
+  --stretch-lag: calc(var(--transition-duration-pill) / 6);
   transition-property: left, right;
 
   &:is([data-direction='forward'], [data-direction='forward'] > *) {
@@ -268,11 +269,6 @@
    colors never transition. */
 @utility transition-presence {
   transition-property: opacity, translate, scale;
-}
-
-/* A label that opens out of its icon through a 0fr to 1fr grid column. */
-@utility transition-columns {
-  transition-property: grid-template-columns;
 }
 
 /* State layers on ::before follow their container's corners. */

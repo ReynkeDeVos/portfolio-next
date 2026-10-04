@@ -48,7 +48,7 @@ function SegmentPill({ index, from = index }: { index: number; from?: number }) 
       data-slot='segment-pill'
       data-direction={last.direction}
       style={position}
-      className='bg-secondary-container ease-spatial-fast duration-spatial-fast stretch-pill absolute inset-y-0 right-[calc(var(--segment-index)*(-100%-0.125rem))] left-[calc(var(--segment-index)*(100%+0.125rem))] -z-10 rounded-full [grid-area:1/1/2/2] starting:right-[calc(var(--segment-from)*(-100%-0.125rem))] starting:left-[calc(var(--segment-from)*(100%+0.125rem))]'
+      className='bg-secondary-container ease-spatial-fast duration-pill stretch-pill absolute inset-y-0 right-[calc(var(--segment-index)*(-100%-0.125rem))] left-[calc(var(--segment-index)*(100%+0.125rem))] -z-10 rounded-full [grid-area:1/1/2/2] starting:right-[calc(var(--segment-from)*(-100%-0.125rem))] starting:left-[calc(var(--segment-from)*(100%+0.125rem))]'
     />
   );
 }
@@ -122,4 +122,4 @@ function SiteControls({ locale }: { locale: Locale }) {
   );
 }
 
-export { SiteControls };
+export { SegmentPill, SiteControls, segmentGroup };

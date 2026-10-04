@@ -18,12 +18,12 @@ function TabsList({ children, ...props }: React.ComponentProps<typeof TabsPrimit
   return (
     <TabsPrimitive.List
       data-slot='tabs-list'
-      className='group/tabs-list bg-tab-track @container/tabs relative isolate grid h-12 scroll-mt-4 auto-cols-fr grid-flow-col overflow-hidden rounded-full p-1'
+      className='group/tabs-list bg-tab-track relative isolate grid h-12 scroll-mt-4 auto-cols-fr grid-flow-col overflow-hidden rounded-full p-1'
       {...props}
     >
       <span
         aria-hidden
-        className='bg-secondary-container ease-spatial-fast duration-spatial-fast stretch-pill absolute inset-y-1 right-[calc(0.25rem+(var(--tab-count,1)-1-var(--tab-index,0))*(100%-0.5rem)/var(--tab-count,1))] left-[calc(0.25rem+var(--tab-index,0)*(100%-0.5rem)/var(--tab-count,1))] -z-10 rounded-full group-data-[animate=false]/tabs-list:transition-none'
+        className='bg-secondary-container ease-spatial-fast duration-pill stretch-pill absolute inset-y-1 right-[calc(0.25rem+(var(--tab-count,1)-1-var(--tab-index,0))*(100%-0.5rem)/var(--tab-count,1))] left-[calc(0.25rem+var(--tab-index,0)*(100%-0.5rem)/var(--tab-count,1))] -z-10 rounded-full group-data-[animate=false]/tabs-list:transition-none'
       />
       {children}
     </TabsPrimitive.List>
@@ -32,13 +32,12 @@ function TabsList({ children, ...props }: React.ComponentProps<typeof TabsPrimit
 
 // Triggers morph like buttons when pressed and reach over the track's padding,
 // so each one is a 48px touch target. The selected label's weight springs up
-// with the indicator rather than snapping. On the narrowest tracks the labels
-// step down to label-medium, so long German names keep apart.
+// with the indicator rather than snapping.
 function TabsTrigger(props: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
   return (
     <TabsPrimitive.Trigger
       data-slot='tabs-trigger'
-      className='type-label-lg @max-[22rem]/tabs:type-label-md text-on-surface-variant before:ease-effects-fast data-[state=active]:text-on-secondary-container rounded-lg-inc duration-spatial-fast ease-spatial-fast before:rounded-inherit relative inline-flex min-w-0 cursor-pointer items-center justify-center px-2 font-medium transition-[border-radius,font-weight] select-none [--focus-ring-offset:-3px] before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 after:absolute after:inset-x-0 after:-inset-y-1 hover:before:opacity-8 focus-visible:before:opacity-10 active:rounded-sm active:duration-150 data-[state=active]:font-semibold data-[state=active]:hover:before:opacity-0'
+      className='type-label-lg text-on-surface-variant before:ease-effects-fast data-[state=active]:text-on-secondary-container rounded-lg-inc duration-pill ease-spatial-fast before:rounded-inherit relative inline-flex min-w-0 cursor-pointer items-center justify-center px-2 font-medium transition-[border-radius,font-weight] select-none [--focus-ring-offset:-3px] before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 after:absolute after:inset-x-0 after:-inset-y-1 hover:before:opacity-8 focus-visible:before:opacity-10 active:rounded-sm active:duration-150 data-[state=active]:font-semibold data-[state=active]:hover:before:opacity-0'
       {...props}
     />
   );
