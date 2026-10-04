@@ -1,7 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { cn } from 'cn';
 import { Monitor, Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { CSSProperties } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -29,25 +28,15 @@ let leftLocale: Locale | null = null;
 // The selected pill of an equal-column group. It fills the first grid cell and
 // slides to the selected one on the Section tabs' spatial spring; the group
 // clips the overshoot. A freshly mounted pill starts from `from`.
-function SegmentPill({
-  index,
-  from = index,
-  animate,
-}: {
-  index: number;
-  from?: number;
-  animate: boolean;
-}) {
+function SegmentPill({ index, from = index }: { index: number; from?: number }) {
   const position: CSSProperties = { '--segment-index': index, '--segment-from': from };
 
   return (
     <span
       aria-hidden
+      data-slot='segment-pill'
       style={position}
-      className={cn(
-        'bg-secondary-container absolute inset-0 -z-10 [grid-area:1/1/2/2] translate-x-[calc(var(--segment-index)*(100%+0.125rem))] rounded-full starting:translate-x-[calc(var(--segment-from)*(100%+0.125rem))]',
-        animate && 'ease-spatial-fast transition-transform duration-spatial-fast',
-      )}
+      className='bg-secondary-container ease-spatial-fast duration-spatial-fast absolute inset-0 -z-10 translate-x-[calc(var(--segment-index)*(100%+0.125rem))] rounded-full transition-transform [grid-area:1/1/2/2] starting:translate-x-[calc(var(--segment-from)*(100%+0.125rem))]'
     />
   );
 }
@@ -57,8 +46,6 @@ function SiteControls({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const theme = useThemePreference();
   const { section } = useSectionNavigation();
-  // The stored theme arrives after hydration; only a click slides its pill.
-  const [themePicked, setThemePicked] = useState(false);
 
   useEffect(() => {
     leftLocale = null;
@@ -67,11 +54,7 @@ function SiteControls({ locale }: { locale: Locale }) {
   return (
     <div className='border-outline-variant flex flex-wrap items-center justify-between gap-2 border-t pt-4'>
       <nav aria-label={t.localeLabel} className={segmentGroup}>
-        <SegmentPill
-          index={locales.indexOf(locale)}
-          from={locales.indexOf(leftLocale ?? locale)}
-          animate
-        />
+        <SegmentPill index={locales.indexOf(locale)} from={locales.indexOf(leftLocale ?? locale)} />
         {locales.map((target) => (
           <Button key={target} asChild variant='segment' size='sm'>
             <Link
@@ -97,8 +80,9 @@ function SiteControls({ locale }: { locale: Locale }) {
         ))}
       </nav>
 
-      <fieldset aria-label={t.themeLabel} className={segmentGroup}>
-        <SegmentPill index={themeOrder.indexOf(theme)} animate={themePicked} />
+      {/* styles.css shows a stored theme here before hydration. */}
+      <fieldset aria-label={t.themeLabel} data-slot='theme-group' className={segmentGroup}>
+        <SegmentPill index={themeOrder.indexOf(theme)} />
         {themeOrder.map((option) => {
           const Icon = themeIcons[option];
 
@@ -110,8 +94,8 @@ function SiteControls({ locale }: { locale: Locale }) {
               aria-label={t.themes[option]}
               title={t.themes[option]}
               aria-pressed={theme === option}
+              data-theme-option={option}
               onClick={(event) => {
-                setThemePicked(true);
                 void revealTheme(option, event.currentTarget);
               }}
             >

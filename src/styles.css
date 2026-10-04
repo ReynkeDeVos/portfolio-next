@@ -42,6 +42,32 @@
 }
 
 /*
+ * The prerendered theme group presses System. A stored choice is on the root
+ * before first paint, so these rules move the pill to it and color its button,
+ * agreeing with what React renders once hydrated. !important beats the pill's
+ * inline position and start; unlayered beats the aria-pressed utilities. The
+ * indexes follow the group's order: System, Light, Dark.
+ */
+:root[data-theme='light'] [data-slot='theme-group'] > [data-slot='segment-pill'] {
+  --segment-index: 1 !important;
+  --segment-from: 1 !important;
+}
+
+:root[data-theme='dark'] [data-slot='theme-group'] > [data-slot='segment-pill'] {
+  --segment-index: 2 !important;
+  --segment-from: 2 !important;
+}
+
+:root[data-theme] [data-theme-option] {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+:root[data-theme='light'] [data-theme-option='light'],
+:root[data-theme='dark'] [data-theme-option='dark'] {
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/*
  * Theme switch: the new snapshot covers the old one without blending while
  * theme.ts grows its clip from the pressed control.
  */
