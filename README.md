@@ -11,9 +11,9 @@ uv installs the locked FontTools/Brotli dependencies in an isolated, cached
 environment; no Python packages need to be installed globally.
 See [font generation and verification](docs/fonts.md).
 
-Dependency security is checked weekly for production and monthly for development;
-critical development findings are also checked weekly. See
-[the automation policy and manual controls](docs/dependency-security.md).
+The Check workflow fails on high or critical dependency advisories
+(`aube audit --audit-level high`). Refresh the lockfile with
+`aube audit --fix=update`, then run the checks again.
 
 Pull requests must pass the Check workflow: `aubr check`, `aubr build`, then
 `aubr test:prerender`, which asserts the built HTML of both Locale pages, and

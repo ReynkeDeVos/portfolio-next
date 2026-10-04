@@ -41,24 +41,19 @@ const clipId = 'portrait-cookie';
 const clipPath = cookiePath();
 
 // The hint runs along the lower inner rim on a sage band, in a
-// 100-unit box. The action line's middle baseline sits on a radius-38 arc,
-// so text clears the lobe valleys (44) while its 1.6em band reaches past
-// them and takes the scalloped edge as its outer contour. textLength fixes
-// the line at its target width, so the band fits the words, emoji included.
-const hintLines = [{ key: 'action', id: 'portrait-hint-action', radius: 38 }] as const;
+// 100-unit box. Its middle baseline sits on a radius-38 arc, so text
+// clears the lobe valleys (44) while its 1.6em band reaches past them and
+// takes the scalloped edge as its outer contour. textLength fixes the line
+// at its target width, so the band fits the words, emoji included.
+const hintRadius = 38;
 
-const hintEm = {
-  en: { action: 5.2 },
-  de: { action: 6 },
-} satisfies Record<Locale, Record<(typeof hintLines)[number]['key'], number>>;
+const hintArc = `M${50 - hintRadius} 50A${hintRadius} ${hintRadius} 0 0 0 ${50 + hintRadius} 50`;
 
-function hintArc(radius: number) {
-  return `M${50 - radius} 50A${radius} ${radius} 0 0 0 ${50 + radius} 50`;
-}
+const hintEm = { en: 5.2, de: 6 } satisfies Record<Locale, number>;
 
-// One dash, centred on the arc, as long as the line's text.
-function hintBand(radius: number, em: number) {
-  const arcLength = Math.PI * radius;
+// One dash, centred on the arc, as long as the hint's text.
+function hintBand(em: number) {
+  const arcLength = Math.PI * hintRadius;
 
   return {
     dash: `${em}em ${arcLength.toFixed(2)}`,
@@ -122,6 +117,7 @@ function Portrait({ locale }: { locale: Locale }) {
   const rotation: CSSProperties = { '--portrait-angle': `${angle}deg` };
   const { portrait } = contentFor(locale).profile;
   const [open, setOpen] = useState(false);
+  const band = hintBand(hintEm[locale]);
 
   return (
     <Dialog.Root
@@ -175,36 +171,26 @@ function Portrait({ locale }: { locale: Locale }) {
               viewBox='0 0 100 100'
               className='ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial type-portrait-hint transition-portrait-hint absolute inset-0 size-full translate-y-[15%] font-medium opacity-0 duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-500 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-500'
             >
-              {hintLines.map((line) => {
-                const band = hintBand(line.radius, hintEm[locale][line.key]);
-
-                return (
-                  <path
-                    key={line.id}
-                    id={line.id}
-                    d={hintArc(line.radius)}
-                    fill='none'
-                    strokeWidth='1.6em'
-                    strokeLinecap='round'
-                    className='stroke-primary-container portrait-hint-band'
-                    style={{ '--hint-dash': band.dash, '--hint-offset': band.offset }}
-                  />
-                );
-              })}
-              {hintLines.map((line) => (
-                <text
-                  key={line.id}
-                  textLength={`${hintEm[locale][line.key]}em`}
-                  lengthAdjust='spacing'
-                  textAnchor='middle'
-                  dominantBaseline='middle'
-                  className='fill-on-primary-container'
-                >
-                  <textPath href={`#${line.id}`} startOffset='50%'>
-                    {t.photoHint[line.key]}
-                  </textPath>
-                </text>
-              ))}
+              <path
+                id='portrait-hint'
+                d={hintArc}
+                fill='none'
+                strokeWidth='1.6em'
+                strokeLinecap='round'
+                className='stroke-primary-container portrait-hint-band'
+                style={{ '--hint-dash': band.dash, '--hint-offset': band.offset }}
+              />
+              <text
+                textLength={`${hintEm[locale]}em`}
+                lengthAdjust='spacing'
+                textAnchor='middle'
+                dominantBaseline='middle'
+                className='fill-on-primary-container'
+              >
+                <textPath href='#portrait-hint' startOffset='50%'>
+                  {t.photoHint}
+                </textPath>
+              </text>
             </svg>
           </span>
         </button>

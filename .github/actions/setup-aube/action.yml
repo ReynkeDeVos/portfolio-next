@@ -21,6 +21,5 @@ runs:
         package-manager-cache: false
     - shell: bash
       run: |
-        bash scripts/install-aube.sh "$RUNNER_TEMP/build-tools"
-        bash scripts/install-uv.sh "$RUNNER_TEMP/build-tools"
+        bash scripts/install-build-tools.sh "$RUNNER_TEMP/build-tools"
         echo "$RUNNER_TEMP/build-tools" >> "$GITHUB_PATH"

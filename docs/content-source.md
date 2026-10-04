@@ -176,8 +176,8 @@ software skill, and the chip group’s accessible label reflects the mixed
 profile highlights. The portfolio-build section addresses a
 technical lead, such as the head of a software team. It names and links the technologies used,
 with one short reason per group for the less obvious ones. React, TypeScript,
-Tailwind and the fonts are not explained. Radix and class-variance-authority
-are not listed because they come with shadcn/ui. The aube description follows its
+Tailwind and the fonts are not explained. Radix is not listed because it
+comes with shadcn/ui. The aube description follows its
 [guide](https://aube.sh/guide.html), checked on 2026-10-01: made by jdx, the
 developer of mise; it reads and writes pnpm, npm, Yarn and Bun lockfiles in
 place; it checks publishing evidence, release age and known malicious packages

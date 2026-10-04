@@ -27,7 +27,7 @@ const locales = [
 // absolutely positioned, so the name computation treats them as blocks and
 // puts a space before each comma; screen readers don't voice it.
 function fullName(parts: readonly string[]) {
-  const escaped = parts.map((part) => part.replaceAll(/[.*+?^${}()|[\]\\]/gu, String.raw`\$&`));
+  const escaped = parts.map((part) => RegExp.escape(part));
 
   return new RegExp(`^${escaped.join(' ?, ')}$`, 'u');
 }

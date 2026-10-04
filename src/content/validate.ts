@@ -3,20 +3,10 @@ import { z } from 'zod';
 import { contentSchema } from './schema.ts';
 import type { Content } from './schema.ts';
 
-// Counts how often each value occurs, keeping first-seen order for messages.
-function countOccurrences(values: readonly string[]) {
-  const counts = new Map<string, number>();
-
-  for (const value of values) {
-    counts.set(value, (counts.get(value) ?? 0) + 1);
-  }
-
-  return counts;
-}
-
+// Map.groupBy keeps first-seen order, so messages follow the Content's order.
 function duplicateIds(label: string, entries: readonly { id: string }[]) {
-  return [...countOccurrences(entries.map((entry) => entry.id))].flatMap(([id, count]) =>
-    count > 1 ? [`${label} contains "${id}" ${count} times; give each entry its own ID.`] : [],
+  return [...Map.groupBy(entries, (entry) => entry.id)].flatMap(([id, { length }]) =>
+    length > 1 ? [`${label} contains "${id}" ${length} times; give each entry its own ID.`] : [],
   );
 }
 
@@ -29,9 +19,9 @@ function selectedWorkProblems({ projects, selectedWork }: Content) {
       problems.push(`selectedWork.${group} is empty; list at least one project ID.`);
     }
 
-    for (const [id, count] of countOccurrences(selectedWork[group])) {
-      if (count > 1) {
-        problems.push(`selectedWork.${group} lists "${id}" ${count} times; list it once.`);
+    for (const [id, { length }] of Map.groupBy(selectedWork[group], (value) => value)) {
+      if (length > 1) {
+        problems.push(`selectedWork.${group} lists "${id}" ${length} times; list it once.`);
       }
 
       if (!catalogIds.has(id)) {

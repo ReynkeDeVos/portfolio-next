@@ -2,7 +2,7 @@
   "jsPlugins": [
     {
       "name": "shadcn",
-      "specifier": "./tools/shadcn-lint.mjs"
+      "specifier": "@shadcn/lint"
     },
     {
       "name": "anti-slop",
@@ -15,20 +15,7 @@
       "entryPoint": "src/styles.css"
     }
   },
-  "plugins": [
-    "eslint",
-    "unicorn",
-    "react",
-    // "react-perf",
-    // "nextjs",
-    "oxc",
-    "import",
-    "jsdoc",
-    "jsx-a11y",
-    // "node",
-    "promise"
-    // "vitest"
-  ],
+  "plugins": ["eslint", "unicorn", "react", "oxc", "import", "jsdoc", "jsx-a11y", "promise"],
   "ignorePatterns": [
     ".agent/**",
     ".agents/**",
@@ -42,19 +29,7 @@
     ".roo/**",
     ".windsurf/**",
     "tools/oxlint/anti-slop/**",
-    "**/.impeccable/questions/**",
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/.wrangler/**",
-    "**/.tanstack/**",
-    "**/routeTree.gen.ts",
-    "**/package-lock.json",
-    "**/npm-shrinkwrap.json",
-    "**/pnpm-lock.yaml",
-    "**/bun.lock",
-    "**/bun.lockb",
-    "**/aube-lock.yaml",
-    "**/deno.lock"
+    "**/routeTree.gen.ts"
   ],
   "options": {
     "typeAware": true

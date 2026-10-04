@@ -24,6 +24,8 @@ jobs:
       - uses: ./.github/actions/setup-aube
       - name: Install dependencies
         run: aube install --frozen-lockfile
+      - name: Fail on high or critical dependency advisories
+        run: aube audit --audit-level high
       - name: Lint, typecheck, test, and validate content
         run: aubr check
       - name: Build and prerender both Locale pages

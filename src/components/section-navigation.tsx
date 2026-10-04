@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from '@tanstack/react-router';
-import { createContext, use, useLayoutEffect, useRef, useState } from 'react';
+import { createContext, use, useLayoutEffect, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,7 +8,27 @@ import type { Locale } from '@/lib/locale';
 import { defaultSection, isSection, sectionFromHash, sectionHash, sections } from '@/lib/section';
 import type { Section } from '@/lib/section';
 
-import { sectionPanels } from './section-panels';
+import { CareerPanel } from './career-panel';
+import { SkillsPanel } from './skills-panel';
+import { WorkPanel } from './work-panel';
+import { WorkflowPanel } from './workflow-panel';
+
+// WAI-ARIA tabs: a panel is a Tab stop only when its content does not start
+// with a focusable element. Work's only content before its first link is the
+// visually hidden Section heading, which repeats the tab name a screen-reader
+// user just heard, so Tab moves from the tab list straight to the link.
+// Career opens each entry with the role heading, real information its
+// organization link leaves out, so its panel keeps its own Tab stop.
+// tests/e2e/section-focus.spec.ts checks these flags against the panels.
+const sectionPanels = {
+  work: { Panel: WorkPanel, startsWithLink: true },
+  career: { Panel: CareerPanel, startsWithLink: false },
+  skills: { Panel: SkillsPanel, startsWithLink: false },
+  workflow: { Panel: WorkflowPanel, startsWithLink: false },
+} satisfies Record<
+  Section,
+  { Panel: (props: { locale: Locale }) => ReactNode; startsWithLink: boolean }
+>;
 
 type SectionNavigationState = {
   section: Section;
@@ -20,7 +40,6 @@ type SectionNavigationState = {
   // Only the Section tabs below pick Sections and slide the indicator.
   pick: (section: Section) => void;
   animate: boolean;
-  registerTab: (section: Section, element: HTMLButtonElement | null) => void;
 };
 
 // How the open Section last changed. A pick is noted first and consumed once
@@ -30,7 +49,8 @@ type Motion = { shown: Section; picked: Section | null; animate: boolean; turns:
 
 const SectionNavigationContext = createContext<SectionNavigationState | null>(null);
 
-function useSectionNavigationState() {
+// The Section navigation state, for anything inside SectionNavigation.
+function useSectionNavigation() {
   const state = use(SectionNavigationContext);
 
   if (!state) {
@@ -38,14 +58,6 @@ function useSectionNavigationState() {
   }
 
   return state;
-}
-
-// The open Section, the portrait frame's turn count and a way to focus the
-// open Section's tab, for anything inside SectionNavigation.
-function useSectionNavigation() {
-  const { section, turns, focusOpenSection } = useSectionNavigationState();
-
-  return { section, turns, focusOpenSection };
 }
 
 // The address's hash names the open Section. Once the page has hydrated, the
@@ -68,8 +80,6 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     animate: false,
     turns: 0,
   });
-
-  const tabs = useRef<Partial<Record<Section, HTMLButtonElement>>>({});
 
   const section = hydrated ? sectionFromHash(hash) : defaultSection;
 
@@ -119,17 +129,10 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     section,
     turns: motion.turns,
     focusOpenSection: () => {
-      tabs.current[section]?.focus();
+      document.querySelector<HTMLElement>(`[role='tab'][data-section='${section}']`)?.focus();
     },
     pick,
     animate: motion.animate,
-    registerTab: (tabSection, element) => {
-      if (element) {
-        tabs.current[tabSection] = element;
-      } else {
-        delete tabs.current[tabSection];
-      }
-    },
   };
 
   return <SectionNavigationContext value={state}>{children}</SectionNavigationContext>;
@@ -138,7 +141,7 @@ function SectionNavigation({ children }: { children: ReactNode }) {
 // The tab list and every Section's panel.
 function SectionTabs({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const { section, pick, animate, registerTab } = useSectionNavigationState();
+  const { section, pick, animate } = useSectionNavigation();
 
   const indicator: CSSProperties = {
     '--tab-index': sections.indexOf(section),
@@ -157,14 +160,7 @@ function SectionTabs({ locale }: { locale: Locale }) {
       {/* The Section panel switches at once; the indicator follows. */}
       <TabsList aria-label={t.sectionsLabel} style={indicator} data-animate={animate}>
         {sections.map((value) => (
-          <TabsTrigger
-            key={value}
-            ref={(element) => {
-              registerTab(value, element);
-            }}
-            value={value}
-            data-section={value}
-          >
+          <TabsTrigger key={value} value={value} data-section={value}>
             {t.sectionNames[value]}
           </TabsTrigger>
         ))}
