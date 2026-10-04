@@ -5,7 +5,6 @@ import type { Locale } from '@/lib/locale';
 
 import {
   Card,
-  CardDetails,
   CardGrid,
   CardHeader,
   CardText,
@@ -65,7 +64,7 @@ function WorkPanel({ locale }: { locale: Locale }) {
                 end={<LinkArrow />}
               />
               <CardText>{project.description}</CardText>
-              <CardDetails>{project.details}</CardDetails>
+              <p className='type-body-sm text-on-surface-variant mt-2'>{project.details}</p>
               <TechList items={project.technologies} className='mt-auto pt-3' />
             </Card>
           ))}

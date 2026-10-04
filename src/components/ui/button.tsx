@@ -4,7 +4,7 @@ import { Slot } from 'radix-ui';
 // Material buttons: full shape, label-large type and an opacity state layer.
 // Only transform and opacity transition, so theme changes never animate color.
 const base =
-  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full font-medium whitespace-nowrap type-label-lg outline-none transition-transform duration-150 ease-spatial-fast select-none before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 before:ease-effects-fast hover:before:opacity-8 focus-visible:focus-ring focus-visible:before:opacity-10 active:scale-[0.97] active:before:opacity-10 disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5";
+  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full font-medium whitespace-nowrap type-label-lg transition-transform duration-150 ease-spatial-fast select-none before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 before:ease-effects-fast hover:before:opacity-8 focus-visible:before:opacity-10 active:scale-[0.97] active:before:opacity-10 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5";
 
 const variants = {
   filled: 'bg-primary text-on-primary',

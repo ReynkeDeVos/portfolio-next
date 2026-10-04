@@ -130,20 +130,15 @@ type LocalizedContent = ReturnType<typeof resolve>;
 
 type SelectedProject = LocalizedContent['work']['featured'][number];
 
-// Returns a lookup that resolves each Locale once, on first use.
-function createContent(raw: Content) {
-  const resolved = new Map<Locale, LocalizedContent>();
+const byLocale = {
+  en: resolve(portfolio, 'en'),
+  de: resolve(portfolio, 'de'),
+} satisfies Record<Locale, LocalizedContent>;
 
-  return (locale: Locale): LocalizedContent => {
-    const cached = resolved.get(locale) ?? resolve(raw, locale);
-    resolved.set(locale, cached);
-
-    return cached;
-  };
+function contentFor(locale: Locale) {
+  return byLocale[locale];
 }
 
-const contentFor = createContent(portfolio);
-
-export { contentFor, createContent };
+export { contentFor, resolve };
 
 export type { LocalizedContent, SelectedProject };

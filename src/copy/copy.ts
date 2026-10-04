@@ -4,6 +4,9 @@ type Years = Readonly<{ from: number; to: number | null }>;
 
 type CurrentRole = Readonly<{ role: string; organization: string; since: number }>;
 
+// Each Locale's name in its own language, the same on every page.
+const localeNames = { en: 'English', de: 'Deutsch' } satisfies Record<Locale, string>;
+
 // "2014–2023", "2024", or "2025–present": an open end reads as the present.
 function years({ from, to }: Years, present: string) {
   return to === from ? String(from) : `${from}–${to ?? present}`;
@@ -11,7 +14,6 @@ function years({ from, to }: Years, present: string) {
 
 const en = {
   localeLabel: 'Language',
-  localeNames: { en: 'English', de: 'Deutsch' },
   themeLabel: 'Color theme',
   themes: { system: 'System theme', light: 'Light theme', dark: 'Dark theme' },
   contactLabel: 'Contact',
@@ -65,7 +67,6 @@ const en = {
     dismiss: 'Hide this note',
   },
   meta: {
-    title: (name: string) => `${name} · Dev`,
     description:
       'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
   },
@@ -76,7 +77,6 @@ const copy = {
   en,
   de: {
     localeLabel: 'Sprache',
-    localeNames: { en: 'English', de: 'Deutsch' },
     themeLabel: 'Farbschema',
     themes: { system: 'System-Farbschema', light: 'Helles Farbschema', dark: 'Dunkles Farbschema' },
     contactLabel: 'Kontakt',
@@ -135,11 +135,10 @@ const copy = {
       dismiss: 'Hinweis ausblenden',
     },
     meta: {
-      title: (name: string) => `${name} · Dev`,
       description:
         'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
     },
   },
 } satisfies Record<Locale, typeof en>;
 
-export { copy };
+export { copy, localeNames };

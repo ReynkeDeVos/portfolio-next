@@ -6,10 +6,6 @@ import animationUrl from '@/assets/console/hello-there.avif?no-inline';
 // file is fetched and converted at startup. A closed Console buffers the
 // messages, so visitors see them whenever they open it.
 
-// Survives repeated initialization in the same document, such as a
-// re-executed entry module.
-const loggedKey = Symbol.for('portfolio-next.console-greeting');
-
 const sourceUrl = 'https://github.com/ReynkeDeVos/portfolio-next';
 
 // DevTools drops width and height, so the padding box sets a 320x160 area. The
@@ -60,12 +56,6 @@ async function loadDataUrl(url: string) {
 }
 
 async function startConsoleGreeting() {
-  if (Reflect.has(globalThis, loggedKey)) {
-    return;
-  }
-
-  Reflect.set(globalThis, loggedKey, true);
-
   // Phones and tablets have no built-in DevTools, so they skip the download.
   // Remote debugging from a desktop still shows the text greeting.
   if (matchMedia('(pointer: coarse)').matches) {

@@ -1,7 +1,7 @@
 /*
  * The Portrait's own styles: the hint on the thumbnail, and the Portrait
- * viewer's scrim fade, the scroll lock it causes and the morph view
- * transition between the thumbnail and the viewer.
+ * viewer's scrim fade, its scroll lock and the morph view transition between
+ * the thumbnail and the viewer.
  */
 
 /*
@@ -50,14 +50,10 @@
 }
 
 @layer base {
-  /*
-   * The page's stable scrollbar gutter already keeps it in place when the
-   * Portrait viewer locks scrolling, so the lock's scrollbar compensation
-   * would shift it instead. A layered !important outranks the lock's
-   * unlayered one.
-   */
-  body[data-scroll-locked] {
-    margin-right: 0 !important;
+  /* The open Portrait viewer locks page scrolling; the stable scrollbar gutter
+     keeps the page in place. */
+  :root:has(dialog[open]) {
+    overflow: hidden;
   }
 }
 
@@ -69,6 +65,13 @@
  */
 @utility view-transition-morph {
   :root:active-view-transition-type(morph) & {
+    view-transition-name: morph;
+  }
+}
+
+/* The thumbnail's stand-in names the other end only while the viewer is closed. */
+@utility view-transition-morph-origin {
+  :root:active-view-transition-type(morph):not(:has(dialog[open])) & {
     view-transition-name: morph;
   }
 }
