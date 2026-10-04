@@ -11,6 +11,7 @@
  * scheme unless it carries an explicit data-theme preference.
  * The highest container, worn only by labels that do nothing when pressed,
  * stays a quiet neutral sand, so caramel alone marks what can be pressed.
+ * Inverse surface flips the theme for brief plain tooltips.
  */
 :root {
   color-scheme: light dark;
@@ -32,6 +33,8 @@
   --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.021 80), oklch(33% 0.02 60));
   --md-sys-color-outline: light-dark(oklch(58% 0.035 62), oklch(64% 0.03 65));
   --md-sys-color-outline-variant: light-dark(oklch(84% 0.04 70), oklch(40% 0.022 60));
+  --md-sys-color-inverse-surface: light-dark(oklch(30% 0.02 58), oklch(90% 0.022 76));
+  --md-sys-color-inverse-on-surface: light-dark(oklch(95% 0.02 80), oklch(27% 0.016 60));
   --md-sys-color-scrim: light-dark(oklch(20% 0.02 55 / 0.6), oklch(10% 0.01 60 / 0.7));
 }
 
@@ -96,6 +99,8 @@
   --color-surface-container-high: var(--md-sys-color-surface-container-high);
   --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
   --color-outline-variant: var(--md-sys-color-outline-variant);
+  --color-inverse-surface: var(--md-sys-color-inverse-surface);
+  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
   --color-scrim: var(--md-sys-color-scrim);
 
   /* Tab track: high nearly matches the light page, so light steps up to low. */
@@ -146,11 +151,12 @@
 
   /* The fast spatial duration, one speed for every shape that travels across
      the page: the theme reveal, the Portrait morph and the floating toolbar.
-     Exits take two thirds of it. Controls move a short way, so their pills,
-     press morphs and label weight run on a quicker one. */
+     Controls move a short way, so their pills, press morphs, label weight and
+     tooltips run on a quicker one. Exits take two thirds of either. */
   --transition-duration-spatial-fast: 350ms;
   --transition-duration-spatial-fast-exit: calc(var(--transition-duration-spatial-fast) * 2 / 3);
   --transition-duration-pill: 250ms;
+  --transition-duration-pill-exit: calc(var(--transition-duration-pill) * 2 / 3);
 }
 
 /*
