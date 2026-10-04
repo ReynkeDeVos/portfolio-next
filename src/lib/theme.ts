@@ -53,8 +53,53 @@ function setTheme(preference: ThemePreference) {
 }
 
 // The radius at which the reveal's lobes reach their full depth, about the
-// largest Portrait frame's.
+// largest Portrait frame's, and the deepest they get in pixels, like a
+// Material shape measured in dp. Lobes that kept growing with the screen
+// would leave deep scallops creeping along the far edges of a large screen
+// while the reveal slows down at its end.
 const fullLobes = 72;
+
+const deepestLobe = 80;
+
+// The cookie's lobe depth as a share of its radius at full depth.
+const lobeSpan = cookieReach(0) - cookieReach(Math.PI / lobes);
+
+// How deep the reveal's lobes are at `radius`: they grow in while it is
+// small and keep a fixed depth in pixels once it is large.
+function lobeDepth(radius: number) {
+  return Math.min(1, radius / fullLobes, deepestLobe / (lobeSpan * radius));
+}
+
+// A cubic-bezier() coordinate at parameter `at`, given its two control values.
+function bezier(first: number, second: number, at: number) {
+  return 3 * (1 - at) ** 2 * at * first + 3 * (1 - at) * at ** 2 * second + at ** 3;
+}
+
+// The progress a CSS cubic-bezier() curve has made at `time`. Its time rises
+// steadily, so halving the bezier parameter finds the point.
+function easedAt(time: number, easing: string) {
+  if (time <= 0 || time >= 1) {
+    return Math.min(1, Math.max(0, time));
+  }
+
+  const [x1 = 0, y1 = 0, x2 = 1, y2 = 1] = (easing.match(/-?[\d.]+/gu) ?? []).map(Number);
+
+  let low = 0;
+
+  let high = 1;
+
+  for (let round = 0; round < 24; round += 1) {
+    const middle = (low + high) / 2;
+
+    if (bezier(x1, x2, middle) < time) {
+      low = middle;
+    } else {
+      high = middle;
+    }
+  }
+
+  return bezier(y1, y2, (low + high) / 2);
+}
 
 function isDark(preference: ThemePreference) {
   return (
@@ -102,11 +147,20 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     [innerWidth, innerHeight],
   ] as const;
 
-  const radius = Math.max(
-    ...corners.map(
-      ([cx, cy]) => Math.hypot(cx - x, cy - y) / cookieReach(Math.atan2(cy - y, cx - x)),
-    ),
-  );
+  // The radius whose cookie just reaches the farthest corner. Its lobe depth
+  // depends on the radius in turn, so a few rounds settle both.
+  const reaching = (depth: number) =>
+    Math.max(
+      ...corners.map(
+        ([cx, cy]) => Math.hypot(cx - x, cy - y) / cookieReach(Math.atan2(cy - y, cx - x), depth),
+      ),
+    );
+
+  let radius = reaching(1);
+
+  for (let round = 0; round < 3; round += 1) {
+    radius = reaching(lobeDepth(radius));
+  }
 
   // The speed and curve come from the motion tokens in styles.css, which the
   // Portrait morph shares. The minifier may rewrite 350ms as .35s.
@@ -116,17 +170,16 @@ async function revealTheme(preference: ThemePreference, from: Element) {
 
   // Small, the cookie's lobes read as a spiky star, so they grow in with the
   // size: it leaves the control as a round bloom and is a full cookie by the
-  // time it is as large as the Portrait. Frames crowd the start, where the
-  // shape changes most.
-  const steps = 16;
+  // time it is as large as the Portrait. Frames sample the curve evenly in
+  // time and play linearly, so the slow end runs through closely spaced
+  // cookies too, instead of one long straight blend between two far apart.
+  const steps = 32;
 
   const frames = Array.from({ length: steps + 1 }, (_, step) => {
-    const progress = (step / steps) ** 2;
-    const grown = radius * progress;
-    const turn = progress * ((Math.PI * 2) / lobes);
-    const depth = Math.min(1, grown / fullLobes);
+    const grown = radius * easedAt(step / steps, easing);
+    const turn = (grown / radius) * ((Math.PI * 2) / lobes);
 
-    return { offset: progress, clipPath: `path('${cookiePath(grown, x, y, turn, depth)}')` };
+    return { clipPath: `path('${cookiePath(grown, x, y, turn, lobeDepth(grown))}')` };
   });
 
   try {
@@ -147,7 +200,7 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     duration: duration / 4,
     pseudoElement: '::view-transition-new(root)',
   });
-  root.animate(frames, { duration, easing, pseudoElement: '::view-transition-new(root)' });
+  root.animate(frames, { duration, pseudoElement: '::view-transition-new(root)' });
 }
 
 function useThemePreference() {
