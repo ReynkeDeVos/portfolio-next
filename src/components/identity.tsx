@@ -92,8 +92,13 @@ function Contact({ locale }: { locale: Locale }) {
 
   const decode = () => globalThis.atob(emailEncoded);
 
-  // The check and the announcement clear after a moment, so the live region
-  // changes again and a second copy is announced too.
+  // A repeated message gains a trailing no-break space, so the live region
+  // still changes and the outcome is announced again.
+  const announce = (message: string) => {
+    setAnnouncement((current) => (current === message ? `${message}\u00A0` : message));
+  };
+
+  // The check and the announcement clear after a moment.
   async function copyAddress() {
     if (resetTimer.current) {
       clearTimeout(resetTimer.current);
@@ -101,19 +106,18 @@ function Contact({ locale }: { locale: Locale }) {
 
     const value = decode();
     setCopied(false);
-    setAnnouncement('');
 
     try {
       await globalThis.navigator.clipboard.writeText(value);
       setCopied(true);
-      setAnnouncement(t.addressCopied);
+      announce(t.addressCopied);
       resetTimer.current = setTimeout(() => {
         setCopied(false);
         setAnnouncement('');
       }, 2000);
     } catch {
       setAddress(value);
-      setAnnouncement(t.copyFailed);
+      announce(t.copyFailed);
     }
   }
 
@@ -130,7 +134,7 @@ function Contact({ locale }: { locale: Locale }) {
             onClick={() => {
               const decoded = decode();
               setAddress(decoded);
-              setAnnouncement(t.addressShown(decoded));
+              announce(t.addressShown(decoded));
               // Reviewed: the target is a mailto: link to the build-validated address.
               // fallow-ignore-next-line security-sink
               globalThis.location.href = `mailto:${decoded}`;

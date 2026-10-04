@@ -28,19 +28,23 @@ function SectionToolbar({ locale }: { locale: Locale }) {
   const { section, pick } = useSectionNavigation();
   const [shown, setShown] = useState(false);
 
+  // Shown while the tabs sit wholly above the viewport. Reading their position
+  // on every scroll, rather than waiting for an intersection change, also
+  // catches jumps that carry the tabs from below the viewport to above it.
   useEffect(() => {
     const tabs = document.querySelector('[data-slot="tabs-list"]');
 
-    const observer = new IntersectionObserver(([entry]) => {
-      setShown(entry !== undefined && !entry.isIntersecting && entry.boundingClientRect.top < 0);
-    });
+    const update = () => {
+      setShown(tabs !== null && tabs.getBoundingClientRect().bottom < 0);
+    };
 
-    if (tabs) {
-      observer.observe(tabs);
-    }
+    update();
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
 
     return () => {
-      observer.disconnect();
+      removeEventListener('scroll', update);
+      removeEventListener('resize', update);
     };
   }, []);
 

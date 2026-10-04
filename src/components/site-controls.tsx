@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { cn } from 'cn';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import type { CSSProperties } from 'react';
@@ -64,7 +65,9 @@ function SiteControls({ locale }: { locale: Locale }) {
 
   return (
     <div className='border-outline-variant flex flex-wrap items-center justify-between gap-2 border-t pt-4'>
-      <nav aria-label={t.localeLabel} className={segmentGroup}>
+      {/* On touch screens the Locales take the room the 48px theme
+          segments leave, so both groups still share one row on phones. */}
+      <nav aria-label={t.localeLabel} className={cn(segmentGroup, 'pointer-coarse:grow')}>
         <SegmentPill index={locales.indexOf(locale)} from={locales.indexOf(leftLocale ?? locale)} />
         {locales.map((target) => (
           <Button key={target} asChild variant='segment' size='segment'>

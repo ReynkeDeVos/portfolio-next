@@ -12,8 +12,8 @@ from fontTools.ttLib import TTFont
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_EXTENSIONS = {".ts", ".tsx", ".css", ".json"}
 # Each family with the Fontsource axis file it ships: Roboto Flex varies its
-# weight only; Google Sans Flex also carries roundness (ROND) for the
-# Expressive emphasis of the name.
+# weight only; Google Sans Flex also carries roundness (ROND), which every
+# headline and title role sets fully for the Expressive heading voice.
 FONTS = (
     ("roboto-flex", "Roboto Flex Variable", "wght"),
     ("google-sans-flex", "Google Sans Flex Variable", "rond"),

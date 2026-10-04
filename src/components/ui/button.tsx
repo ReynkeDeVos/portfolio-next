@@ -9,10 +9,10 @@ import { Slot } from 'radix-ui';
 // and springs back on release. Each size sets its own resting corner, half its
 // height, because a numeric radius morphs smoothly where a pill's never-ending
 // one would only snap. Only the corners and opacity transition, so theme
-// changes never animate color. The ::after keeps a 48px touch target however
-// small the visible shape.
+// changes never animate color. The ::after keeps the touch target 48px tall
+// however small the visible shape, and 48px wide too for coarse pointers.
 const base =
-  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium whitespace-nowrap type-label-lg transition-[border-radius] duration-spatial-fast ease-spatial-fast select-none active:rounded-sm active:duration-150 before:pointer-events-none before:absolute before:inset-0 before:rounded-inherit before:bg-current before:opacity-0 before:transition-opacity before:duration-150 before:ease-effects-fast hover:before:opacity-8 focus-visible:before:opacity-10 active:before:opacity-10 after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:min-h-full after:-translate-y-1/2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5";
+  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium whitespace-nowrap type-label-lg transition-[border-radius] duration-spatial-fast ease-spatial-fast select-none active:rounded-sm active:duration-150 before:pointer-events-none before:absolute before:inset-0 before:rounded-inherit before:bg-current before:opacity-0 before:transition-opacity before:duration-150 before:ease-effects-fast hover:before:opacity-8 focus-visible:before:opacity-10 active:before:opacity-10 after:absolute after:top-1/2 after:left-1/2 after:h-12 after:min-h-full after:w-full after:-translate-1/2 pointer-coarse:after:min-w-12 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5";
 
 const variants = {
   filled: 'bg-primary text-on-primary',
@@ -29,7 +29,7 @@ const variants = {
   // Floating toolbar item on its vibrant container. The current item fills
   // with primary and squares off, the Expressive selection shape.
   toolbar:
-    'group/toolbar-item text-on-primary-container aria-current:rounded-md aria-current:bg-primary aria-current:text-on-primary',
+    'group/toolbar-item text-on-primary-container aria-current:rounded-md aria-current:bg-primary aria-current:text-on-primary aria-current:active:rounded-sm',
 };
 
 // An icon is first when no visible element precedes it: the label's text
@@ -43,9 +43,9 @@ const sizes = {
   icon: 'size-10 rounded-lg-inc',
   'icon-sm': "size-8 rounded-lg [&_svg:not([class*='size-'])]:size-4",
   segment:
-    'h-8 rounded-lg px-3.5 pointer-coarse:h-10 pointer-coarse:rounded-lg-inc pointer-coarse:px-3',
+    'h-8 rounded-lg px-3.5 pointer-coarse:h-10 pointer-coarse:rounded-lg-inc pointer-coarse:px-2',
   'icon-segment':
-    "size-8 rounded-lg pointer-coarse:size-10 pointer-coarse:rounded-lg-inc [&_svg:not([class*='size-'])]:size-4",
+    "size-8 rounded-lg pointer-coarse:h-10 pointer-coarse:w-12 pointer-coarse:rounded-lg-inc [&_svg:not([class*='size-'])]:size-4",
   // The icon sits centred in a 40px pill; a label adds its own spacing.
   toolbar: 'h-10 gap-0 rounded-lg-inc px-2.75',
   // The two halves of an Expressive split button: round outer corners, small
@@ -53,7 +53,7 @@ const sizes = {
   'split-start':
     'h-10 rounded-s-lg-inc rounded-e-xs px-5 active:rounded-s-lg-inc active:rounded-e-md has-[>svg:not(:not(.sr-only)~*)]:ps-4',
   'split-end':
-    'h-10 w-11 rounded-s-xs rounded-e-lg-inc active:rounded-s-md active:rounded-e-lg-inc',
+    'h-10 w-12 rounded-s-xs rounded-e-lg-inc active:rounded-s-md active:rounded-e-lg-inc',
 };
 
 function Button({

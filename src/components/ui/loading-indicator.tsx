@@ -26,27 +26,43 @@ const turnMs = 4666;
 function LoadingIndicator({ label }: { label: string }) {
   const figure = useRef<HTMLSpanElement>(null);
 
+  // The preference can change while the photo loads, so the animations
+  // follow it rather than reading it once.
   useEffect(() => {
     const element = figure.current;
-    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const still = matchMedia('(prefers-reduced-motion: reduce)');
     const easing = getComputedStyle(document.documentElement).getPropertyValue('--ease-spatial');
     const frames = [...polygons, polygons[0]].map((clipPath) => ({ clipPath, easing }));
+    let animations: Animation[] = [];
 
-    const animations =
-      element && !still
-        ? [
-            element.animate(frames, { duration: morphMs * sequence.length, iterations: Infinity }),
-            element.animate([{ rotate: '0turn' }, { rotate: '1turn' }], {
-              duration: turnMs,
-              iterations: Infinity,
-            }),
-          ]
-        : [];
-
-    return () => {
+    const stop = () => {
       for (const animation of animations) {
         animation.cancel();
       }
+
+      animations = [];
+    };
+
+    const follow = () => {
+      stop();
+
+      if (element && !still.matches) {
+        animations = [
+          element.animate(frames, { duration: morphMs * sequence.length, iterations: Infinity }),
+          element.animate([{ rotate: '0turn' }, { rotate: '1turn' }], {
+            duration: turnMs,
+            iterations: Infinity,
+          }),
+        ];
+      }
+    };
+
+    follow();
+    still.addEventListener('change', follow);
+
+    return () => {
+      still.removeEventListener('change', follow);
+      stop();
     };
   }, []);
 
