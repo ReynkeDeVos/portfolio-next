@@ -15,10 +15,11 @@ const variants = {
   // Material assist chip used as a link: outlined, small corners.
   chip: 'rounded-sm border border-outline-variant text-on-surface',
   standard: 'text-on-surface-variant',
-  // Connected button group item; selection is aria-pressed or aria-current.
-  // The focus ring is inset so the track and neighbours never cover it.
+  // Connected button group item; selection is aria-pressed or aria-current,
+  // over the group's sliding pill. The focus ring is inset so the track and
+  // neighbours never cover it.
   segment:
-    'text-on-surface-variant [--focus-ring-offset:-3px] aria-pressed:bg-secondary-container aria-pressed:text-on-secondary-container aria-[current=page]:bg-secondary-container aria-[current=page]:font-semibold aria-[current=page]:text-on-secondary-container',
+    'text-on-surface-variant [--focus-ring-offset:-3px] aria-pressed:text-on-secondary-container aria-[current=page]:font-semibold aria-[current=page]:text-on-secondary-container',
 };
 
 // An icon is first when no visible element precedes it: the label's text
