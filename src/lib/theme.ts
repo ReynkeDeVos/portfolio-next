@@ -89,6 +89,7 @@ async function revealTheme(preference: ThemePreference, from: Element) {
   const box = from.getBoundingClientRect();
   const x = box.x + box.width / 2;
   const y = box.y + box.height / 2;
+
   const corners = [
     [0, 0],
     [innerWidth, 0],
@@ -101,6 +102,7 @@ async function revealTheme(preference: ThemePreference, from: Element) {
       ([cx, cy]) => Math.hypot(cx - x, cy - y) / cookieReach(Math.atan2(cy - y, cx - x)),
     ),
   );
+
   const steps = 8;
 
   const frames = Array.from({ length: steps + 1 }, (_, step) => ({
