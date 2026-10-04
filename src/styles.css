@@ -373,8 +373,6 @@
   }
 }
 
-/* Feedback motion is decorative; content never depends on it. */
-
 /* Dark ink with white catchlights reads as eyes in both themes. */
 .browser-mascot-pupils,
 .browser-mascot-eyes-happy {
