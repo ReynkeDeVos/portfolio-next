@@ -1,7 +1,9 @@
 import { XIcon } from 'lucide-react';
+import { useState } from 'react';
 import type { Ref } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { LoadingIndicator } from '@/components/ui/loading-indicator';
 import { contentFor } from '@/content/content';
 import type { Locale } from '@/lib/locale';
 import { uiText } from '@/ui-text/ui-text';
@@ -13,7 +15,8 @@ import { uiText } from '@/ui-text/ui-text';
 // on opening, disappears at once on closing and carries the pointer cursor.
 // The surface skips its own fade: the morph view transition grows it out of
 // the thumbnail and fades the content in place.
-// The large image is lazy, so it loads only once the viewer opens.
+// The large image is lazy, so it loads only once the viewer opens; until it
+// has, the Expressive loading indicator morphs where it will appear.
 function PortraitViewer({
   locale,
   ref,
@@ -25,6 +28,7 @@ function PortraitViewer({
 }) {
   const t = uiText[locale];
   const { portrait, fullPortrait } = contentFor(locale).profile;
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <dialog
@@ -56,15 +60,28 @@ function PortraitViewer({
       </Button>
       {/* Both viewport axes bound the photo without another display crop.
           The height budget covers viewport margin, padding and the close row. */}
-      <img
-        src={fullPortrait.src}
-        alt={fullPortrait.alt}
-        width={fullPortrait.width}
-        height={fullPortrait.height}
-        loading='lazy'
-        decoding='async'
-        className='bg-surface-container view-transition-morph-content rounded-inherit mx-auto h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] object-contain'
-      />
+      <div className='rounded-inherit relative mx-auto'>
+        <img
+          src={fullPortrait.src}
+          alt={fullPortrait.alt}
+          width={fullPortrait.width}
+          height={fullPortrait.height}
+          loading='lazy'
+          decoding='async'
+          onLoad={() => {
+            setLoaded(true);
+          }}
+          onError={() => {
+            setLoaded(true);
+          }}
+          className='bg-surface-container view-transition-morph-content rounded-inherit h-auto w-[min(calc(100vw-5rem),calc((100dvh-10rem)*2/3),960px)] object-contain'
+        />
+        {loaded ? null : (
+          <div className='pointer-events-none absolute inset-0 grid place-items-center'>
+            <LoadingIndicator label={t.photoLoading} />
+          </div>
+        )}
+      </div>
     </dialog>
   );
 }

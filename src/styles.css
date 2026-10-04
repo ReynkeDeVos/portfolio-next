@@ -123,10 +123,14 @@
   --font-heading: 'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif;
   --font-weight-emphasized: 650;
 
-  /* The Material shape steps in use, including the Expressive increased ones. */
+  /* The Material shape steps in use, including the Expressive increased ones.
+     Large and large-increased are also the resting corners of 32px and 40px
+     controls, half their height, so the press morph has a number to leave. */
   --radius-*: initial;
   --radius-xs: 4px;
   --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
   --radius-lg-inc: 20px;
   --radius-xl-inc: 32px;
 
@@ -226,6 +230,26 @@
 @utility focus-ring {
   outline: 3px solid var(--md-sys-color-primary);
   outline-offset: var(--focus-ring-offset, 2px);
+}
+
+/*
+ * A selection pill that stretches as it travels: its edges are positioned
+ * separately and the trailing one sets off a sixth of the fast spatial
+ * duration later, so the pill elongates towards its target and the spring
+ * settles it back. data-direction, on the pill or its track, names the way
+ * it goes.
+ */
+@utility stretch-pill {
+  --stretch-lag: calc(var(--transition-duration-spatial-fast) / 6);
+  transition-property: left, right;
+
+  &:is([data-direction='forward'], [data-direction='forward'] > *) {
+    transition-delay: var(--stretch-lag), 0s;
+  }
+
+  &:is([data-direction='backward'], [data-direction='backward'] > *) {
+    transition-delay: 0s, var(--stretch-lag);
+  }
 }
 
 /* State layers on ::before follow their container's corners. */
