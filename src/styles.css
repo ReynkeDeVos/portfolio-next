@@ -149,6 +149,10 @@
   /* Material emphasized easing for transitions that begin and end on screen. */
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
 
+  /* Material emphasized accelerate for elements leaving the screen: they set
+     off slowly, so a short exit still reads as motion before it is gone. */
+  --ease-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+
   /* The fast spatial duration, one speed for every shape that travels across
      the page: the theme reveal, the Portrait morph and the floating toolbar.
      Controls move a short way, so their pills, press morphs, label weight and
