@@ -10,3 +10,5 @@ scripts/__pycache__/
 # Local secrets; this repo is public
 .env*
 .dev.vars*
+# Fallow analysis cache
+.fallow/
