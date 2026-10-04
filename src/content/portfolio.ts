@@ -544,7 +544,7 @@ export const portfolio = {
   // not listed stay in the catalog without being shown.
   selectedWork: {
     featured: ['reputation-assistant', 'scoundrel-tui', 'pokemon-battle'],
-    supporting: ['elder-gym-bro', 'omarchy-stats'],
+    supporting: ['elder-gym-bro', 'omarchy-stats', 'portfolio'],
   },
   projects: [
     {
@@ -561,6 +561,10 @@ export const portfolio = {
         en: 'Players can choose which groups matter most to them. The default settings follow the reputation guide on qudzoo.',
         de: 'Man kann festlegen, welche Gruppen einem am wichtigsten sind. Die Standardeinstellungen folgen dem Ruf-Leitfaden von qudzoo.',
       },
+      engineering: {
+        en: 'A C# mod that uses Harmony to patch the game’s code at runtime, adding the reputation overview to the description of the creature you look at.',
+        de: 'Eine C#-Mod, die den Spielcode zur Laufzeit mit Harmony patcht und die Ruf-Übersicht an die Beschreibung der betrachteten Figur anhängt.',
+      },
     },
     {
       id: 'scoundrel-tui',
@@ -575,6 +579,10 @@ export const portfolio = {
       details: {
         en: 'Based on the card game Scoundrel by Zach Gage and Kurt Bieg. Credits for the game and the artwork are in the repository.',
         de: 'Nach dem Kartenspiel Scoundrel von Zach Gage und Kurt Bieg. Die Nachweise für Spiel und Bilder stehen im Repository.',
+      },
+      engineering: {
+        en: 'A Python app built on the Textual framework. It draws the card art with the Kitty terminal graphics protocol or, if you prefer, with half-block characters.',
+        de: 'Eine Python-App auf Basis des Frameworks Textual. Die Kartenbilder zeichnet sie über das Kitty-Grafikprotokoll fürs Terminal oder wahlweise mit Halbblock-Zeichen.',
       },
     },
     {
@@ -635,6 +643,25 @@ export const portfolio = {
       details: {
         en: 'Built with Sebastian and Clara during the bootcamp. This is my fork of the team repository.',
         de: 'Mit Sebastian und Clara im Bootcamp entwickelt. Das ist mein Fork des Team-Repositorys.',
+      },
+      engineering: {
+        en: 'The React frontend keeps who is fighting whom in a shared Context, and an Express API serves the data. The frontend runs on Netlify, the backend on Render.',
+        de: 'Das React-Frontend hält in einem gemeinsamen Context fest, wer gegen wen kämpft, und eine Express-API liefert die Daten. Das Frontend läuft auf Netlify, das Backend auf Render.',
+      },
+    },
+    {
+      id: 'portfolio',
+      name: 'portfolio-next',
+      category: { en: 'This website', de: 'Diese Website' },
+      description: {
+        en: 'The site you are looking at, in English and German, designed with Material 3 Expressive and prerendered to static HTML.',
+        de: 'Die Seite, die du gerade ansiehst, auf Englisch und Deutsch, gestaltet nach Material 3 Expressive und vorab als statisches HTML gerendert.',
+      },
+      technologies: ['TanStack Start', 'React', 'Tailwind CSS', 'Cloudflare Workers'],
+      url: 'https://github.com/ReynkeDeVos/portfolio-next',
+      details: {
+        en: 'How it is built is explained at the end of Workflow.',
+        de: 'Wie sie gebaut ist, steht am Ende von Workflow.',
       },
     },
   ],
