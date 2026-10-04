@@ -87,16 +87,8 @@
   :root:has(dialog[open]) {
     overflow: hidden;
     background-color: light-dark(
-      color-mix(
-        in srgb,
-        oklch(from var(--color-scrim) l c h / 1) 60%,
-        var(--color-surface)
-      ),
-      color-mix(
-        in srgb,
-        oklch(from var(--color-scrim) l c h / 1) 70%,
-        var(--color-surface)
-      )
+      color-mix(in srgb, oklch(from var(--color-scrim) l c h / 1) 60%, var(--color-surface)),
+      color-mix(in srgb, oklch(from var(--color-scrim) l c h / 1) 70%, var(--color-surface))
     );
 
     & body {
