@@ -20,9 +20,12 @@ const en = {
   photoOpen: 'View larger portrait',
   photoHint: 'click me 😊',
   photoClose: 'Close photo',
+  photoLoading: 'Loading the photo',
   email: 'Email',
   copyAddress: 'Copy email address',
   addressCopied: 'Email address copied',
+  addressShown: (address: string) => `Email address: ${address}`,
+  copyFailed: 'Couldn’t copy the email address; it’s now shown below the contact buttons.',
   strengthsLabel: 'Profile highlights',
   currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
     role,
@@ -30,6 +33,7 @@ const en = {
   ],
   period: (span: Years) => years(span, 'present'),
   sectionsLabel: 'Portfolio sections',
+  toolbarLabel: 'Jump to a section',
   sectionNames: { work: 'Work', skills: 'Skills', workflow: 'Workflow', career: 'Career' },
   sectionHeadings: {
     work: 'Selected work',
@@ -38,6 +42,7 @@ const en = {
     career: 'Career',
   },
   sourceOnGitHub: 'source on GitHub',
+  underTheHood: 'Under the hood',
   opensInNewTab: 'opens in a new tab',
   moreWork: 'More projects',
   moreOnGitHub: 'See more on my GitHub profile',
@@ -83,9 +88,13 @@ const uiText = {
     photoOpen: 'Porträt vergrößern',
     photoHint: 'klick mich 😊',
     photoClose: 'Foto schließen',
+    photoLoading: 'Foto wird geladen',
     email: 'E-Mail',
     copyAddress: 'E-Mail-Adresse kopieren',
     addressCopied: 'E-Mail-Adresse kopiert',
+    addressShown: (address: string) => `E-Mail-Adresse: ${address}`,
+    copyFailed:
+      'Die E-Mail-Adresse ließ sich nicht kopieren; sie steht jetzt unter den Kontaktbuttons.',
     strengthsLabel: 'Kurzprofil',
     currentRole: ({ role, organization, since }: CurrentRole): readonly [string, string] => [
       role,
@@ -93,6 +102,7 @@ const uiText = {
     ],
     period: (span: Years) => years(span, 'heute'),
     sectionsLabel: 'Bereiche des Portfolios',
+    toolbarLabel: 'Zu einem Bereich springen',
     sectionNames: {
       work: 'Projekte',
       skills: 'Kenntnisse',
@@ -106,6 +116,7 @@ const uiText = {
       career: 'Werdegang',
     },
     sourceOnGitHub: 'Quellcode auf GitHub',
+    underTheHood: 'Technisch',
     opensInNewTab: 'öffnet in neuem Tab',
     moreWork: 'Weitere Projekte',
     moreOnGitHub: 'Mehr auf meinem GitHub-Profil',

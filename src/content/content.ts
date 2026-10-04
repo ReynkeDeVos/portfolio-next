@@ -32,6 +32,7 @@ function resolve(raw: Content, locale: Locale) {
       category: found.category[locale],
       description: found.description[locale],
       details: found.details[locale],
+      engineering: found.engineering?.[locale],
       technologies: technologyList(found.technologies),
       url: found.url,
     };

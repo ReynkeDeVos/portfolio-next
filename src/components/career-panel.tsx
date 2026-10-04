@@ -11,7 +11,6 @@ import {
   ProfileLink,
   StretchedLink,
   Subsection,
-  TechList,
 } from './section-parts';
 
 function CareerPanel({ locale }: { locale: Locale }) {
@@ -47,7 +46,8 @@ function CareerPanel({ locale }: { locale: Locale }) {
 
       <Subsection id='teaching-heading' heading={t.teachingHeading}>
         {/* Dense rows inside one card surface instead of a wall of identical
-            cards. Label left, technologies right from md. */}
+            cards or tags. Label left, technologies right from md, as quiet
+            running text: the topics carry the row, the tools only detail it. */}
         <ul className='rounded-lg-inc bg-surface-card divide-outline-variant divide-y px-5'>
           {career.teaching.map((topic) => (
             <li
@@ -57,7 +57,18 @@ function CareerPanel({ locale }: { locale: Locale }) {
               <h4 className='type-title-sm text-on-surface font-semibold md:pt-0.5'>
                 {topic.topic}
               </h4>
-              <TechList items={topic.technologies} />
+              {/* Each name keeps its separator, so a wrapped line never
+                  starts with one. */}
+              <ul className='type-body-md text-on-surface-variant flex flex-wrap gap-x-1.5 md:pt-px'>
+                {topic.technologies.map((technology) => (
+                  <li
+                    key={technology}
+                    className='whitespace-nowrap after:ms-1.5 after:content-["·"] last:after:content-none'
+                  >
+                    {technology}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

@@ -40,12 +40,22 @@ type SectionNavigationState = {
   // Only the Section tabs below pick Sections and slide the indicator.
   pick: (section: Section) => void;
   animate: boolean;
+  // Which way the last change went, so the indicator stretches that way.
+  direction: Direction;
 };
+
+type Direction = 'forward' | 'backward';
 
 // How the open Section last changed. A pick is noted first and consumed once
 // the router's location reaches that Section, so the pick and the address
 // never have to land in the same render.
-type Motion = { shown: Section; picked: Section | null; animate: boolean; turns: number };
+type Motion = {
+  shown: Section;
+  picked: Section | null;
+  animate: boolean;
+  turns: number;
+  direction: Direction;
+};
 
 const SectionNavigationContext = createContext<SectionNavigationState | null>(null);
 
@@ -79,6 +89,7 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     picked: null,
     animate: false,
     turns: 0,
+    direction: 'forward',
   });
 
   const section = hydrated ? sectionFromHash(hash) : defaultSection;
@@ -104,6 +115,7 @@ function SectionNavigation({ children }: { children: ReactNode }) {
       picked: null,
       animate: picked,
       turns: picked ? motion.turns + step : motion.turns,
+      direction: step > 0 ? 'forward' : 'backward',
     });
   }
 
@@ -133,6 +145,7 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     },
     pick,
     animate: motion.animate,
+    direction: motion.direction,
   };
 
   return <SectionNavigationContext value={state}>{children}</SectionNavigationContext>;
@@ -141,7 +154,7 @@ function SectionNavigation({ children }: { children: ReactNode }) {
 // The tab list and every Section's panel.
 function SectionTabs({ locale }: { locale: Locale }) {
   const t = uiText[locale];
-  const { section, pick, animate } = useSectionNavigation();
+  const { section, pick, animate, direction } = useSectionNavigation();
 
   const indicator: CSSProperties = {
     '--tab-index': sections.indexOf(section),
@@ -158,7 +171,12 @@ function SectionTabs({ locale }: { locale: Locale }) {
       }}
     >
       {/* The Section panel switches at once; the indicator follows. */}
-      <TabsList aria-label={t.sectionsLabel} style={indicator} data-animate={animate}>
+      <TabsList
+        aria-label={t.sectionsLabel}
+        style={indicator}
+        data-animate={animate}
+        data-direction={direction}
+      >
         {sections.map((value) => (
           <TabsTrigger key={value} value={value} data-section={value}>
             {t.sectionNames[value]}

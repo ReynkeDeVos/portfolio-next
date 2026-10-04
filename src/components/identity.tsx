@@ -20,7 +20,7 @@ function Identity({ locale }: { locale: Locale }) {
   return (
     <section
       aria-labelledby='identity-name'
-      className='rounded-xl-inc bg-surface-group flex flex-col gap-5 p-5 sm:p-6 lg:top-6 lg:self-start lg:p-7 lg:[@media(min-height:46rem)]:sticky'
+      className='rounded-xl-inc bg-surface-group @container/identity flex flex-col gap-5 p-5 sm:p-6 lg:top-6 lg:self-start lg:p-7 lg:[@media(min-height:46rem)]:sticky'
     >
       <div className='flex items-center gap-4 sm:gap-5'>
         <Portrait locale={locale} />
@@ -66,13 +66,18 @@ function Identity({ locale }: { locale: Locale }) {
   );
 }
 
-// The address stays out of the HTML until Email is pressed. Pressing it opens
-// the mail app and also shows the address, so a missing mail app is no dead end.
+// The address stays out of the HTML until it is asked for. Email, the
+// leading half of an Expressive split button, opens the mail app and also
+// shows the address, so a missing mail app is no dead end; the trailing half
+// copies it. A failed copy shows the address instead. Both outcomes are
+// announced. Narrow profiles give the split button its own row and share the
+// next between the two profile links.
 function Contact({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const { emailEncoded, github, linkedin } = contentFor(locale).profile;
   const [address, setAddress] = useState<string>();
   const [copied, setCopied] = useState(false);
+  const [announcement, setAnnouncement] = useState('');
 
   const resetTimer = useRef<ReturnType<typeof setTimeout>>(null);
 
@@ -85,35 +90,51 @@ function Contact({ locale }: { locale: Locale }) {
     [],
   );
 
-  // The address stays visible and selectable if the clipboard is unavailable.
-  // The check and the announcement clear after a moment, so the live region
-  // changes again and a second copy is announced too.
-  async function copyAddress(value: string) {
+  const decode = () => globalThis.atob(emailEncoded);
+
+  // A repeated message gains a trailing no-break space, so the live region
+  // still changes and the outcome is announced again.
+  const announce = (message: string) => {
+    setAnnouncement((current) => (current === message ? `${message}\u00A0` : message));
+  };
+
+  // The check and the announcement clear after a moment.
+  async function copyAddress() {
     if (resetTimer.current) {
       clearTimeout(resetTimer.current);
     }
 
+    const value = decode();
     setCopied(false);
 
     try {
       await globalThis.navigator.clipboard.writeText(value);
       setCopied(true);
+      announce(t.addressCopied);
       resetTimer.current = setTimeout(() => {
         setCopied(false);
+        setAnnouncement('');
       }, 2000);
     } catch {
-      setCopied(false);
+      setAddress(value);
+      announce(t.copyFailed);
     }
   }
 
   return (
     <div className='flex flex-col gap-3'>
-      <ul aria-label={t.contactLabel} className='flex flex-wrap gap-2'>
-        <li>
+      <ul
+        aria-label={t.contactLabel}
+        className='grid grid-cols-2 gap-2 @min-[23rem]/identity:flex @min-[23rem]/identity:flex-wrap'
+      >
+        <li className='col-span-2 flex gap-0.5'>
           <Button
+            size='split-start'
+            className='flex-1'
             onClick={() => {
-              const decoded = globalThis.atob(emailEncoded);
+              const decoded = decode();
               setAddress(decoded);
+              announce(t.addressShown(decoded));
               // Reviewed: the target is a mailto: link to the build-validated address.
               // fallow-ignore-next-line security-sink
               globalThis.location.href = `mailto:${decoded}`;
@@ -122,39 +143,36 @@ function Contact({ locale }: { locale: Locale }) {
             <Mail aria-hidden />
             {t.email}
           </Button>
+          <Button
+            size='split-end'
+            aria-label={t.copyAddress}
+            title={t.copyAddress}
+            onClick={() => {
+              void copyAddress();
+            }}
+          >
+            {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
+          </Button>
         </li>
         <li>
-          <ProfileLink href={github} locale={locale}>
+          <ProfileLink href={github} locale={locale} className='grid'>
             GitHub
           </ProfileLink>
         </li>
         <li>
-          <ProfileLink href={linkedin} locale={locale}>
+          <ProfileLink href={linkedin} locale={locale} className='grid'>
             LinkedIn
           </ProfileLink>
         </li>
       </ul>
 
       {address ? (
-        <p className='bg-surface-container-high flex items-center gap-2 rounded-full py-1 ps-4 pe-1'>
-          <span className='type-body-md text-on-surface min-w-0 flex-1 break-all select-all'>
-            {address}
-          </span>
-          <Button
-            variant='standard'
-            size='icon-sm'
-            aria-label={t.copyAddress}
-            title={t.copyAddress}
-            onClick={() => {
-              void copyAddress(address);
-            }}
-          >
-            {copied ? <Check aria-hidden className='text-primary' /> : <Copy aria-hidden />}
-          </Button>
+        <p className='bg-surface-container-high type-body-md text-on-surface rounded-full px-4 py-2 break-all select-all'>
+          {address}
         </p>
       ) : null}
       <p aria-live='polite' className='sr-only'>
-        {copied ? t.addressCopied : ''}
+        {announcement}
       </p>
     </div>
   );

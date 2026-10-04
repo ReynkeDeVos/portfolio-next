@@ -9,6 +9,8 @@
  * selected-work evidence. Dark mode is warm charcoal with softer accents.
  * Each role is one light-dark() pair: the root follows the system color
  * scheme unless it carries an explicit data-theme preference.
+ * The highest container, worn only by labels that do nothing when pressed,
+ * stays a quiet neutral sand, so caramel alone marks what can be pressed.
  */
 :root {
   color-scheme: light dark;
@@ -27,7 +29,7 @@
   --md-sys-color-surface-container-low: light-dark(oklch(97% 0.018 82), oklch(23% 0.014 60));
   --md-sys-color-surface-container: light-dark(oklch(94.5% 0.028 78), oklch(25.5% 0.016 60));
   --md-sys-color-surface-container-high: light-dark(oklch(92% 0.038 75), oklch(29% 0.018 60));
-  --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.048 72), oklch(33% 0.02 60));
+  --md-sys-color-surface-container-highest: light-dark(oklch(89.5% 0.021 80), oklch(33% 0.02 60));
   --md-sys-color-outline: light-dark(oklch(58% 0.035 62), oklch(64% 0.03 65));
   --md-sys-color-outline-variant: light-dark(oklch(84% 0.04 70), oklch(40% 0.022 60));
   --md-sys-color-scrim: light-dark(oklch(20% 0.02 55 / 0.6), oklch(10% 0.01 60 / 0.7));
@@ -123,10 +125,14 @@
   --font-heading: 'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif;
   --font-weight-emphasized: 650;
 
-  /* The Material shape steps in use, including the Expressive increased ones. */
+  /* The Material shape steps in use, including the Expressive increased ones.
+     Large and large-increased are also the resting corners of 32px and 40px
+     controls, half their height, so the press morph has a number to leave. */
   --radius-*: initial;
   --radius-xs: 4px;
   --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
   --radius-lg-inc: 20px;
   --radius-xl-inc: 32px;
 
@@ -138,47 +144,59 @@
   /* Material emphasized easing for transitions that begin and end on screen. */
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
 
-  /* The fast spatial duration, one speed for every shape that travels: the
-     theme reveal, the Portrait morph, the tab indicator and segment pills. */
+  /* The fast spatial duration, one speed for every shape that travels across
+     the page: the theme reveal, the Portrait morph and the floating toolbar.
+     Exits take two thirds of it. Controls move a short way, so their pills,
+     press morphs and label weight run on a quicker one. */
   --transition-duration-spatial-fast: 350ms;
+  --transition-duration-spatial-fast-exit: calc(var(--transition-duration-spatial-fast) * 2 / 3);
+  --transition-duration-pill: 250ms;
 }
 
 /*
  * Material type roles as utilities. Weight stays separate so emphasized
- * variants are a plain font-* utility next to the role.
+ * variants are a plain font-* utility next to the role. Headline and title
+ * roles round Google Sans Flex's stroke ends fully (ROND), the Expressive
+ * voice that echoes the cookie's soft lobes.
  */
 @utility type-headline-lg {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 2rem;
   line-height: 2.5rem;
   letter-spacing: -0.02em;
 }
 @utility type-headline-md {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1.75rem;
   line-height: 2.25rem;
   letter-spacing: -0.015em;
 }
 @utility type-headline-sm {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1.5rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
 }
 @utility type-title-lg {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1.375rem;
   line-height: 1.75rem;
   letter-spacing: -0.005em;
 }
 @utility type-title-md {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 0.009em;
 }
 @utility type-title-sm {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 0.875rem;
   line-height: 1.25rem;
   letter-spacing: 0.007em;
@@ -226,6 +244,31 @@
 @utility focus-ring {
   outline: 3px solid var(--md-sys-color-primary);
   outline-offset: var(--focus-ring-offset, 2px);
+}
+
+/*
+ * A selection pill that stretches as it travels: its edges are positioned
+ * separately and the trailing one sets off a sixth of the pill duration
+ * later, so the pill elongates towards its target and the spring settles it
+ * back. data-direction, on the pill or its track, names the way it goes.
+ */
+@utility stretch-pill {
+  --stretch-lag: calc(var(--transition-duration-pill) / 6);
+  transition-property: left, right;
+
+  &:is([data-direction='forward'], [data-direction='forward'] > *) {
+    transition-delay: var(--stretch-lag), 0s;
+  }
+
+  &:is([data-direction='backward'], [data-direction='backward'] > *) {
+    transition-delay: 0s, var(--stretch-lag);
+  }
+}
+
+/* Floating surfaces appear and leave by moving, growing and fading; their
+   colors never transition. */
+@utility transition-presence {
+  transition-property: opacity, translate, scale;
 }
 
 /* State layers on ::before follow their container's corners. */
@@ -580,6 +623,7 @@
   ::before,
   ::after {
     transition-duration: 0s !important;
+    transition-delay: 0s !important;
     animation-duration: 0s !important;
   }
 }

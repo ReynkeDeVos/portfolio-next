@@ -35,11 +35,23 @@ function Item({ linked, children }: { linked?: boolean; children: ReactNode }) {
   );
 }
 
-// Title, accent line and an optional end slot, the head of every list item.
-function ItemHeader({ title, meta, end }: { title: ReactNode; meta?: ReactNode; end?: ReactNode }) {
+// Title, accent line and optional lead and end slots, the head of every list
+// item. A lead sits before the title, centred on it.
+function ItemHeader({
+  title,
+  meta,
+  lead,
+  end,
+}: {
+  title: ReactNode;
+  meta?: ReactNode;
+  lead?: ReactNode;
+  end?: ReactNode;
+}) {
   return (
     <div className='flex items-start justify-between gap-x-4 gap-y-1'>
-      <div className='min-w-0'>
+      {lead}
+      <div className='min-w-0 flex-1 self-center'>
         <h3 className='type-title-lg text-on-surface font-semibold'>{title}</h3>
         {meta ? <p className='type-label-lg text-tertiary mt-0.5 font-medium'>{meta}</p> : null}
       </div>
@@ -163,7 +175,9 @@ function LinkChips({
   className?: string;
 }) {
   return (
-    <ul className={cn('flex flex-wrap gap-2', className)}>
+    // Rows of 32px chips sit 16px apart on touch screens, so their 48px
+    // touch targets meet without overlapping.
+    <ul className={cn('flex flex-wrap gap-2 pointer-coarse:gap-y-4', className)}>
       {links.map((link) => (
         <li key={link.name}>
           <Button asChild variant='chip' size='sm'>
@@ -179,17 +193,20 @@ function LinkChips({
   );
 }
 
+// A grid wrapper stretches the button over its cell.
 function ProfileLink({
   href,
   locale,
+  className,
   children,
 }: {
   href: string;
   locale: Locale;
+  className?: string;
   children: string;
 }) {
   return (
-    <p>
+    <p className={className}>
       <Button asChild variant='tonal'>
         <a href={href} target='_blank' rel='noopener noreferrer'>
           {children}

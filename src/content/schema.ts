@@ -34,6 +34,8 @@ const project = z.strictObject({
   technologies,
   url: z.url(),
   details: translatedText,
+  // One plain sentence on how it works, for technical readers.
+  engineering: translatedText.optional(),
 });
 
 const contentSchema = z.strictObject({

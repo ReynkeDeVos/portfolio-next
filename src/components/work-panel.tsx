@@ -1,3 +1,5 @@
+import { CodeXml } from 'lucide-react';
+
 import { contentFor } from '@/content/content';
 import type { SelectedProject } from '@/content/content';
 import type { Locale } from '@/lib/locale';
@@ -49,6 +51,17 @@ function WorkPanel({ locale }: { locale: Locale }) {
             <p className='type-body-md text-on-surface-variant mt-2 max-w-[72ch]'>
               {project.details}
             </p>
+            {/* How it works, for technical readers: the plain-language text
+                above stays readable without it. */}
+            {project.engineering ? (
+              <p className='type-body-md text-on-surface-variant mt-3 flex max-w-[72ch] gap-2'>
+                <CodeXml aria-hidden className='text-primary mt-0.5 size-4 shrink-0' />
+                <span>
+                  <span className='text-on-surface font-medium'>{t.underTheHood}: </span>
+                  {project.engineering}
+                </span>
+              </p>
+            ) : null}
             <TechList items={project.technologies} className='mt-4' />
           </Item>
         ))}

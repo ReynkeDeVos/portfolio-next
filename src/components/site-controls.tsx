@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
+import { cn } from 'cn';
 import { Monitor, Moon, Sun } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { CSSProperties } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -25,18 +26,29 @@ const segmentGroup =
 // one stood; the new page clears it, so Back and Forward simply appear.
 let leftLocale: Locale | null = null;
 
-// The selected pill of an equal-column group. It fills the first grid cell and
-// slides to the selected one on the Section tabs' spatial spring; the group
-// clips the overshoot. A freshly mounted pill starts from `from`.
+// The selected pill of an equal-column group. It sits in the first grid cell
+// and reaches the selected one with its edges, stretching on the Section
+// tabs' spatial spring; the group clips the overshoot. A freshly mounted pill
+// starts from `from`.
 function SegmentPill({ index, from = index }: { index: number; from?: number }) {
+  const [last, setLast] = useState({
+    index,
+    direction: index < from ? 'backward' : 'forward',
+  });
+
+  if (index !== last.index) {
+    setLast({ index, direction: index > last.index ? 'forward' : 'backward' });
+  }
+
   const position: CSSProperties = { '--segment-index': index, '--segment-from': from };
 
   return (
     <span
       aria-hidden
       data-slot='segment-pill'
+      data-direction={last.direction}
       style={position}
-      className='bg-secondary-container ease-spatial-fast duration-spatial-fast absolute inset-0 -z-10 translate-x-[calc(var(--segment-index)*(100%+0.125rem))] rounded-full transition-transform [grid-area:1/1/2/2] starting:translate-x-[calc(var(--segment-from)*(100%+0.125rem))]'
+      className='bg-secondary-container ease-spatial-fast duration-pill stretch-pill absolute inset-y-0 right-[calc(var(--segment-index)*(-100%-0.125rem))] left-[calc(var(--segment-index)*(100%+0.125rem))] -z-10 rounded-full [grid-area:1/1/2/2] starting:right-[calc(var(--segment-from)*(-100%-0.125rem))] starting:left-[calc(var(--segment-from)*(100%+0.125rem))]'
     />
   );
 }
@@ -53,10 +65,12 @@ function SiteControls({ locale }: { locale: Locale }) {
 
   return (
     <div className='border-outline-variant flex flex-wrap items-center justify-between gap-2 border-t pt-4'>
-      <nav aria-label={t.localeLabel} className={segmentGroup}>
+      {/* On touch screens the Locales take the room the 48px theme
+          segments leave, so both groups still share one row on phones. */}
+      <nav aria-label={t.localeLabel} className={cn(segmentGroup, 'pointer-coarse:grow')}>
         <SegmentPill index={locales.indexOf(locale)} from={locales.indexOf(leftLocale ?? locale)} />
         {locales.map((target) => (
-          <Button key={target} asChild variant='segment' size='sm'>
+          <Button key={target} asChild variant='segment' size='segment'>
             <Link
               to={localePath(target)}
               // The open Section comes along to the other Locale. Not `hash: true`:
@@ -90,7 +104,7 @@ function SiteControls({ locale }: { locale: Locale }) {
             <Button
               key={option}
               variant='segment'
-              size='icon-sm'
+              size='icon-segment'
               aria-label={t.themes[option]}
               title={t.themes[option]}
               aria-pressed={theme === option}
@@ -108,4 +122,4 @@ function SiteControls({ locale }: { locale: Locale }) {
   );
 }
 
-export { SiteControls };
+export { SegmentPill, SiteControls, segmentGroup };

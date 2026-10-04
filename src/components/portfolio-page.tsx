@@ -5,6 +5,7 @@ import type { Locale } from '@/lib/locale';
 import { EngineNote } from './engine-note';
 import { Identity } from './identity';
 import { SectionNavigation, SectionTabs } from './section-navigation';
+import { SectionToolbar } from './section-toolbar';
 
 function PortfolioPage({ locale }: { locale: Locale }) {
   // Effects run children first, so once this one runs the whole page has
@@ -23,6 +24,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
           <div className='flex min-w-0 flex-col gap-4'>
             <EngineNote locale={locale} />
             <SectionTabs locale={locale} />
+            <SectionToolbar locale={locale} />
           </div>
         </main>
       </SectionNavigation>
