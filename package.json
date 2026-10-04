@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "uv run --locked scripts/subset-fonts.py && vite",
-    "build": "uv run --locked scripts/subset-fonts.py && vite build"
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
     "@fontsource-variable/google-sans-flex": "^5.3.1",

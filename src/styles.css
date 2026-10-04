@@ -1,5 +1,6 @@
 @import 'tailwindcss';
-@import './generated/fonts/fonts.css';
+@import '@fontsource-variable/roboto-flex/wght.css';
+@import '@fontsource-variable/google-sans-flex/rond.css';
 @import './components/portrait/portrait.css';
 
 /*
