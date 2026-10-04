@@ -1,3 +1,6 @@
+// The wrappers forward the remaining props to the Radix primitives.
+// oxlint-disable react/jsx-props-no-spreading
+
 import { Tabs as TabsPrimitive } from 'radix-ui';
 
 function Tabs(props: React.ComponentProps<typeof TabsPrimitive.Root>) {

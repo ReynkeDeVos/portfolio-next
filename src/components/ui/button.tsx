@@ -1,3 +1,6 @@
+// The wrapper forwards the remaining props to the Radix primitive.
+// oxlint-disable react/jsx-props-no-spreading
+
 import { cn } from 'cn';
 import { Slot } from 'radix-ui';
 

@@ -1,3 +1,6 @@
+// Zod schemas nest by design; extracting each level would hide the shape.
+// oxlint-disable unicorn/max-nested-calls
+
 import { z } from 'zod';
 
 // The one declaration of the Content shape. The page imports only its type, so

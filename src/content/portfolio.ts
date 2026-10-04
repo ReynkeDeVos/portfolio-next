@@ -1,3 +1,6 @@
+// Bilingual content data grows with the portfolio, not with logic.
+// oxlint-disable max-lines
+
 import type { Content } from './schema.ts';
 
 export const portfolio = {
