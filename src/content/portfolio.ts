@@ -626,8 +626,8 @@ export const portfolio = {
       technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express'],
       url: 'https://github.com/ReynkeDeVos/ElderGymBroApp',
       details: {
-        en: 'Built by a team of four: Michal, Sebastian, Alex and Renke.',
-        de: 'Im Viererteam mit Michal, Sebastian, Alex und Renke entwickelt.',
+        en: 'Built by a team of four: Michal, Sebastian, Alex and Renke. This is my fork of the team repository.',
+        de: 'Im Viererteam mit Michal, Sebastian, Alex und Renke entwickelt. Das ist mein Fork des Team-Repositorys.',
       },
     },
     {
