@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { localePath, locales, rememberLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
 import { sectionHash } from '@/lib/section';
-import { setTheme, useThemePreference } from '@/lib/theme';
+import { revealTheme, useThemePreference } from '@/lib/theme';
 import type { ThemePreference } from '@/lib/theme';
 import { localeNames, uiText } from '@/ui-text/ui-text';
 
@@ -66,8 +66,8 @@ function SiteControls({ locale }: { locale: Locale }) {
               aria-label={t.themes[option]}
               title={t.themes[option]}
               aria-pressed={theme === option}
-              onClick={() => {
-                setTheme(option);
+              onClick={(event) => {
+                revealTheme(option, event.currentTarget);
               }}
             >
               <Icon aria-hidden />
