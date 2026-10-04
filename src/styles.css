@@ -151,40 +151,48 @@
 
 /*
  * Material type roles as utilities. Weight stays separate so emphasized
- * variants are a plain font-* utility next to the role.
+ * variants are a plain font-* utility next to the role. Headline and title
+ * roles round Google Sans Flex's stroke ends fully (ROND), the Expressive
+ * voice that echoes the cookie's soft lobes.
  */
 @utility type-headline-lg {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 2rem;
   line-height: 2.5rem;
   letter-spacing: -0.02em;
 }
 @utility type-headline-md {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1.75rem;
   line-height: 2.25rem;
   letter-spacing: -0.015em;
 }
 @utility type-headline-sm {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1.5rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
 }
 @utility type-title-lg {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1.375rem;
   line-height: 1.75rem;
   letter-spacing: -0.005em;
 }
 @utility type-title-md {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 0.009em;
 }
 @utility type-title-sm {
   font-family: var(--font-heading);
+  font-variation-settings: 'ROND' 100;
   font-size: 0.875rem;
   line-height: 1.25rem;
   letter-spacing: 0.007em;
