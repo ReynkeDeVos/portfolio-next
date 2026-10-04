@@ -127,7 +127,7 @@ function ToolsSection({ locale }: { locale: Locale }) {
           <Card key={tip.id}>
             <CardHeader title={tip.title} />
             <CardText>{tip.description}</CardText>
-            <LinkChips links={tip.links} locale={locale} className='mt-auto pt-4' />
+            <LinkChips links={tip.links} locale={locale} />
           </Card>
         ))}
       </CardGrid>
@@ -179,7 +179,7 @@ function BuildSection({ locale }: { locale: Locale }) {
             <Card key={item.id}>
               <CardHeader title={item.topic} />
               <CardText>{item.description}</CardText>
-              <LinkChips links={item.links} locale={locale} className='mt-auto pt-4' />
+              <LinkChips links={item.links} locale={locale} />
             </Card>
           ))}
         </CardGrid>

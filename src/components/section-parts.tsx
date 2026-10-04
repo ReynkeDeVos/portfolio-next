@@ -168,16 +168,14 @@ function LinkArrow() {
 function LinkChips({
   links,
   locale,
-  className,
 }: {
   links: readonly { name: string; url: string }[];
   locale: Locale;
-  className?: string;
 }) {
   return (
     // Rows of 32px chips sit 16px apart on touch screens, so their 48px
-    // touch targets meet without overlapping.
-    <ul className={cn('flex flex-wrap gap-2 pointer-coarse:gap-y-4', className)}>
+    // touch targets meet without overlapping. They sit at the foot of a card.
+    <ul className='mt-auto flex flex-wrap gap-2 pt-4 pointer-coarse:gap-y-4'>
       {links.map((link) => (
         <li key={link.name}>
           <Button asChild variant='chip' size='sm'>

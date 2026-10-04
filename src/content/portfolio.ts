@@ -336,10 +336,10 @@ export const portfolio = {
       {
         id: 'images',
         topic: { en: 'Design & assets', de: 'Design & Assets' },
-        technologies: ['Material 3 Expressive', 'Fontsource', 'fontTools', 'AVIF', 'lottie-web'],
+        technologies: ['Material 3 Expressive', 'Fontsource', 'AVIF'],
         description: {
-          en: 'The design follows Material 3 Expressive. Fontsource provides the fonts as npm packages, so the site serves them itself instead of loading them from Google Fonts. fontTools strips them down to the characters this site uses, which makes them about a third smaller.',
-          de: 'Das Design folgt Material 3 Expressive. Fontsource stellt die Schriften als npm-Pakete bereit, so liefert die Seite sie selbst aus, statt sie von Google Fonts zu laden. fontTools reduziert sie auf die Zeichen, die diese Seite nutzt, und macht sie so etwa ein Drittel kleiner.',
+          en: 'The design follows Material 3 Expressive. Fontsource provides the fonts as npm packages, so the site serves them itself instead of loading them from Google Fonts. The browser fetches only the files with the Latin characters the text needs.',
+          de: 'Das Design folgt Material 3 Expressive. Fontsource stellt die Schriften als npm-Pakete bereit, so liefert die Seite sie selbst aus, statt sie von Google Fonts zu laden. Der Browser lädt davon nur die Dateien mit den lateinischen Zeichen, die der Text braucht.',
         },
       },
       {
@@ -381,8 +381,6 @@ export const portfolio = {
       { name: 'Material 3 Expressive', url: 'https://m3.material.io/' },
       { name: 'AVIF', url: 'https://aomediacodec.github.io/av1-avif/' },
       { name: 'Fontsource', url: 'https://fontsource.org/' },
-      { name: 'fontTools', url: 'https://github.com/fonttools/fonttools' },
-      { name: 'lottie-web', url: 'https://lottie.airbnb.tech/' },
       { name: 'GitHub Actions', url: 'https://github.com/features/actions' },
       { name: 'Playwright', url: 'https://playwright.dev/' },
       { name: 'Cloudflare Workers', url: 'https://www.cloudflare.com/products/workers/' },

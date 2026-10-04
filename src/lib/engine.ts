@@ -1,3 +1,5 @@
+import { store } from './storage.ts';
+
 const storageKey = 'engine-note';
 
 // Runs in the document head before first paint, so the note never shifts the
@@ -8,12 +10,7 @@ const engineScript = `try{if(!navigator.userAgentData?.brands.some((b)=>b.brand=
 
 function dismissEngineNote() {
   delete document.documentElement.dataset.engineNote;
-
-  try {
-    localStorage.setItem(storageKey, 'dismissed');
-  } catch {
-    // The note stays hidden for this page view.
-  }
+  store('localStorage', storageKey, 'dismissed');
 }
 
 export { dismissEngineNote, engineScript };

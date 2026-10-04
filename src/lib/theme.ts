@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
 import { cookiePath, cookieReach, lobes } from './cookie.ts';
+import { store } from './storage.ts';
 import { startViewTransition } from './view-transition.ts';
 
 type ThemePreference = 'system' | 'light' | 'dark';
@@ -37,15 +38,7 @@ function setTheme(preference: ThemePreference) {
     root.dataset.theme = preference;
   }
 
-  try {
-    if (preference === 'system') {
-      localStorage.removeItem(storageKey);
-    } else {
-      localStorage.setItem(storageKey, preference);
-    }
-  } catch {
-    // The choice still applies for this page view.
-  }
+  store('localStorage', storageKey, preference === 'system' ? null : preference);
 
   for (const listener of listeners) {
     listener();
@@ -68,37 +61,6 @@ const lobeSpan = cookieReach(0) - cookieReach(Math.PI / lobes);
 // small and keep a fixed depth in pixels once it is large.
 function lobeDepth(radius: number) {
   return Math.min(1, radius / fullLobes, deepestLobe / (lobeSpan * radius));
-}
-
-// A cubic-bezier() coordinate at parameter `at`, given its two control values.
-function bezier(first: number, second: number, at: number) {
-  return 3 * (1 - at) ** 2 * at * first + 3 * (1 - at) * at ** 2 * second + at ** 3;
-}
-
-// The progress a CSS cubic-bezier() curve has made at `time`. Its time rises
-// steadily, so halving the bezier parameter finds the point.
-function easedAt(time: number, easing: string) {
-  if (time <= 0 || time >= 1) {
-    return Math.min(1, Math.max(0, time));
-  }
-
-  const [x1 = 0, y1 = 0, x2 = 1, y2 = 1] = (easing.match(/-?[\d.]+/gu) ?? []).map(Number);
-
-  let low = 0;
-
-  let high = 1;
-
-  for (let round = 0; round < 24; round += 1) {
-    const middle = (low + high) / 2;
-
-    if (bezier(x1, x2, middle) < time) {
-      low = middle;
-    } else {
-      high = middle;
-    }
-  }
-
-  return bezier(y1, y2, (low + high) / 2);
 }
 
 function isDark(preference: ThemePreference) {
@@ -170,14 +132,14 @@ async function revealTheme(preference: ThemePreference, from: Element) {
 
   // Small, the cookie's lobes read as a spiky star, so they grow in with the
   // size: it leaves the control as a round bloom and is a full cookie by the
-  // time it is as large as the Portrait. Frames sample the curve evenly in
-  // time and play linearly, so the slow end runs through closely spaced
-  // cookies too, instead of one long straight blend between two far apart.
+  // time it is as large as the Portrait. The frames sit evenly along the
+  // radius and the animation's easing paces them, so the browser only ever
+  // blends between two close cookies.
   const steps = 32;
 
   const frames = Array.from({ length: steps + 1 }, (_, step) => {
-    const grown = radius * easedAt(step / steps, easing);
-    const turn = (grown / radius) * ((Math.PI * 2) / lobes);
+    const grown = (radius * step) / steps;
+    const turn = (step / steps) * ((Math.PI * 2) / lobes);
 
     return { clipPath: `path('${cookiePath(grown, x, y, turn, lobeDepth(grown))}')` };
   });
@@ -200,7 +162,7 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     duration: duration / 4,
     pseudoElement: '::view-transition-new(root)',
   });
-  root.animate(frames, { duration, pseudoElement: '::view-transition-new(root)' });
+  root.animate(frames, { duration, easing, pseudoElement: '::view-transition-new(root)' });
 }
 
 function useThemePreference() {

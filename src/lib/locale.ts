@@ -1,3 +1,5 @@
+import { store } from './storage.ts';
+
 const locales = ['en', 'de'] as const;
 
 type Locale = (typeof locales)[number];
@@ -57,11 +59,7 @@ function localeHead(locale: Locale) {
 const localeScript = `try{if(location.pathname==='/'&&localStorage.getItem('${storageKey}')==='de'){location.replace('${localePath('de')}'+location.search+location.hash);document.documentElement.hidden=true}}catch{}`;
 
 function rememberLocale(locale: Locale) {
-  try {
-    localStorage.setItem(storageKey, locale);
-  } catch {
-    // The URL still carries the Locale for this visit.
-  }
+  store('localStorage', storageKey, locale);
 }
 
 export {
