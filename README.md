@@ -10,4 +10,4 @@ aubr dev        # installs dependencies, starts Vite
 ```
 
 `aubr build` builds the Worker.
-Cloudflare Workers Builds runs `scripts/cloudflare-build.sh` and deploys `main`.
+Cloudflare Workers Builds installs with pnpm from `pnpm-lock.yaml`, runs `pnpm run build` and deploys `main`.
