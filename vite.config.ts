@@ -10,12 +10,7 @@ export default defineConfig({
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
     tanstackStart({
       router: { codeSplittingOptions: { defaultBehavior: [] } },
-      prerender: {
-        enabled: true,
-        autoStaticPathsDiscovery: true,
-        crawlLinks: true,
-        failOnError: true,
-      },
+      prerender: { enabled: true },
     }),
     react({ compiler: true }),
     tailwindcss(),
