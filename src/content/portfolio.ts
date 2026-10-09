@@ -171,33 +171,36 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-10-03',
+    updated: '2026-10-09',
     items: [
       {
         id: 'investigate',
         task: { en: 'Investigate & debug', de: 'Untersuchen & debuggen' },
         model: 'GPT-6.1 Sol',
+        effort: 'High',
+        note: {
+          en: 'Root causes, regressions and architecture',
+          de: 'Fehlerursachen, Regressionen und Architektur',
+        },
+      },
+      {
+        id: 'gather',
+        task: { en: 'Search & gather', de: 'Suchen & sammeln' },
+        model: 'Haiku 5.5',
         effort: 'Medium',
-        note: { en: 'High for difficult diagnosis', de: 'High für schwierige Diagnosen' },
+        note: {
+          en: 'Bounded subagent tasks with a clear check',
+          de: 'Abgegrenzte Subagenten-Aufgaben mit klarer Prüfung',
+        },
       },
       {
         id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
-        model: 'GPT-6.1 Sol',
-        effort: 'Medium',
-        note: {
-          en: 'Clear requirements; High for difficult work',
-          de: 'Klare Anforderungen; High für schwierige Aufgaben',
-        },
-      },
-      {
-        id: 'refactor',
-        task: { en: 'Refactor & port', de: 'Umbauen & portieren' },
         model: 'Opus 5.5',
         effort: 'Extra High',
         note: {
-          en: 'Ambiguous features, substantial refactoring or long ports',
-          de: 'Unklare Anforderungen, größere Refactorings oder langwierige Portierungen',
+          en: 'Features, refactoring and long ports',
+          de: 'Features, Refactorings und langwierige Portierungen',
         },
       },
       {
@@ -219,11 +222,18 @@ export const portfolio = {
       {
         model: 'GPT-6.1 Sol',
         note: {
-          en: 'Low for small, well-defined tasks; Extra High only when High falls short; no Max.',
-          de: 'Low für kleine, klar definierte Aufgaben; Extra High nur, wenn High nicht ausreicht; kein Max.',
+          en: 'Medium for scoped edits and everyday questions; Extra High only when High falls short; no Max.',
+          de: 'Medium für klar abgegrenzte Änderungen und Alltagsfragen; Extra High nur, wenn High nicht ausreicht; kein Max.',
         },
       },
       { model: 'Opus 5.5', note: { en: 'No Low or Max.', de: 'Kein Low und kein Max.' } },
+      {
+        model: 'Haiku 5.5',
+        note: {
+          en: 'Reasoning on; Low only for simple, checked tasks; High for longer ones.',
+          de: 'Mit Reasoning; Low nur für einfache, überprüfte Aufgaben; High für längere.',
+        },
+      },
     ],
     tips: [
       {
