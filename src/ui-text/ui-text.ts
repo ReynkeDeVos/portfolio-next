@@ -75,7 +75,8 @@ const en = {
   meta: {
     description:
       'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
-    imageAlt: (name: string, identity: string) => `Portrait of ${name} beside the line “${identity}”`,
+    imageAlt: (name: string, identity: string) =>
+      `Portrait of ${name} beside the line “${identity}”`,
   },
 };
 
@@ -151,7 +152,8 @@ const uiText = {
     meta: {
       description:
         'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
-      imageAlt: (name: string, identity: string) => `Porträt von ${name} neben dem Satz „${identity}“`,
+      imageAlt: (name: string, identity: string) =>
+        `Porträt von ${name} neben dem Satz „${identity}“`,
     },
   },
 } satisfies Record<Locale, typeof en>;
