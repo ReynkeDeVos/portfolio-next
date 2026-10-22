@@ -71,6 +71,7 @@ export {
   locales,
   localeScript,
   rememberLocale,
+  siteOrigin,
 };
 
 export type { Locale };
