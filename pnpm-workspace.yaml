@@ -1,3 +1,7 @@
 allowBuilds:
   esbuild: true
   workerd: true
+overrides:
+  # Miniflare, pinned by @cloudflare/vite-plugin 1.65.0, still ships undici 7.29.1,
+  # under a high advisory (GHSA-xjj6-f33q-929c). Only affected 7.x releases move.
+  'undici@^7 <7.30.1': ^7.30.1

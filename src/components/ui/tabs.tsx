@@ -37,6 +37,14 @@ function TabsTrigger(props: React.ComponentProps<typeof TabsPrimitive.Trigger>) 
   return (
     <TabsPrimitive.Trigger
       data-slot='tabs-trigger'
+      // Radix focuses a pressed tab itself, and Chrome rings that as keyboard
+      // focus; focusing it first, without the ring, keeps clicks ring-free.
+      // Only the presses Radix acts on: focus alone would select the tab.
+      onMouseDown={(event) => {
+        if (event.button === 0 && !event.ctrlKey) {
+          event.currentTarget.focus({ focusVisible: false });
+        }
+      }}
       className='type-label-lg text-on-surface-variant before:ease-effects-fast data-[state=active]:text-on-secondary-container rounded-lg-inc duration-pill ease-spatial-fast before:rounded-inherit relative inline-flex min-w-0 cursor-pointer items-center justify-center px-2 font-medium transition-[border-radius,font-weight] select-none [--focus-ring-offset:-3px] before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 after:absolute after:inset-x-0 after:-inset-y-1 hover:before:opacity-8 focus-visible:before:opacity-10 active:rounded-sm active:duration-150 data-[state=active]:font-semibold data-[state=active]:hover:before:opacity-0'
       {...props}
     />
