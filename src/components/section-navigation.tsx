@@ -166,8 +166,8 @@ function SectionTabs({ locale }: { locale: Locale }) {
   const { section, pick, animate, direction } = useSectionNavigation();
 
   const indicator: CSSProperties = {
-    '--tab-index': sections.indexOf(section),
-    '--tab-count': sections.length,
+    '--tab-index': String(sections.indexOf(section)),
+    '--tab-count': String(sections.length),
   };
 
   return (

@@ -29,11 +29,16 @@ function pageHead(locale: Locale) {
       { name: 'twitter:card', content: 'summary_large_image' },
       ...tags.meta,
     ],
-    links: tags.links,
+    links: [
+      // The Portrait photo is the largest paint; React hinted it from its
+      // high fetch priority, Redact needs it listed.
+      { rel: 'preload', as: 'image', href: profile.portrait.src, fetchPriority: 'high' as const },
+      ...tags.links,
+    ],
   };
 }
 
-// The not-found page renders these itself; it has no route head of its own.
+// The not-found page's tags; it has no route head of its own.
 function notFoundHead(locale: Locale) {
   return {
     title: uiText[locale].notFound.title(contentFor(locale).profile.name),

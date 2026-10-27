@@ -22,6 +22,11 @@ const clipId = 'portrait-cookie';
 // moves it back to the centre.
 const clipPath = cookiePath(0.5);
 
+// shortcut: Redact 0.2 writes clipPathUnits as clip-path-units, which clips
+// the photo away, so the clip goes in as markup; return it to JSX once Redact
+// maps SVG attribute names the way React does.
+const clipMarkup = `<clipPath id="${clipId}" clipPathUnits="objectBoundingBox"><path d="${clipPath}" class="ease-spatial [translate:0.5px_0.5px] rotate-(--portrait-angle) transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]" /></clipPath>`;
+
 // The hint runs along the lower inner rim on a sage band, in a
 // 100-unit box. Its middle baseline sits on a radius-38 arc, so text
 // clears the lobe valleys (44) while its 1.6em band reaches past them and
@@ -156,14 +161,11 @@ function Portrait({ locale }: { locale: Locale }) {
             itself stays in the page instead of being lifted into the
             transition. It carries the name only while the viewer is closed. */}
         <span aria-hidden className='view-transition-morph-origin absolute inset-0' />
-        <svg aria-hidden className='absolute size-0'>
-          <clipPath id={clipId} clipPathUnits='objectBoundingBox'>
-            <path
-              d={clipPath}
-              className='ease-spatial [translate:0.5px_0.5px] rotate-(--portrait-angle) transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]'
-            />
-          </clipPath>
-        </svg>
+        <svg
+          aria-hidden
+          className='absolute size-0'
+          dangerouslySetInnerHTML={{ __html: clipMarkup }}
+        />
         {/* On hover or focus the frame grows to 1.08 while the photo holds
             its size. The 1.09 overscan keeps the grown lobe tips, spring
             overshoot included, on the image. */}
@@ -196,9 +198,8 @@ function Portrait({ locale }: { locale: Locale }) {
             <text
               textLength={`${hintEm[locale]}em`}
               lengthAdjust='spacing'
-              textAnchor='middle'
-              dominantBaseline='middle'
-              className='fill-on-primary-container'
+              // CSS, since Redact 0.2 drops the hyphen these attributes need.
+              className='fill-on-primary-container [dominant-baseline:middle] [text-anchor:middle]'
             >
               <textPath href='#portrait-hint' startOffset='50%'>
                 {t.photoHint}

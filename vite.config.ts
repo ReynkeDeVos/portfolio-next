@@ -1,6 +1,7 @@
 import { cloudflare } from '@cloudflare/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
+import { redact } from '@tanstack/redact/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
@@ -16,6 +17,7 @@ export default defineConfig({
       prerender: { enabled: true },
     }),
     react(),
+    redact({ features: { activity: false, fragmentRefs: false, portal: false } }),
     tailwindcss(),
   ],
 });
