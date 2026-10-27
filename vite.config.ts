@@ -15,7 +15,7 @@ export default defineConfig({
       router: { codeSplittingOptions: { defaultBehavior: [] } },
       prerender: { enabled: true },
     }),
-    react({ compiler: true }),
+    react(),
     tailwindcss(),
   ],
 });
