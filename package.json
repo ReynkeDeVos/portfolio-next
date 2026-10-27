@@ -23,7 +23,6 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
-    "oxc-transform-react": "^0.152.0",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.5",
     "wrangler": "^4.152.0",
@@ -31,5 +30,6 @@
   },
   "engines": {
     "node": ">=24"
-  }
+  },
+  "//": "React Compiler: off since October 2026. It added 5.1 KB (brotli) of client JavaScript and no measured speed gain. To bring it back, add oxc-transform-react to devDependencies and pass { compiler: true } to react() in vite.config.ts."
 }

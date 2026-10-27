@@ -1,7 +1,3 @@
-// The Latin files of the Fontsource faces in styles.css, the only ones the
-// English and German text needs.
-import googleSansFlexLatin from '@fontsource-variable/google-sans-flex/files/google-sans-flex-latin-rond-normal.woff2?url';
-import robotoFlexLatin from '@fontsource-variable/roboto-flex/files/roboto-flex-latin-wght-normal.woff2?url';
 import {
   createRootRoute,
   HeadContent,
@@ -10,6 +6,9 @@ import {
   useRouterState,
 } from '@tanstack/react-router';
 
+// The Latin faces in styles.css, the only ones the English and German text needs.
+import googleSansFlexLatin from '@/assets/fonts/google-sans-flex-latin.woff2?url';
+import robotoFlexLatin from '@/assets/fonts/roboto-flex-latin.woff2?url';
 import { NotFound } from '@/components/not-found';
 import { buildDisclosureScript } from '@/lib/build-disclosure';
 import { engineScript } from '@/lib/engine';
