@@ -9,7 +9,7 @@ import {
 // The Latin faces in styles.css, the only ones the English and German text needs.
 import googleSansFlexLatin from '@/assets/fonts/google-sans-flex-latin.woff2?url';
 import robotoFlexLatin from '@/assets/fonts/roboto-flex-latin.woff2?url';
-import { NotFound } from '@/components/not-found';
+import { NotFound, NotFoundHead } from '@/components/not-found';
 import { buildDisclosureScript } from '@/lib/build-disclosure';
 import { engineScript } from '@/lib/engine';
 import { localeFromPathname, localeScript } from '@/lib/locale';
@@ -49,11 +49,22 @@ const Route = createRootRoute({
 
 function Root() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const locale = localeFromPathname(pathname);
+
+  // shortcut: reads the router's internal flag for an address no page claims;
+  // switch once TanStack Router exposes a public one. A browser test guards it.
+  const notFound = useRouterState({
+    select: (state) => state.matches.some((match) => match._notFound),
+  });
 
   return (
     // The head scripts may mark the root before hydration.
-    <html lang={localeFromPathname(pathname)} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* First, so the charset lands in the first 1024 bytes: Redact keeps
+            head order where React hoists these tags. */}
+        <HeadContent />
+        {notFound && <NotFoundHead locale={locale} />}
         <script>
           {localeScript + themeScript + engineScript + sectionScript + buildDisclosureScript}
         </script>
@@ -62,7 +73,6 @@ function Root() {
         {/* oxlint-disable shadcn/no-inline-styles */}
         <style>{sectionStyles}</style>
         {/* oxlint-enable shadcn/no-inline-styles */}
-        <HeadContent />
       </head>
       <body>
         <Outlet />

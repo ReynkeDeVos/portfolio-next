@@ -40,7 +40,10 @@ function SegmentPill({ index, from = index }: { index: number; from?: number }) 
     setLast({ index, direction: index > last.index ? 'forward' : 'backward' });
   }
 
-  const position: CSSProperties = { '--segment-index': index, '--segment-from': from };
+  const position: CSSProperties = {
+    '--segment-index': String(index),
+    '--segment-from': String(from),
+  };
 
   return (
     <span
