@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import type { Locale } from '@/lib/locale';
 import { sections } from '@/lib/section';
-import type { Section } from '@/lib/section';
 import { uiText } from '@/ui-text/ui-text';
 
 import { useSectionNavigation } from './section-navigation';
@@ -20,7 +19,7 @@ import { SegmentPill, segmentGroup } from './site-controls';
 // never show it; while hidden it is inert.
 function SectionToolbar({ locale }: { locale: Locale }) {
   const t = uiText[locale];
-  const { section, pick } = useSectionNavigation();
+  const { section, jumpTo } = useSectionNavigation();
   const [shown, setShown] = useState(false);
 
   // Reading the tabs' position on every scroll, rather than waiting for an
@@ -53,17 +52,6 @@ function SectionToolbar({ locale }: { locale: Locale }) {
     };
   }, []);
 
-  function open(next: Section) {
-    pick(next);
-    document
-      .querySelector<HTMLElement>(`[role='tab'][data-section='${next}']`)
-      ?.focus({ preventScroll: true });
-    document.querySelector('[data-slot="tabs-list"]')?.scrollIntoView({
-      block: 'start',
-      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-    });
-  }
-
   return (
     <div className='sticky bottom-4 z-10 h-12 sm:hidden'>
       <nav
@@ -84,7 +72,7 @@ function SectionToolbar({ locale }: { locale: Locale }) {
             size='segment'
             aria-current={value === section ? 'true' : undefined}
             onClick={() => {
-              open(value);
+              jumpTo(value);
             }}
           >
             {t.sectionNames[value]}

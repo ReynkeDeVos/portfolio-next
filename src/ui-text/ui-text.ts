@@ -66,9 +66,9 @@ const en = {
     lead: 'Do a few animations look a little… wonky? Don’t worry, that’s just the browser. I’m trying out the latest web features, and your browser hasn’t caught up with all of them yet.',
     why: 'Why only Chromium?',
     details: [
-      'This portfolio is my playground for the latest web features. Some are only available in Blink, the engine behind Chrome. Your browser uses a different engine. I could make it look just as good in Firefox (Gecko) and Safari (WebKit); here, though, I want to experiment with the newest browser features.',
+      'This portfolio is my playground. Some of the features it uses exist only in Blink, the engine behind Chrome, and your browser runs a different engine. I could make it look just as good in Firefox (Gecko) and Safari (WebKit); here, though, I’d rather experiment.',
       'Open the page in Chrome, Edge, Brave, Opera or another Chromium-based browser on a laptop or Android device. On iPhone and iPad, there’s always WebKit under the hood. Thanks, Apple. 🤷',
-      'Or give your browser a year or two. By then, it will support these new features too.',
+      'Or give your browser a year or two. By then, it should support these features too.',
     ],
     dismiss: 'Hide this note',
   },
@@ -143,9 +143,9 @@ const uiText = {
       lead: 'Sehen ein paar Animationen etwas … verunglückt aus? Keine Sorge, das ist nur der Browser. Ich probiere hier die neuesten Web-Features aus, und ein paar davon kennt er noch nicht.',
       why: 'Warum nur Chromium?',
       details: [
-        'Dieses Portfolio ist meine Spielwiese für die neuesten Web-Features. Einige gibt es bisher nur in Blink, der Engine hinter Chrome. Dein Browser nutzt eine andere Engine. Ich könnte die Seite auch für Firefox (Gecko) und Safari (WebKit) genauso hübsch machen; hier möchte ich aber mit den neuesten Browser-Features experimentieren.',
+        'Dieses Portfolio ist meine Spielwiese. Einige der Features, die es nutzt, gibt es bisher nur in Blink, der Engine hinter Chrome, und dein Browser nutzt eine andere Engine. Ich könnte die Seite auch für Firefox (Gecko) und Safari (WebKit) genauso hübsch machen; hier experimentiere ich aber lieber.',
         'Öffne die Seite in Chrome, Edge, Brave, Opera oder einem anderen Chromium-basierten Browser auf einem Notebook oder Android-Gerät. Auf iPhone und iPad läuft aber immer WebKit. Danke, Apple. 🤷',
-        'Oder gib deinem Browser ein, zwei Jahre Zeit. Dann unterstützt er diese neuen Features auch.',
+        'Oder gib deinem Browser ein, zwei Jahre Zeit. Dann sollte er diese Features auch unterstützen.',
       ],
       dismiss: 'Hinweis ausblenden',
     },

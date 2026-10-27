@@ -301,10 +301,10 @@ export const portfolio = {
       {
         id: 'rendering',
         topic: { en: 'Framework', de: 'Framework' },
-        technologies: ['React 19', 'TanStack Start', 'Vite 8'],
+        technologies: ['React 19', 'TanStack Redact', 'TanStack Start', 'Vite 8'],
         description: {
-          en: 'Prerenders both language versions to static HTML. Switching tabs sends no network request.',
-          de: 'Rendert beide Sprachfassungen vorab als statisches HTML. Tabwechsel senden keine Netzwerkanfrage.',
+          en: 'Prerenders both language versions to static HTML. The React components run on TanStack Redact, a smaller alternative to React’s own runtime. Switching tabs sends no network request.',
+          de: 'Rendert beide Sprachfassungen vorab als statisches HTML. Die React-Komponenten laufen auf TanStack Redact, einer schlankeren Alternative zur Laufzeit von React. Tabwechsel senden keine Netzwerkanfrage.',
         },
       },
       {
@@ -373,6 +373,7 @@ export const portfolio = {
     ],
     links: [
       { name: 'React 19', url: 'https://react.dev/' },
+      { name: 'TanStack Redact', url: 'https://github.com/TanStack/redact' },
       { name: 'TanStack Start', url: 'https://tanstack.com/start' },
       { name: 'Vite 8', url: 'https://vite.dev/' },
       { name: 'shadcn/ui', url: 'https://ui.shadcn.com/' },
