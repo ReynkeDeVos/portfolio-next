@@ -37,7 +37,10 @@ type SectionNavigationState = {
   turns: number;
   // Moves focus to the open Section's tab, e.g. when what had focus goes away.
   focusOpenSection: () => void;
-  // Only the Section tabs below pick Sections and slide the indicator.
+  // Opens a Section from anywhere on the page and returns the visitor to its
+  // tab, even when that Section is already open.
+  jumpTo: (section: Section) => void;
+  // Only the Section tabs below call this; everything else jumps.
   pick: (section: Section) => void;
   animate: boolean;
   // Which way the last change went, so the indicator stretches that way.
@@ -58,6 +61,10 @@ type Motion = {
 };
 
 const SectionNavigationContext = createContext<SectionNavigationState | null>(null);
+
+function sectionTab(section: Section) {
+  return document.querySelector<HTMLElement>(`[role='tab'][data-section='${section}']`);
+}
 
 // The Section navigation state, for anything inside SectionNavigation.
 function useSectionNavigation() {
@@ -150,7 +157,16 @@ function SectionNavigation({ children }: { children: ReactNode }) {
     section,
     turns: motion.turns,
     focusOpenSection: () => {
-      document.querySelector<HTMLElement>(`[role='tab'][data-section='${section}']`)?.focus();
+      sectionTab(section)?.focus();
+    },
+    jumpTo: (next) => {
+      pick(next);
+      const tab = sectionTab(next);
+      tab?.focus({ preventScroll: true });
+      tab?.closest('[role="tablist"]')?.scrollIntoView({
+        block: 'start',
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      });
     },
     pick,
     animate: motion.animate,
