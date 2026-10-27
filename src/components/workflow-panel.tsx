@@ -65,7 +65,8 @@ function AiSection({ locale }: { locale: Locale }) {
       <div className='rounded-lg-inc bg-surface-card px-5 sm:px-6'>
         <table aria-labelledby='ai-heading' className='w-full border-collapse text-left'>
           <thead>
-            <tr className='type-label-md text-on-surface-variant'>
+            {/* A heading that wraps on phones keeps its neighbours on its last line. */}
+            <tr className='type-label-md text-on-surface-variant align-bottom'>
               <th scope='col' className='pt-4 pr-4 pb-2 font-medium'>
                 {t.aiTable.task}
               </th>
@@ -89,10 +90,11 @@ function AiSection({ locale }: { locale: Locale }) {
                 <td className='type-body-md text-on-surface py-3 pr-4 whitespace-nowrap'>
                   {item.model}
                 </td>
-                {/* The thinking levels keep the English names the model tools show. */}
+                {/* The thinking levels keep the English names the model tools show,
+                    on one line so Extra High never reads as two levels. */}
                 <td
                   lang={locale === 'en' ? undefined : 'en'}
-                  className='type-body-md text-on-surface py-3'
+                  className='type-body-md text-on-surface py-3 whitespace-nowrap'
                 >
                   {item.effort}
                 </td>
@@ -169,8 +171,10 @@ function BuildSection({ locale }: { locale: Locale }) {
           aria-hidden
           className='text-on-surface ease-spatial row-span-2 size-6 transition-transform duration-300 group-open/disclosure:rotate-180'
         />
+        {/* No-break spaces keep each topic whole and its dot on the line before,
+            so a wrapped line never starts with one. */}
         <span className='type-body-md text-on-surface-variant'>
-          {build.map((item) => item.topic).join(' · ')}
+          {build.map((item) => item.topic.replaceAll(' ', '\u00A0')).join('\u00A0· ')}
         </span>
       </summary>
       <div className='mt-3'>
