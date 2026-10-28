@@ -1,11 +1,6 @@
 allowBuilds:
   esbuild: true
   workerd: true
-# shortcut: Redact 0.2.1 came out 2026-10-27 05:18 UTC, inside pnpm's one-day
-# minimum release age, which fails a clean install; drop this entry once a fresh
-# install passes without it, after 2026-10-28 05:18 UTC.
-minimumReleaseAgeExclude:
-  - '@tanstack/redact@0.2.1'
 overrides:
   # Miniflare, pinned by @cloudflare/vite-plugin 1.65.0, still ships undici 7.29.1,
   # under a high advisory (GHSA-xjj6-f33q-929c). Only affected 7.x releases move.
