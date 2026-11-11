@@ -30,7 +30,7 @@
     "zod": "^4.6.7"
   },
   "engines": {
-    "node": ">=24"
+    "node": ">=26"
   },
   "//": "React Compiler: off since October 2026. It added 5.1 KB (brotli) of client JavaScript and no measured speed gain. To bring it back, add oxc-transform-react to devDependencies and pass { compiler: true } to react() in vite.config.ts."
 }

@@ -171,7 +171,7 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-10-09',
+    updated: '2026-11-11',
     items: [
       {
         id: 'investigate',
@@ -217,6 +217,16 @@ export const portfolio = {
         effort: 'Extra High',
         note: { en: 'Layout and UX refinements', de: 'Layout und UX verfeinern' },
       },
+      {
+        id: 'advise',
+        task: { en: 'Ask an advisor', de: 'Rat einholen' },
+        model: 'Fable 5.2',
+        effort: 'High',
+        note: {
+          en: 'Second opinions on stuck runs and hard problems',
+          de: 'Zweitmeinung bei festgefahrenen Läufen und schweren Problemen',
+        },
+      },
     ],
     modelNotes: [
       {
@@ -227,6 +237,13 @@ export const portfolio = {
         },
       },
       { model: 'Opus 5.5', note: { en: 'No Low or Max.', de: 'Kein Low und kein Max.' } },
+      {
+        model: 'Fable 5.2',
+        note: {
+          en: 'Advises while another model builds; Extra High only for the hardest problems; no Max.',
+          de: 'Berät, während ein anderes Modell umsetzt; Extra High nur für die schwersten Probleme; kein Max.',
+        },
+      },
       {
         model: 'Haiku 5.5',
         note: {
