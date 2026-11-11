@@ -69,7 +69,7 @@ const contentSchema = z.strictObject({
         }),
       )
       .min(1)
-      .max(5),
+      .max(6),
     modelNotes: z.array(z.strictObject({ model: text, note: translatedText })).min(1),
     tips: z
       .array(
