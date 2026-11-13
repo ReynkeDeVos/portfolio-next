@@ -171,36 +171,26 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-11-11',
+    updated: '2026-11-14',
     items: [
       {
         id: 'investigate',
         task: { en: 'Investigate & debug', de: 'Untersuchen & debuggen' },
-        model: 'GPT-6.1 Sol',
+        model: 'Opus 5.5',
         effort: 'High',
         note: {
-          en: 'Root causes, regressions and architecture',
-          de: 'Fehlerursachen, Regressionen und Architektur',
-        },
-      },
-      {
-        id: 'gather',
-        task: { en: 'Search & gather', de: 'Suchen & sammeln' },
-        model: 'Haiku 5.5',
-        effort: 'Medium',
-        note: {
-          en: 'Bounded subagent tasks with a clear check',
-          de: 'Abgegrenzte Subagenten-Aufgaben mit klarer Prüfung',
+          en: 'Root causes, regressions, repros and architecture',
+          de: 'Fehlerursachen, Regressionen, Reproduktionen und Architektur',
         },
       },
       {
         id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
         model: 'Opus 5.5',
-        effort: 'Extra High',
+        effort: 'High',
         note: {
-          en: 'Features, refactoring and long ports',
-          de: 'Features, Refactorings und langwierige Portierungen',
+          en: 'Features, refactors, migrations and long ports',
+          de: 'Features, Refactorings, Migrationen und langwierige Portierungen',
         },
       },
       {
@@ -208,47 +198,69 @@ export const portfolio = {
         task: { en: 'Review code', de: 'Code prüfen' },
         model: 'GPT-6.1 Sol',
         effort: 'High',
-        note: { en: 'Independent review', de: 'Unabhängige Prüfung' },
+        note: {
+          en: 'Independent cross-family review',
+          de: 'Unabhängige Prüfung durch eine andere Modellfamilie',
+        },
       },
       {
         id: 'design',
         task: { en: 'Explore visual design', de: 'Visuelles Design erkunden' },
-        model: 'Opus 5.5',
-        effort: 'Extra High',
-        note: { en: 'Layout and UX refinements', de: 'Layout und UX verfeinern' },
-      },
-      {
-        id: 'advise',
-        task: { en: 'Ask an advisor', de: 'Rat einholen' },
         model: 'Fable 5.2',
         effort: 'High',
         note: {
-          en: 'Second opinions on stuck runs and hard problems',
-          de: 'Zweitmeinung bei festgefahrenen Läufen und schweren Problemen',
+          en: 'Fresh visual directions, graphics and unique visualizers',
+          de: 'Neue visuelle Richtungen, Grafiken und eigenständige Visualisierungen',
+        },
+      },
+      {
+        id: 'advise',
+        task: { en: 'Ask Fable', de: 'Fable fragen' },
+        model: 'Fable 5.2',
+        effort: 'High',
+        note: {
+          en: 'Stuck runs, calls no check can settle, and whether circling work is good enough to ship',
+          de: 'Festgefahrene Läufe, Fragen ohne prüfbare Antwort und ob kreisende Arbeit gut genug zum Ausliefern ist',
+        },
+      },
+      {
+        id: 'bulk',
+        task: { en: 'Bulk analysis', de: 'Massenanalyse' },
+        model: 'Haiku 5.5',
+        effort: 'Medium',
+        note: {
+          en: 'Classify or pattern-match across many files or a large data set',
+          de: 'Viele Dateien oder große Datenmengen klassifizieren oder nach Mustern durchsuchen',
         },
       },
     ],
     modelNotes: [
       {
-        model: 'GPT-6.1 Sol',
+        model: 'Opus 5.5',
         note: {
-          en: 'Medium for scoped edits and everyday questions; Extra High only when High falls short; no Max.',
-          de: 'Medium für klar abgegrenzte Änderungen und Alltagsfragen; Extra High nur, wenn High nicht ausreicht; kein Max.',
+          en: 'Extra High for hairy work that needs many checks; no Low or Max.',
+          de: 'Extra High für knifflige Arbeit mit vielen Prüfungen; kein Low und kein Max.',
         },
       },
-      { model: 'Opus 5.5', note: { en: 'No Low or Max.', de: 'Kein Low und kein Max.' } },
       {
         model: 'Fable 5.2',
         note: {
-          en: 'Advises while another model builds; Extra High only for the hardest problems; no Max.',
-          de: 'Berät, während ein anderes Modell umsetzt; Extra High nur für die schwersten Probleme; kein Max.',
+          en: 'Finds the fix or direction while Opus builds the check-heavy parts; Extra High only for the hardest problems; no Max.',
+          de: 'Findet die Lösung oder Richtung, Opus baut die prüfintensiven Teile; Extra High nur für die schwersten Probleme; kein Max.',
+        },
+      },
+      {
+        model: 'GPT-6.1 Sol',
+        note: {
+          en: 'Extra High only when High falls short; no Max.',
+          de: 'Extra High nur, wenn High nicht ausreicht; kein Max.',
         },
       },
       {
         model: 'Haiku 5.5',
         note: {
-          en: 'Reasoning on; Low only for simple, checked tasks; High for longer ones.',
-          de: 'Mit Reasoning; Low nur für einfache, überprüfte Aufgaben; High für längere.',
+          en: 'Reasoning on; reads and labels, never writes code.',
+          de: 'Mit Reasoning; liest und ordnet zu, schreibt nie Code.',
         },
       },
     ],
