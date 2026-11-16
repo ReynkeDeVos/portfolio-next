@@ -269,15 +269,15 @@ export const portfolio = {
         id: 'harness',
         title: { en: 'Harness', de: 'Harness' },
         description: {
-          en: 'T3 Code for a clear overview of agent sessions; pi for project-specific workflows. herdr + Tailscale for persistent agent sessions you can reach remotely.',
-          de: 'T3 Code für einen klaren Überblick über Agentensitzungen, pi für projektspezifische Abläufe. herdr + Tailscale für dauerhafte Agentensitzungen mit Remote-Zugriff.',
+          en: 'T3 Code for a clear overview of agent sessions; pi for project-specific workflows. Tailscale for persistent agent sessions you can reach remotely.',
+          de: 'T3 Code für einen klaren Überblick über Agentensitzungen, pi für projektspezifische Abläufe. Tailscale für dauerhafte Agentensitzungen mit Remote-Zugriff.',
         },
         links: [
           { name: 'T3 Code', url: 'https://t3.codes/' },
-          { name: 'herdr', url: 'https://herdr.dev/' },
+          { name: 'Orca', url: 'https://orca.dev/' },
           { name: 'pi', url: 'https://pi.dev/' },
           { name: 'Tailscale', url: 'https://tailscale.com/' },
-          { name: 'Hermes', url: 'https://hermes-agent.nousresearch.com/' },
+          { name: 'Grok Bot', url: 'https://x.ai/bot' },
         ],
       },
       {
