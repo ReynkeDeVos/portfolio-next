@@ -267,7 +267,7 @@ export const portfolio = {
     tips: [
       {
         id: 'harness',
-        title: { en: 'Harness', de: 'Harness' },
+        title: { en: 'Orchestration', de: 'Orchestrierung' },
         description: {
           en: 'T3 Code for a clear overview of agent sessions; pi for project-specific workflows. Tailscale for persistent agent sessions you can reach remotely.',
           de: 'T3 Code für einen klaren Überblick über Agentensitzungen, pi für projektspezifische Abläufe. Tailscale für dauerhafte Agentensitzungen mit Remote-Zugriff.',
