@@ -171,7 +171,7 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-11-14',
+    updated: '2026-11-18',
     items: [
       {
         id: 'investigate',
@@ -196,7 +196,7 @@ export const portfolio = {
       {
         id: 'review',
         task: { en: 'Review code', de: 'Code prüfen' },
-        model: 'GPT-6.1 Sol',
+        model: 'GPT-6.2 Astra',
         effort: 'High',
         note: {
           en: 'Independent cross-family review',
@@ -215,7 +215,7 @@ export const portfolio = {
       },
       {
         id: 'advise',
-        task: { en: 'Ask Fable', de: 'Fable fragen' },
+        task: { en: 'Get unstuck', de: 'Blockaden lösen' },
         model: 'Fable 5.2',
         effort: 'High',
         note: {
@@ -245,15 +245,15 @@ export const portfolio = {
       {
         model: 'Fable 5.2',
         note: {
-          en: 'Finds the fix or direction while Opus builds the check-heavy parts; Extra High only for the hardest problems; no Max.',
-          de: 'Findet die Lösung oder Richtung, Opus baut die prüfintensiven Teile; Extra High nur für die schwersten Probleme; kein Max.',
+          en: 'Finds the fix or direction and directs while Opus implements; its own changes must pass their checks; Extra High only for the hardest problems; no Max.',
+          de: 'Findet die Lösung oder Richtung und gibt sie vor, Opus setzt um; eigene Änderungen müssen ihre Prüfungen bestehen; Extra High nur für die schwersten Probleme; kein Max.',
         },
       },
       {
-        model: 'GPT-6.1 Sol',
+        model: 'GPT-6.2 Astra',
         note: {
-          en: 'Extra High only when High falls short; no Max.',
-          de: 'Extra High nur, wenn High nicht ausreicht; kein Max.',
+          en: 'Only for review and heavy computer use; ask for plain-English findings and have Opus restate a report you cannot follow.',
+          de: 'Nur für Reviews und anspruchsvolle Computer-Nutzung; Befunde in klarer Sprache anfordern und unverständliche Berichte von Opus umformulieren lassen.',
         },
       },
       {
