@@ -25,14 +25,14 @@ const stageMarks = new Map<string, StageMark>([
   ['ship', { outline: 'sunny', Icon: Rocket }],
 ]);
 
-const shapeByEmphasis = {
+const badgeFillByEmphasis = {
   quiet: 'bg-surface-container-highest scale-90',
   primary: 'bg-primary-container',
   review: 'bg-tertiary-container rotate-12',
 } as const;
 
 const iconByEmphasis = {
-  quiet: 'text-on-surface-variant opacity-70',
+  quiet: 'text-on-surface-variant',
   primary: 'text-on-primary-container',
   review: 'text-on-tertiary-container',
 } as const;
@@ -43,9 +43,11 @@ const statusByEmphasis = {
   review: 'bg-tertiary-container text-on-tertiary-container',
 } as const;
 
+type WorkflowTier = ReturnType<typeof contentFor>['workflow']['ai']['tiers'][number];
+
 // Only the clipped Expressive outline turns and scales on emphasis changes;
 // the icon itself stays upright, matching the Portrait frame's motion grammar.
-function StageBadge({ id, emphasis }: { id: string; emphasis: keyof typeof shapeByEmphasis }) {
+function StageBadge({ id, emphasis }: { id: string; emphasis: keyof typeof badgeFillByEmphasis }) {
   const { outline, Icon } = stageMarks.get(id) ?? defaultStageMark;
   const clip: CSSProperties = { '--stage-outline': outlinePolygon(outline) };
 
@@ -54,29 +56,112 @@ function StageBadge({ id, emphasis }: { id: string; emphasis: keyof typeof shape
       <span
         style={clip}
         className={cn(
-          'ease-spatial transition-stage absolute inset-0 duration-300 [clip-path:var(--stage-outline)]',
-          shapeByEmphasis[emphasis],
+          'ease-spatial absolute inset-0 transition-transform duration-300 [clip-path:var(--stage-outline)]',
+          badgeFillByEmphasis[emphasis],
         )}
       />
-      <Icon
-        className={cn(
-          'relative size-4.5 transition-opacity duration-200',
-          iconByEmphasis[emphasis],
-        )}
-      />
+      <Icon className={cn('relative size-4.5', iconByEmphasis[emphasis])} />
     </span>
   );
 }
 
 // Three gentle pulsing dots represent independent model families deliberating
-// together on medium and high-risk diffs.
-function CouncilDots() {
+// together on medium and high-risk diffs. Rendered in inactive rows too (without
+// animating) so wrapping never shifts card height on narrow screens.
+function CouncilDots({ active }: { active: boolean }) {
+  const dotClass = cn('bg-tertiary size-1.5 rounded-full', active && 'workflow-council-dot');
+
   return (
     <span aria-hidden className='inline-flex items-center gap-1 ps-0.5'>
-      <span className='workflow-council-dot bg-tertiary size-1.5 rounded-full' />
-      <span className='workflow-council-dot bg-tertiary size-1.5 rounded-full' />
-      <span className='workflow-council-dot bg-tertiary size-1.5 rounded-full' />
+      <span className={dotClass} />
+      <span className={dotClass} />
+      <span className={dotClass} />
     </span>
+  );
+}
+
+function StageRow({
+  stage,
+  index,
+  hasNext,
+  activeTierId,
+  tiers,
+}: {
+  stage: WorkflowTier['stages'][number];
+  index: number;
+  hasNext: boolean;
+  activeTierId: WorkflowTier['id'];
+  tiers: readonly WorkflowTier[];
+}) {
+  return (
+    <li className={cn('relative flex items-start gap-4', hasNext && 'pb-5')}>
+      {/* Each connector runs from this badge's centre to the next badge's
+          centre behind the opaque z-10 outlines, so no polygon leaves a gap
+          and the rail always terminates cleanly on the last stage. */}
+      {hasNext ? (
+        <span
+          aria-hidden
+          className='bg-outline-variant pointer-events-none absolute top-5 -bottom-5 left-5 w-0.5 -translate-x-1/2 overflow-hidden rounded-full'
+        >
+          <span
+            data-tier={activeTierId}
+            data-step={index}
+            className={cn(
+              'workflow-rail-pulse block h-5 w-full rounded-full',
+              activeTierId === 'high' ? 'bg-tertiary' : 'bg-primary',
+            )}
+          />
+        </span>
+      ) : null}
+
+      <StageBadge id={stage.id} emphasis={stage.emphasis} />
+      <div className='grid min-w-0 flex-1 pt-0.5'>
+        {tiers.map((tier) => {
+          const candidate = tier.stages[index];
+
+          if (!candidate) {
+            return null;
+          }
+
+          const isActive = tier.id === activeTierId;
+
+          return (
+            <div
+              key={tier.id}
+              aria-hidden={!isActive || undefined}
+              className={cn(
+                'col-start-1 row-start-1',
+                !isActive && 'pointer-events-none invisible select-none',
+              )}
+            >
+              <div className='flex flex-wrap items-center gap-2'>
+                {isActive ? (
+                  <h4 className='type-title-sm text-on-surface font-semibold'>{candidate.title}</h4>
+                ) : (
+                  <span className='type-title-sm text-on-surface font-semibold'>
+                    {candidate.title}
+                  </span>
+                )}
+                <span
+                  className={cn(
+                    'type-label-md rounded-xs px-2 py-0.5 font-medium',
+                    statusByEmphasis[candidate.emphasis],
+                  )}
+                >
+                  {candidate.status}
+                </span>
+                {candidate.id === 'review' && candidate.emphasis === 'review' ? (
+                  <CouncilDots active={isActive} />
+                ) : null}
+              </div>
+              <p className='type-body-md text-on-surface-variant mt-1 max-w-[60ch]'>
+                {candidate.summary}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </li>
   );
 }
 
@@ -153,85 +238,16 @@ function WorkflowPipeline({ locale }: { locale: Locale }) {
       </div>
 
       <ol aria-label={t.stagesLabel} className='flex flex-col'>
-        {activeTier.stages.map((stage, index) => {
-          const hasNext = index < activeTier.stages.length - 1;
-
-          return (
-            <li key={stage.id} className={cn('relative flex items-start gap-4', hasNext && 'pb-5')}>
-              {/* Each connector runs from this badge's centre to the next badge's
-                  centre behind the opaque z-10 shapes, so no polygon leaves a gap
-                  and the rail always terminates cleanly on the last stage. */}
-              {hasNext ? (
-                <span
-                  aria-hidden
-                  className='bg-outline-variant pointer-events-none absolute top-5 -bottom-5 left-5 w-0.5 -translate-x-1/2 overflow-hidden rounded-full'
-                >
-                  <span
-                    data-tier={activeTier.id}
-                    data-step={index}
-                    className={cn(
-                      'workflow-rail-pulse block h-5 w-full rounded-full',
-                      activeTier.id === 'high' ? 'bg-tertiary' : 'bg-primary',
-                    )}
-                  />
-                </span>
-              ) : null}
-
-              <StageBadge id={stage.id} emphasis={stage.emphasis} />
-              <div className='grid min-w-0 flex-1 pt-0.5'>
-                {tiers.map((tier) => {
-                  const candidate = tier.stages[index];
-
-                  if (!candidate) {
-                    return null;
-                  }
-
-                  const isActive = tier.id === activeTier.id;
-
-                  return (
-                    <div
-                      key={tier.id}
-                      aria-hidden={!isActive || undefined}
-                      className={cn(
-                        'col-start-1 row-start-1 transition-opacity duration-200',
-                        !isActive && 'pointer-events-none invisible select-none',
-                        isActive && candidate.emphasis === 'quiet' && 'opacity-70',
-                      )}
-                    >
-                      <div className='flex flex-wrap items-center gap-2'>
-                        {isActive ? (
-                          <h4 className='type-title-sm text-on-surface font-semibold'>
-                            {candidate.title}
-                          </h4>
-                        ) : (
-                          <span className='type-title-sm text-on-surface font-semibold'>
-                            {candidate.title}
-                          </span>
-                        )}
-                        <span
-                          className={cn(
-                            'type-label-md rounded-xs px-2 py-0.5 font-medium',
-                            statusByEmphasis[candidate.emphasis],
-                          )}
-                        >
-                          {candidate.status}
-                        </span>
-                        {isActive &&
-                        candidate.id === 'review' &&
-                        candidate.emphasis === 'review' ? (
-                          <CouncilDots />
-                        ) : null}
-                      </div>
-                      <p className='type-body-md text-on-surface-variant mt-1 max-w-[60ch]'>
-                        {candidate.summary}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </li>
-          );
-        })}
+        {activeTier.stages.map((stage, index) => (
+          <StageRow
+            key={stage.id}
+            stage={stage}
+            index={index}
+            hasNext={index < activeTier.stages.length - 1}
+            activeTierId={activeTier.id}
+            tiers={tiers}
+          />
+        ))}
       </ol>
 
       <div className='border-outline-variant grid border-t'>

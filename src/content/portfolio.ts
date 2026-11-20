@@ -803,8 +803,8 @@ export const portfolio = {
         de: 'Caves-of-Qud-Mod · Steam Workshop',
       },
       description: {
-        en: 'Shows which factions care about a character and what a fight or ritual will cost before you act.',
-        de: 'Zeigt vor einer Entscheidung, welche Fraktionen zu einer Figur gehören und was ein Kampf oder Ritual kostet.',
+        en: 'Shows which factions care about a character and what a kill or Water Ritual will cost before you act.',
+        de: 'Zeigt vor einer Entscheidung, welche Fraktionen zu einer Figur gehören und was es kostet, sie zu töten oder ein Wasserritual durchzuführen.',
       },
       technologies: ['C#', 'Harmony'],
       url: 'https://github.com/ReynkeDeVos/CoQ_MOD_ReputationAssistant',
@@ -813,8 +813,8 @@ export const portfolio = {
         de: 'Die Standard-Prioritäten folgen dem Leitfaden von qudzoo und lassen sich im Spiel anpassen.',
       },
       engineering: {
-        en: 'Patches the game’s C# assemblies at runtime via Harmony to inject faction priorities, targets and worst-roll outcomes directly into creature tooltips. Safe to toggle mid-save and maintained through major game updates (v1.7).',
-        de: 'Patcht die C#-Assemblies des Spiels zur Laufzeit per Harmony und blendet Fraktionsprioritäten, Zielwerte und Worst-Case-Folgen direkt im Tooltip ein. Sicher mitten im Spielstand nutzbar und bis v1.7 gepflegt.',
+        en: 'Patches the game’s C# assemblies at runtime via Harmony to inject faction priorities, targets and worst-roll outcomes directly into creature tooltips. Safe to toggle mid-save and maintained through major game updates (mod v1.7).',
+        de: 'Patcht die C#-Assemblies des Spiels zur Laufzeit per Harmony und blendet Fraktionsprioritäten, Zielwerte und Worst-Case-Folgen direkt im Tooltip ein. Sicher mitten im Spielstand nutzbar und nach großen Spiel-Updates weitergepflegt (Mod v1.7).',
       },
     },
     {

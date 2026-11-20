@@ -297,11 +297,6 @@
   transition-property: opacity, translate, scale;
 }
 
-/* Workflow stage badges move, turn and fade without animating colors. */
-@utility transition-stage {
-  transition-property: transform, opacity;
-}
-
 /* State layers on ::before follow their container's corners. */
 @utility rounded-inherit {
   border-radius: inherit;
