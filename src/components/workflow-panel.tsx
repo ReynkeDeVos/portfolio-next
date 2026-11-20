@@ -6,36 +6,17 @@ import { readBuildOpen, rememberBuildOpen } from '@/lib/build-disclosure';
 import type { Locale } from '@/lib/locale';
 import { uiText } from '@/ui-text/ui-text';
 
-import {
-  Card,
-  CardGrid,
-  CardHeader,
-  CardText,
-  Item,
-  ItemHeader,
-  ItemList,
-  ItemText,
-  LinkChips,
-  Subsection,
-} from './section-parts';
+import { Card, CardGrid, CardHeader, CardText, LinkChips, Subsection } from './section-parts';
+import { WorkflowPipeline } from './workflow-pipeline';
 
 function WorkflowPanel({ locale }: { locale: Locale }) {
   const t = uiText[locale];
-  const { interests } = contentFor(locale).workflow;
 
   return (
     <div className='flex flex-col gap-10'>
       <h2 className='sr-only'>{t.sectionHeadings.workflow}</h2>
 
-      <ItemList>
-        {interests.map((interest) => (
-          <Item key={interest.id}>
-            <ItemHeader title={interest.title} />
-            <ItemText>{interest.description}</ItemText>
-          </Item>
-        ))}
-      </ItemList>
-
+      <WorkflowPipeline locale={locale} />
       <AiSection locale={locale} />
       <ToolsSection locale={locale} />
       <BuildSection locale={locale} />
@@ -169,7 +150,7 @@ function BuildSection({ locale }: { locale: Locale }) {
         <h3 className='type-headline-sm text-on-surface font-semibold'>{t.buildHeading}</h3>
         <ChevronDown
           aria-hidden
-          className='text-on-surface ease-spatial row-span-2 size-6 transition-transform duration-300 group-open/disclosure:rotate-180'
+          className='text-on-surface ease-spatial row-span-2 size-6 transition-transform duration-200 group-open/disclosure:rotate-180'
         />
         {/* No-break spaces keep each topic whole and its dot on the line before,
             so a wrapped line never starts with one. */}

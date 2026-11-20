@@ -30,7 +30,7 @@ function EngineNote({ locale }: { locale: Locale }) {
             {t.why}
             <ChevronDown
               aria-hidden
-              className='ease-spatial size-4 transition-transform duration-300 group-open/why:rotate-180'
+              className='ease-spatial size-4 transition-transform duration-200 group-open/why:rotate-180'
             />
           </summary>
           <div className='flex flex-col gap-2 py-1'>

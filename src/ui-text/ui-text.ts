@@ -39,7 +39,7 @@ const en = {
   sectionHeadings: {
     work: 'Selected work',
     skills: 'Skills',
-    workflow: 'Workflow and interests',
+    workflow: 'Workflow',
     career: 'Career',
   },
   sourceOnGitHub: 'source on GitHub',
@@ -48,7 +48,14 @@ const en = {
   moreWork: 'More projects',
   moreOnGitHub: 'See more on my GitHub profile',
   moreOnLinkedIn: 'See more on my LinkedIn profile',
-  aiHeading: 'My AI workflow',
+  aiPipeline: {
+    heading: 'How risk shapes my AI workflow',
+    lead: 'Guardrails scale with risk.',
+    tierLabel: 'Change risk level',
+    stagesLabel: 'Workflow stages',
+    toolsLabel: 'Tools at this tier',
+  },
+  aiHeading: 'Model routing',
   aiTable: { task: 'Task', model: 'Model' },
   toolsHeading: 'Tools around the models',
   thinkingLevel: 'Thinking level',
@@ -74,7 +81,7 @@ const en = {
   },
   meta: {
     description:
-      'Renke Brixel builds web applications, game mods and tools for the terminal and Linux desktop. Selected projects, skills and experience.',
+      'Renke Brixel builds developer tools, Linux desktop plugins, web apps and AI-assisted coding workflows. Selected work, career and technical setup.',
     imageAlt: (name: string, identity: string) =>
       `Portrait of ${name} beside the line “${identity}”`,
   },
@@ -116,16 +123,23 @@ const uiText = {
     sectionHeadings: {
       work: 'Ausgewählte Projekte',
       skills: 'Kenntnisse',
-      workflow: 'Arbeitsweise und Interessen',
+      workflow: 'Workflow',
       career: 'Werdegang',
     },
     sourceOnGitHub: 'Quellcode auf GitHub',
-    underTheHood: 'Technisch',
+    underTheHood: 'Unter der Haube',
     opensInNewTab: 'öffnet in neuem Tab',
     moreWork: 'Weitere Projekte',
     moreOnGitHub: 'Mehr auf meinem GitHub-Profil',
     moreOnLinkedIn: 'Mehr auf meinem LinkedIn-Profil',
-    aiHeading: 'Mein KI-Workflow',
+    aiPipeline: {
+      heading: 'Wie Risiko meinen KI-Workflow steuert',
+      lead: 'Der Aufwand wächst mit dem Risiko.',
+      tierLabel: 'Risikostufe der Änderung',
+      stagesLabel: 'Schritte im Workflow',
+      toolsLabel: 'Werkzeuge auf dieser Stufe',
+    },
+    aiHeading: 'Modell-Routing',
     aiTable: { task: 'Aufgabe', model: 'Modell' },
     toolsHeading: 'Werkzeuge rund um die Modelle',
     thinkingLevel: 'Denkstufe',
@@ -151,7 +165,7 @@ const uiText = {
     },
     meta: {
       description:
-        'Renke Brixel entwickelt Webanwendungen, Spiele-Mods und Werkzeuge für Terminal und Linux-Desktop. Ausgewählte Projekte, Kenntnisse und Berufserfahrung.',
+        'Renke Brixel entwickelt Entwickler-Tools, Linux-Desktop-Plugins, Web-Apps und KI-gestützte Coding-Workflows. Ausgewählte Projekte, Werdegang und Arbeitsweise.',
       imageAlt: (name: string, identity: string) =>
         `Porträt von ${name} neben dem Satz „${identity}“`,
     },

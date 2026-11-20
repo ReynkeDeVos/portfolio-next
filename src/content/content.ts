@@ -96,6 +96,19 @@ function resolve(raw: Content, locale: Locale) {
       ai: {
         updated: aiRecommendations.updated,
         updatedLabel: formatDate(aiRecommendations.updated, locale),
+        tiers: (aiRecommendations.tiers ?? []).map((tier) => ({
+          id: tier.id,
+          label: tier.label[locale],
+          tagline: tier.tagline[locale],
+          stages: tier.stages.map((stage) => ({
+            id: stage.id,
+            title: stage.title[locale],
+            status: stage.status[locale],
+            summary: stage.summary[locale],
+            emphasis: stage.emphasis,
+          })),
+          links: tier.links,
+        })),
         items: aiRecommendations.items.map((item) => ({
           id: item.id,
           task: item.task[locale],

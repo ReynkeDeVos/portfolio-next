@@ -25,7 +25,7 @@ const clipPath = cookiePath(0.5);
 // shortcut: Redact 0.2 writes clipPathUnits as clip-path-units, which clips
 // the photo away, so the clip goes in as markup; return it to JSX once Redact
 // maps SVG attribute names the way React does.
-const clipMarkup = `<clipPath id="${clipId}" clipPathUnits="objectBoundingBox"><path d="${clipPath}" class="ease-spatial [translate:0.5px_0.5px] rotate-(--portrait-angle) transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]" /></clipPath>`;
+const clipMarkup = `<clipPath id="${clipId}" clipPathUnits="objectBoundingBox"><path d="${clipPath}" class="ease-spatial [translate:0.5px_0.5px] rotate-(--portrait-angle) transition-transform duration-350 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]" /></clipPath>`;
 
 // The hint runs along the lower inner rim on a sage band, in a
 // 100-unit box. Its middle baseline sits on a radius-38 arc, so text
@@ -184,7 +184,7 @@ function Portrait({ locale }: { locale: Locale }) {
           <svg
             aria-hidden
             viewBox='0 0 100 100'
-            className='portrait-hint-peek ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial type-portrait-hint transition-portrait-hint absolute inset-0 size-full translate-y-[15%] font-medium opacity-0 duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-500 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-500'
+            className='portrait-hint-peek ease-effects-fast group-hover:ease-spatial group-focus-visible:ease-spatial type-portrait-hint transition-portrait-hint absolute inset-0 size-full translate-y-[15%] font-medium opacity-0 duration-150 group-hover:translate-y-0 group-hover:scale-[1.08] group-hover:opacity-100 group-hover:duration-350 group-focus-visible:translate-y-0 group-focus-visible:scale-[1.08] group-focus-visible:opacity-100 group-focus-visible:duration-350'
           >
             <path
               id='portrait-hint'

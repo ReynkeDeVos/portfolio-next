@@ -135,7 +135,7 @@ async function revealTheme(preference: ThemePreference, from: Element) {
   // time it is as large as the Portrait. The frames sit evenly along the
   // radius and the animation's easing paces them, so the browser only ever
   // blends between two close cookies.
-  const steps = 32;
+  const steps = 22;
 
   const frames = Array.from({ length: steps + 1 }, (_, step) => {
     const grown = (radius * step) / steps;

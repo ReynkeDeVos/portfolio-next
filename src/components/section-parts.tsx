@@ -22,12 +22,21 @@ function ItemList({ ordered, children }: { ordered?: boolean; children: ReactNod
   return <List className='flex flex-col gap-1'>{children}</List>;
 }
 
-function Item({ linked, children }: { linked?: boolean; children: ReactNode }) {
+function Item({
+  linked,
+  className,
+  children,
+}: {
+  linked?: boolean;
+  className?: string;
+  children: ReactNode;
+}) {
   return (
     <li
       className={cn(
         'bg-surface-group first:rounded-t-xl-inc last:rounded-b-xl-inc relative rounded-xs p-5 sm:px-6',
         linked && linkedItem,
+        className,
       )}
     >
       {children}
@@ -246,4 +255,5 @@ export {
   StretchedLink,
   Subsection,
   TechList,
+  linkedItem,
 };

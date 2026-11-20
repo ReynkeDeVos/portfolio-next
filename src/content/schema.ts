@@ -38,6 +38,22 @@ const project = z.strictObject({
   engineering: translatedText.optional(),
 });
 
+const workflowStage = z.strictObject({
+  id,
+  title: translatedText,
+  status: translatedText,
+  summary: translatedText,
+  emphasis: z.enum(['quiet', 'primary', 'review']),
+});
+
+const workflowTier = z.strictObject({
+  id: z.enum(['small', 'medium', 'high']),
+  label: translatedText,
+  tagline: translatedText,
+  stages: z.array(workflowStage).length(4),
+  links: z.array(link),
+});
+
 const contentSchema = z.strictObject({
   name: text,
   location: translatedText,
@@ -48,9 +64,7 @@ const contentSchema = z.strictObject({
   fullPortrait: image,
   identity: translatedText,
   introduction: translatedText,
-  interests: z
-    .array(z.strictObject({ id, title: translatedText, description: translatedText }))
-    .min(1),
+  interests: z.array(z.strictObject({ id, title: translatedText, description: translatedText })),
   coreStrengths: z.array(z.strictObject({ id, name: translatedText })).min(1),
   technologyNames: z.record(text, translatedText),
   skills: z
@@ -58,6 +72,7 @@ const contentSchema = z.strictObject({
     .min(1),
   aiRecommendations: z.strictObject({
     updated: z.iso.date(),
+    tiers: z.array(workflowTier).min(1).optional(),
     items: z
       .array(
         z.strictObject({
