@@ -171,7 +171,7 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-11-18',
+    updated: '2026-11-20',
     items: [
       {
         id: 'investigate',
@@ -186,11 +186,21 @@ export const portfolio = {
       {
         id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
-        model: 'Opus 5.5',
+        model: 'Gemini 4 Neon',
+        effort: 'Extra High',
+        note: {
+          en: 'Features, refactors, migrations, long ports and performance work',
+          de: 'Features, Refactorings, Migrationen, langwierige Portierungen und Performance-Arbeit',
+        },
+      },
+      {
+        id: 'write',
+        task: { en: 'Write for people', de: 'Für Menschen schreiben' },
+        model: 'Gemini 4 Neon',
         effort: 'High',
         note: {
-          en: 'Features, refactors, migrations and long ports',
-          de: 'Features, Refactorings, Migrationen und langwierige Portierungen',
+          en: 'Plans, proposals and feature write-ups a person will read',
+          de: 'Pläne, Vorschläge und Feature-Beschreibungen, die Menschen lesen',
         },
       },
       {
@@ -236,17 +246,24 @@ export const portfolio = {
     ],
     modelNotes: [
       {
+        model: 'Gemini 4 Neon',
+        note: {
+          en: 'High for small, clear edits; check its claims about a codebase; weak at 3D visuals; falls back to Opus when unavailable.',
+          de: 'High für kleine, klar umrissene Änderungen; Aussagen über eine Codebasis prüfen; schwach bei 3D-Grafik; fällt auf Opus zurück, wenn nicht verfügbar.',
+        },
+      },
+      {
         model: 'Opus 5.5',
         note: {
-          en: 'Extra High for hairy work that needs many checks; no Low or Max.',
-          de: 'Extra High für knifflige Arbeit mit vielen Prüfungen; kein Low und kein Max.',
+          en: 'Builds when Neon is unavailable; Extra High when investigating hairy work that needs many checks; no Low or Max.',
+          de: 'Setzt um, wenn Neon nicht verfügbar ist; Extra High bei kniffligen Untersuchungen mit vielen Prüfungen; kein Low und kein Max.',
         },
       },
       {
         model: 'Fable 5.2',
         note: {
-          en: 'Finds the fix or direction and directs while Opus implements; its own changes must pass their checks; Extra High only for the hardest problems; no Max.',
-          de: 'Findet die Lösung oder Richtung und gibt sie vor, Opus setzt um; eigene Änderungen müssen ihre Prüfungen bestehen; Extra High nur für die schwersten Probleme; kein Max.',
+          en: 'Finds the fix or direction and directs while Neon implements; its own changes must pass their checks; Extra High only for the hardest problems; no Max.',
+          de: 'Findet die Lösung oder Richtung und gibt sie vor, Neon setzt um; eigene Änderungen müssen ihre Prüfungen bestehen; Extra High nur für die schwersten Probleme; kein Max.',
         },
       },
       {
