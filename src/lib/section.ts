@@ -1,4 +1,4 @@
-const sections = ['work', 'career', 'skills', 'workflow'] as const;
+const sections = ['work', 'workflow', 'career', 'skills'] as const;
 
 type Section = (typeof sections)[number];
 

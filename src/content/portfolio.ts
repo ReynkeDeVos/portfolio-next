@@ -35,32 +35,7 @@ export const portfolio = {
     en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
     de: 'Ich liebe Lernen, Programmieren, Kaffee, lange Läufe und Freundschaft mit Katzen & Hunden.',
   },
-  interests: [
-    {
-      id: 'exploration',
-      title: { en: 'Curious by default', de: 'Neugierig auf Neues' },
-      description: {
-        en: 'I enjoy trying new technologies and finding out where they help in real projects. This portfolio began as productive procrastination: a chance to try TanStack Start and Cloudflare Workers and finally have a portfolio.',
-        de: 'Ich probiere gern neue Technologien aus und finde heraus, wo sie in echten Projekten helfen. Dieses Portfolio entstand aus produktiver Prokrastination: eine Gelegenheit, TanStack Start und Cloudflare Workers auszuprobieren und endlich ein Portfolio zu haben.',
-      },
-    },
-    {
-      id: 'terminal',
-      title: { en: 'Terminal first', de: 'Terminal zuerst' },
-      description: {
-        en: 'Linux has been my main operating system for 20+ years. I love Arch Linux and a terminal-first workflow. Linux’s text-based configuration lets AI agents customize the operating system itself, from desktop settings to system services. Faster file access also helps with parallel Git worktrees.',
-        de: 'Linux ist seit über 20 Jahren mein Hauptbetriebssystem. Ich liebe Arch Linux und einen terminalbasierten Workflow. Dank der textbasierten Konfiguration können KI-Agenten das Betriebssystem selbst anpassen, von Desktop-Einstellungen bis zu Systemdiensten. Schneller Dateizugriff hilft auch bei parallelen Git-Worktrees.',
-      },
-    },
-    {
-      id: 'ai',
-      title: { en: 'AI with a purpose', de: 'KI mit einem Zweck' },
-      description: {
-        en: 'I follow AI news daily and evaluate which tools actually help me build, investigate and review software. I participated in the Claude Code for Business course as part of our company’s preparation for the business partner program.',
-        de: 'Ich verfolge täglich KI-Nachrichten und prüfe, welche Werkzeuge mir beim Entwickeln, Untersuchen und Prüfen von Software wirklich helfen. Ich habe am Kurs Claude Code for Business teilgenommen, als Teil der Vorbereitung unseres Unternehmens auf das Business-Partnerprogramm.',
-      },
-    },
-  ],
+  interests: [],
   coreStrengths: [
     { id: 'react-typescript', name: { en: 'React & TypeScript', de: 'React & TypeScript' } },
     { id: 'dotnet', name: { en: 'C#/.NET', de: 'C#/.NET' } },
@@ -77,10 +52,45 @@ export const portfolio = {
     {
       id: 'languages',
       title: { en: 'Languages & foundations', de: 'Sprachen & Grundlagen' },
-      technologies: ['TypeScript', 'JavaScript', 'Python', 'C#', 'SQL', 'HTML', 'CSS', 'zsh'],
+      technologies: [
+        'TypeScript',
+        'JavaScript',
+        'C#',
+        'Python',
+        'Rust',
+        'SQL',
+        'HTML',
+        'CSS',
+        'zsh',
+      ],
       description: {
-        en: 'I build frontends with React and TypeScript, and backends with TypeScript on Node.js as well as C# on .NET. For algorithms and data structures I use Python. Object-oriented design and asynchronous programming are part of my teaching and development work.',
-        de: 'Frontends entwickle ich mit React und TypeScript, Backends sowohl mit TypeScript auf Node.js als auch mit C# auf .NET. Für Algorithmen und Datenstrukturen nutze ich Python. Objektorientiertes Design und asynchrone Programmierung gehören zu meiner Lehr- und Entwicklungsarbeit.',
+        en: 'TypeScript in the browser and on Node.js, C# on .NET, Python for algorithms and TUIs, Rust for small native tools.',
+        de: 'TypeScript im Browser und auf Node.js, C# auf .NET, Python für Algorithmen und TUIs, Rust für kleine native Tools.',
+      },
+    },
+    {
+      id: 'ai-tools',
+      title: { en: 'AI-assisted engineering & SDKs', de: 'KI-gestützte Entwicklung & SDKs' },
+      technologies: [
+        'Claude Code',
+        'Codex',
+        'T3 Code',
+        'pi',
+        'OpenSpec',
+        'Matt Pocock skills',
+        'open-code-review',
+        'MCP',
+        'Claude Agent SDK',
+        'Anthropic SDK',
+        'OpenAI Agents SDK',
+        'OpenAI SDK',
+        'Google Gen AI SDK',
+        'Ollama',
+        'n8n',
+      ],
+      description: {
+        en: 'Spec-driven coding, cross-model reviews and agent harnesses daily; streaming, tool calls, MCP and local models in teaching.',
+        de: 'Spec-getriebene Entwicklung, Cross-Model-Reviews und Agent-Harnesses im Alltag; Streaming, Tool-Calls, MCP und lokale Modelle im Unterricht.',
       },
     },
     {
@@ -99,8 +109,8 @@ export const portfolio = {
         'Effect',
       ],
       description: {
-        en: 'Interfaces, routing, server rendering, state and data validation. TanStack Start and shadcn/ui are part of this portfolio’s stack.',
-        de: 'Oberflächen, Routing, Server-Rendering, Zustandsverwaltung und Datenvalidierung. TanStack Start und shadcn/ui gehören zum Stack dieses Portfolios.',
+        en: 'Prerendered and interactive apps with strong typing, accessible primitives and predictable state.',
+        de: 'Vorgerenderte und interaktive Web-Apps mit strenger Typisierung, barrierefreien Bausteinen und klarem State.',
       },
     },
     {
@@ -122,8 +132,8 @@ export const portfolio = {
         'Better Auth',
       ],
       description: {
-        en: 'API design, persistence and authentication with custom JWT/cookie solutions, ASP.NET Core Identity and Better Auth.',
-        de: 'API-Design, Persistenz und Authentifizierung mit eigenen JWT-/Cookie-Lösungen, ASP.NET Core Identity und Better Auth.',
+        en: 'REST APIs, relational and document storage, and auth from custom JWT/cookies to ASP.NET Core Identity and Better Auth.',
+        de: 'REST-APIs, relationale und dokumentenbasierte Datenbanken sowie Auth von eigenen JWT/Cookies bis ASP.NET Core Identity und Better Auth.',
       },
     },
     {
@@ -132,46 +142,187 @@ export const portfolio = {
       technologies: [
         'Vitest',
         'Testing Library',
+        'Playwright',
         'GitHub Actions',
         'Docker',
         'Podman',
+        'Cloudflare',
         'Azure',
         'Git',
         'Oxc',
         'Fallow',
       ],
       description: {
-        en: 'I write unit and integration tests, use Docker and Podman, and deploy applications to Cloudflare, Render, Vercel or Railway.',
-        de: 'Ich schreibe Unit- und Integrationstests, nutze Docker und Podman und veröffentliche Anwendungen auf Cloudflare, Render, Vercel oder Railway.',
-      },
-    },
-    {
-      id: 'ai-tools',
-      title: { en: 'AI & automation', de: 'KI & Automatisierung' },
-      technologies: [
-        'OpenAI SDK',
-        'OpenAI Agents SDK',
-        'Anthropic SDK',
-        'Google Gen AI SDK',
-        'Claude Agent SDK',
-        'MCP',
-        'Ollama',
-        'n8n',
-        'claude',
-        'Codex',
-        'pi',
-        'GitHub Copilot',
-        'OpenSpec',
-        'Matt Pocock skills',
-      ],
-      description: {
-        en: 'Teaching examples and experiments with streaming, tool calls, agent handoffs, guardrails and local models, plus spec-driven development with coding agents.',
-        de: 'Lehrbeispiele und Experimente mit Streaming, Tool-Aufrufen, Agenten-Übergaben, Guardrails und lokalen Modellen sowie spezifikationsgetriebene Entwicklung mit Coding-Agenten.',
+        en: 'Automated tests, fast Rust-based linting and container or edge deploys from a terminal-first Linux setup.',
+        de: 'Automatisierte Tests, schnelles Rust-Linting sowie Container- und Edge-Deployments aus einem terminalbasierten Linux-Setup.',
       },
     },
   ],
   aiRecommendations: {
     updated: '2026-11-20',
+    tiers: [
+      {
+        id: 'small',
+        label: { en: 'Small', de: 'Klein' },
+        tagline: {
+          en: 'Ship before the coffee cools',
+          de: 'Fertig, bevor der Kaffee kalt ist',
+        },
+        stages: [
+          {
+            id: 'plan',
+            title: { en: 'Plan & spec', de: 'Planung & Spec' },
+            status: { en: 'Skip', de: 'Überspringen' },
+            summary: {
+              en: 'No spec ceremony when the scope fits in one sentence.',
+              de: 'Keine Spec-Bürokratie, wenn der Umfang in einen Satz passt.',
+            },
+            emphasis: 'quiet',
+          },
+          {
+            id: 'build',
+            title: { en: 'Build & verify', de: 'Bauen & prüfen' },
+            status: { en: 'Direct edit', de: 'Direkte Umsetzung' },
+            summary: {
+              en: 'Implement cleanly and run lint, typecheck and tests right away.',
+              de: 'Sauber umsetzen und direkt Lint, Typecheck und Tests laufen lassen.',
+            },
+            emphasis: 'primary',
+          },
+          {
+            id: 'review',
+            title: { en: 'Review gate', de: 'Review-Gate' },
+            status: { en: 'Self-check', de: 'Selbstcheck' },
+            summary: {
+              en: 'Read the diff carefully; no separate reviewer council needed.',
+              de: 'Diff aufmerksam lesen; kein eigenes Review-Council nötig.',
+            },
+            emphasis: 'quiet',
+          },
+          {
+            id: 'ship',
+            title: { en: 'Ship', de: 'Ausliefern' },
+            status: { en: 'Merge', de: 'Mergen' },
+            summary: {
+              en: 'Small, reversible commit lands once checks are green.',
+              de: 'Kleiner, leicht umkehrbarer Commit landet bei grünen Checks.',
+            },
+            emphasis: 'primary',
+          },
+        ],
+        links: [{ name: 'rstack', url: 'https://github.com/ReynkeDeVos/rstack' }],
+      },
+      {
+        id: 'medium',
+        label: { en: 'Medium', de: 'Mittel' },
+        tagline: {
+          en: 'Trust, then cross-check',
+          de: 'Vertrauen ist gut, Cross-Check ist besser',
+        },
+        stages: [
+          {
+            id: 'plan',
+            title: { en: 'Plan & spec', de: 'Planung & Spec' },
+            status: { en: 'Short plan', de: 'Kurzer Plan' },
+            summary: {
+              en: 'Pin down boundaries, edge cases and what stays out of scope.',
+              de: 'Grenzen, Randfälle und bewusste Ausnahmen kurz festziehen.',
+            },
+            emphasis: 'primary',
+          },
+          {
+            id: 'build',
+            title: { en: 'Build & verify', de: 'Bauen & prüfen' },
+            status: { en: 'Worktree & tests', de: 'Worktree & Tests' },
+            summary: {
+              en: 'Build in a fresh Git worktree and prove the diff with automated checks.',
+              de: 'In einem frischen Git-Worktree umsetzen und mit Tests absichern.',
+            },
+            emphasis: 'primary',
+          },
+          {
+            id: 'review',
+            title: { en: 'Review gate', de: 'Review-Gate' },
+            status: { en: 'Reviewer council', de: 'Review-Council' },
+            summary: {
+              en: 'Independent models from another family review the diff for blind spots.',
+              de: 'Modelle einer anderen Familie prüfen den Diff auf blinde Flecken.',
+            },
+            emphasis: 'review',
+          },
+          {
+            id: 'ship',
+            title: { en: 'Ship', de: 'Ausliefern' },
+            status: { en: 'Confidence gate', de: 'Vertrauens-Gate' },
+            summary: {
+              en: 'Merge once author and reviewer council both report high confidence.',
+              de: 'Merge erst, wenn Umsetzung und Council gemeinsam grünes Licht geben.',
+            },
+            emphasis: 'primary',
+          },
+        ],
+        links: [
+          { name: 'code-review', url: 'https://www.aihero.dev/skills-code-review' },
+          { name: 'rstack', url: 'https://github.com/ReynkeDeVos/rstack' },
+        ],
+      },
+      {
+        id: 'high',
+        label: { en: 'High risk', de: 'Hohes Risiko' },
+        tagline: {
+          en: 'Measure twice, review thrice',
+          de: 'Zweimal planen, dreimal prüfen',
+        },
+        stages: [
+          {
+            id: 'plan',
+            title: { en: 'Plan & spec', de: 'Planung & Spec' },
+            status: { en: 'Spec-driven', de: 'Spec-getrieben' },
+            summary: {
+              en: 'Map open decisions first with OpenSpec, wayfinder or grill-with-docs.',
+              de: 'Offene Fragen zuerst mit OpenSpec, wayfinder oder grill-with-docs klären.',
+            },
+            emphasis: 'review',
+          },
+          {
+            id: 'build',
+            title: { en: 'Build & verify', de: 'Bauen & prüfen' },
+            status: { en: 'Worktree & suite', de: 'Worktree & Suite' },
+            summary: {
+              en: 'Build slice by slice in an isolated worktree with unit and browser tests.',
+              de: 'Schrittweise im isolierten Worktree bauen, mit Unit- und Browser-Tests.',
+            },
+            emphasis: 'primary',
+          },
+          {
+            id: 'review',
+            title: { en: 'Review gate', de: 'Review-Gate' },
+            status: { en: 'Council + OCR', de: 'Council + OCR' },
+            summary: {
+              en: 'Cross-family reviewer council plus alibaba/open-code-review line audits.',
+              de: 'Cross-Model-Council plus alibaba/open-code-review für Zeilen-Audits.',
+            },
+            emphasis: 'review',
+          },
+          {
+            id: 'ship',
+            title: { en: 'Ship', de: 'Ausliefern' },
+            status: { en: 'Verified merge', de: 'Verifizierter Merge' },
+            summary: {
+              en: 'Security, data and concurrency findings resolved and re-verified first.',
+              de: 'Funde zu Sicherheit, Daten und Nebenläufigkeit vor dem Merge klären.',
+            },
+            emphasis: 'primary',
+          },
+        ],
+        links: [
+          { name: 'OpenSpec', url: 'https://openspec.dev/' },
+          { name: 'wayfinder', url: 'https://www.aihero.dev/skills-wayfinder' },
+          { name: 'grill-with-docs', url: 'https://www.aihero.dev/skills-grill-with-docs' },
+          { name: 'open-code-review', url: 'https://github.com/alibaba/open-code-review' },
+        ],
+      },
+    ],
     items: [
       {
         id: 'investigate',
@@ -286,58 +437,62 @@ export const portfolio = {
         id: 'harness',
         title: { en: 'Orchestration', de: 'Orchestrierung' },
         description: {
-          en: 'T3 Code for a clear overview of agent sessions; pi for project-specific workflows. Tailscale for persistent agent sessions you can reach remotely.',
-          de: 'T3 Code für einen klaren Überblick über Agentensitzungen, pi für projektspezifische Abläufe. Tailscale für dauerhafte Agentensitzungen mit Remote-Zugriff.',
+          en: 'Parallel sessions in T3 Code, custom harnesses in pi and remote reach via Tailscale.',
+          de: 'Parallele Sessions in T3 Code, eigene Harnesses in pi und Remote-Zugriff über Tailscale.',
         },
         links: [
           { name: 'T3 Code', url: 'https://t3.codes/' },
-          { name: 'Orca', url: 'https://orca.dev/' },
           { name: 'pi', url: 'https://pi.dev/' },
           { name: 'Tailscale', url: 'https://tailscale.com/' },
           { name: 'Grok Bot', url: 'https://x.ai/bot' },
         ],
       },
       {
-        id: 'design',
-        title: { en: 'Design', de: 'Design' },
-        description: {
-          en: 'Interface design, critique and polish.',
-          de: 'Oberflächendesign, Designkritik und Feinschliff.',
-        },
-        links: [{ name: 'Impeccable', url: 'https://impeccable.style/' }],
-      },
-      {
         id: 'planning',
-        title: { en: 'Planning', de: 'Planung' },
+        title: { en: 'Planning & specs', de: 'Planung & Specs' },
         description: {
-          en: 'wayfinder for open decisions; OpenSpec as an alternative for specs and tasks.',
-          de: 'wayfinder für offene Entscheidungen, alternativ OpenSpec für Specs und Aufgaben.',
+          en: 'Pinning down open decisions and versioned specs before writing code.',
+          de: 'Offene Entscheidungen und versionierte Specs vor dem ersten Commit.',
         },
         links: [
-          {
-            name: 'wayfinder',
-            url: 'https://www.aihero.dev/skills-wayfinder',
-          },
+          { name: 'wayfinder', url: 'https://www.aihero.dev/skills-wayfinder' },
+          { name: 'grill-with-docs', url: 'https://www.aihero.dev/skills-grill-with-docs' },
           { name: 'OpenSpec', url: 'https://openspec.dev/' },
         ],
       },
       {
         id: 'engineering-skills',
-        title: { en: 'Development', de: 'Entwicklung' },
+        title: { en: 'Review & quality', de: 'Review & Qualität' },
         description: {
-          en: 'Matt Pocock’s skills for requirements and code review.',
-          de: 'Matt Pococks Skills für Anforderungen und Code-Reviews.',
+          en: 'Cross-model PR checks, line-level risk audits and my shared rstack rules.',
+          de: 'Cross-Model-Reviews, Risiko-Audits auf Zeilenebene und meine rstack-Regeln.',
         },
         links: [
-          {
-            name: 'grill-with-docs',
-            url: 'https://www.aihero.dev/skills-grill-with-docs',
-          },
-          {
-            name: 'code-review',
-            url: 'https://www.aihero.dev/skills-code-review',
-          },
+          { name: 'open-code-review', url: 'https://github.com/alibaba/open-code-review' },
+          { name: 'code-review', url: 'https://www.aihero.dev/skills-code-review' },
           { name: 'ponytail', url: 'https://ponytail.dev/' },
+          { name: 'rstack', url: 'https://github.com/ReynkeDeVos/rstack' },
+        ],
+      },
+      {
+        id: 'design',
+        title: { en: 'Design', de: 'Design' },
+        description: {
+          en: 'Interface craft, UX critique and purposeful motion.',
+          de: 'Oberflächendesign, UX-Kritik und gezielte Bewegung.',
+        },
+        links: [{ name: 'Impeccable', url: 'https://impeccable.style/' }],
+      },
+      {
+        id: 'environment',
+        title: { en: 'Terminal & Arch Linux', de: 'Terminal & Arch Linux' },
+        description: {
+          en: '20+ years on Linux (yes, Arch btw). Text config lets coding agents customize the OS itself, and fast local filesystems keep parallel Git worktrees painless.',
+          de: 'Über 20 Jahre Linux (ja, Arch btw). Klartext-Konfiguration lässt Agenten am System mitarbeiten, und schnelle Dateisysteme halten parallele Git-Worktrees flott.',
+        },
+        links: [
+          { name: 'Arch Linux', url: 'https://archlinux.org/' },
+          { name: 'Omarchy', url: 'https://omarchy.org/' },
         ],
       },
     ],
@@ -349,8 +504,8 @@ export const portfolio = {
         topic: { en: 'Framework', de: 'Framework' },
         technologies: ['React 19', 'TanStack Redact', 'TanStack Start', 'Vite 8'],
         description: {
-          en: 'Prerenders both language versions to static HTML. The React components run on TanStack Redact, a smaller alternative to React’s own runtime. Switching tabs sends no network request.',
-          de: 'Rendert beide Sprachfassungen vorab als statisches HTML. Die React-Komponenten laufen auf TanStack Redact, einer schlankeren Alternative zur Laufzeit von React. Tabwechsel senden keine Netzwerkanfrage.',
+          en: 'Both locales prerender to static HTML. Components run on TanStack Redact for a smaller client runtime, and tab switches make zero network requests.',
+          de: 'Beide Sprachfassungen werden vorab als statisches HTML gerendert. TanStack Redact hält die Laufzeit schlank, und Tabwechsel brauchen keine Netzwerkanfrage.',
         },
       },
       {
@@ -358,8 +513,8 @@ export const portfolio = {
         topic: { en: 'Components', de: 'Komponenten' },
         technologies: ['shadcn/ui', 'Tailwind CSS 4', 'cn', '@shadcn/lint', 'Lucide'],
         description: {
-          en: 'shadcn/ui copies the component source into the repo, so I fully own the code. cn replaces clsx and tailwind-merge; the shadcn linter flags raw colors and off-token values.',
-          de: 'shadcn/ui kopiert den Quellcode der Komponenten ins Repository, so gehört der Code vollständig mir. cn ersetzt clsx und tailwind-merge; der shadcn-Linter meldet feste Farben und Werte außerhalb der Tokens.',
+          en: 'Components live directly in the repo instead of behind a black box. cn replaces clsx + tailwind-merge, and @shadcn/lint catches raw colors and off-token values.',
+          de: 'Komponenten liegen direkt im Repository statt in einer Blackbox. cn ersetzt clsx + tailwind-merge, und @shadcn/lint meldet feste Farben oder Werte außerhalb der Tokens.',
         },
       },
       {
@@ -367,8 +522,8 @@ export const portfolio = {
         topic: { en: 'Content', de: 'Inhalte' },
         technologies: ['Zod 4'],
         description: {
-          en: 'Zod checks the English and German content for missing translations, empty text and malformed URLs. The check runs in the test pipeline.',
-          de: 'Zod prüft die englischen und deutschen Inhalte auf fehlende Übersetzungen, leere Texte und ungültige URLs. Die Prüfung läuft in der Testpipeline.',
+          en: 'Checks English and German content in CI for missing translations, empty strings, broken relationships and invalid URLs.',
+          de: 'Prüft englische und deutsche Inhalte in der CI auf fehlende Übersetzungen, leere Texte, fehlerhafte Referenzen und ungültige URLs.',
         },
       },
       {
@@ -376,8 +531,8 @@ export const portfolio = {
         topic: { en: 'Runtime & packages', de: 'Laufzeit & Pakete' },
         technologies: ['mise', 'Node.js', 'aube'],
         description: {
-          en: 'mise pins Node LTS, which runs the TypeScript scripts and tests. aube, from the developer of mise, is fast and works with existing pnpm, npm, Yarn and Bun lockfiles. Before choosing a version, it checks publishing evidence, release age and known malicious packages.',
-          de: 'mise legt Node LTS fest, das die TypeScript-Skripte und Tests ausführt. aube vom Entwickler von mise ist schnell und arbeitet mit bestehenden Lockfiles von pnpm, npm, Yarn und Bun. Vor der Wahl einer Version prüft es Veröffentlichungsnachweise, Alter des Releases und bekannte Schadpakete.',
+          en: 'mise pins Node LTS locally; aube reads pnpm-lock.yaml directly and checks release age, provenance and known malicious packages before resolving versions.',
+          de: 'mise fixiert Node LTS lokal; aube liest pnpm-lock.yaml direkt und prüft Release-Alter, Herkunftsnachweise und bekannte Schadpakete vor der Auflösung.',
         },
       },
       {
@@ -385,8 +540,8 @@ export const portfolio = {
         topic: { en: 'Code quality', de: 'Codequalität' },
         technologies: ['TypeScript 7', 'Oxlint', 'Oxfmt', 'Fallow'],
         description: {
-          en: 'TypeScript 7’s compiler is ported to Go and about 10x faster; Oxlint uses it for type-aware rules. Oxlint and Oxfmt come from VoidZero and replace ESLint and Prettier with Rust-based tools; Oxlint also runs anti-slop rules. Fallow finds unused files, exports and dependencies as well as duplicated code.',
-          de: 'Der Compiler von TypeScript 7 ist nach Go portiert und etwa zehnmal schneller; Oxlint nutzt ihn für typbasierte Regeln. Oxlint und Oxfmt stammen von VoidZero und ersetzen ESLint und Prettier durch Rust-basierte Werkzeuge; Oxlint prüft zusätzlich Anti-Slop-Regeln. Fallow findet ungenutzte Dateien, Exporte und Abhängigkeiten sowie doppelten Code.',
+          en: 'TypeScript 7’s Go compiler powers type-aware Oxlint checks (including anti-slop rules). Oxfmt formats, and Fallow flags dead code, unused exports and duplicates.',
+          de: 'Der Go-Compiler von TypeScript 7 treibt typbasierte Oxlint-Prüfungen samt Anti-Slop-Regeln an. Oxfmt formatiert, Fallow findet toten Code und ungenutzte Exporte.',
         },
       },
       {
@@ -394,8 +549,8 @@ export const portfolio = {
         topic: { en: 'Design & assets', de: 'Design & Assets' },
         technologies: ['Material 3 Expressive', 'Fontsource', 'AVIF'],
         description: {
-          en: 'The design follows Material 3 Expressive. Fontsource provides the fonts as npm packages, so the site serves them itself instead of loading them from Google Fonts. The browser fetches only the files with the Latin characters the text needs.',
-          de: 'Das Design folgt Material 3 Expressive. Fontsource stellt die Schriften als npm-Pakete bereit, so liefert die Seite sie selbst aus, statt sie von Google Fonts zu laden. Der Browser lädt davon nur die Dateien mit den lateinischen Zeichen, die der Text braucht.',
+          en: 'Material 3 Expressive surfaces with self-hosted Fontsource variable fonts instanced to the exact Latin weights used, plus metadata-free AVIF portraits.',
+          de: 'Material 3 Expressive mit selbst gehosteten Fontsource-Schriften, zugeschnitten auf die genutzten lateinischen Schriftschnitte, plus AVIF-Porträts ohne Metadaten.',
         },
       },
       {
@@ -403,8 +558,8 @@ export const portfolio = {
         topic: { en: 'Test pipeline', de: 'Testpipeline' },
         technologies: ['GitHub Actions', 'Playwright'],
         description: {
-          en: 'The tests live in a private repository, where GitHub Actions runs them against this site: the content check, unit tests, linting and type checks. Playwright then checks what only a real browser shows: tab switching, Back and Forward, the portrait viewer and keyboard focus.',
-          de: 'Die Tests liegen in einem privaten Repository, in dem GitHub Actions sie gegen diese Seite ausführt: die Inhaltsprüfung, Unit-Tests, Linting und Typprüfung. Playwright prüft danach, was nur ein echter Browser zeigt: Tabwechsel, Zurück und Vor, die Porträtansicht und den Tastaturfokus.',
+          en: 'Unit tests, content validation, lint and typechecks run in a companion test repo on GitHub Actions, followed by Playwright checks for tabs, history, portrait morphs and keyboard focus.',
+          de: 'Unit-Tests, Inhaltsprüfung, Lint und Typechecks laufen per GitHub Actions im privaten Test-Repo, gefolgt von Playwright-Checks für Tabs, Verlauf, Porträt-Morph und Tastaturfokus.',
         },
       },
       {
@@ -412,8 +567,8 @@ export const portfolio = {
         topic: { en: 'Deployment', de: 'Deployment' },
         technologies: ['Cloudflare Workers', 'Wrangler'],
         description: {
-          en: 'Hosted on Cloudflare Workers. Cloudflare is an official TanStack Start hosting partner and acquired VoidZero in 2026.',
-          de: 'Gehostet auf Cloudflare Workers. Cloudflare ist offizieller Hosting-Partner von TanStack Start und hat 2026 VoidZero übernommen.',
+          en: 'Deployed straight from main to Cloudflare Workers, TanStack Start’s official hosting partner.',
+          de: 'Direkt von main auf Cloudflare Workers bereitgestellt, dem offiziellen Hosting-Partner von TanStack Start.',
         },
       },
     ],
@@ -540,8 +695,8 @@ export const portfolio = {
       period: { from: 2025, to: null },
       role: { en: 'Software development instructor', de: 'Dozent für Softwareentwicklung' },
       description: {
-        en: 'I teach modern web development, frontend and backend.',
-        de: 'Ich unterrichte moderne Webentwicklung für Frontend und Backend.',
+        en: 'Teaching full-stack web development (React, TypeScript, Node.js), C#/.NET backends, Python algorithms and AI agent workflows across both tracks. Completed the Claude Code for Business course as part of our partner-program preparation.',
+        de: 'Ich unterrichte Full-Stack-Webentwicklung (React, TypeScript, Node.js), C#/.NET-Backends, Python-Algorithmen und KI-Agenten-Workflows in beiden Tracks. Außerdem habe ich den Kurs Claude Code for Business zur Vorbereitung auf das Partnerprogramm absolviert.',
       },
     },
     {
@@ -551,8 +706,8 @@ export const portfolio = {
       period: { from: 2024, to: 2024 },
       role: { en: 'Frontend development intern', de: 'Praktikant Frontend-Entwicklung' },
       description: {
-        en: 'I modernized interface components with React, TypeScript and Formik and worked with the developers and the designer to improve workflows for business customers.',
-        de: 'Ich habe Oberflächenkomponenten mit React, TypeScript und Formik modernisiert und mit Entwicklung und Design die Arbeitsabläufe für die Geschäftskunden verbessert.',
+        en: 'Modernized UI components in React, TypeScript and Formik alongside engineering and design to streamline B2B workflows.',
+        de: 'UI-Komponenten in React, TypeScript und Formik modernisiert und gemeinsam mit Entwicklung und Design die B2B-Workflows verschlankt.',
       },
     },
     {
@@ -562,8 +717,8 @@ export const portfolio = {
       period: { from: 2014, to: 2023 },
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
       description: {
-        en: 'I researched how common viruses hijack human cells. As hazardous materials officer, I introduced software solutions and trained the team, and I helped manage the lab in multidisciplinary teams.',
-        de: 'Ich habe erforscht, wie verbreitete Viren menschliche Zellen kapern. Als Gefahrstoffbeauftragter habe ich Softwarelösungen eingeführt und das Team geschult und in fachübergreifenden Teams das Labor mitorganisiert.',
+        en: 'Researched how common viruses hijack human cells. As hazardous materials officer, I rolled out lab software, trained the team and helped run cross-disciplinary lab operations.',
+        de: 'Erforscht, wie verbreitete Viren menschliche Zellen kapern. Als Gefahrstoffbeauftragter habe ich Labor-Software eingeführt, das Team geschult und den Laborbetrieb mitorganisiert.',
       },
     },
     {
@@ -576,8 +731,8 @@ export const portfolio = {
       period: { from: 2012, to: 2014 },
       role: { en: 'Biological-technical assistant', de: 'Biologisch-technischer Assistent' },
       description: {
-        en: 'I studied what triggers breast cancer cells to spread to other parts of the body, analyzed samples, maintained the database and supervised interns.',
-        de: 'Ich habe untersucht, was Brustkrebszellen dazu bringt, sich in andere Körperregionen auszubreiten, Proben analysiert, die Datenbank gepflegt und Praktikantinnen und Praktikanten betreut.',
+        en: 'Studied what drives breast cancer metastasis, analyzed samples, maintained the lab database and mentored incoming interns.',
+        de: 'Untersucht, was die Ausbreitung von Brustkrebszellen auslöst, Proben ausgewertet, die Datenbank gepflegt und Praktikanten betreut.',
       },
     },
     {
@@ -590,122 +745,125 @@ export const portfolio = {
       period: { from: 2012, to: 2012 },
       role: { en: 'Research intern', de: 'Forschungspraktikant' },
       description: {
-        en: 'I reprogrammed patient skin cells into neurons to model brain injury risks during heart transplantation and maintained the plasmid database. I also built a team to-do app for phone and desktop on software the lab already licensed.',
-        de: 'Ich habe Hautzellen aus Patientenproben zu Nervenzellen umprogrammiert, um das Risiko von Hirnschäden bei Herztransplantationen zu modellieren, und die Plasmid-Datenbank gepflegt. Außerdem habe ich auf Basis bereits lizenzierter Software eine To-do-App fürs Team gebaut, für Smartphone und Desktop.',
+        en: 'Reprogrammed patient skin cells into neurons to model brain-injury risk during heart transplants, maintained the plasmid database and built a phone/desktop to-do app for the lab on software it already licensed.',
+        de: 'Patienten-Hautzellen zu Nervenzellen umprogrammiert, um Hirnschaden-Risiken bei Herztransplantationen zu modellieren, die Plasmid-Datenbank gepflegt und auf Basis bestehender Lizenzen eine Team-To-do-App für Smartphone und Desktop gebaut.',
       },
     },
   ],
   // Display order is set here, not by catalog order. Catalog records that are
   // not listed stay in the catalog without being shown.
   selectedWork: {
-    featured: ['reputation-assistant', 'elder-gym-bro', 'pokemon-battle'],
-    supporting: ['scoundrel-tui', 'omarchy-stats', 'portfolio'],
+    featured: ['project-formatter', 'flights', 'reputation-assistant'],
+    supporting: ['omarchy-stats', 'rstack', 'scoundrel-tui', 'portfolio'],
   },
   projects: [
     {
+      id: 'project-formatter',
+      name: 'Project Formatter',
+      category: { en: 'VS Code extension', de: 'VS-Code-Erweiterung' },
+      description: {
+        en: 'One default formatter for VS Code that automatically picks whatever a repo uses (Prettier, Biome, Oxfmt, dprint or Bun) and falls back to Oxfmt.',
+        de: 'Ein Standard-Formatter für VS Code, der automatisch das Werkzeug des jeweiligen Repos nutzt (Prettier, Biome, Oxfmt, dprint oder Bun) und sonst auf Oxfmt zurückfällt.',
+      },
+      technologies: ['JavaScript', 'Node.js', 'VS Code API', 'Oxfmt'],
+      url: 'https://github.com/ReynkeDeVos/vscode-project-formatter',
+      details: {
+        en: 'Shipped as a VSIX release for Linux and macOS.',
+        de: 'Als VSIX-Release für Linux und macOS veröffentlicht.',
+      },
+      engineering: {
+        en: 'Walks up to the repository root to detect scripts, configs or dependencies. Keeps a project’s Prettier warm in a worker, runs Biome and dprint natively, formats Python (Ruff) and C# (CSharpier) code blocks inside Markdown using the active formatter’s own parser, and kills leftover processes on cancelled saves or a 15s timeout.',
+        de: 'Sucht bis ins Repo-Root nach Skripten, Konfigurationen oder Abhängigkeiten. Hält das Projekt-Prettier im Worker warm, startet Biome und dprint nativ, formatiert Python- (Ruff) und C#-Blöcke (CSharpier) in Markdown über den eigenen Parser des aktiven Formatters und beendet Prozesse bei Abbruch oder nach 15 s.',
+      },
+    },
+    {
+      id: 'flights',
+      name: 'Flights',
+      category: { en: 'Linux desktop widget', de: 'Linux-Desktop-Widget' },
+      description: {
+        en: 'Built to track my partner’s long-haul trips right in my desktop bar: live delays, tight transfers, gate changes and when to leave for airport pickup.',
+        de: 'Gebaut, um die Langstreckenflüge meiner Partnerin direkt in der Desktop-Leiste zu verfolgen: Verspätungen, knappe Umstiege, Gate-Wechsel und Abfahrtszeit zum Flughafen.',
+      },
+      technologies: ['Rust', 'QML', 'Quickshell', 'Linux'],
+      url: 'https://github.com/ReynkeDeVos/omarchy-plugin-flights',
+      details: {
+        en: 'Includes an interactive demo recorded from real Lufthansa flights.',
+        de: 'Mit einer interaktiven Demo auf Basis echter Lufthansa-Flüge.',
+      },
+      engineering: {
+        en: 'A 2.2 MB size-optimized Rust backend (ureq and jiff) polls FlightStats and adsb.lol without API keys and feeds a Quickshell/QML widget with milestone notifications, full keyboard setup and color-coded status icons.',
+        de: 'Ein 2,2 MB kleines, größenoptimiertes Rust-Backend (ureq und jiff) liest FlightStats und adsb.lol ohne API-Keys aus und speist ein Quickshell/QML-Widget mit Meilenstein-Meldungen, Tastaturbedienung und farbcodierten Status-Icons.',
+      },
+    },
+    {
       id: 'reputation-assistant',
       name: 'Reputation Assistant',
-      category: { en: 'Add-on for Caves of Qud', de: 'Erweiterung für Caves of Qud' },
+      category: {
+        en: 'Caves of Qud mod · Steam Workshop',
+        de: 'Caves-of-Qud-Mod · Steam Workshop',
+      },
       description: {
-        en: 'In the role-playing game Caves of Qud, you meet characters who belong to different groups, and each group thinks better or worse of your character. When you take a closer look at someone you meet, this add-on shows how their groups see you and how an action could change that. That helps you decide what to do next.',
-        de: 'Im Rollenspiel Caves of Qud begegnet man Figuren, die zu verschiedenen Gruppen gehören. Jede Gruppe ist der eigenen Spielfigur mehr oder weniger wohlgesonnen. Sieht man sich eine Figur genauer an, zeigt die Erweiterung, wie ihre Gruppen zur eigenen Spielfigur stehen und wie eine Handlung das verändern könnte. Das hilft bei der Entscheidung, was man als Nächstes tut.',
+        en: 'Shows which factions care about a character and what a fight or ritual will cost before you act.',
+        de: 'Zeigt vor einer Entscheidung, welche Fraktionen zu einer Figur gehören und was ein Kampf oder Ritual kostet.',
       },
       technologies: ['C#', 'Harmony'],
       url: 'https://github.com/ReynkeDeVos/CoQ_MOD_ReputationAssistant',
       details: {
-        en: 'Players can choose which groups matter most to them. The default settings follow the reputation guide on qudzoo.',
-        de: 'Man kann festlegen, welche Gruppen einem am wichtigsten sind. Die Standardeinstellungen folgen dem Ruf-Leitfaden von qudzoo.',
+        en: 'Default faction priorities follow qudzoo’s guide and stay customizable in-game.',
+        de: 'Die Standard-Prioritäten folgen dem Leitfaden von qudzoo und lassen sich im Spiel anpassen.',
       },
       engineering: {
-        en: 'A C# mod that uses Harmony to patch the game’s code at runtime, adding the reputation overview to the description of the creature you look at.',
-        de: 'Eine C#-Mod, die den Spielcode zur Laufzeit mit Harmony patcht und die Ruf-Übersicht an die Beschreibung der betrachteten Figur anhängt.',
+        en: 'Patches the game’s C# assemblies at runtime via Harmony to inject faction priorities, targets and worst-roll outcomes directly into creature tooltips. Safe to toggle mid-save and maintained through major game updates (v1.7).',
+        de: 'Patcht die C#-Assemblies des Spiels zur Laufzeit per Harmony und blendet Fraktionsprioritäten, Zielwerte und Worst-Case-Folgen direkt im Tooltip ein. Sicher mitten im Spielstand nutzbar und bis v1.7 gepflegt.',
+      },
+    },
+    {
+      id: 'omarchy-stats',
+      name: 'System Stats',
+      category: { en: 'Linux desktop widget', de: 'Linux-Desktop-Widget' },
+      description: {
+        en: 'Live CPU, RAM and GPU load on every monitor, backed by one shared native C sampler.',
+        de: 'Live-Auslastung von CPU, RAM und GPU auf jedem Monitor, gespeist von einem gemeinsamen nativen C-Sampler.',
+      },
+      technologies: ['C', 'QML', 'Quickshell', 'Linux'],
+      url: 'https://github.com/ReynkeDeVos/omarchy-plugin-system-stats',
+      details: {
+        en: 'Reads /proc, Intel PMU/DRM fdinfo and AMD sysfs directly with crash-backoff restarts.',
+        de: 'Liest /proc, Intel-PMU/DRM-fdinfo und AMD-sysfs direkt aus, mit Neustart-Backoff.',
+      },
+    },
+    {
+      id: 'rstack',
+      name: 'rstack',
+      category: { en: 'AI coding setup', de: 'KI-Entwicklungs-Setup' },
+      description: {
+        en: 'My shared skills, model routing rules and cross-model PR review gate for Claude Code, Codex and T3 Code in one public repo.',
+        de: 'Meine gemeinsamen Skills, das Modell-Routing und das Cross-Model-PR-Review-Gate für Claude Code, Codex und T3 Code in einem öffentlichen Repo.',
+      },
+      technologies: ['Claude Code', 'Codex', 'Markdown', 'JavaScript'],
+      url: 'https://github.com/ReynkeDeVos/rstack',
+      details: {
+        en: 'Includes timestamped model evaluations and a web-modernization audit skill.',
+        de: 'Mit datierten Modell-Bewertungen und einem Web-Modernisierungs-Skill.',
       },
     },
     {
       id: 'scoundrel-tui',
       name: 'Scoundrel TUI',
-      category: { en: 'Card game for the terminal', de: 'Kartenspiel fürs Terminal' },
+      category: { en: 'Terminal card game', de: 'Terminal-Kartenspiel' },
       description: {
-        en: 'A card game with illustrated cards that runs in the terminal, the text-based workspace on a computer. You play it entirely with the keyboard.',
-        de: 'Ein Kartenspiel mit illustrierten Karten. Es läuft im Terminal, dem textbasierten Arbeitsbereich eines Computers, und wird komplett mit der Tastatur gespielt.',
+        en: 'Keyboard-driven roguelike card game in the terminal, rendering illustrated cards over the Kitty graphics protocol or half-block fallback.',
+        de: 'Tastaturgesteuertes Roguelike-Kartenspiel fürs Terminal mit illustrierten Karten über das Kitty-Grafikprotokoll oder Halbblock-Fallback.',
       },
       technologies: ['Python', 'Textual'],
       url: 'https://github.com/ReynkeDeVos/Scoundrel-TUI',
       details: {
-        en: 'Based on the card game Scoundrel by Zach Gage and Kurt Bieg. Credits for the game and the artwork are in the repository.',
-        de: 'Nach dem Kartenspiel Scoundrel von Zach Gage und Kurt Bieg. Die Nachweise für Spiel und Bilder stehen im Repository.',
+        en: 'Based on Scoundrel by Zach Gage and Kurt Bieg.',
+        de: 'Nach dem Kartenspiel Scoundrel von Zach Gage und Kurt Bieg.',
       },
       engineering: {
-        en: 'A Python app built on the Textual framework. It draws the card art with the Kitty terminal graphics protocol or, if you prefer, with half-block characters.',
-        de: 'Eine Python-App auf Basis des Frameworks Textual. Die Kartenbilder zeichnet sie über das Kitty-Grafikprotokoll fürs Terminal oder wahlweise mit Halbblock-Zeichen.',
-      },
-    },
-    {
-      id: 'omarchy-stats',
-      name: 'Omarchy System Stats',
-      category: { en: 'Linux desktop add-on', de: 'Erweiterung für den Linux-Desktop' },
-      description: {
-        en: 'Shows how busy the processor, memory and graphics card are, right on the Linux desktop.',
-        de: 'Zeigt direkt auf dem Linux-Desktop, wie stark Prozessor, Arbeitsspeicher und Grafikkarte ausgelastet sind.',
-      },
-      technologies: ['QML', 'C', 'Quickshell', 'Linux'],
-      url: 'https://github.com/ReynkeDeVos/omarchy-plugin-system-stats',
-      details: {
-        en: 'If a computer does not provide one of these values, the display says so.',
-        de: 'Liefert ein Rechner einen dieser Werte nicht, zeigt die Anzeige das an.',
-      },
-    },
-    {
-      id: 'name-shuffler',
-      name: 'Name Shuffler CLI',
-      category: { en: 'Terminal tool', de: 'Terminal-Werkzeug' },
-      description: {
-        en: 'Enter a list of names and choose how many groups you need. The tool randomly assigns people to those groups, directly in the terminal.',
-        de: 'Namen eingeben und die gewünschte Anzahl an Gruppen wählen. Das Werkzeug verteilt die Personen per Zufall auf diese Gruppen, direkt im Terminal.',
-      },
-      technologies: ['JavaScript', 'Node.js', 'Inquirer'],
-      url: 'https://github.com/ReynkeDeVos/name-shuffler-cli',
-      details: {
-        en: 'An experiment in AI-assisted development with Claude.',
-        de: 'Ein Experiment mit KI-gestützter Entwicklung und Claude.',
-      },
-    },
-    {
-      id: 'elder-gym-bro',
-      name: 'Elder Gym Bro App',
-      category: { en: 'Bootcamp final team project', de: 'Bootcamp-Abschlussprojekt im Team' },
-      description: {
-        en: 'A fitness app for planning workouts and following your progress.',
-        de: 'Eine Fitness-App, mit der man Trainings plant und die eigenen Fortschritte verfolgt.',
-      },
-      technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express'],
-      url: 'https://github.com/ReynkeDeVos/ElderGymBroApp',
-      details: {
-        en: 'Built by a team of four: Michal, Sebastian, Alex and me. This is my fork of the team repository.',
-        de: 'Im Viererteam mit Michal, Sebastian, Alex und mir entwickelt. Das ist mein Fork des Team-Repositorys.',
-      },
-      engineering: {
-        en: 'The React frontend runs on Netlify and passes API calls to an Express backend on Render. The backend keeps accounts and workout progress in MongoDB and profile pictures on Cloudinary.',
-        de: 'Das React-Frontend läuft auf Netlify und reicht API-Aufrufe an ein Express-Backend auf Render weiter. Das Backend speichert Konten und Trainingsfortschritte in MongoDB und Profilbilder bei Cloudinary.',
-      },
-    },
-    {
-      id: 'pokemon-battle',
-      name: 'PokémonBattle',
-      category: { en: 'Bootcamp team project', de: 'Bootcamp-Teamprojekt' },
-      description: {
-        en: 'A browser game in which Pokémon fight each other.',
-        de: 'Ein Browserspiel, in dem Pokémon gegeneinander kämpfen.',
-      },
-      technologies: ['React', 'Context API', 'CSS'],
-      url: 'https://github.com/ReynkeDeVos/PokemonBattle',
-      details: {
-        en: 'Built with Sebastian and Clara during the bootcamp. This is my fork of the team repository.',
-        de: 'Mit Sebastian und Clara im Bootcamp entwickelt. Das ist mein Fork des Team-Repositorys.',
-      },
-      engineering: {
-        en: 'The React frontend keeps who is fighting whom in a shared Context, and an Express API serves the data. The frontend runs on Netlify, the backend on Render.',
-        de: 'Das React-Frontend hält in einem gemeinsamen Context fest, wer gegen wen kämpft, und eine Express-API liefert die Daten. Das Frontend läuft auf Netlify, das Backend auf Render.',
+        en: 'Built on Python and Textual with pluggable terminal image rendering (Kitty graphics protocol and half-block characters).',
+        de: 'Mit Python und Textual gebaut, mit umschaltbarem Terminal-Rendering (Kitty-Grafikprotokoll und Halbblock-Zeichen).',
       },
     },
     {
@@ -713,14 +871,67 @@ export const portfolio = {
       name: 'portfolio-next',
       category: { en: 'This website', de: 'Diese Website' },
       description: {
-        en: 'The site you are looking at, in English and German, designed with Material 3 Expressive and prerendered to static HTML.',
-        de: 'Die Seite, die du gerade ansiehst, auf Englisch und Deutsch, gestaltet nach Material 3 Expressive und vorab als statisches HTML gerendert.',
+        en: 'Bilingual static site on TanStack Start, TanStack Redact and Cloudflare Workers with instant, zero-request tab switches.',
+        de: 'Zweisprachige statische Seite auf TanStack Start, TanStack Redact und Cloudflare Workers mit sofortigen Tabwechseln ohne Netzwerkanfrage.',
       },
       technologies: ['TanStack Start', 'React', 'Tailwind CSS', 'Cloudflare Workers'],
       url: 'https://github.com/ReynkeDeVos/portfolio-next',
       details: {
-        en: 'How it is built is explained at the end of Workflow.',
-        de: 'Wie sie gebaut ist, steht am Ende von Workflow.',
+        en: 'Full stack breakdown sits at the bottom of Workflow.',
+        de: 'Der komplette Stack steht ganz unten im Tab Workflow.',
+      },
+    },
+    {
+      id: 'name-shuffler',
+      name: 'Name Shuffler CLI',
+      category: { en: 'Terminal tool', de: 'Terminal-Werkzeug' },
+      description: {
+        en: 'Splits a list of names into random groups directly in the terminal.',
+        de: 'Verteilt eine Namensliste direkt im Terminal per Zufall auf Gruppen.',
+      },
+      technologies: ['JavaScript', 'Node.js', 'Inquirer'],
+      url: 'https://github.com/ReynkeDeVos/name-shuffler-cli',
+      details: {
+        en: 'An early experiment in AI-assisted development with Claude.',
+        de: 'Ein frühes Experiment mit KI-gestützter Entwicklung und Claude.',
+      },
+    },
+    {
+      id: 'elder-gym-bro',
+      name: 'Elder Gym Bro App',
+      category: { en: 'Bootcamp final team project', de: 'Bootcamp-Abschlussprojekt im Team' },
+      description: {
+        en: 'Workout planner and progress tracker built with a team of four.',
+        de: 'Trainingsplaner und Fortschritts-Tracker, im Viererteam entwickelt.',
+      },
+      technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express'],
+      url: 'https://github.com/ReynkeDeVos/ElderGymBroApp',
+      details: {
+        en: 'Built with Michal, Sebastian and Alex; fork of the team repository.',
+        de: 'Mit Michal, Sebastian und Alex gebaut; Fork des Team-Repositorys.',
+      },
+      engineering: {
+        en: 'React frontend on Netlify talking to an Express API on Render, storing accounts and workouts in MongoDB and avatars on Cloudinary.',
+        de: 'React-Frontend auf Netlify mit Express-API auf Render, MongoDB für Konten und Trainings sowie Cloudinary für Profilbilder.',
+      },
+    },
+    {
+      id: 'pokemon-battle',
+      name: 'PokémonBattle',
+      category: { en: 'Bootcamp team project', de: 'Bootcamp-Teamprojekt' },
+      description: {
+        en: 'Turn-based Pokémon browser battle game built in a team of three.',
+        de: 'Rundenbasiertes Pokémon-Browserspiel, im Dreierteam entwickelt.',
+      },
+      technologies: ['React', 'Context API', 'CSS'],
+      url: 'https://github.com/ReynkeDeVos/PokemonBattle',
+      details: {
+        en: 'Built with Sebastian and Clara; fork of the team repository.',
+        de: 'Mit Sebastian und Clara gebaut; Fork des Team-Repositorys.',
+      },
+      engineering: {
+        en: 'React Context manages battle state on Netlify against an Express API on Render.',
+        de: 'React Context verwaltet den Kampfstatus auf Netlify gegen eine Express-API auf Render.',
       },
     },
   ],

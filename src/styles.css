@@ -173,9 +173,9 @@
      the page: the theme reveal, the Portrait morph and the floating toolbar.
      Controls move a short way, so their pills, press morphs, label weight and
      tooltips run on a quicker one. Exits take two thirds of either. */
-  --transition-duration-spatial-fast: 350ms;
+  --transition-duration-spatial-fast: 290ms;
   --transition-duration-spatial-fast-exit: calc(var(--transition-duration-spatial-fast) * 2 / 3);
-  --transition-duration-pill: 250ms;
+  --transition-duration-pill: 185ms;
   --transition-duration-pill-exit: calc(var(--transition-duration-pill) * 2 / 3);
 }
 
@@ -295,6 +295,11 @@
    colors never transition. */
 @utility transition-presence {
   transition-property: opacity, translate, scale;
+}
+
+/* Workflow stage badges move, turn and fade without animating colors. */
+@utility transition-stage {
+  transition-property: transform, opacity;
 }
 
 /* State layers on ::before follow their container's corners. */
@@ -686,9 +691,105 @@
   }
 }
 
+/* Subtle relay signal passing down the Workflow pipeline connectors, plus
+   gentle staggered deliberation dots on active cross-model review stages. */
+.workflow-rail-pulse {
+  animation: workflow-rail-pulse 3.6s ease-in-out infinite;
+}
+
+.workflow-rail-pulse[data-step='1'] {
+  animation-delay: 0.75s;
+}
+
+.workflow-rail-pulse[data-step='2'] {
+  animation-delay: 1.5s;
+}
+
+.workflow-rail-pulse[data-tier='small'] {
+  animation-duration: 2.4s;
+}
+
+.workflow-rail-pulse[data-tier='small'][data-step='1'] {
+  animation-delay: 0.45s;
+}
+
+.workflow-rail-pulse[data-tier='small'][data-step='2'] {
+  animation-delay: 0.9s;
+}
+
+.workflow-council-dot {
+  animation: workflow-council-breathe 2.4s ease-in-out infinite;
+}
+
+.workflow-council-dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.workflow-council-dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.workflow-disclosure-body {
+  animation: workflow-reveal 180ms var(--ease-effects-fast) both;
+}
+
+@keyframes workflow-rail-pulse {
+  0%,
+  55%,
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.95;
+  }
+
+  38% {
+    opacity: 0.95;
+  }
+
+  50% {
+    transform: translateY(380%);
+    opacity: 0;
+  }
+}
+
+@keyframes workflow-council-breathe {
+  0%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.35;
+  }
+
+  45% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes workflow-reveal {
+  from {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  [class*='browser-mascot-'] {
+  [class*='browser-mascot-'],
+  .workflow-rail-pulse,
+  .workflow-council-dot,
+  .workflow-disclosure-body {
     animation: none;
+  }
+
+  .workflow-rail-pulse {
+    opacity: 0;
   }
 
   *,

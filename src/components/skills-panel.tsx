@@ -30,12 +30,12 @@ function GroupMarkBadge({ id }: { id: string }) {
   const clip: CSSProperties = { '--group-outline': outlinePolygon(outline) };
 
   return (
-    <span
-      aria-hidden
-      style={clip}
-      className='bg-primary-container text-on-primary-container grid size-12 shrink-0 place-items-center [clip-path:var(--group-outline)]'
-    >
-      <Icon className='size-5' />
+    <span aria-hidden className='relative grid size-12 shrink-0 place-items-center'>
+      <span
+        style={clip}
+        className='bg-primary-container ease-spatial absolute inset-0 transition-transform duration-300 [clip-path:var(--group-outline)] group-hover/skill:rotate-12'
+      />
+      <Icon className='text-on-primary-container relative size-5' />
     </span>
   );
 }
@@ -50,7 +50,7 @@ function SkillsPanel({ locale }: { locale: Locale }) {
 
       <ItemList>
         {skills.map((group) => (
-          <Item key={group.id}>
+          <Item key={group.id} className='group/skill'>
             <ItemHeader title={group.title} lead={<GroupMarkBadge id={group.id} />} />
             <ItemText>{group.description}</ItemText>
             <TechList items={group.technologies} className='mt-4' />
