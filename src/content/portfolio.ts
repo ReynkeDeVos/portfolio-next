@@ -803,8 +803,8 @@ export const portfolio = {
         de: 'Caves-of-Qud-Mod · Steam Workshop',
       },
       description: {
-        en: 'Shows which factions care about a character and what a kill or Water Ritual will cost before you act.',
-        de: 'Zeigt vor einer Entscheidung, welche Fraktionen zu einer Figur gehören und was es kostet, sie zu töten oder ein Wasserritual durchzuführen.',
+        en: 'Shows which factions care about a character and how a kill or Water Ritual will shift your reputation before you act.',
+        de: 'Zeigt vor einer Entscheidung, welche Fraktionen zu einer Figur gehören und wie sich dein Ruf verändert, wenn du sie tötest oder ein Wasserritual durchführst.',
       },
       technologies: ['C#', 'Harmony'],
       url: 'https://github.com/ReynkeDeVos/CoQ_MOD_ReputationAssistant',
