@@ -15,6 +15,11 @@ import { uiText } from '@/ui-text/ui-text';
 const linkedItem =
   'group before:bg-on-surface before:ease-effects-fast before:rounded-inherit has-[a:focus-visible]:focus-ring before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 has-[a:focus-visible]:z-10';
 
+// Compact disclosure `<summary>` pill shared by Project notes and the Engine
+// note. Grows to a 48px target on touch screens so taps clear adjacent links.
+const disclosureSummary =
+  'type-label-lg text-on-surface before:ease-effects-fast before:rounded-inherit relative -ms-3 inline-flex min-h-8 cursor-pointer list-none items-center gap-1.5 rounded-full px-3 font-medium select-none before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 pointer-coarse:min-h-12 [&::-webkit-details-marker]:hidden';
+
 // Connected Expressive list: large outer corners, small inner ones.
 function ItemList({ ordered, children }: { ordered?: boolean; children: ReactNode }) {
   const List = ordered ? 'ol' : 'ul';
@@ -255,5 +260,6 @@ export {
   StretchedLink,
   Subsection,
   TechList,
+  disclosureSummary,
   linkedItem,
 };
