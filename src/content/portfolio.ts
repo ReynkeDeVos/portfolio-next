@@ -337,7 +337,7 @@ export const portfolio = {
         id: 'build',
         task: { en: 'Build & implement', de: 'Entwickeln & umsetzen' },
         model: 'Gemini 4 Neon',
-        effort: 'Extra High',
+        effort: 'Extra',
         note: {
           en: 'Features, refactors, migrations, long ports and performance work',
           de: 'Features, Refactorings, Migrationen, langwierige Portierungen und Performance-Arbeit',
