@@ -687,7 +687,7 @@
 }
 
 /* Subtle relay signal passing down the Workflow pipeline connectors, plus
-   gentle staggered deliberation dots on active cross-model review stages. */
+   distinct slow-paced glyphs on active high-attention quality gates. */
 .workflow-rail-pulse {
   animation: workflow-rail-pulse 3.6s ease-in-out infinite;
 }
@@ -712,16 +712,102 @@
   animation-delay: 0.9s;
 }
 
-.workflow-council-dot {
-  animation: workflow-council-breathe 2.4s ease-in-out infinite;
+.workflow-gate-glyph {
+  display: block;
+  height: 1rem;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.workflow-council-dot:nth-child(2) {
-  animation-delay: 0.3s;
+.workflow-gate-glyph * {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
-.workflow-council-dot:nth-child(3) {
-  animation-delay: 0.6s;
+/* Spec-driven: three open questions resolve one by one and write spec lines. */
+.workflow-spec-glyph {
+  width: 1.75rem;
+}
+
+.workflow-spec-ring {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.workflow-spec-track {
+  stroke-width: 2;
+  opacity: 0.22;
+}
+
+.workflow-spec-fill {
+  --from: 0;
+  fill: currentColor;
+  stroke: none;
+}
+
+.workflow-spec-glyph .workflow-spec-ink {
+  --from: 0 1;
+  --lag: 0.2s;
+  stroke-width: 2;
+  transform-origin: left center;
+}
+
+.workflow-spec-glyph[data-active] .workflow-spec-q1 :is(.workflow-spec-fill, .workflow-spec-ink) {
+  animation: workflow-spec-1 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
+}
+
+.workflow-spec-glyph[data-active] .workflow-spec-q2 :is(.workflow-spec-fill, .workflow-spec-ink) {
+  animation: workflow-spec-2 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
+}
+
+.workflow-spec-glyph[data-active] .workflow-spec-q3 :is(.workflow-spec-fill, .workflow-spec-ink) {
+  animation: workflow-spec-3 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
+}
+
+/* Review gate: three model perspectives converge over two rounds into one verdict. */
+.workflow-council-glyph {
+  width: 1.375rem;
+}
+
+.workflow-council-glyph circle {
+  fill: currentColor;
+  stroke: none;
+}
+
+.workflow-council-view {
+  translate: calc(var(--dx) * 0.38) calc(var(--dy) * 0.38);
+}
+
+.workflow-council-v1 {
+  --dx: 0px;
+  --dy: 6px;
+}
+
+.workflow-council-v2 {
+  --dx: 5.2px;
+  --dy: -3px;
+  fill-opacity: 0.75;
+}
+
+.workflow-council-v3 {
+  --dx: -5.2px;
+  --dy: -3px;
+  fill-opacity: 0.55;
+}
+
+.workflow-council-verdict {
+  scale: 0;
+}
+
+.workflow-council-glyph[data-active] .workflow-council-view {
+  animation: workflow-council-view 6s var(--ease-emphasized) infinite;
+}
+
+.workflow-council-glyph[data-active] .workflow-council-verdict {
+  animation: workflow-council-verdict 6s var(--ease-emphasized) infinite;
 }
 
 .workflow-disclosure-body {
@@ -750,16 +836,115 @@
   }
 }
 
-@keyframes workflow-council-breathe {
+@keyframes workflow-spec-1 {
   0%,
-  100% {
-    transform: scale(0.75);
-    opacity: 0.35;
+  6% {
+    scale: var(--from);
+    opacity: 1;
   }
 
-  45% {
-    transform: scale(1.1);
+  16%,
+  86% {
+    scale: 1;
     opacity: 1;
+  }
+
+  94%,
+  100% {
+    scale: 1;
+    opacity: 0;
+  }
+}
+
+@keyframes workflow-spec-2 {
+  0%,
+  30% {
+    scale: var(--from);
+    opacity: 1;
+  }
+
+  40%,
+  86% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  94%,
+  100% {
+    scale: 1;
+    opacity: 0;
+  }
+}
+
+@keyframes workflow-spec-3 {
+  0%,
+  54% {
+    scale: var(--from);
+    opacity: 1;
+  }
+
+  64%,
+  86% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  94%,
+  100% {
+    scale: 1;
+    opacity: 0;
+  }
+}
+
+@keyframes workflow-council-view {
+  0%,
+  6% {
+    translate: 0 0;
+    opacity: 1;
+  }
+
+  20%,
+  34% {
+    translate: calc(var(--dx) * 0.38) calc(var(--dy) * 0.38);
+    opacity: 1;
+  }
+
+  48%,
+  56% {
+    translate: calc(var(--dx) * 0.7) calc(var(--dy) * 0.7);
+    opacity: 1;
+    animation-timing-function: ease-in;
+  }
+
+  62%,
+  84% {
+    translate: var(--dx) var(--dy);
+    opacity: 0;
+  }
+
+  96%,
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes workflow-council-verdict {
+  0%,
+  56% {
+    scale: 0;
+    animation-timing-function: var(--ease-spatial);
+  }
+
+  64%,
+  84% {
+    scale: 1;
+    animation-timing-function: ease-in;
+  }
+
+  92%,
+  100% {
+    scale: 0;
   }
 }
 
@@ -778,9 +963,12 @@
 @media (prefers-reduced-motion: reduce) {
   [class*='browser-mascot-'],
   .workflow-rail-pulse,
-  .workflow-council-dot,
   .workflow-disclosure-body {
     animation: none;
+  }
+
+  .workflow-gate-glyph * {
+    animation: none !important;
   }
 
   .workflow-rail-pulse {

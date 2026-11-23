@@ -99,7 +99,7 @@ function resolve(raw: Content, locale: Locale) {
         tiers: (aiRecommendations.tiers ?? []).map((tier) => ({
           id: tier.id,
           label: tier.label[locale],
-          tagline: tier.tagline[locale],
+          scope: tier.scope[locale],
           stages: tier.stages.map((stage) => ({
             id: stage.id,
             title: stage.title[locale],

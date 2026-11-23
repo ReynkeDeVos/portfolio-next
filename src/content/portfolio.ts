@@ -164,9 +164,9 @@ export const portfolio = {
       {
         id: 'small',
         label: { en: 'Small', de: 'Klein' },
-        tagline: {
-          en: 'Ship before the coffee cools',
-          de: 'Fertig, bevor der Kaffee kalt ist',
+        scope: {
+          en: 'e.g. copy, styling, small fixes',
+          de: 'z.\u00A0B. Texte, Styling, kleine Fixes',
         },
         stages: [
           {
@@ -215,9 +215,9 @@ export const portfolio = {
       {
         id: 'medium',
         label: { en: 'Medium', de: 'Mittel' },
-        tagline: {
-          en: 'Trust, then cross-check',
-          de: 'Vertrauen ist gut, Cross-Check ist besser',
+        scope: {
+          en: 'e.g. features, refactors, API changes',
+          de: 'z.\u00A0B. Features, Refactorings, API-Änderungen',
         },
         stages: [
           {
@@ -269,9 +269,9 @@ export const portfolio = {
       {
         id: 'high',
         label: { en: 'High risk', de: 'Hohes Risiko' },
-        tagline: {
-          en: 'Measure twice, review thrice',
-          de: 'Zweimal planen, dreimal prüfen',
+        scope: {
+          en: 'e.g. auth, migrations, core architecture',
+          de: 'z.\u00A0B. Auth, Migrationen, Kernarchitektur',
         },
         stages: [
           {
