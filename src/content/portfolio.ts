@@ -398,29 +398,29 @@ export const portfolio = {
       {
         model: 'Gemini 4 Neon',
         note: {
-          en: 'High for small, clear edits; check its claims about a codebase; weak at 3D visuals; falls back to Opus when unavailable.',
-          de: 'High für kleine, klar umrissene Änderungen; Aussagen über eine Codebasis prüfen; schwach bei 3D-Grafik; fällt auf Opus zurück, wenn nicht verfügbar.',
+          en: 'High for small, clear edits; check its codebase claims; weak at 3D visuals.',
+          de: 'High für kleine, klare Änderungen; Aussagen zur Codebasis prüfen; schwach bei 3D-Grafik.',
         },
       },
       {
         model: 'Opus 5.5',
         note: {
-          en: 'Builds when Neon is unavailable; Extra High when investigating hairy work that needs many checks; no Low or Max.',
-          de: 'Setzt um, wenn Neon nicht verfügbar ist; Extra High bei kniffligen Untersuchungen mit vielen Prüfungen; kein Low und kein Max.',
+          en: 'Extra High for hairy investigations needing many checks; no Low or Max.',
+          de: 'Extra High für knifflige Untersuchungen mit vielen Prüfungen; kein Low oder Max.',
         },
       },
       {
         model: 'Fable 5.2',
         note: {
-          en: 'Finds the fix or direction and directs while Neon implements; its own changes must pass their checks; Extra High only for the hardest problems; no Max.',
-          de: 'Findet die Lösung oder Richtung und gibt sie vor, Neon setzt um; eigene Änderungen müssen ihre Prüfungen bestehen; Extra High nur für die schwersten Probleme; kein Max.',
+          en: 'Finds the fix or direction while Neon builds; its own edits must pass checks; Extra High only for the hardest problems; no Max.',
+          de: 'Findet Lösung oder Richtung, Neon setzt um; eigene Änderungen müssen Checks bestehen; Extra High nur für die schwersten Probleme; kein Max.',
         },
       },
       {
         model: 'GPT-6.2 Astra',
         note: {
-          en: 'Only for review and heavy computer use; ask for plain-English findings and have Opus restate a report you cannot follow; when unavailable, cross-family review falls back to Opus 5.5 (High) for Gemini work or Gemini 4 Neon (Extra High) for Claude work.',
-          de: 'Nur für Reviews und anspruchsvolle Computer-Nutzung; Befunde in klarer Sprache anfordern und unverständliche Berichte von Opus umformulieren lassen; wenn nicht verfügbar, übernehmen Opus 5.5 (High) für Gemini-Arbeit oder Gemini 4 Neon (Extra High) für Claude-Arbeit das Cross-Family-Review.',
+          en: 'Review and heavy computer use only; ask for plain-English findings; have Opus restate unclear reports.',
+          de: 'Nur für Reviews und anspruchsvolle Computer-Nutzung; Befunde in klarer Sprache anfordern; unklare Berichte von Opus umformulieren lassen.',
         },
       },
       {
