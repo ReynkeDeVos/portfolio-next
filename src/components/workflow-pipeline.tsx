@@ -115,6 +115,7 @@ function WorkflowPipeline({ locale }: { locale: Locale }) {
   const t = uiText[locale].aiPipeline;
   const { tiers } = contentFor(locale).workflow.ai;
   const initialTier = tiers.at(-1)?.id ?? 'high';
+
   const [selectedId, setSelectedId] = useState<WorkflowTier['id']>(
     () => selectedTierId ?? initialTier,
   );

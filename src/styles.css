@@ -755,18 +755,6 @@
   transform-origin: left center;
 }
 
-.workflow-spec-glyph[data-active] .workflow-spec-q1 :is(.workflow-spec-fill, .workflow-spec-ink) {
-  animation: workflow-spec-1 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
-}
-
-.workflow-spec-glyph[data-active] .workflow-spec-q2 :is(.workflow-spec-fill, .workflow-spec-ink) {
-  animation: workflow-spec-2 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
-}
-
-.workflow-spec-glyph[data-active] .workflow-spec-q3 :is(.workflow-spec-fill, .workflow-spec-ink) {
-  animation: workflow-spec-3 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
-}
-
 /* Review gate: three model perspectives converge over two rounds into one verdict. */
 .workflow-council-glyph {
   width: 1.375rem;
@@ -802,12 +790,26 @@
   scale: 0;
 }
 
-.workflow-council-glyph[data-active] .workflow-council-view {
-  animation: workflow-council-view 6s var(--ease-emphasized) infinite;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .workflow-spec-glyph[data-active] .workflow-spec-q1 :is(.workflow-spec-fill, .workflow-spec-ink) {
+    animation: workflow-spec-1 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
+  }
 
-.workflow-council-glyph[data-active] .workflow-council-verdict {
-  animation: workflow-council-verdict 6s var(--ease-emphasized) infinite;
+  .workflow-spec-glyph[data-active] .workflow-spec-q2 :is(.workflow-spec-fill, .workflow-spec-ink) {
+    animation: workflow-spec-2 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
+  }
+
+  .workflow-spec-glyph[data-active] .workflow-spec-q3 :is(.workflow-spec-fill, .workflow-spec-ink) {
+    animation: workflow-spec-3 6.4s var(--ease-emphasized) var(--lag, 0s) infinite backwards;
+  }
+
+  .workflow-council-glyph[data-active] .workflow-council-view {
+    animation: workflow-council-view 6s var(--ease-emphasized) infinite;
+  }
+
+  .workflow-council-glyph[data-active] .workflow-council-verdict {
+    animation: workflow-council-verdict 6s var(--ease-emphasized) infinite;
+  }
 }
 
 .workflow-disclosure-body {
@@ -965,10 +967,6 @@
   .workflow-rail-pulse,
   .workflow-disclosure-body {
     animation: none;
-  }
-
-  .workflow-gate-glyph * {
-    animation: none !important;
   }
 
   .workflow-rail-pulse {
