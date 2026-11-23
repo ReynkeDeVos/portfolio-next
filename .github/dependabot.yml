@@ -8,4 +8,4 @@ updates:
     groups:
       security:
         applies-to: security-updates
-        patterns: ["*"]
+        patterns: ['*']
