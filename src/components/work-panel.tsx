@@ -19,6 +19,7 @@ import {
   StretchedLink,
   Subsection,
   TechList,
+  disclosureSummary,
   linkedItem,
 } from './section-parts';
 
@@ -32,7 +33,7 @@ function ProjectLink({ project, locale }: { project: SelectedProject; locale: Lo
 }
 
 // Each featured Project shows a plain-language summary up front for quick
-// scanning and keeps technical architecture one click away inside a native
+// scanning and keeps technical context one click away inside a native
 // disclosure, separated from the stretched GitHub link above it.
 function FeaturedProject({ project, locale }: { project: SelectedProject; locale: Locale }) {
   const t = uiText[locale];
@@ -41,8 +42,7 @@ function FeaturedProject({ project, locale }: { project: SelectedProject; locale
     <li className='bg-surface-group group/card first:rounded-t-xl-inc last:rounded-b-xl-inc relative rounded-xs'>
       <div
         className={cn(
-          'group-first/card:rounded-t-xl-inc relative rounded-xs p-5 sm:px-6',
-          project.engineering ? 'pb-4' : 'group-last/card:rounded-b-xl-inc',
+          'group-first/card:rounded-t-xl-inc relative rounded-xs px-5 pt-5 pb-4 sm:px-6',
           linkedItem,
         )}
       >
@@ -55,24 +55,24 @@ function FeaturedProject({ project, locale }: { project: SelectedProject; locale
         <TechList items={project.technologies} className='mt-4' />
       </div>
 
-      {project.engineering ? (
-        <div className='border-outline-variant mx-5 border-t py-2.5 sm:mx-6'>
-          <details className='group/hood'>
-            <summary className='type-label-lg text-on-surface before:ease-effects-fast before:rounded-inherit relative -ms-3 inline-flex h-8 cursor-pointer list-none items-center gap-1.5 rounded-full px-3 font-medium select-none before:pointer-events-none before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-8 [&::-webkit-details-marker]:hidden'>
-              <CodeXml aria-hidden className='text-primary size-4 shrink-0' />
-              <span>{t.underTheHood}</span>
-              <ChevronDown
-                aria-hidden
-                className='ease-spatial size-4 transition-transform duration-200 group-open/hood:rotate-180'
-              />
-            </summary>
-            <div className='workflow-disclosure-body flex flex-col gap-1.5 pt-2 pb-1.5'>
+      <div className='border-outline-variant mx-5 border-t py-2.5 sm:mx-6'>
+        <details className='group/hood'>
+          <summary className={disclosureSummary}>
+            <CodeXml aria-hidden className='text-primary size-4 shrink-0' />
+            <span>{t.underTheHood}</span>
+            <ChevronDown
+              aria-hidden
+              className='ease-spatial size-4 transition-transform duration-200 group-open/hood:rotate-180'
+            />
+          </summary>
+          <div className='workflow-disclosure-body flex flex-col gap-1.5 pt-2 pb-1.5'>
+            {project.engineering ? (
               <p className='type-body-md text-on-surface max-w-[72ch]'>{project.engineering}</p>
-              <p className='type-body-sm text-on-surface-variant max-w-[72ch]'>{project.details}</p>
-            </div>
-          </details>
-        </div>
-      ) : null}
+            ) : null}
+            <p className='type-body-sm text-on-surface-variant max-w-[72ch]'>{project.details}</p>
+          </div>
+        </details>
+      </div>
     </li>
   );
 }

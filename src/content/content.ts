@@ -88,15 +88,10 @@ function resolve(raw: Content, locale: Locale) {
       technologies: technologyList(group.technologies),
     })),
     workflow: {
-      interests: raw.interests.map((interest) => ({
-        id: interest.id,
-        title: interest.title[locale],
-        description: interest.description[locale],
-      })),
       ai: {
         updated: aiRecommendations.updated,
         updatedLabel: formatDate(aiRecommendations.updated, locale),
-        tiers: (aiRecommendations.tiers ?? []).map((tier) => ({
+        tiers: aiRecommendations.tiers.map((tier) => ({
           id: tier.id,
           label: tier.label[locale],
           scope: tier.scope[locale],

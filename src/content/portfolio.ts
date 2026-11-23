@@ -35,7 +35,6 @@ export const portfolio = {
     en: 'I love learning new things, coding, coffee, long runs, and making friends with cats & dogs.',
     de: 'Ich liebe Lernen, Programmieren, Kaffee, lange Läufe und Freundschaft mit Katzen & Hunden.',
   },
-  interests: [],
   coreStrengths: [
     { id: 'react-typescript', name: { en: 'React & TypeScript', de: 'React & TypeScript' } },
     { id: 'dotnet', name: { en: 'C#/.NET', de: 'C#/.NET' } },

@@ -64,7 +64,6 @@ const contentSchema = z.strictObject({
   fullPortrait: image,
   identity: translatedText,
   introduction: translatedText,
-  interests: z.array(z.strictObject({ id, title: translatedText, description: translatedText })),
   coreStrengths: z.array(z.strictObject({ id, name: translatedText })).min(1),
   technologyNames: z.record(text, translatedText),
   skills: z
@@ -72,7 +71,7 @@ const contentSchema = z.strictObject({
     .min(1),
   aiRecommendations: z.strictObject({
     updated: z.iso.date(),
-    tiers: z.array(workflowTier).min(1).optional(),
+    tiers: z.array(workflowTier).min(1),
     items: z
       .array(
         z.strictObject({

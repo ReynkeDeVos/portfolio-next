@@ -63,8 +63,16 @@ type OutlineName = keyof typeof outlines;
 
 const points = 72;
 
+const polygonCache = new Map<OutlineName, string>();
+
 // The outline as a CSS polygon() filling its box.
 function outlinePolygon(name: OutlineName) {
+  const cached = polygonCache.get(name);
+
+  if (cached !== undefined) {
+    return cached;
+  }
+
   const outline = outlines[name];
 
   const list = Array.from({ length: points }, (_, index) => {
@@ -74,7 +82,10 @@ function outlinePolygon(name: OutlineName) {
     return `${(50 + reach * Math.cos(angle)).toFixed(2)}% ${(50 + reach * Math.sin(angle)).toFixed(2)}%`;
   });
 
-  return `polygon(${list.join(',')})`;
+  const value = `polygon(${list.join(',')})`;
+  polygonCache.set(name, value);
+
+  return value;
 }
 
 export { outlinePolygon };

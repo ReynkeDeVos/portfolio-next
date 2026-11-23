@@ -70,6 +70,10 @@ function isDark(preference: ThemePreference) {
   );
 }
 
+let themeRequest = 0;
+
+let activeTransition: ViewTransition | null = null;
+
 // The new theme grows out of the pressed control as the Portrait's cookie and
 // turns one lobe on its way out, the way the frame turns one lobe per Section.
 // The whole document switches at once underneath; only its new snapshot is
@@ -82,18 +86,25 @@ function isDark(preference: ThemePreference) {
 // colours, such as System while the system is already light, applies without
 // a transition.
 async function revealTheme(preference: ThemePreference, from: Element) {
+  themeRequest += 1;
+  const request = themeRequest;
+
   const update = () => {
-    setTheme(preference);
+    if (request === themeRequest) {
+      setTheme(preference);
+    }
   };
 
   if (isDark(preference) === isDark(readTheme())) {
+    activeTransition?.skipTransition();
+    activeTransition = null;
     update();
 
     return;
   }
 
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    startViewTransition(update, []);
+    activeTransition = startViewTransition(update, []);
 
     return;
   }
@@ -144,10 +155,17 @@ async function revealTheme(preference: ThemePreference, from: Element) {
     return { clipPath: `path('${cookiePath(grown, x, y, turn, lobeDepth(grown))}')` };
   });
 
+  const transition = startViewTransition(update, ['theme']);
+  activeTransition = transition;
+
   try {
-    await startViewTransition(update, ['theme'])?.ready;
+    await transition?.ready;
   } catch {
     // A newer choice skipped this transition; it already applied.
+    return;
+  }
+
+  if (request !== themeRequest) {
     return;
   }
 

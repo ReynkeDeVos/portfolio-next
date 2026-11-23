@@ -148,9 +148,11 @@ function Portrait({ locale }: { locale: Locale }) {
         onPointerDown={warmFullPortrait}
         onFocus={warmFullPortrait}
         onClick={() => {
-          if (viewer.current) {
+          if (viewer.current && !viewer.current.open) {
             void morphPortrait(true, viewer.current, () => {
-              viewer.current?.showModal();
+              if (!viewer.current?.open) {
+                viewer.current?.showModal();
+              }
             });
           }
         }}
