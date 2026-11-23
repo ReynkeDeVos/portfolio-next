@@ -481,7 +481,10 @@ export const portfolio = {
           en: 'Interface craft, UX critique and purposeful motion.',
           de: 'Oberflächendesign, UX-Kritik und gezielte Bewegung.',
         },
-        links: [{ name: 'Impeccable', url: 'https://impeccable.style/' }],
+        links: [
+          { name: 'Impeccable', url: 'https://impeccable.style/' },
+          { name: 'UI SDK', url: 'https://ui-sdk.dev/' },
+        ],
       },
       {
         id: 'environment',
@@ -492,7 +495,14 @@ export const portfolio = {
         },
         links: [
           { name: 'Arch Linux', url: 'https://archlinux.org/' },
-          { name: 'Omarchy', url: 'https://omarchy.org/' },
+          { name: 'Hyprland', url: 'https://hypr.land/' },
+          { name: 'Ghostty', url: 'https://ghostty.org/' },
+          { name: 'Herdr', url: 'https://herdr.dev/' },
+          { name: 'zsh', url: 'https://www.zsh.org/' },
+          { name: 'mise', url: 'https://mise.jdx.dev/' },
+          { name: 'Atuin', url: 'https://atuin.sh/' },
+          { name: 'Starship', url: 'https://starship.rs/' },
+          { name: 'Carapace', url: 'https://carapace.sh/' },
         ],
       },
     ],
