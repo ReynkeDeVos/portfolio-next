@@ -1,41 +1,14 @@
 import { cn } from 'cn';
-import { Compass, Rocket, ShieldCheck, Terminal } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
-import type { CSSProperties } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { contentFor } from '@/content/content';
 import type { Locale } from '@/lib/locale';
-import { outlinePolygon } from '@/lib/outlines';
-import type { OutlineName } from '@/lib/outlines';
 import { uiText } from '@/ui-text/ui-text';
 
 import { LinkChips } from './section-parts';
 import { SegmentPill, segmentGroup } from './site-controls';
-
-type StageMark = { outline: OutlineName; Icon: LucideIcon };
-
-const defaultStageMark: StageMark = { outline: 'pentagon', Icon: Compass };
-
-const stageMarks = new Map<string, StageMark>([
-  ['plan', defaultStageMark],
-  ['build', { outline: 'cookie4', Icon: Terminal }],
-  ['review', { outline: 'softBurst', Icon: ShieldCheck }],
-  ['ship', { outline: 'sunny', Icon: Rocket }],
-]);
-
-const badgeFillByEmphasis = {
-  quiet: 'bg-surface-container-highest scale-90',
-  primary: 'bg-primary-container',
-  review: 'bg-tertiary-container rotate-12',
-} as const;
-
-const iconByEmphasis = {
-  quiet: 'text-on-surface-variant',
-  primary: 'text-on-primary-container',
-  review: 'text-on-tertiary-container',
-} as const;
+import { GateGlyph, StageBadge } from './workflow-stage-marks';
 
 const statusByEmphasis = {
   quiet: 'bg-surface-container-highest text-on-surface-variant',
@@ -44,41 +17,6 @@ const statusByEmphasis = {
 } as const;
 
 type WorkflowTier = ReturnType<typeof contentFor>['workflow']['ai']['tiers'][number];
-
-// Only the clipped Expressive outline turns and scales on emphasis changes;
-// the icon itself stays upright, matching the Portrait frame's motion grammar.
-function StageBadge({ id, emphasis }: { id: string; emphasis: keyof typeof badgeFillByEmphasis }) {
-  const { outline, Icon } = stageMarks.get(id) ?? defaultStageMark;
-  const clip: CSSProperties = { '--stage-outline': outlinePolygon(outline) };
-
-  return (
-    <span aria-hidden className='relative z-10 grid size-10 shrink-0 place-items-center'>
-      <span
-        style={clip}
-        className={cn(
-          'ease-spatial absolute inset-0 transition-transform duration-300 [clip-path:var(--stage-outline)]',
-          badgeFillByEmphasis[emphasis],
-        )}
-      />
-      <Icon className={cn('relative size-4.5', iconByEmphasis[emphasis])} />
-    </span>
-  );
-}
-
-// Three gentle pulsing dots represent independent model families deliberating
-// together on medium and high-risk diffs. Rendered in inactive rows too (without
-// animating) so wrapping never shifts card height on narrow screens.
-function CouncilDots({ active }: { active: boolean }) {
-  const dotClass = cn('bg-tertiary size-1.5 rounded-full', active && 'workflow-council-dot');
-
-  return (
-    <span aria-hidden className='inline-flex items-center gap-1 ps-0.5'>
-      <span className={dotClass} />
-      <span className={dotClass} />
-      <span className={dotClass} />
-    </span>
-  );
-}
 
 function StageRow({
   stage,
@@ -150,8 +88,8 @@ function StageRow({
                 >
                   {candidate.status}
                 </span>
-                {candidate.id === 'review' && candidate.emphasis === 'review' ? (
-                  <CouncilDots active={isActive} />
+                {candidate.emphasis === 'review' ? (
+                  <GateGlyph id={candidate.id} active={isActive} />
                 ) : null}
               </div>
               <p className='type-body-md text-on-surface-variant mt-1 max-w-[60ch]'>
@@ -165,6 +103,10 @@ function StageRow({
   );
 }
 
+// Each Locale has its own route, so switching languages remounts this section;
+// keeping the chosen tier at module scope preserves it without hydration drift.
+let selectedTierId: WorkflowTier['id'] | null = null;
+
 // Interactive risk-tiered AI workflow visualizer. Starts on High risk so
 // spec-driven planning, reviewer councils and open-code-review are visible on
 // first glance, while smaller tiers show how ceremony scales down. All tiers
@@ -173,7 +115,10 @@ function WorkflowPipeline({ locale }: { locale: Locale }) {
   const t = uiText[locale].aiPipeline;
   const { tiers } = contentFor(locale).workflow.ai;
   const initialTier = tiers.at(-1)?.id ?? 'high';
-  const [selectedId, setSelectedId] = useState(initialTier);
+
+  const [selectedId, setSelectedId] = useState<WorkflowTier['id']>(
+    () => selectedTierId ?? initialTier,
+  );
 
   const activeIndex = Math.max(
     0,
@@ -209,6 +154,7 @@ function WorkflowPipeline({ locale }: { locale: Locale }) {
               size='segment'
               aria-pressed={tier.id === activeTier.id}
               onClick={() => {
+                selectedTierId = tier.id;
                 setSelectedId(tier.id);
               }}
             >
@@ -226,11 +172,11 @@ function WorkflowPipeline({ locale }: { locale: Locale }) {
                 key={tier.id}
                 aria-hidden={!isActive || undefined}
                 className={cn(
-                  'bg-surface-container-highest type-label-md text-on-surface-variant col-start-1 row-start-1 rounded-xs px-2.5 py-1 font-medium',
+                  'type-label-md text-on-surface-variant col-start-1 row-start-1 sm:text-right',
                   !isActive && 'pointer-events-none invisible select-none',
                 )}
               >
-                {tier.tagline}
+                {tier.scope}
               </p>
             );
           })}

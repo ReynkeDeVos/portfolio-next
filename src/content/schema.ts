@@ -49,7 +49,7 @@ const workflowStage = z.strictObject({
 const workflowTier = z.strictObject({
   id: z.enum(['small', 'medium', 'high']),
   label: translatedText,
-  tagline: translatedText,
+  scope: translatedText,
   stages: z.array(workflowStage).length(4),
   links: z.array(link),
 });
