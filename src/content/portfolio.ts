@@ -159,7 +159,7 @@ export const portfolio = {
     },
   ],
   aiRecommendations: {
-    updated: '2026-11-20',
+    updated: '2026-11-23',
     tiers: [
       {
         id: 'small',
@@ -420,8 +420,8 @@ export const portfolio = {
       {
         model: 'GPT-6.2 Astra',
         note: {
-          en: 'Only for review and heavy computer use; ask for plain-English findings and have Opus restate a report you cannot follow.',
-          de: 'Nur für Reviews und anspruchsvolle Computer-Nutzung; Befunde in klarer Sprache anfordern und unverständliche Berichte von Opus umformulieren lassen.',
+          en: 'Only for review and heavy computer use; ask for plain-English findings and have Opus restate a report you cannot follow; when unavailable, cross-family review falls back to Opus 5.5 (High) for Gemini work or Gemini 4 Neon (Extra High) for Claude work.',
+          de: 'Nur für Reviews und anspruchsvolle Computer-Nutzung; Befunde in klarer Sprache anfordern und unverständliche Berichte von Opus umformulieren lassen; wenn nicht verfügbar, übernehmen Opus 5.5 (High) für Gemini-Arbeit oder Gemini 4 Neon (Extra High) für Claude-Arbeit das Cross-Family-Review.',
         },
       },
       {
