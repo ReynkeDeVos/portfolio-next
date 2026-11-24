@@ -3,6 +3,8 @@
 
 import { Tabs as TabsPrimitive } from 'radix-ui';
 
+import { tabsContentSlot, tabsListSlot, tabsTriggerSlot } from '@/lib/section';
+
 function Tabs(props: React.ComponentProps<typeof TabsPrimitive.Root>) {
   return <TabsPrimitive.Root className='flex flex-col gap-4' {...props} />;
 }
@@ -17,7 +19,7 @@ function Tabs(props: React.ComponentProps<typeof TabsPrimitive.Root>) {
 function TabsList({ children, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) {
   return (
     <TabsPrimitive.List
-      data-slot='tabs-list'
+      data-slot={tabsListSlot}
       className='group/tabs-list bg-tab-track relative isolate grid h-12 scroll-mt-4 auto-cols-fr grid-flow-col overflow-hidden rounded-full p-1'
       {...props}
     >
@@ -36,7 +38,7 @@ function TabsList({ children, ...props }: React.ComponentProps<typeof TabsPrimit
 function TabsTrigger(props: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
   return (
     <TabsPrimitive.Trigger
-      data-slot='tabs-trigger'
+      data-slot={tabsTriggerSlot}
       // Radix focuses a pressed tab itself, and Chrome rings that as keyboard
       // focus; focusing it first, without the ring, keeps clicks ring-free.
       // Only the presses Radix acts on: focus alone would select the tab.
@@ -54,7 +56,7 @@ function TabsTrigger(props: React.ComponentProps<typeof TabsPrimitive.Trigger>) 
 function TabsContent(props: React.ComponentProps<typeof TabsPrimitive.Content>) {
   return (
     <TabsPrimitive.Content
-      data-slot='tabs-content'
+      data-slot={tabsContentSlot}
       className='rounded-xl-inc [--focus-ring-offset:4px] data-[state=inactive]:hidden'
       {...props}
     />

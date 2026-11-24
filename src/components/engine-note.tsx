@@ -34,7 +34,7 @@ function EngineNote({ locale }: { locale: Locale }) {
               className='ease-spatial size-4 transition-transform duration-200 group-open/why:rotate-180'
             />
           </summary>
-          <div className='flex flex-col gap-2 py-1'>
+          <div className='disclosure-body flex flex-col gap-2 py-1'>
             {t.details.map((paragraph) => (
               <p key={paragraph} className='type-body-md text-on-surface-variant max-w-[72ch]'>
                 {paragraph}

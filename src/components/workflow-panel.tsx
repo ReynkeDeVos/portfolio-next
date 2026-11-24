@@ -2,7 +2,7 @@ import { ChevronDown } from 'lucide-react';
 import { Fragment, useLayoutEffect, useRef } from 'react';
 
 import { contentFor } from '@/content/content';
-import { readBuildOpen, rememberBuildOpen } from '@/lib/build-disclosure';
+import { buildDisclosureSlot, readBuildOpen, rememberBuildOpen } from '@/lib/build-disclosure';
 import type { Locale } from '@/lib/locale';
 import { uiText } from '@/ui-text/ui-text';
 
@@ -26,6 +26,8 @@ function WorkflowPanel({ locale }: { locale: Locale }) {
 
 // A small dated table: one row per task, the note under the task name, then
 // the thinking-level exceptions per model as quieter notes inside the card.
+// On narrow containers each row stacks full-width so task notes never squeeze
+// into tall columns beside fixed-width model cells.
 function AiSection({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const { ai } = contentFor(locale).workflow;
@@ -43,10 +45,13 @@ function AiSection({ locale }: { locale: Locale }) {
         </p>
       }
     >
-      <div className='rounded-lg-inc bg-surface-card px-5 sm:px-6'>
-        <table aria-labelledby='ai-heading' className='w-full border-collapse text-left'>
-          <thead>
-            {/* A heading that wraps on phones keeps its neighbours on its last line. */}
+      <div className='rounded-lg-inc bg-surface-card @container/routing px-5 sm:px-6'>
+        <table
+          aria-labelledby='ai-heading'
+          className='w-full border-collapse text-left @max-[28rem]/routing:block'
+        >
+          <thead className='@max-[28rem]/routing:sr-only'>
+            {/* A heading that wraps on narrow widths keeps its neighbours on its last line. */}
             <tr className='type-label-md text-on-surface-variant align-bottom'>
               <th scope='col' className='pt-4 pr-4 pb-2 font-medium'>
                 {t.aiTable.task}
@@ -59,31 +64,37 @@ function AiSection({ locale }: { locale: Locale }) {
               </th>
             </tr>
           </thead>
-          <tbody className='divide-outline-variant border-outline-variant divide-y border-t'>
+          <tbody className='divide-outline-variant border-outline-variant divide-y border-t @max-[28rem]/routing:block @max-[28rem]/routing:border-t-0'>
             {ai.items.map((item) => (
-              <tr key={item.id} className='align-top'>
-                <th scope='row' className='py-3 pr-4 text-left font-normal'>
+              <tr
+                key={item.id}
+                className='align-top @max-[28rem]/routing:grid @max-[28rem]/routing:grid-cols-[auto_minmax(0,1fr)] @max-[28rem]/routing:items-baseline @max-[28rem]/routing:gap-x-3 @max-[28rem]/routing:gap-y-1.5 @max-[28rem]/routing:py-3.5'
+              >
+                <th
+                  scope='row'
+                  className='py-3 pr-4 text-left font-normal @max-[28rem]/routing:col-span-2 @max-[28rem]/routing:p-0'
+                >
                   <span className='type-body-md text-on-surface block font-medium'>
                     {item.task}
                   </span>
                   <span className='type-body-sm text-on-surface-variant block'>{item.note}</span>
                 </th>
-                <td className='type-body-md text-on-surface py-3 pr-4 whitespace-nowrap'>
+                <td className='type-body-md text-on-surface py-3 pr-4 whitespace-nowrap @max-[28rem]/routing:p-0 @max-[28rem]/routing:font-medium'>
                   {item.model}
                 </td>
                 {/* The thinking levels keep the English names the model tools show,
                     on one line so Extra High never reads as two levels. */}
-                <td
-                  lang={locale === 'en' ? undefined : 'en'}
-                  className='type-body-md text-on-surface py-3 whitespace-nowrap'
-                >
-                  {item.effort}
+                <td className='type-body-md text-on-surface @max-[28rem]/routing:type-body-sm @max-[28rem]/routing:text-on-surface-variant py-3 whitespace-nowrap @max-[28rem]/routing:p-0'>
+                  <span aria-hidden className='hidden @max-[28rem]/routing:inline'>
+                    {t.thinkingLevel}:{' '}
+                  </span>
+                  <span lang={locale === 'en' ? undefined : 'en'}>{item.effort}</span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <dl className='border-outline-variant grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-t py-4'>
+        <dl className='border-outline-variant grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 border-t py-4'>
           {ai.modelNotes.map((entry) => (
             <Fragment key={entry.model}>
               <dt className='type-body-sm text-on-surface font-medium whitespace-nowrap'>
@@ -138,7 +149,7 @@ function BuildSection({ locale }: { locale: Locale }) {
   return (
     <details
       ref={disclosure}
-      data-slot='build-disclosure'
+      data-slot={buildDisclosureSlot}
       // The head script may open it before React takes over.
       suppressHydrationWarning
       onToggle={(event) => {

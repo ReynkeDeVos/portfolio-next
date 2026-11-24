@@ -3,6 +3,8 @@
 
 import { z } from 'zod';
 
+import { workflowEmphases, workflowStageIds, workflowTierIds } from '../lib/workflow-stages.ts';
+
 // The one declaration of the Content shape. The page imports only its type, so
 // Zod stays out of the browser bundle; the content check runs the schema itself.
 // Strict objects reject misspelled keys instead of silently dropping them.
@@ -39,18 +41,24 @@ const project = z.strictObject({
 });
 
 const workflowStage = z.strictObject({
-  id,
+  id: z.enum(workflowStageIds),
   title: translatedText,
   status: translatedText,
   summary: translatedText,
-  emphasis: z.enum(['quiet', 'primary', 'review']),
+  emphasis: z.enum(workflowEmphases),
 });
 
 const workflowTier = z.strictObject({
-  id: z.enum(['small', 'medium', 'high']),
+  id: z.enum(workflowTierIds),
   label: translatedText,
   scope: translatedText,
-  stages: z.array(workflowStage).length(4),
+  stages: z
+    .array(workflowStage)
+    .length(workflowStageIds.length)
+    .refine(
+      (stages) => new Set(stages.map((stage) => stage.id)).size === workflowStageIds.length,
+      'Each workflow stage ID must appear once per tier.',
+    ),
   links: z.array(link),
 });
 

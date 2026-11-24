@@ -6,6 +6,12 @@ const defaultSection = 'work' satisfies Section;
 
 const otherSections = sections.filter((section) => section !== defaultSection);
 
+const tabsListSlot = 'tabs-list';
+
+const tabsTriggerSlot = 'tabs-trigger';
+
+const tabsContentSlot = 'tabs-content';
+
 function isSection(value: string): value is Section {
   return sections.some((section) => section === value);
 }
@@ -35,12 +41,12 @@ const sectionStyles = [
   ...otherSections.map(
     (section) => `:root[data-section='${section}']{--section-index:${sections.indexOf(section)}}`,
   ),
-  ":root[data-section] [data-slot='tabs-list']{--tab-index:var(--section-index)!important}",
-  ":root[data-section] [data-slot='tabs-trigger']{color:var(--color-on-surface-variant);font-weight:500}",
-  ":root[data-section] [data-slot='tabs-content']{display:none}",
+  `:root[data-section] [data-slot='${tabsListSlot}']{--tab-index:var(--section-index)!important}`,
+  `:root[data-section] [data-slot='${tabsTriggerSlot}']{color:var(--color-on-surface-variant);font-weight:500}`,
+  `:root[data-section] [data-slot='${tabsContentSlot}']{display:none}`,
   ...otherSections.flatMap((section) => [
-    `:root[data-section='${section}'] [data-slot='tabs-trigger'][data-section='${section}']{color:var(--color-on-secondary-container);font-weight:600}`,
-    `:root[data-section='${section}'] [data-slot='tabs-content'][data-section='${section}']{display:block}`,
+    `:root[data-section='${section}'] [data-slot='${tabsTriggerSlot}'][data-section='${section}']{color:var(--color-on-secondary-container);font-weight:600}`,
+    `:root[data-section='${section}'] [data-slot='${tabsContentSlot}'][data-section='${section}']{display:block}`,
   ]),
 ].join('');
 
@@ -52,6 +58,9 @@ export {
   sections,
   sectionScript,
   sectionStyles,
+  tabsContentSlot,
+  tabsListSlot,
+  tabsTriggerSlot,
 };
 
 export type { Section };

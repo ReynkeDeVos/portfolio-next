@@ -1,33 +1,38 @@
 import { cn } from 'cn';
 import { Compass, Rocket, ShieldCheck, Terminal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 import { outlinePolygon } from '@/lib/outlines';
 import type { OutlineName } from '@/lib/outlines';
+import type { GateKind, WorkflowEmphasis, WorkflowStageId } from '@/lib/workflow-stages';
 
 type StageMark = { outline: OutlineName; Icon: LucideIcon };
 
-const defaultStageMark: StageMark = { outline: 'pentagon', Icon: Compass };
-
-const stageMarks = new Map<string, StageMark>([
-  ['plan', defaultStageMark],
-  ['build', { outline: 'cookie4', Icon: Terminal }],
-  ['review', { outline: 'softBurst', Icon: ShieldCheck }],
-  ['ship', { outline: 'sunny', Icon: Rocket }],
-]);
+const stageMarks = {
+  plan: { outline: 'pentagon', Icon: Compass },
+  build: { outline: 'cookie4', Icon: Terminal },
+  review: { outline: 'softBurst', Icon: ShieldCheck },
+  ship: { outline: 'sunny', Icon: Rocket },
+} satisfies Record<WorkflowStageId, StageMark>;
 
 const badgeFillByEmphasis = {
   quiet: 'bg-surface-container-highest scale-90',
   primary: 'bg-primary-container',
   review: 'bg-tertiary-container rotate-12',
-} as const;
+} as const satisfies Record<WorkflowEmphasis, string>;
 
 const iconByEmphasis = {
   quiet: 'text-on-surface-variant',
   primary: 'text-on-primary-container',
   review: 'text-on-tertiary-container',
-} as const;
+} as const satisfies Record<WorkflowEmphasis, string>;
+
+const statusByEmphasis = {
+  quiet: 'bg-surface-container-highest text-on-surface-variant',
+  primary: 'bg-primary-container text-on-primary-container',
+  review: 'bg-tertiary-container text-on-tertiary-container',
+} as const satisfies Record<WorkflowEmphasis, string>;
 
 const specRows = [
   { className: 'workflow-spec-q1', y: 3, x2: 26 },
@@ -35,10 +40,36 @@ const specRows = [
   { className: 'workflow-spec-q3', y: 13, x2: 23 },
 ] as const;
 
+// Stacks per-tier variants in one grid cell so switching tiers never shifts
+// height, while keeping inactive variants hidden and inert for assistive tech.
+function StackedSlot({
+  active,
+  className,
+  children,
+}: {
+  active: boolean;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      aria-hidden={!active || undefined}
+      inert={!active || undefined}
+      className={cn(
+        'col-start-1 row-start-1',
+        !active && 'pointer-events-none invisible select-none',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
 // Only the clipped Expressive outline turns and scales on emphasis changes;
 // the icon itself stays upright, matching the Portrait frame's motion grammar.
-function StageBadge({ id, emphasis }: { id: string; emphasis: keyof typeof badgeFillByEmphasis }) {
-  const { outline, Icon } = stageMarks.get(id) ?? defaultStageMark;
+function StageBadge({ id, emphasis }: { id: WorkflowStageId; emphasis: WorkflowEmphasis }) {
+  const { outline, Icon } = stageMarks[id];
   const clip: CSSProperties = { '--stage-outline': outlinePolygon(outline) };
 
   return (
@@ -59,14 +90,10 @@ function StageBadge({ id, emphasis }: { id: string; emphasis: keyof typeof badge
 // three checklist lines as open questions resolve, while Review gate pulls
 // three model perspectives together into one verdict. Rendered in inactive
 // rows too (without animating) so wrapping never shifts height on narrow screens.
-function GateGlyph({ id, active }: { id: string; active: boolean }) {
-  if (id !== 'plan' && id !== 'review') {
-    return null;
-  }
-
+function GateGlyph({ kind, active }: { kind: GateKind; active: boolean }) {
   return (
     <span aria-hidden className='text-tertiary inline-flex items-center ps-0.5'>
-      {id === 'plan' ? (
+      {kind === 'spec' ? (
         <svg
           viewBox='0 0 28 16'
           data-active={active || undefined}
@@ -107,4 +134,4 @@ function GateGlyph({ id, active }: { id: string; active: boolean }) {
   );
 }
 
-export { GateGlyph, StageBadge };
+export { GateGlyph, StackedSlot, StageBadge, statusByEmphasis };
