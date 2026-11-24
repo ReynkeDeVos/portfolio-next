@@ -14,9 +14,19 @@ import { buildDisclosureScript } from '@/lib/build-disclosure';
 import { engineScript } from '@/lib/engine';
 import { localeFromPathname, localeScript } from '@/lib/locale';
 import { sectionScript, sectionStyles } from '@/lib/section';
-import { themeScript } from '@/lib/theme';
+import { themeScript, themeStyles } from '@/lib/theme';
 
 import appCss from '../styles.css?url';
+
+const prePaintScripts = [
+  localeScript,
+  themeScript,
+  engineScript,
+  sectionScript,
+  buildDisclosureScript,
+].join('');
+
+const prePaintStyles = [themeStyles, sectionStyles].join('');
 
 const favicon = `data:image/svg+xml,${encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="50" font-size="88" text-anchor="middle" dominant-baseline="central">🦊</text></svg>',
@@ -65,13 +75,12 @@ function Root() {
             head order where React hoists these tags. */}
         <HeadContent />
         {notFound && <NotFoundHead locale={locale} />}
-        <script>
-          {localeScript + themeScript + engineScript + sectionScript + buildDisclosureScript}
-        </script>
-        {/* The pre-hydration Section rules are built from the Section list, so they
-            can't live in the theme CSS; here they still apply before first paint. */}
+        <script>{prePaintScripts}</script>
+        {/* The pre-hydration Theme and Section rules are derived from their
+            option lists, so they can't drift from the UI and still apply
+            before first paint. */}
         {/* oxlint-disable shadcn/no-inline-styles */}
-        <style>{sectionStyles}</style>
+        <style>{prePaintStyles}</style>
         {/* oxlint-enable shadcn/no-inline-styles */}
       </head>
       <body>

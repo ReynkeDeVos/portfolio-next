@@ -91,7 +91,7 @@ function Subsection({
 }) {
   return (
     <section aria-labelledby={id} className='flex flex-col gap-3'>
-      <div className='flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-1'>
+      <div className='flex flex-col gap-0.5 px-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4 sm:gap-y-1'>
         <h3 id={id} className='type-headline-sm text-on-surface font-semibold'>
           {heading}
         </h3>

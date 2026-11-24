@@ -1,13 +1,11 @@
-import { cn } from 'cn';
 import { useEffect, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { SegmentedGroup, SegmentedOption } from '@/components/ui/segmented-control';
 import type { Locale } from '@/lib/locale';
-import { sections } from '@/lib/section';
+import { sections, tabsListSlot } from '@/lib/section';
 import { uiText } from '@/ui-text/ui-text';
 
 import { useSectionNavigation } from './section-navigation';
-import { SegmentPill, segmentGroup } from './site-controls';
 
 // On phones, once the Section tabs have scrolled above the viewport, a
 // floating copy of them rises within thumb reach: the same names in the same
@@ -16,7 +14,7 @@ import { SegmentPill, segmentGroup } from './site-controls';
 // Its slot at the foot of the content column is reserved, so at the end it
 // sits below the last content instead of covering it. Picking a Section opens
 // it and returns to the tabs. Wider screens keep the tabs in easy reach and
-// never show it; while hidden it is inert.
+// never show it; while hidden it is inert and runs no scroll work.
 function SectionToolbar({ locale }: { locale: Locale }) {
   const t = uiText[locale];
   const { section, jumpTo } = useSectionNavigation();
@@ -24,11 +22,14 @@ function SectionToolbar({ locale }: { locale: Locale }) {
 
   // Reading the tabs' position on every scroll, rather than waiting for an
   // intersection change, also catches jumps from below the viewport to above
-  // it. Small scroll jitter keeps the last direction.
+  // it. Small scroll jitter keeps the last direction. Listeners only run below
+  // Tailwind's `sm` breakpoint where the toolbar is visible.
   useEffect(() => {
-    const tabs = document.querySelector('[data-slot="tabs-list"]');
+    const phone = matchMedia('(width < 40rem)');
+    const tabs = document.querySelector(`[data-slot="${tabsListSlot}"]`);
     let lastY = scrollY;
     let up = false;
+    let listening = false;
 
     const update = () => {
       if (Math.abs(scrollY - lastY) > 8) {
@@ -42,43 +43,64 @@ function SectionToolbar({ locale }: { locale: Locale }) {
       setShown(above && (up || end));
     };
 
-    update();
-    addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update);
+    const detach = () => {
+      if (!listening) {
+        return;
+      }
 
-    return () => {
       removeEventListener('scroll', update);
       removeEventListener('resize', update);
+      listening = false;
+    };
+
+    const sync = () => {
+      if (phone.matches) {
+        if (!listening) {
+          lastY = scrollY;
+          up = false;
+          addEventListener('scroll', update, { passive: true });
+          addEventListener('resize', update);
+          listening = true;
+        }
+
+        update();
+      } else {
+        detach();
+        setShown(false);
+      }
+    };
+
+    sync();
+    phone.addEventListener('change', sync);
+
+    return () => {
+      phone.removeEventListener('change', sync);
+      detach();
     };
   }, []);
 
   return (
     <div className='sticky bottom-4 z-10 h-12 sm:hidden'>
-      <nav
-        aria-label={t.toolbarLabel}
-        aria-hidden={!shown || undefined}
-        inert={!shown}
-        data-shown={shown}
-        className={cn(
-          segmentGroup,
-          'bg-primary-container duration-spatial-fast ease-spatial-fast data-[shown=false]:ease-emphasized transition-presence data-[shown=false]:duration-spatial-fast-exit h-12 origin-bottom data-[shown=false]:pointer-events-none data-[shown=false]:translate-y-4 data-[shown=false]:scale-90 data-[shown=false]:opacity-0',
-        )}
+      <SegmentedGroup
+        as='nav'
+        surface='floating'
+        label={t.toolbarLabel}
+        index={sections.indexOf(section)}
+        shown={shown}
       >
-        <SegmentPill index={sections.indexOf(section)} />
         {sections.map((value) => (
-          <Button
+          <SegmentedOption
             key={value}
-            variant='segment-vibrant'
-            size='segment'
-            aria-current={value === section ? 'true' : undefined}
+            vibrant
+            current={value === section ? 'true' : undefined}
             onClick={() => {
               jumpTo(value);
             }}
           >
             {t.sectionNames[value]}
-          </Button>
+          </SegmentedOption>
         ))}
-      </nav>
+      </SegmentedGroup>
     </div>
   );
 }

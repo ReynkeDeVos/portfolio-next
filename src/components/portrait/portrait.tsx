@@ -3,16 +3,15 @@ import type { CSSProperties } from 'react';
 
 import { useSectionNavigation } from '@/components/section-navigation';
 import { contentFor } from '@/content/content';
-import { cookiePath, lobes } from '@/lib/cookie';
 import { defaultLocale } from '@/lib/locale';
 import type { Locale } from '@/lib/locale';
-import { startViewTransition } from '@/lib/view-transition';
+import { cookieLobes, cookiePath, morphFrames } from '@/lib/outlines';
+import { runClipTransition } from '@/lib/view-transition';
 import { uiText } from '@/ui-text/ui-text';
 
-import { morphFrames } from './morph-shape';
 import { PortraitViewer } from './viewer';
 
-const stepDegrees = 360 / lobes;
+const stepDegrees = 360 / cookieLobes;
 
 const clipId = 'portrait-cookie';
 
@@ -71,54 +70,53 @@ function warmFullPortrait() {
 // in portrait.css, to this one moment; the shape's clip follows the morph's
 // own timing from there.
 async function morphPortrait(open: boolean, viewer: HTMLDialogElement, update: () => void) {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    startViewTransition(update, ['morph-fade']);
-
-    return;
-  }
-
   // The panel is measured while it is open: after opening, before closing.
   let panel = viewer.getBoundingClientRect();
 
-  const transition = startViewTransition(() => {
-    update();
+  await runClipTransition(
+    () => {
+      update();
 
-    if (open) {
-      panel = viewer.getBoundingClientRect();
-    }
-  }, ['morph', open ? 'morph-open' : 'morph-close']);
+      if (open) {
+        panel = viewer.getBoundingClientRect();
+      }
+    },
+    {
+      types: ['morph', open ? 'morph-open' : 'morph-close'],
+      reducedMotionTypes: ['morph-fade'],
+      animate: ({ root, easing }) => {
+        const travel = document
+          .getAnimations()
+          .find(
+            ({ effect }) =>
+              effect instanceof KeyframeEffect &&
+              effect.pseudoElement === '::view-transition-group(morph)',
+          );
 
-  try {
-    await transition?.ready;
-  } catch {
-    return;
-  }
+        if (!travel?.effect) {
+          return;
+        }
 
-  const travel = document
-    .getAnimations()
-    .find(
-      ({ effect }) =>
-        effect instanceof KeyframeEffect &&
-        effect.pseudoElement === '::view-transition-group(morph)',
-    );
+        const { duration, delay } = travel.effect.getTiming();
+        // getComputedStyle always reports the corner radius in px.
+        // oxlint-disable-next-line unicorn/prefer-number-coercion
+        const radius = Number.parseFloat(getComputedStyle(viewer).borderTopLeftRadius);
+        const frames = morphFrames(panel.width, panel.height, radius);
 
-  if (!transition || !travel?.effect) {
-    return;
-  }
+        if (frames.length === 0) {
+          return;
+        }
 
-  const { duration, delay } = travel.effect.getTiming();
-  // getComputedStyle always reports the corner radius in px.
-  // oxlint-disable-next-line unicorn/prefer-number-coercion
-  const radius = Number.parseFloat(getComputedStyle(viewer).borderTopLeftRadius);
-  const frames = morphFrames(panel.width, panel.height, radius);
-
-  document.documentElement.animate(open ? frames : frames.toReversed(), {
-    duration,
-    delay,
-    easing: getComputedStyle(document.documentElement).getPropertyValue('--ease-emphasized'),
-    fill: 'both',
-    pseudoElement: '::view-transition-image-pair(morph)',
-  });
+        root.animate(open ? frames : frames.toReversed(), {
+          duration,
+          delay,
+          easing,
+          fill: 'both',
+          pseudoElement: '::view-transition-image-pair(morph)',
+        });
+      },
+    },
+  );
 }
 
 // The frame turns one lobe per Section the visitor picks, the way the tabs
@@ -214,7 +212,7 @@ function Portrait({ locale }: { locale: Locale }) {
         ref={viewer}
         locale={locale}
         onDismiss={() => {
-          if (viewer.current) {
+          if (viewer.current?.open) {
             void morphPortrait(false, viewer.current, () => {
               viewer.current?.close();
             });

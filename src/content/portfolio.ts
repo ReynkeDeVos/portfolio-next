@@ -436,8 +436,8 @@ export const portfolio = {
         id: 'harness',
         title: { en: 'Orchestration', de: 'Orchestrierung' },
         description: {
-          en: 'Parallel sessions in T3 Code, custom harnesses in pi and remote reach via Tailscale.',
-          de: 'Parallele Sessions in T3 Code, eigene Harnesses in pi und Remote-Zugriff über Tailscale.',
+          en: 'Parallel sessions in T3 Code, custom harnesses in pi, Grok Bot and remote reach via Tailscale.',
+          de: 'Parallele Sessions in T3 Code, eigene Harnesses in pi, Grok Bot und Remote-Zugriff über Tailscale.',
         },
         links: [
           { name: 'T3 Code', url: 'https://t3.codes/' },
@@ -759,8 +759,7 @@ export const portfolio = {
       },
     },
   ],
-  // Display order is set here, not by catalog order. Catalog records that are
-  // not listed stay in the catalog without being shown.
+  // Display order is set here, not by catalog order.
   selectedWork: {
     featured: ['project-formatter', 'flights', 'reputation-assistant'],
     supporting: ['omarchy-stats', 'rstack', 'scoundrel-tui', 'portfolio'],
@@ -870,10 +869,6 @@ export const portfolio = {
         en: 'Based on Scoundrel by Zach Gage and Kurt Bieg.',
         de: 'Nach dem Kartenspiel Scoundrel von Zach Gage und Kurt Bieg.',
       },
-      engineering: {
-        en: 'Built on Python and Textual with pluggable terminal image rendering (Kitty graphics protocol and half-block characters).',
-        de: 'Mit Python und Textual gebaut, mit umschaltbarem Terminal-Rendering (Kitty-Grafikprotokoll und Halbblock-Zeichen).',
-      },
     },
     {
       id: 'portfolio',
@@ -888,59 +883,6 @@ export const portfolio = {
       details: {
         en: 'Full stack breakdown sits at the bottom of Workflow.',
         de: 'Der komplette Stack steht ganz unten im Tab Workflow.',
-      },
-    },
-    {
-      id: 'name-shuffler',
-      name: 'Name Shuffler CLI',
-      category: { en: 'Terminal tool', de: 'Terminal-Werkzeug' },
-      description: {
-        en: 'Splits a list of names into random groups directly in the terminal.',
-        de: 'Verteilt eine Namensliste direkt im Terminal per Zufall auf Gruppen.',
-      },
-      technologies: ['JavaScript', 'Node.js', 'Inquirer'],
-      url: 'https://github.com/ReynkeDeVos/name-shuffler-cli',
-      details: {
-        en: 'An early experiment in AI-assisted development with Claude.',
-        de: 'Ein frühes Experiment mit KI-gestützter Entwicklung und Claude.',
-      },
-    },
-    {
-      id: 'elder-gym-bro',
-      name: 'Elder Gym Bro App',
-      category: { en: 'Bootcamp final team project', de: 'Bootcamp-Abschlussprojekt im Team' },
-      description: {
-        en: 'Workout planner and progress tracker built with a team of four.',
-        de: 'Trainingsplaner und Fortschritts-Tracker, im Viererteam entwickelt.',
-      },
-      technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express'],
-      url: 'https://github.com/ReynkeDeVos/ElderGymBroApp',
-      details: {
-        en: 'Built with Michal, Sebastian and Alex; fork of the team repository.',
-        de: 'Mit Michal, Sebastian und Alex gebaut; Fork des Team-Repositorys.',
-      },
-      engineering: {
-        en: 'React frontend on Netlify talking to an Express API on Render, storing accounts and workouts in MongoDB and avatars on Cloudinary.',
-        de: 'React-Frontend auf Netlify mit Express-API auf Render, MongoDB für Konten und Trainings sowie Cloudinary für Profilbilder.',
-      },
-    },
-    {
-      id: 'pokemon-battle',
-      name: 'PokémonBattle',
-      category: { en: 'Bootcamp team project', de: 'Bootcamp-Teamprojekt' },
-      description: {
-        en: 'Turn-based Pokémon browser battle game built in a team of three.',
-        de: 'Rundenbasiertes Pokémon-Browserspiel, im Dreierteam entwickelt.',
-      },
-      technologies: ['React', 'Context API', 'CSS'],
-      url: 'https://github.com/ReynkeDeVos/PokemonBattle',
-      details: {
-        en: 'Built with Sebastian and Clara; fork of the team repository.',
-        de: 'Mit Sebastian und Clara gebaut; Fork des Team-Repositorys.',
-      },
-      engineering: {
-        en: 'React Context manages battle state on Netlify against an Express API on Render.',
-        de: 'React Context verwaltet den Kampfstatus auf Netlify gegen eine Express-API auf Render.',
       },
     },
   ],

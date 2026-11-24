@@ -44,7 +44,7 @@ const sizes = {
   sm: 'h-8 gap-1.5 rounded-lg px-3.5 has-[>svg:not(:not(.sr-only)~*)]:ps-3 has-[>svg:last-child]:pe-3',
   icon: 'size-10 rounded-lg-inc',
   'icon-sm': "size-8 rounded-lg [&_svg:not([class*='size-'])]:size-4",
-  segment: 'h-10 rounded-lg-inc px-3.5 pointer-coarse:px-2',
+  segment: 'h-10 rounded-lg-inc px-2.5 sm:px-3.5 pointer-coarse:px-2',
   'icon-segment': 'size-10 rounded-lg-inc pointer-coarse:w-12',
   // The two halves of an Expressive split button: round outer corners, small
   // inner ones that round out while pressed; the outer ones stay put.

@@ -42,7 +42,7 @@ function FeaturedProject({ project, locale }: { project: SelectedProject; locale
     <li className='bg-surface-group group/card first:rounded-t-xl-inc last:rounded-b-xl-inc relative rounded-xs'>
       <div
         className={cn(
-          'group-first/card:rounded-t-xl-inc relative rounded-xs px-5 pt-5 pb-4 sm:px-6',
+          'group-first/card:rounded-t-xl-inc relative rounded-t-xs rounded-b-none px-5 pt-5 pb-4 sm:px-6',
           linkedItem,
         )}
       >
@@ -65,7 +65,7 @@ function FeaturedProject({ project, locale }: { project: SelectedProject; locale
               className='ease-spatial size-4 transition-transform duration-200 group-open/hood:rotate-180'
             />
           </summary>
-          <div className='workflow-disclosure-body flex flex-col gap-1.5 pt-2 pb-1.5'>
+          <div className='disclosure-body flex flex-col gap-1.5 pt-2 pb-1.5'>
             {project.engineering ? (
               <p className='type-body-md text-on-surface max-w-[72ch]'>{project.engineering}</p>
             ) : null}
