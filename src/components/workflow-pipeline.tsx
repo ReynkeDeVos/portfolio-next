@@ -136,7 +136,7 @@ function WorkflowPipeline({ locale }: { locale: Locale }) {
           as='fieldset'
           label={t.tierLabel}
           index={activeIndex}
-          className='w-full sm:w-fit'
+          className='w-full sm:w-88'
         >
           {tiers.map((tier) => (
             <SegmentedOption
