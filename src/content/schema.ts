@@ -86,7 +86,7 @@ const contentSchema = z.strictObject({
           id,
           task: translatedText,
           model: text,
-          effort: z.enum(['Low', 'Medium', 'High', 'Extra', 'Extra High', 'Max']),
+          effort: z.enum(['Low', 'Medium', 'High', 'Extra High', 'Max']),
           note: translatedText,
         }),
       )
